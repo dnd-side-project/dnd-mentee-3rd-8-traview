@@ -1,11 +1,14 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
-import Home from "../routes/Home";
-import NavBar from "./NavBar";
-import Login from "../routes/Login";
-import Upload from "../routes/Upload";
-import Detail from "../routes/Detail";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
+import Home from '../routes/Home';
+import NavBar from './NavBar';
+import Login from '../routes/Login';
+import Upload from '../routes/Upload';
+import Detail from '../routes/Detail';
+import Area from '../routes/Area';
+import Register from '../routes/Register';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -15,17 +18,33 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Container = styled.div`
+  max-width: 1440px;
+  margin: auto;
+  margin-bottom: 3rem;
+`;
+
+const InnerContainer = styled.div`
+  margin: 0 90px;
+`;
+
 function App() {
   return (
     <Router>
       <GlobalStyle />
-      <NavBar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/upload" component={Upload} />
-        <Route exact path="/detail/:id" component={Detail} />
-      </Switch>
+      <Container>
+        <NavBar />
+        <InnerContainer>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/upload" component={Upload} />
+            <Route exact path="/detail/:id" component={Detail} />
+            <Route exact path="/area/:id" component={Area} />
+          </Switch>
+        </InnerContainer>
+      </Container>
     </Router>
   );
 }
