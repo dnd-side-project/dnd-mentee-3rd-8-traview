@@ -1,5 +1,6 @@
 import React from 'react';
+import MainGrid from '../components/MainGrid';
 
 export default () => {
-  return <div>Home</div>;
+  return <MainGrid />;
 };
