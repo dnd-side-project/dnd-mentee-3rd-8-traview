@@ -4,8 +4,6 @@ import styled from 'styled-components';
 const Box = styled.div`
   width: 100%;
   margin: 0 0 5px;
-  padding: 10px;
-  background: #000000;
   overflow: hidden;
   break-inside: avoid;
   cursor: pointer;
@@ -37,7 +35,7 @@ const Description = styled.p`
 export default ({ imagePath, title, description }) => {
   return (
     <Box>
-      <Image src={imagePath} />
+      <Image src={imagePath} alt="" />
       <ImageTitle>{title}</ImageTitle>
       <Description>{description}</Description>
     </Box>
