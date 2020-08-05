@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import Picture from './Picture';
+import Loader from './Loader';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import './MainGrid.css';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -44,82 +48,26 @@ const Mood = styled.li`
 `;
 
 const Container = styled.div`
-  width: 1250px;
+  width: 1200px;
   margin: 20px auto;
   columns: 4;
   columns-gap: 40px;
 `;
 
 export default () => {
-  /* 테스트 데이터(백엔드 구현시 삭제) */
-  const datas = [
-    {
-      id: '1',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test1.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '2',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test2.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '3',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test3.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '4',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test4.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '5',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test5.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '6',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test6.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '7',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test7.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '8',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test8.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '9',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test9.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '10',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test10.jpg',
-      description: '어쩌구저쩌구...',
-    },
-    {
-      id: '11',
-      title: '여행 제목 어쩌구',
-      imagePath: '/images/test11.jpg',
-      description: '어쩌구저쩌구...',
-    },
-  ];
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  const fetchImages = () => {
+    const apiRoot = 'https://api.unsplash.com';
+    const accessKey = process.env.REACT_APP_ACCESSKEY;
+    axios
+      .get(`${apiRoot}/photos/random?client_id=${accessKey}&count=15`)
+      .then((res) => setImages([...images, ...res.data]));
+  };
 
   return (
     <>
@@ -135,16 +83,18 @@ export default () => {
           <Mood>낭만</Mood>
         </MoodList>
       </HeaderContainer>
-      <Container>
-        {datas.map((data) => (
-          <Picture
-            key={data.id}
-            title={data.title}
-            imagePath={data.imagePath}
-            description={data.description}
-          />
-        ))}
-      </Container>
+      <InfiniteScroll
+        dataLength={images.length}
+        next={fetchImages}
+        hasMore={true}
+        loader={<Loader />}
+      >
+        <Container>
+          {images.map((image) => (
+            <Picture imagePath={image.urls.small} key={image.id} />
+          ))}
+        </Container>
+      </InfiniteScroll>
     </>
   );
 };
