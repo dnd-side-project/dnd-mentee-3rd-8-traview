@@ -6,7 +6,7 @@ const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 17px 21px;
+  padding: 17px 0;
 `;
 
 const Title = styled(Link)`
@@ -47,6 +47,7 @@ const AreaLink = styled(Link)`
 
   &:hover {
     color: #ff534b;
+    border-bottom: 2px solid #FF534B;
   }
 `;
 
