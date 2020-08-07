@@ -3,27 +3,27 @@ import styled from 'styled-components';
 import BestPictures from './BestPictures';
 
 const BannerPic = styled.div`
-  overflow: hidden;
-  break-inside: avoid;
-  border-radius: 30px;
-  position: relative;
-  margin-bottom: 60px;
+overflow: hidden;
+break-inside: avoid;
+border-radius: 30px;
+position: relative;
+margin-bottom: 60px;
 `;
 
 const Image = styled.img`
-  vertical-align: bottom;
-  width: 1440px;
-  height: 736px;
-  position: absolute;
+vertical-align: bottom;
+width: 1440px;
+height: 736px;
+ position: absolute;
 `;
 const BottomMain = styled.div`
 
-position: absolute;
-width: 1439px
-height: 210px;
-left: 0px;
-top: 612px;
-background: linear-gradient(180deg, rgba(25, 25, 25, 0.0001) 0%, #191919 100%);`;
+  position: absolute;
+  width: 1439px
+  height: 210px;
+  left: 0px;
+  top: 612px;
+  background: linear-gradient(180deg, rgba(25, 25, 25, 0.0001) 0%, #191919 100%);`;
 
 const ContainerText = styled.div`
   margin-left: 117px;
@@ -80,10 +80,10 @@ const Best = styled.h2`
 `;
 
 const BestPic = styled.div`
-margin-left:430px;
-margin-top:40px;
-display: flex
-position: relative;
+  margin-left: 430px;
+  margin-top: 40px;
+  display: flex;
+  position: relative;
 `;
 
 function Banner() {

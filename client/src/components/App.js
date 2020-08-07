@@ -30,22 +30,22 @@ const InnerContainer = styled.div`
 
 function App() {
   return (
-      <Router>
-        <GlobalStyle />
-        <Container>
-          <NavBar />
-          <InnerContainer>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/upload" component={Upload} />
-              <Route exact path="/detail/:id" component={Detail} />
-              <Route exact path="/area/:id" component={Area} />
-            </Switch>
-          </InnerContainer>
-        </Container>
-      </Router>
+    <Router>
+      <GlobalStyle />
+      <Container>
+        <NavBar />
+        <InnerContainer>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/upload" component={Upload} />
+            <Route exact path="/detail/:id" component={Detail} />
+            <Route exact path="/area/:id" component={Area} />
+          </Switch>
+        </InnerContainer>
+      </Container>
+    </Router>
   );
 }
 
