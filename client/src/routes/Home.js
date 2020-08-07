@@ -1,7 +1,7 @@
 import React from 'react';
-import MainGrid from '../components/MainGrid';
-import Banner from '../components/Home/Banner';
-import PickBox from '../components/Home/PickBox';
+import MainGrid from '../components/MainArea/MainArea';
+import Banner from '../components/Banner/Banner';
+import PickBox from '../components/PickBox/PickBox';
 export default () => {
   return (
     <>
