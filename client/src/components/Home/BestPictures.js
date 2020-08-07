@@ -143,58 +143,49 @@ const BestImage = styled.img`
   position: relative;
 `;
 
-export default ({
-  userId,
-  num,
-  interest,
-  like,
-  user,
-  username,
-  imagePath,
-  location,
-}) => {
-  if (num === 0) {
+export default (props) => {
+  if (props.num === 0) {
     return (
       <Container>
-        <BestImage src={imagePath} alt={user} />
+        <BestImage src={props.imagePath} alt={props.user} />
         <InterBox>
           <img src="/images/Interesting.png" alt="Interesting" />
         </InterBox>
-        <InterestCount>{interest}</InterestCount>
+        <InterestCount>{props.interest}</InterestCount>
         <LikeBox>
           <img src="/images/Like.png" alt="Like" />
         </LikeBox>
-        <LikeNumber>{like}</LikeNumber>
-        <Username>{username}</Username>
+        <LikeNumber>{props.like}</LikeNumber>
+        <Username>{props.username}</Username>
         <AvatarBox>
-          <Avatar src={user} alt="Avatar" />
+          <Avatar src={props.user} alt="Avatar" />
         </AvatarBox>
         <LocalBox>
           <img src="/images/location.png" alt="Location" />
         </LocalBox>
-        <LocationName>{location}</LocationName>
+        <LocationName>{props.location}</LocationName>
       </Container>
     );
   } else {
     return (
       <Container>
-        <Image src={imagePath} alt={user} />
+        <Image src={props.imagePath} alt={props.user} />
         <InterBox>
           <img src="/images/Interesting.png" alt="Interesting" />
         </InterBox>
-        <InterestCount>{interest}</InterestCount>
+        <InterestCount>{props.interest}</InterestCount>
         <LikeBox>
           <img src="/images/Like.png" alt="Like" />
         </LikeBox>
-        <LikeNumber>{like}</LikeNumber>
-        <Username>{username}</Username>
+        <LikeNumber>{props.like}</LikeNumber>
+        <Username>{props.username}</Username>
         <AvatarBox>
-          <Avatar src={user} alt="Avatar" />
+          <Avatar src={props.user} alt="Avatar" />
         </AvatarBox>
         <LocalBox>
           <img src="/images/location.png" alt="Like" />
         </LocalBox>
-        <LocationName>{location}</LocationName>
+        <LocationName>{props.location}</LocationName>
       </Container>
     );
   }

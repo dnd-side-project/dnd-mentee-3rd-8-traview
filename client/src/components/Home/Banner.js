@@ -18,12 +18,12 @@ const Image = styled.img`
 `;
 const BottomMain = styled.div`
 
-position: absolute;
-width: 1439px
-height: 210px;
-left: 0px;
-top: 612px;
-background: linear-gradient(180deg, rgba(25, 25, 25, 0.0001) 0%, #191919 100%);`;
+  position: absolute;
+  width: 1439px
+  height: 210px;
+  left: 0px;
+  top: 612px;
+  background: linear-gradient(180deg, rgba(25, 25, 25, 0.0001) 0%, #191919 100%);`;
 
 const ContainerText = styled.div`
   margin-left: 117px;
@@ -80,10 +80,10 @@ const Best = styled.h2`
 `;
 
 const BestPic = styled.div`
-margin-left:430px;
-margin-top:40px;
-display: flex
-position: relative;
+  margin-left: 430px;
+  margin-top: 40px;
+  display: flex;
+  position: relative;
 `;
 
 function Banner() {
