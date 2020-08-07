@@ -11,10 +11,8 @@ export default () => {
       {/*  3 Pick Box(ex Followers Pick)*/}
       <PickBox />
 
-      <div>
-        {/* magical place '*/}
-        <MainGrid />
-      </div>
+      {/* magical place '*/}
+      <MainGrid />
     </>
   );
 };
