@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import BestPictures from './BestPictures';
 
 const BannerPic = styled.div`
-overflow: hidden;
-break-inside: avoid;
-border-radius: 30px;
-position: relative;
-margin-bottom: 60px;
+  overflow: hidden;
+  break-inside: avoid;
+  border-radius: 30px;
+  position: relative;
+  margin-bottom: 60px;
 `;
 
 const Image = styled.img`
-vertical-align: bottom;
-width: 1440px;
-height: 736px;
- position: absolute;
+  vertical-align: bottom;
+  width: 1440px;
+  height: 736px;
+  position: absolute;
 `;
 const BottomMain = styled.div`
 
