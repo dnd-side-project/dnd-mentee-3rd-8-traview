@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import Home from '../routes/Home';
-import NavBar from './NavBar';
+import NavBar from './NavBar/NavBar';
 import Login from '../routes/Login';
 import Upload from '../routes/Upload';
 import Detail from '../routes/Detail';
