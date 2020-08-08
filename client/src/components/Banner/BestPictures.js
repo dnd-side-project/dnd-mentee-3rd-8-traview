@@ -10,18 +10,9 @@ const Container = styled.div`
   border: 2px solid #ff534b;
   margin-right: 15px;
   &:hover {
-    border: 4px solid #50bcdf;
+    border: 2px solid #50bcdf;
   }
   cursor: pointer;
-`;
-
-const Image = styled.img`
-  max-width: 100%;
-  vertical-align: bottom;
-  width: 244px;
-  height: 196px;
-  border-radius: 30px;
-  position: relative;
 `;
 
 const InterBox = styled.div`
@@ -137,56 +128,35 @@ const AvatarBox = styled.div`
 const BestImage = styled.img`
   max-width: 100%;
   vertical-align: bottom;
-  width: 266px;
+  width: 264px;
   height: 196px;
   border-radius: 30px;
   position: relative;
 `;
 
 export default (props) => {
-  if (props.num === 0) {
+    const {userId, interestCount, likeCount, user, userName, imagePath, locationName} = props.data;
     return (
-      <Container>
-        <BestImage src={props.imagePath} alt={props.user} />
-        <InterBox>
-          <img src="/images/Interesting.png" alt="Interesting" />
-        </InterBox>
-        <InterestCount>{props.interest}</InterestCount>
-        <LikeBox>
-          <img src="/images/Like.png" alt="Like" />
-        </LikeBox>
-        <LikeNumber>{props.like}</LikeNumber>
-        <Username>{props.username}</Username>
-        <AvatarBox>
-          <Avatar src={props.user} alt="Avatar" />
-        </AvatarBox>
-        <LocalBox>
-          <img src="/images/location.png" alt="Location" />
-        </LocalBox>
-        <LocationName>{props.location}</LocationName>
-      </Container>
+        <Container>
+            <BestImage src={imagePath} alt={userName}/>
+            <InterBox>
+                <img src="/images/Interesting.png" alt="Interesting"/>
+            </InterBox>
+            <InterestCount>{interestCount}</InterestCount>
+            <LikeBox>
+                <img src="/images/Like.png" alt="Like"/>
+            </LikeBox>
+            <LikeNumber>{likeCount}</LikeNumber>
+            <Username>{userName}</Username>
+
+            <AvatarBox>
+                <Avatar src={user} alt="Avatar"/>
+            </AvatarBox>
+
+            <LocalBox>
+                <img src="/images/location.png" alt="Location"/>
+            </LocalBox>
+            <LocationName>{locationName}</LocationName>
+        </Container>
     );
-  } else {
-    return (
-      <Container>
-        <Image src={props.imagePath} alt={props.user} />
-        <InterBox>
-          <img src="/images/Interesting.png" alt="Interesting" />
-        </InterBox>
-        <InterestCount>{props.interest}</InterestCount>
-        <LikeBox>
-          <img src="/images/Like.png" alt="Like" />
-        </LikeBox>
-        <LikeNumber>{props.like}</LikeNumber>
-        <Username>{props.username}</Username>
-        <AvatarBox>
-          <Avatar src={props.user} alt="Avatar" />
-        </AvatarBox>
-        <LocalBox>
-          <img src="/images/location.png" alt="Like" />
-        </LocalBox>
-        <LocationName>{props.location}</LocationName>
-      </Container>
-    );
-  }
 };

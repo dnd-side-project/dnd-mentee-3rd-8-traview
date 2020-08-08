@@ -72,15 +72,16 @@ const ContainerPicture = styled.div`
 const Best = styled.h2`
   font-style: normal;
   font-weight: bold;
+  text-align: center;
   font-size: 30px;
   line-height: 43px;
   letter-spacing: -0.6px;
-  margin-right: 250px;
+  margin-right: 30px;
   position: relative;
 `;
 
 const BestPic = styled.div`
-  margin-left: 430px;
+  justify-content: flex-end;
   margin-top: 40px;
   display: flex;
   position: relative;
@@ -90,32 +91,31 @@ function Banner() {
   const data = [
     {
       userId: 'test1',
-      interest: 1,
-      like: 4,
+      interestCount: 1,
+      likeCount: 4,
       user: '/images/Avatar2.png',
-      username: 'John',
+      userName: 'John',
       imagePath: '/images/test1.jpg',
-      location: '부산',
+      locationName: '부산',
     },
-
+    //userId,userName, interestCount, likeCount, username, locationName, imagePath
     {
       userId: 'test2',
-      interest: 4,
-      like: 5,
-
+      interestCount: 4,
+      likeCount: 5,
       user: '/images/Avatar1.png',
-      username: 'Pack',
+      userName: 'Pack',
       imagePath: '/images/test2.jpg',
-      location: '서울',
+      locationName: '서울',
     },
     {
       userId: 'test3',
-      interest: 1,
-      like: 9,
+      interestCount: 1,
+      likeCount: 9,
       user: '/images/Avatar3.png',
-      username: 'PSY',
+      userName: 'PSY',
       imagePath: '/images/test3.jpg',
-      location: '경주',
+      locationName: '경주',
     },
   ];
 
@@ -134,16 +134,7 @@ function Banner() {
         <Best> 최고의 사진들 </Best>
         <BestPic>
           {data.map((data, index) => (
-            <BestPictures
-              key={data.userId}
-              num={index}
-              interest={data.interest}
-              like={data.like}
-              user={data.user}
-              username={data.username}
-              imagePath={data.imagePath}
-              location={data.location}
-            />
+            <BestPictures data={data} key={index} />
           ))}
         </BestPic>
       </ContainerPicture>
