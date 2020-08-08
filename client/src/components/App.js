@@ -24,17 +24,12 @@ const Container = styled.div`
   margin-bottom: 3rem;
 `;
 
-const InnerContainer = styled.div`
-  margin: 0 90px;
-`;
-
 function App() {
   return (
     <Router>
       <GlobalStyle />
       <Container>
         <NavBar />
-        <InnerContainer>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
@@ -43,7 +38,6 @@ function App() {
             <Route exact path="/detail/:id" component={Detail} />
             <Route exact path="/area/:id" component={Area} />
           </Switch>
-        </InnerContainer>
       </Container>
     </Router>
   );

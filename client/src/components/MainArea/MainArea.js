@@ -48,10 +48,10 @@ const Mood = styled.li`
 `;
 
 const Container = styled.div`
-  width: 1200px;
-  margin: 20px auto;
-  columns: 4;
-  columns-gap: 40px;
+  width: 1440px;
+  margin: 20px 0;
+  columns: 5;
+  columns-gap: 20px;
 `;
 
 export default () => {
