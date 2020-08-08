@@ -19,31 +19,28 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  max-width: 1440px;
-  margin: auto;
-  margin-bottom: 3rem;
+    max-width: 1440px;
+    margin: auto;
+    margin-bottom: 3rem;
 `;
 
-
-
-
 function App() {
-  return (
-    <Router>
-      <GlobalStyle />
-      <Container>
-        <NavBar />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/upload" component={Upload} />
-          <Route exact path="/detail/:id" component={Detail} />
-          <Route exact path="/area/:id" component={Area} />
-        </Switch>
-      </Container>
-    </Router>
-  );
+    return (
+        <Router>
+            <GlobalStyle />
+            <Container>
+                <NavBar />
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/upload" component={Upload} />
+                    <Route exact path="/detail/:id" component={Detail} />
+                    <Route exact path="/area/:id" component={Area} />
+                </Switch>
+            </Container>
+        </Router>
+    );
 }
 
 export default App;
