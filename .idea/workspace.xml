@@ -26,13 +26,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d4005fb-f515-4bba-9d0a-c35b862cbd80" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Banner/Banner.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Banner/Banner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Banner/BestPictures.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/Banner/BestPictures.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/PickBox/PickBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/PickBox/PickBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +84,7 @@
       <workItem from="1596773838292" duration="3125000" />
       <workItem from="1596870019749" duration="519000" />
       <workItem from="1596877444521" duration="2810000" />
-      <workItem from="1596890706386" duration="7633000" />
+      <workItem from="1596890706386" duration="8252000" />
     </task>
     <servers />
   </component>
