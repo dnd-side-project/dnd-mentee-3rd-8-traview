@@ -47,7 +47,7 @@ const AreaLink = styled(Link)`
 
   &:hover {
     color: #ff534b;
-    border-bottom: 2px solid #FF534B;
+    border-bottom: 2px solid #ff534b;
   }
 `;
 
@@ -110,50 +110,31 @@ const RegisterText = styled(Link)`
 `;
 
 export default () => {
+  const cityMenuList = [
+    { name: '서울', to: '/area/seoul' },
+    { name: '부산', to: '/area/busan' },
+    { name: '대구', to: '/area/daegu' },
+    { name: '인천', to: '/area/incheon' },
+    { name: '광주', to: '/area/gwangju' },
+    { name: '대전', to: '/area/daejeon' },
+    { name: '울산', to: '/area/ulsan' },
+    { name: '경기도', to: '/area/gyeonggi' },
+    { name: '충청도', to: '/area/chungcheong' },
+    { name: '전라도', to: '/area/jeolla' },
+    { name: '경상도', to: '/area/gyeongsang' },
+    { name: '제주도', to: '/area/jeju' },
+  ];
+
   return (
     <Container>
       <Title to={'/'}>Traview</Title>
       <NavContainer>
         <AreaContainer>
-          <ListItem>
-            <AreaLink to={'/area/seoul'}>서울</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/busan'}>부산</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/daegu'}>대구</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/incheon'}>인천</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/gwangju'}>광주</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/daejeon'}>대전</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/ulsan'}>울산</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/gyeonggi'}>경기도</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/gangwon'}>강원도</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/chungcheong'}>충청도</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/jeolla'}>전라도</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/gyeongsang'}>경상도</AreaLink>
-          </ListItem>
-          <ListItem>
-            <AreaLink to={'/area/jeju'}>제주도</AreaLink>
-          </ListItem>
+          {cityMenuList.map((item) => (
+            <ListItem>
+              <AreaLink to={item.to}>{item.name}</AreaLink>
+            </ListItem>
+          ))}
         </AreaContainer>
       </NavContainer>
       <Search />
