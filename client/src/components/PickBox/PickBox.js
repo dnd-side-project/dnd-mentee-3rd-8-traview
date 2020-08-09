@@ -2,74 +2,74 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Main = styled.div`
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 `;
 
 const MainBox = styled.button`
-  width: 460px;
-  height: 236px;
-  border-radius: 8px;
-  margin-bottom: 17px;
-  overflow: hidden;
-  break-inside: avoid;
-  position: relative;
-  display: flex;
-  
-  &:hover {
-    border: 4px solid #50bcdf;
-  }
-  cursor: pointer;
+    width: 460px;
+    height: 236px;
+    border-radius: 8px;
+    margin-bottom: 17px;
+    overflow: hidden;
+    break-inside: avoid;
+    position: relative;
+    display: flex;
+
+    &:hover {
+        border: 4px solid #50bcdf;
+    }
+    cursor: pointer;
 `;
 
 const MainLabel = styled.h2`
-  position: absolute;
-  height: 38px;
-  left: 9%;
-  right: 50%;
-  top: calc(50% - 38px / 2 - 38px);
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 25px;
-  line-height: 38px;
+    position: absolute;
+    height: 38px;
+    left: 9%;
+    right: 50%;
+    top: calc(50% - 38px / 2 - 38px);
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 38px;
 
-  display: flex;
-  align-items: center;
-  text-align: center;
-  letter-spacing: -0.52px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.52px;
 
-  color: #ffffff;
+    color: #ffffff;
 `;
 
 const Label = styled.p`
-  position: absolute;
-  height: 48px;
-  left: 9%;
-  text-align: left;
-  top: calc(50% - 48px / 2 + 11px);
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 23px;
-  letter-spacing: -0.32px;
-  color: #dbdbdb;
+    position: absolute;
+    height: 48px;
+    left: 9%;
+    text-align: left;
+    top: calc(50% - 48px / 2 + 11px);
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: -0.32px;
+    color: #dbdbdb;
 `;
 
 const ImageBox = styled.div`
-  position: absolute;
-  left: 55.75%;
-  right: 6.75%;
-  top: 18.22%;
-  bottom: 18.22%;
+    position: absolute;
+    left: 55.75%;
+    right: 6.75%;
+    top: 18.22%;
+    bottom: 18.22%;
 `;
 const InterestingBox = styled.div`
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  left: 39.75%;
-  bottom: 59.32%;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 39.75%;
+    bottom: 59.32%;
 `;
 
 function PickBox() {
@@ -84,11 +84,11 @@ function PickBox() {
                 <MainLabel>최신 사진 PICK</MainLabel>
                 <Label>
                     오늘은 무슨 신기한
-                    <br/>
+                    <br />
                     장소들이 올라왔을까?
                 </Label>
                 <ImageBox>
-                    <img src={'/images/Oval1.png'} alt="NewPick"/>
+                    <img src={'/images/Oval1.png'} alt="NewPick" />
                 </ImageBox>
             </MainBox>
 
@@ -101,11 +101,11 @@ function PickBox() {
                 <MainLabel>팔로워 PICK</MainLabel>
                 <Label>
                     나의 팔로워들만의 숨겨진
-                    <br/>
+                    <br />
                     장소는 ?!
                 </Label>
                 <ImageBox>
-                    <img src={'/images/Oval2.png'} alt="Follower"/>
+                    <img src={'/images/Oval2.png'} alt="Follower" />
                 </ImageBox>
             </MainBox>
 
@@ -116,15 +116,15 @@ function PickBox() {
                 }}
             >
                 <InterestingBox>
-                    <img src="/images/Interesting.png" alt="Interesting"/>
+                    <img src="/images/Interesting.png" alt="Interesting" />
                 </InterestingBox>
                 <MainLabel>신기한 PICK</MainLabel>
                 <Label>
-                    오늘의 신기한 장소는 <br/>
+                    오늘의 신기한 장소는 <br />
                     어디일까?
                 </Label>
                 <ImageBox>
-                    <img src={'/images/Oval3.png'} alt="Interest"/>
+                    <img src={'/images/Oval3.png'} alt="Interest" />
                 </ImageBox>
             </MainBox>
         </Main>

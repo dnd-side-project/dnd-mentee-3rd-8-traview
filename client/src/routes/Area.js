@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default () => {
-  return <div>Area</div>;
+    return <div>Area</div>;
 };

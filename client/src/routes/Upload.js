@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default () => {
-  return <div>Upload</div>;
+    return <div>Upload</div>;
 };
