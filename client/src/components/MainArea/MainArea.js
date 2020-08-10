@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { API_ROOT, ACCESS_KEY } from '../../const/apiConst';
+import React, { useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import Picture from './Picture';
 import Loader from './Loader';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import './MainGrid.css';
+import useImageSearch from './useImageSearch';
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -56,19 +54,28 @@ const Container = styled.div`
 `;
 
 export default () => {
-    const [images, setImages] = useState([]);
+    const [query, setQuery] = useState('');
+    const [pageNumber, setPageNumber] = useState(1);
 
-    useEffect(() => {
-        fetchImages();
-    }, []);
+    const { images, hasMore, loading, error } = useImageSearch(
+        query,
+        pageNumber
+    );
 
-    const fetchImages = async () => {
-        const result = await axios.get(
-            `${API_ROOT}/photos/random?client_id=${ACCESS_KEY}&count=15`
-        );
-
-        setImages([...images, ...result.data]);
-    };
+    const observer = useRef();
+    const lastImageElementRef = useCallback(
+        (node) => {
+            if (loading) return;
+            if (observer.current) observer.current.disconnect();
+            observer.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && hasMore) {
+                    setPageNumber((prevPageNumber) => prevPageNumber + 1);
+                }
+            });
+            if (node) observer.current.observe(node);
+        },
+        [loading, hasMore]
+    );
 
     return (
         <>
@@ -84,18 +91,27 @@ export default () => {
                     <Mood>낭만</Mood>
                 </MoodList>
             </HeaderContainer>
-            <InfiniteScroll
-                dataLength={images.length}
-                next={fetchImages}
-                hasMore={true}
-                loader={<Loader />}
-            >
-                <Container>
-                    {images.map((image) => (
-                        <Picture imagePath={image.urls.small} key={image.id} />
-                    ))}
-                </Container>
-            </InfiniteScroll>
+            <Container>
+                {images.map((image, index) => {
+                    if (images.length === index + 1) {
+                        return (
+                            <>
+                                <Picture
+                                    imagePath={image.urls.small}
+                                    key={index}
+                                />
+                                <div ref={lastImageElementRef}>라스트</div>
+                            </>
+                        );
+                    } else {
+                        return (
+                            <Picture imagePath={image.urls.small} key={index} />
+                        );
+                    }
+                })}
+            </Container>
+            {loading && <Loader />}
+            <div>{error && 'Error'}</div>
         </>
     );
 };
