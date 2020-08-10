@@ -2,19 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    margin-bottom: 17px;
     overflow: hidden;
     break-inside: avoid;
-    border-radius: 30px;
-    position: relative;
+    border-radius: 10px;
     border: 2px solid #ff534b;
-    margin-right: 15px;
+    margin-right: 36px;
+    width: 224px;
+    height: 160px;
     &:hover {
+        background: radial-gradient(
+            87.41% 87.41% at 50% 50%,
+            rgba(0, 0, 0, 0.0001) 0%,
+            #000000 100%
+        );
         border: 2px solid #50bcdf;
+        height: 196px;
+        width: 266px;
     }
-    cursor: pointer;
 `;
-
 const InterBox = styled.div`
     left: 57.89%;
     right: 34.59%;
@@ -30,13 +35,11 @@ const InterestCount = styled.p`
     height: 15px;
     left: 66.92%;
     right: 26.69%;
-    top: calc(50% - 15px / 2 - 81.5px);
+    top: 5%;
     font-style: normal;
     font-weight: 500;
     font-size: 10px;
     line-height: 14px;
-    align-items: center;
-    text-align: center;
     letter-spacing: -0.2px;
 `;
 
@@ -56,7 +59,7 @@ const LikeNumber = styled.p`
     height: 15px;
     left: 90.59%;
     right: 6.02%;
-    top: calc(50% - 15px / 2 - 81.5px);
+    top: 5%;
     font-weight: 500;
     font-size: 10px;
     line-height: 14px;
@@ -67,9 +70,9 @@ const LikeNumber = styled.p`
 const Username = styled.p`
     position: absolute;
     height: 15px;
-    left: 8.77%;
-    right: 84.21%;
-    top: calc(50% - 15px / 2 + 80.5px);
+    left: 6.77%;
+    right: 81.21%;
+    top: 87%;
     font-style: normal;
     font-weight: 500;
     font-size: 10px;
@@ -91,32 +94,27 @@ const LocalBox = styled.div`
 
 const LocationName = styled.p`
     position: absolute;
-    height: 15px;
     left: 82.84%;
     right: 6.02%;
-    top: calc(50% - 15px / 2 + 74.5px);
+    top: 85%;
     font-family: Noto Sans KR;
     font-style: normal;
     font-weight: 500;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 14px;
     align-items: center;
     text-align: center;
     letter-spacing: -0.2px;
 `;
-
 const Avatar = styled.img`
     max-width: 100%;
-    vertical-align: bottom;
-    width: 28px;
-    height: 28px;
     position: relative;
     background: transparent;
     border: none;
 `;
 const AvatarBox = styled.div`
     position: absolute;
-    left: 7.02%;
+    left: 8.5%;
     right: 83.46%;
     top: 72.96%;
     bottom: 12.76%;
@@ -125,17 +123,24 @@ const AvatarBox = styled.div`
     background: transparent;
     border: none;
 `;
-
-const BestImage = styled.img`
-    max-width: 100%;
-    vertical-align: bottom;
-    width: 264px;
-    height: 196px;
-    border-radius: 30px;
+const Block = styled.div`
+    border-radius: 10px;
     position: relative;
+    border: 2px solid #ff534b;
+    margin-right: 36px;
+    width: 224px;
+
+    height: 160px;
+    &:hover {
+        border: 2px solid #50bcdf;
+        height: 196px;
+        width: 266px;
+        opacity: 1;
+    }
+    opacity: 0;
 `;
 
-export default (props) => {
+function BestPicture(props) {
     const {
         userId,
         interestCount,
@@ -146,26 +151,34 @@ export default (props) => {
         locationName,
     } = props.data;
     return (
-        <Container>
-            <BestImage src={imagePath} alt={userName} />
-            <InterBox>
-                <img src="/images/Interesting.png" alt="Interesting" />
-            </InterBox>
-            <InterestCount>{interestCount}</InterestCount>
-            <LikeBox>
-                <img src="/images/Like.png" alt="Like" />
-            </LikeBox>
-            <LikeNumber>{likeCount}</LikeNumber>
-            <Username>{userName}</Username>
-
-            <AvatarBox>
-                <Avatar src={user} alt="Avatar" />
-            </AvatarBox>
-
-            <LocalBox>
-                <img src="/images/location.png" alt="Location" />
-            </LocalBox>
-            <LocationName>{locationName}</LocationName>
-        </Container>
+        <>
+            <Container
+                style={{
+                    backgroundImage: `url('${imagePath}')`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                }}
+            >
+                <Block>
+                    <InterBox>
+                        <img src="/images/Interesting.png" alt="Interesting" />
+                    </InterBox>
+                    <InterestCount>{interestCount}</InterestCount>
+                    <LikeBox>
+                        <img src="/images/Like.png" alt="Like" />
+                    </LikeBox>
+                    <LikeNumber>{likeCount}</LikeNumber>
+                    <Username>{userName}</Username>
+                    <AvatarBox>
+                        <Avatar src={user} alt="Avatar" />
+                    </AvatarBox>
+                    <LocalBox>
+                        <img src="/images/location.png" alt="Location" />
+                    </LocalBox>
+                    <LocationName>{locationName}</LocationName>
+                </Block>
+            </Container>
+        </>
     );
-};
+}
+export default BestPicture;

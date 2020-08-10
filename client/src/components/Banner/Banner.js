@@ -4,35 +4,20 @@ import BestPictures from './BestPictures';
 
 const BannerPic = styled.div`
     overflow: hidden;
-    break-inside: avoid;
     border-radius: 30px;
     position: relative;
     margin-bottom: 60px;
+    max-width: 1440px;
+    max-height: 736px;
 `;
-
-const Image = styled.img`
-    vertical-align: bottom;
-    width: 1440px;
-    height: 736px;
-    position: absolute;
-`;
-const BottomMain = styled.div`
-
-  position: absolute;
-  width: 1439px
-  height: 210px;
-  left: 0px;
-  top: 612px;
-  background: linear-gradient(180deg, rgba(25, 25, 25, 0.0001) 0%, #191919 100%);`;
 
 const ContainerText = styled.div`
     margin-left: 117px;
-    margin-top: 100px;
+    margin-top: 150px;
     align-items: center;
     font-style: normal;
     position: relative;
 `;
-
 const RecLabel = styled.h5`
     font-size: 40px;
     line-height: 58px;
@@ -40,7 +25,6 @@ const RecLabel = styled.h5`
     letter-spacing: -0.8px;
     position: relative;
 `;
-
 const MainLabel = styled.h2`
     font-weight: 500;
     font-size: 80px;
@@ -49,15 +33,14 @@ const MainLabel = styled.h2`
     letter-spacing: -1.6px;
     position: relative;
 `;
-
 const ConnectBtn = styled.button`
     display: flex;
     font-size: 24px;
     border: 2px solid #ffffff;
     box-sizing: border-box;
     border-radius: 28px;
-    padding: 4px 38px;
-    align-items: center;
+    padding: 4px 35px;
+    margin-top: 30px;
     letter-spacing: -0.48px;
     line-height: 35px;
     color: #ffffff;
@@ -68,28 +51,38 @@ const ConnectBtn = styled.button`
 const ContainerPicture = styled.div`
     align-items: center;
     text-align: center;
-    margin-top: 90px;
+    margin-bottom: 60px;
     position: relative;
 `;
 
 const Best = styled.h2`
+    margin-right: 40px;
+    margin-top: 30px;
     font-style: normal;
     font-weight: bold;
-    text-align: center;
     font-size: 30px;
-    line-height: 43px;
     letter-spacing: -0.6px;
-    margin-right: 30px;
     position: relative;
 `;
 
 const BestPic = styled.div`
+    margin-top: 30px;
     justify-content: flex-end;
-    margin-top: 40px;
     display: flex;
-    position: relative;
 `;
 
+const BackColor = styled.div`
+    position: flex;
+    width: 1439px;
+    height: 210px;
+    left: 0px;
+    top: 612px;
+    background: linear-gradient(
+        180deg,
+        rgba(25, 25, 25, 0.0001) 0%,
+        #191919 100%
+    );
+`;
 function Banner() {
     const data = [
         {
@@ -123,8 +116,13 @@ function Banner() {
     ];
 
     return (
-        <BannerPic>
-            <Image src="/images/Main.png" alt="RecommendPlace" />
+        <BannerPic
+            style={{
+                backgroundImage: `url("/images/Main.png")`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+            }}
+        >
             <ContainerText>
                 <RecLabel>
                     오늘의
@@ -141,7 +139,7 @@ function Banner() {
                     ))}
                 </BestPic>
             </ContainerPicture>
-            <BottomMain />
+            <BackColor />
         </BannerPic>
     );
 }
