@@ -137,7 +137,6 @@ export default () => {
                     ))}
                 </AreaContainer>
             </NavContainer>
-
             <Search />
             <UploadContainer>
                 <UploadIcon />
