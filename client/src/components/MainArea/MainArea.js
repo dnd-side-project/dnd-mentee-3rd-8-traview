@@ -62,10 +62,12 @@ export default () => {
         fetchImages();
     }, []);
 
-    const fetchImages = () => {
-        axios
-            .get(`${API_ROOT}/photos/random?client_id=${ACCESS_KEY}&count=15`)
-            .then((res) => setImages([...images, ...res.data]));
+    const fetchImages = async () => {
+        const result = await axios.get(
+            `${API_ROOT}/photos/random?client_id=${ACCESS_KEY}&count=15`
+        );
+
+        setImages([...images, ...result.data]);
     };
 
     return (
