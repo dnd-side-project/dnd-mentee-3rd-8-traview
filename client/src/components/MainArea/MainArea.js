@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_ROOT, ACCESS_KEY } from '../../const/apiConst';
 import styled from 'styled-components';
 import axios from 'axios';
 import Picture from './Picture';
@@ -62,10 +63,8 @@ export default () => {
     }, []);
 
     const fetchImages = () => {
-        const apiRoot = 'https://api.unsplash.com';
-        const accessKey = process.env.REACT_APP_ACCESSKEY;
         axios
-            .get(`${apiRoot}/photos/random?client_id=${accessKey}&count=15`)
+            .get(`${API_ROOT}/photos/random?client_id=${ACCESS_KEY}&count=15`)
             .then((res) => setImages([...images, ...res.data]));
     };
 
