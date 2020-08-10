@@ -9,7 +9,6 @@ const Container = styled.div`
     margin-right: 36px;
     width: 224px;
     height: 160px;
-
     &:hover {
         background: radial-gradient(
             87.41% 87.41% at 50% 50%,
@@ -21,7 +20,6 @@ const Container = styled.div`
         width: 266px;
     }
 `;
-
 const InterBox = styled.div`
     left: 57.89%;
     right: 34.59%;
@@ -131,6 +129,7 @@ const Block = styled.div`
     border: 2px solid #ff534b;
     margin-right: 36px;
     width: 224px;
+
     height: 160px;
     &:hover {
         border: 2px solid #50bcdf;
@@ -141,7 +140,7 @@ const Block = styled.div`
     opacity: 0;
 `;
 
-export default (props) => {
+function BestPicture(props) {
     const {
         userId,
         interestCount,
@@ -181,4 +180,5 @@ export default (props) => {
             </Container>
         </>
     );
-};
+}
+export default BestPicture;
