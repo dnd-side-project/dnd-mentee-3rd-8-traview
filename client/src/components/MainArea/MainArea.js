@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { API_ROOT, ACCESS_KEY } from '../../const/apiConst';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -58,17 +58,16 @@ const Container = styled.div`
 export default () => {
     const [images, setImages] = useState([]);
 
-    useEffect(() => {
-        fetchImages();
-    }, []);
-
-    const fetchImages = async () => {
+    const fetchImages = useCallback(async () => {
         const result = await axios.get(
             `${API_ROOT}/photos/random?client_id=${ACCESS_KEY}&count=15`
         );
+        setImages((images) => [...images, ...result.data]);
+    }, [setImages]);
 
-        setImages([...images, ...result.data]);
-    };
+    useEffect(() => {
+        fetchImages();
+    }, [fetchImages]);
 
     return (
         <>
@@ -91,8 +90,8 @@ export default () => {
                 loader={<Loader />}
             >
                 <Container>
-                    {images.map((image) => (
-                        <Picture imagePath={image.urls.small} key={image.id} />
+                    {images.map((image, index) => (
+                        <Picture imagePath={image.urls.small} key={index} />
                     ))}
                 </Container>
             </InfiniteScroll>
