@@ -1,0 +1,23 @@
+{
+  "name": "traview",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "frontend": "npm run start --prefix client",
+    "backend": "nodemon server/index.js",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "repository": "https://github.com/HoJin9622/dnd-mentee-3rd-8-traview.git",
+  "author": "hojin9622 <kiss0104040@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.28"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
