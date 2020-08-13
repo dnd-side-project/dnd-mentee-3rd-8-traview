@@ -1,5 +1,10 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    useParams,
+} from 'react-router-dom';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import Home from '../routes/Home';
@@ -28,17 +33,17 @@ function App() {
     return (
         <Router>
             <GlobalStyle />
-            <Container>
-                <NavBar />
-                <Switch>
+            <Switch>
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Container>
+                    <NavBar />
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/register" component={Register} />
                     <Route exact path="/upload" component={Upload} />
                     <Route exact path="/detail/:id" component={Detail} />
                     <Route exact path="/area/:id" component={Area} />
-                </Switch>
-            </Container>
+                </Container>
+            </Switch>
         </Router>
     );
 }
