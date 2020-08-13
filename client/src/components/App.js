@@ -28,17 +28,17 @@ function App() {
     return (
         <Router>
             <GlobalStyle />
-            <Container>
-                <NavBar />
-                <Switch>
+            <Switch>
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Container>
+                    <NavBar />
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/register" component={Register} />
                     <Route exact path="/upload" component={Upload} />
                     <Route exact path="/detail/:id" component={Detail} />
                     <Route exact path="/area/:id" component={Area} />
-                </Switch>
-            </Container>
+                </Container>
+            </Switch>
         </Router>
     );
 }
