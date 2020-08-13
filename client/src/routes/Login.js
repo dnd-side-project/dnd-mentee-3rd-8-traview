@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BackgroundBox } from '../components/ButtonStyle/BackgroundBox';
 import { InputBar } from '../components/ButtonStyle/InputBar';
-import { MainThema } from '../components/ButtonStyle/MainThema';
+import { MainTheme } from '../components/ButtonStyle/MainTheme';
 import { SignUpLabel } from '../components/ButtonStyle/SignUpLabel';
 import { SocialBox } from '../components/ButtonStyle/SocialBox';
 import { SocialFont } from '../components/ButtonStyle/SocialFont';
@@ -42,7 +42,7 @@ function Login() {
     };
 
     return (
-        <MainThema
+        <MainTheme
             style={{
                 width: '100%',
                 height: '1024px',
@@ -159,7 +159,7 @@ function Login() {
                     </IDCheckLabel>
                 </form>
             </BackgroundBox>
-        </MainThema>
+        </MainTheme>
     );
 }
 

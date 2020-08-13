@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BackgroundBox } from '../components/ButtonStyle/BackgroundBox';
 import { InputBar } from '../components/ButtonStyle/InputBar';
-import { MainThema } from '../components/ButtonStyle/MainThema';
+import { MainTheme } from '../components/ButtonStyle/MainTheme';
 import { SignUpLabel } from '../components/ButtonStyle/SignUpLabel';
 import { SocialBox } from '../components/ButtonStyle/SocialBox';
 import { SocialFont } from '../components/ButtonStyle/SocialFont';
@@ -33,7 +33,7 @@ function Register() {
     };
 
     return (
-        <MainThema
+        <MainTheme
             style={{
                 width: '100%',
                 height: '1024px',
@@ -155,7 +155,7 @@ function Register() {
                     </form>
                 </BackgroundBox>
             </div>
-        </MainThema>
+        </MainTheme>
     );
 }
 export default Register;
