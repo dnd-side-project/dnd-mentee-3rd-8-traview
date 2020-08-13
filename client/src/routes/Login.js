@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { BackgroundBox } from '../components/ButtonStyle/BackgroundBox';
-import { InputBar } from '../components/ButtonStyle/InputBar';
-import { MainTheme } from '../components/ButtonStyle/MainTheme';
-import { SignUpLabel } from '../components/ButtonStyle/SignUpLabel';
-import { SocialBox } from '../components/ButtonStyle/SocialBox';
-import { SocialFont } from '../components/ButtonStyle/SocialFont';
-import { SocialImage } from '../components/ButtonStyle/SocialImage';
-import { SubmittBtn } from '../components/ButtonStyle/SubmittBtn';
+import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
+import { InputBar } from '../components/CommonStyle/InputBar';
+import { MainTheme } from '../components/CommonStyle/MainTheme';
+import { SignUpLabel } from '../components/CommonStyle/SignUpLabel';
+import { SocialBox } from '../components/CommonStyle/SocialBox';
+import { SocialFont } from '../components/CommonStyle/SocialFont';
+import { SocialImage } from '../components/CommonStyle/SocialImage';
+import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -42,15 +42,7 @@ function Login() {
     };
 
     return (
-        <MainTheme
-            style={{
-                width: '100%',
-                height: '1024px',
-                backgroundImage: `url("/images/LoginBackground.png")`,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-            }}
-        >
+        <MainTheme bg={'/images/LoginBackground.png'}>
             <SignUpLabel style={{ marginTop: '10%' }}>
                 <span style={{ color: 'red' }}>Traview</span>
                 &nbsp;로그인
