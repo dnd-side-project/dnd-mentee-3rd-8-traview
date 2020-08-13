@@ -1,94 +1,13 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-
-const MainThema = styled.div`
-    overflow: hidden;
-    text-align: center;
-    font-weight: 300;
-    color: #ffffff;
-    font-family: Noto Sans KR;
-    font-style: normal;
-    margin: auto;
-`;
-
-const TopLabel = styled.h2`
-    margin-top: 7%;
-    font-weight: 300;
-    font-size: 40px;
-    line-height: 58px;
-    color: #ffffff;
-`;
-const SignUpLabel = styled.h2`
-    font-size: 60px;
-    line-height: 87px;
-    font-weight: bold;
-    margin-bottom: 5%;
-`;
-const BackgroundBox = styled.div`
-    width: 774px;
-    height: 617px;
-    background: rgba(51, 51, 51, 0.7);
-    backdrop-filter: blur(2.71828px);
-    border-radius: 20px;
-    margin: 0 auto;
-`;
-const SocialBox = styled.div`
-    margin-top: 5%;
-    cursor: pointer;
-`;
-
-const SocialImage = styled.div`
-    width: 68px;
-    height: 68px;
-    margin: 0px auto;
-`;
-const SocialFont = styled.p`
-    margin-top: 5px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 23px;
-    display: flex;
-    letter-spacing: -1px;
-`;
-
-const InputBar = styled.input`
-    border: 2px solid #ff534b;
-    box-sizing: border-box;
-    border-radius: 29.5px;
-    height: 14%;
-    width: 75%;
-    margin: 0 auto;
-    font-family: Noto Sans KR;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 29px;
-    align-items: center;
-    padding-left: 5%;
-    letter-spacing: -1.25px;
-`;
-const StartBtn = styled.button`
-    margin: 0 auto;
-    width: 75%;
-    align-items: center;
-    text-align: center;
-    border: 2px solid #ff534b;
-    background: #ff534b;
-    box-sizing: border-box;
-    border-radius: 29.5px;
-    height: 14%;
-    font-family: Noto Sans KR;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 32px;
-    letter-spacing: -1.375px;
-    color: #ffffff;
-    &:hover {
-        border: 2px solid #50bcdf;
-    }
-    cursor: pointer;
-`;
+import { BackgroundBox } from '../components/ButtonStyle/BackgroundBox';
+import { InputBar } from '../components/ButtonStyle/InputBar';
+import { MainThema } from '../components/ButtonStyle/MainThema';
+import { SignUpLabel } from '../components/ButtonStyle/SignUpLabel';
+import { SocialBox } from '../components/ButtonStyle/SocialBox';
+import { SocialFont } from '../components/ButtonStyle/SocialFont';
+import { SocialImage } from '../components/ButtonStyle/SocialImage';
+import { SubmittBtn } from '../components/ButtonStyle/SubmittBtn';
+import { TopLabel } from '../components/ButtonStyle/TopLabel';
 
 function Register() {
     const [NickName, setNickName] = useState('');
@@ -153,7 +72,7 @@ function Register() {
                     >
                         <SocialBox>
                             <SocialImage>
-                                <img src="/images/kakao.png" alt="kakao" />
+                                <img src="/images/kakao.png" alt="Kakao" />
                             </SocialImage>
                             <SocialFont>
                                 카카오 아이디로
@@ -162,7 +81,7 @@ function Register() {
                         </SocialBox>
                         <SocialBox>
                             <SocialImage>
-                                <img src="/images/naver.png" alt="kakao" />
+                                <img src="/images/naver.png" alt="Naver" />
                             </SocialImage>
                             <SocialFont>
                                 네이버 아이디로
@@ -176,7 +95,10 @@ function Register() {
                                     borderRadius: '35px',
                                 }}
                             >
-                                <img src="/images/facebook.png" alt="kakao" />
+                                <img
+                                    src="/images/facebook.png"
+                                    alt="Facebook"
+                                />
                             </SocialImage>
                             <SocialFont>
                                 페이스북 아이디로
@@ -185,7 +107,7 @@ function Register() {
                         </SocialBox>
                         <SocialBox>
                             <SocialImage>
-                                <img src="/images/google.png" alt="kakao" />
+                                <img src="/images/google.png" alt="Google" />
                             </SocialImage>
                             <SocialFont>
                                 구글 아이디로
@@ -228,9 +150,9 @@ function Register() {
                             value={Password}
                             onChange={onPasswordHandler}
                         />
-                        <StartBtn onClick={onSignUpHandler}>
+                        <SubmittBtn onClick={onSignUpHandler}>
                             Traview 시작하기
-                        </StartBtn>
+                        </SubmittBtn>
                     </form>
                 </BackgroundBox>
             </div>

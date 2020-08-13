@@ -1,10 +1,5 @@
-import React, { useEffect } from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    useParams,
-} from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import Home from '../routes/Home';
