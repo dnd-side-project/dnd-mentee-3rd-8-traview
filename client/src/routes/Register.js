@@ -35,7 +35,7 @@ function Register() {
     return (
         <MainThema
             style={{
-                width: '1440px',
+                width: '100%',
                 height: '1024px',
                 backgroundImage: `url("/images/RegistalBackground.png")`,
                 backgroundSize: 'cover',
@@ -45,7 +45,7 @@ function Register() {
             <div
                 style={{
                     overflow: 'hidden',
-                    width: '1440px',
+                    width: '100%',
                     height: '1024px',
                     backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 }}
@@ -53,8 +53,7 @@ function Register() {
                 <TopLabel>나만 몰랐던 국내 여행지</TopLabel>
                 <SignUpLabel>
                     <span style={{ color: 'red' }}>Traview</span>
-                    <span> </span>
-                    회원가입
+                    &nbsp;회원가입
                 </SignUpLabel>
 
                 <BackgroundBox>
