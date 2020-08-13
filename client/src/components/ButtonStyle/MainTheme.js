@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MainThema = styled.div`
+export const MainTheme = styled.div`
     overflow: hidden;
     text-align: center;
     color: #ffffff;
