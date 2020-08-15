@@ -8,6 +8,7 @@ import { SocialFont } from '../components/CommonStyle/SocialFont';
 import { SocialImage } from '../components/CommonStyle/SocialImage';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { TopLabel } from '../components/CommonStyle/TopLabel';
+import { SocialCollection } from '../components/CommonStyle/SocialCollection';
 
 function Register() {
     const [NickName, setNickName] = useState('');
@@ -48,32 +49,22 @@ function Register() {
                     &nbsp;회원가입
                 </SignUpLabel>
 
-                <BackgroundBox>
+                <BackgroundBox style={{ marginTop: '-3%' }}>
                     {/*소셜 로그인 박스*/}
-                    <div
+                    <SocialCollection
                         style={{
-                            margin: '0 auto',
-                            width: '88%',
-                            height: '30%',
-                            display: 'flex',
-                            justifyContent: 'space-around',
-                            position: 'relative',
                             marginBottom: '-20px',
                         }}
                     >
                         <SocialBox>
-                            <SocialImage>
-                                <img src="/images/kakao.png" alt="Kakao" />
-                            </SocialImage>
+                            <SocialImage bg={'/images/kakao.png'} />
                             <SocialFont>
                                 카카오 아이디로
                                 <br /> 로그인하기
                             </SocialFont>
                         </SocialBox>
                         <SocialBox>
-                            <SocialImage>
-                                <img src="/images/naver.png" alt="Naver" />
-                            </SocialImage>
+                            <SocialImage bg={'/images/naver.png'} />
                             <SocialFont>
                                 네이버 아이디로
                                 <br /> 로그인하기
@@ -97,15 +88,16 @@ function Register() {
                             </SocialFont>
                         </SocialBox>
                         <SocialBox>
-                            <SocialImage>
-                                <img src="/images/google.png" alt="Google" />
-                            </SocialImage>
+                            <SocialImage
+                                bg={'/images/google.png'}
+                                alt="Google"
+                            />
                             <SocialFont>
                                 구글 아이디로
                                 <br /> 로그인하기
                             </SocialFont>
                         </SocialBox>
-                    </div>
+                    </SocialCollection>
                     {/*inputBox Div*/}
 
                     <form

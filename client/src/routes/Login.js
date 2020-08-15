@@ -9,6 +9,7 @@ import { SocialImage } from '../components/CommonStyle/SocialImage';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { SocialCollection } from '../components/CommonStyle/SocialCollection';
 
 const LoginLabel = styled.div`
     margin-top: -4%;
@@ -43,36 +44,23 @@ function Login() {
 
     return (
         <MainTheme bg={'/images/LoginBackground.png'}>
-            <SignUpLabel style={{ marginTop: '10%' }}>
+            <SignUpLabel style={{ marginTop: '6%' }}>
                 <span style={{ color: 'red' }}>Traview</span>
                 &nbsp;로그인
             </SignUpLabel>
             <LoginLabel>방문해주셔서 감사합니다</LoginLabel>
             <BackgroundBox style={{ height: '516px', marginTop: '2%' }}>
                 {/*소셜 로그인 박스*/}
-                <div
-                    style={{
-                        margin: '0 auto',
-                        width: '88%',
-                        height: '30%',
-                        display: 'flex',
-                        justifyContent: 'space-around',
-                        position: 'relative',
-                    }}
-                >
+                <SocialCollection>
                     <SocialBox>
-                        <SocialImage>
-                            <img src="/images/kakao.png" alt="Kakao" />
-                        </SocialImage>
+                        <SocialImage bg={'/images/kakao.png'} />
                         <SocialFont>
                             카카오 아이디로
                             <br /> 로그인하기
                         </SocialFont>
                     </SocialBox>
                     <SocialBox>
-                        <SocialImage>
-                            <img src="/images/naver.png" alt="Naver" />
-                        </SocialImage>
+                        <SocialImage bg={'/images/naver.png'} />
                         <SocialFont>
                             네이버 아이디로
                             <br /> 로그인하기
@@ -93,15 +81,13 @@ function Login() {
                         </SocialFont>
                     </SocialBox>
                     <SocialBox>
-                        <SocialImage>
-                            <img src="/images/google.png" alt="Google" />
-                        </SocialImage>
+                        <SocialImage bg={'/images/google.png'} alt="Google" />
                         <SocialFont>
                             구글 아이디로
                             <br /> 로그인하기
                         </SocialFont>
                     </SocialBox>
-                </div>
+                </SocialCollection>
                 {/*inputBox Div*/}
 
                 <form

@@ -46,6 +46,7 @@ const ConnectBtn = styled.button`
     color: #ffffff;
     background: transparent;
     position: relative;
+    cursor: pointer;
 `;
 
 const ContainerPicture = styled.div`
