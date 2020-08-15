@@ -44,6 +44,7 @@ const AreaLink = styled(Link)`
     font-size: 18px;
     line-height: 26px;
     letter-spacing: -0.36px;
+    padding-bottom: 17px;
 
     &:hover {
         color: #ff534b;
@@ -130,8 +131,8 @@ export default () => {
             <Title to={'/'}>Traview</Title>
             <NavContainer>
                 <AreaContainer>
-                    {cityMenuList.map((item) => (
-                        <ListItem>
+                    {cityMenuList.map((item, index) => (
+                        <ListItem key={index}>
                             <AreaLink to={item.to}>{item.name}</AreaLink>
                         </ListItem>
                     ))}
