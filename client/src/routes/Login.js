@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../_actions/user_action';
+import styled from 'styled-components';
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
 import { InputBar } from '../components/CommonStyle/InputBar';
 import { MainTheme } from '../components/CommonStyle/MainTheme';
@@ -7,8 +11,6 @@ import { SocialBox } from '../components/CommonStyle/SocialBox';
 import { SocialFont } from '../components/CommonStyle/SocialFont';
 import { SocialImage } from '../components/CommonStyle/SocialImage';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 const LoginLabel = styled.div`
     margin-top: -4%;
@@ -29,16 +31,38 @@ const IDCheckLabel = styled.div`
 `;
 
 function Login() {
+    const dispatch = useDispatch();
+
     const [ID, setID] = useState('');
-    const [Password, setPassword] = useState(''); //state
+    const [Password, setPassword] = useState('');
+    const history = useHistory();
+
     const onIDHandler = (event) => {
         setID(event.currentTarget.value);
     };
+
     const onPasswordHandler = (event) => {
         setPassword(event.currentTarget.value);
     };
+
     const onLoginHandler = (event) => {
         event.preventDefault();
+
+        console.log(ID);
+        console.log(Password);
+
+        let body = {
+            id: ID,
+            password: Password,
+        };
+
+        dispatch(loginUser(body)).then((response) => {
+            if (response.payload.loginSuccess) {
+                history.push('/');
+            } else {
+                alert('Error');
+            }
+        });
     };
 
     return (
@@ -105,7 +129,7 @@ function Login() {
                 {/*inputBox Div*/}
 
                 <form
-                    onSubmit={{ onLoginHandler }}
+                    onSubmit={onLoginHandler}
                     style={{
                         height: '70%',
                         display: 'flex',
@@ -138,7 +162,7 @@ function Login() {
                     </p>
                     <SubmittBtn
                         style={{ height: '17%', marginTop: '-2%' }}
-                        onClick={{ onLoginHandler }}
+                        onClick={onLoginHandler}
                     >
                         Traview 로그인
                     </SubmittBtn>
