@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
+import DetailPage from '../Detail/DetailPage';
 const Container = styled.div`
     overflow: hidden;
     break-inside: avoid;
@@ -141,6 +141,15 @@ const Block = styled.div`
 `;
 
 function BestPicture(props) {
+    useEffect(() => {
+        setIsModalOpen(false);
+    }, []);
+    const [IsModalOpen, setIsModalOpen] = useState(false);
+    const onClose = () => {
+        console.log('실행되기전', IsModalOpen);
+        setIsModalOpen(false);
+        console.log('onclose 실행됨 isModalOpen 값:', IsModalOpen);
+    };
     const {
         userId,
         interestCount,
@@ -149,14 +158,26 @@ function BestPicture(props) {
         userName,
         imagePath,
         locationName,
+        mapControl1,
+        mapControl2,
     } = props.data;
     return (
         <>
+            <DetailPage
+                imagePath={imagePath}
+                open={IsModalOpen}
+                close={onClose}
+                mapControl1={mapControl1}
+                mapControl2={mapControl2}
+            />
             <Container
                 style={{
                     backgroundImage: `url('${imagePath}')`,
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
+                }}
+                onClick={() => {
+                    setIsModalOpen(true);
                 }}
             >
                 <Block>

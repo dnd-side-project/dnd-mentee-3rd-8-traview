@@ -84,6 +84,7 @@ const BackColor = styled.div`
         #191919 100%
     );
 `;
+
 function Banner() {
     const data = [
         {
@@ -94,6 +95,8 @@ function Banner() {
             userName: 'John',
             imagePath: '/images/test1.jpg',
             locationName: '부산',
+            mapControl1: 33.450309567309525,
+            mapControl2: 126.56706008404826,
         },
         //userId,userName, interestCount, likeCount, username, locationName, imagePath
         {
@@ -104,6 +107,8 @@ function Banner() {
             userName: 'Pack',
             imagePath: '/images/test2.jpg',
             locationName: '서울',
+            mapControl1: 36.32233881614439,
+            mapControl2: 127.80792919254546,
         },
         {
             userId: 'test3',
@@ -113,6 +118,8 @@ function Banner() {
             userName: 'PSY',
             imagePath: '/images/test3.jpg',
             locationName: '경주',
+            mapControl1: 35.51872967285886,
+            mapControl2: 128.74798659953822,
         },
     ];
 
