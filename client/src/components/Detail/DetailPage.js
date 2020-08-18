@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import {
     ArticleContainer,
     CommentContainer,
+    Container1,
     DataContainer,
     Graph_Like_Container,
     GraphContainer,
@@ -19,8 +20,11 @@ import {
     ProfileContainer,
     RelativeContainer,
     RightContainer,
+    TotalContainer,
 } from './DetailStyle';
 import Profile from './DetailFunction/Profile';
+import MainImage from './DetailFunction/MainImage';
+import Article from './DetailFunction/Article';
 
 const DialogBody = styled(DialogContent)`
     background: rgba(64, 64, 64, 0.7);
@@ -45,13 +49,12 @@ export default function DetailPage(props) {
         >
             {/*<DialogTitle id="form-dialog-title">최악의 세대</DialogTitle>*/}
             <DialogBody>
-                <Container>
+                <TotalContainer>
                     <MainContentContainer>
                         <LeftContainer>
                             <ImageContainer>
-                                짱큰이미지컴포넌트
                                 {/* 이곳에 짱큰 이미지 넣어주시면 됩니다. */}
-                                {/* <Image /> */}
+                                <MainImage imagePath={props.imagePath} />
                             </ImageContainer>
                             <DataContainer>
                                 <ProfileContainer>
@@ -69,7 +72,8 @@ export default function DetailPage(props) {
                         </LeftContainer>
                         <RightContainer>
                             <ArticleContainer>
-                                본문 컴포넌트
+                                <Article close={props.close} />
+                                {/*본문 컴포넌트*/}
                                 {/* 이곳에 제목 글 작성날자 등 들어갑니다. */}
                                 {/* <Article /> */}
                             </ArticleContainer>
@@ -98,7 +102,7 @@ export default function DetailPage(props) {
                         {/* <주변사진들 /> */}
                         {/* <비슷한 사진들 /> */}
                     </RelativeContainer>
-                </Container>
+                </TotalContainer>
             </DialogBody>
             <DialogActions>
                 <Button item xs={3} onClick={props.close} color="primary">

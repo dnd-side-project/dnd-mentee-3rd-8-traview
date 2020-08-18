@@ -120,6 +120,7 @@ export default () => {
         { name: '대전', to: '/area/daejeon' },
         { name: '울산', to: '/area/ulsan' },
         { name: '경기도', to: '/area/gyeonggi' },
+        { name: '강원도', to: '/area/gangwondo' },
         { name: '충청도', to: '/area/chungcheong' },
         { name: '전라도', to: '/area/jeolla' },
         { name: '경상도', to: '/area/gyeongsang' },

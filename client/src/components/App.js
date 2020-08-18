@@ -6,7 +6,6 @@ import Home from '../routes/Home';
 import NavBar from './NavBar/NavBar';
 import Login from '../routes/Login';
 import Upload from '../routes/Upload';
-import Detail from '../routes/Detail';
 import Area from '../routes/Area';
 import Register from '../routes/Register';
 
@@ -35,7 +34,6 @@ function App() {
                     <NavBar />
                     <Route exact path="/" component={Home} />
                     <Route exact path="/upload" component={Upload} />
-                    <Route exact path="/detail/:id" component={Detail} />
                     <Route exact path="/area/:id" component={Area} />
                 </Container>
             </Switch>
