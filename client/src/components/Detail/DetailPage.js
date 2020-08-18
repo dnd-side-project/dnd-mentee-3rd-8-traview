@@ -64,7 +64,10 @@ export default function DetailPage(props) {
                                     />
                                 </ProfileContainer>
                                 <MapContainer>
-                                    <KakaoMap />
+                                    <KakaoMap
+                                        Latitude={props.Latitude}
+                                        longitude={props.longitude}
+                                    />
                                     {/* 여기는 카카오맵 넣어주시면 됩니다. */}
                                     {/* <KaKaoMap /> */}
                                 </MapContainer>
