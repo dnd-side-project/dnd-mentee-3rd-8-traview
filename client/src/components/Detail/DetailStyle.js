@@ -51,7 +51,7 @@ export const CommentContainer = styled.div`
     height: 400px;
 `;
 
-export const Graph_Like_Container = styled.div`
+export const GraphLikeContainer = styled.div`
     display: flex;
     justify-content: center;
 `;
