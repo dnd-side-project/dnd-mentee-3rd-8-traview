@@ -26,15 +26,6 @@ import Article from './DetailFunction/Article';
 import Like from './DetailFunction/Like';
 import KakaoMap from './DetailFunction/KakaoMap';
 
-const DialogBody = styled(DialogContent)`
-    background: rgba(64, 64, 64, 0.7);
-    backdrop-filter: blur(30px);
-    border-radius: 20px;
-    margin: -15px;
-    font-family: Noto Sans KR;
-    font-style: normal;
-    color: #ffffff;
-`;
 export default function DetailPage(props) {
     return (
         <Dialog
@@ -42,13 +33,17 @@ export default function DetailPage(props) {
             open={props.open}
             onClose={props.close}
             aria-labelledby="form-dialog-title"
-            style={{
-                borderRadius: '20px',
-                padding: '1px',
+            PaperProps={{
+                style: {
+                    backgroundColor: 'rgba(64, 64, 64, 0.7)',
+                    backdropFilter: 'blur(30px)',
+                    borderRadius: '20px',
+                    color: '#ffffff',
+                },
             }}
         >
             {/*<DialogTitle id="form-dialog-title">최악의 세대</DialogTitle>*/}
-            <DialogBody>
+            <DialogContent>
                 <TotalContainer>
                     <MainContentContainer>
                         <LeftContainer>
@@ -104,7 +99,7 @@ export default function DetailPage(props) {
                         {/* <비슷한 사진들 /> */}
                     </RelativeContainer>
                 </TotalContainer>
-            </DialogBody>
+            </DialogContent>
             <DialogActions>
                 {/*원래버튼있던자리 지만 저희 기능에선 사용할거없음*/}
             </DialogActions>
