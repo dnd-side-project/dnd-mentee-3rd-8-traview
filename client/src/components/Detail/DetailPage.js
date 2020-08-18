@@ -29,6 +29,7 @@ import KakaoMap from './DetailFunction/KakaoMap';
 export default function DetailPage(props) {
     return (
         <Dialog
+            scroll={'body'}
             maxWidth={false}
             open={props.open}
             onClose={props.close}
