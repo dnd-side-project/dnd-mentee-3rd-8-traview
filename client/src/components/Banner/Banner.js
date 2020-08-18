@@ -94,6 +94,9 @@ function Banner() {
             userName: 'John',
             imagePath: '/images/test1.jpg',
             locationName: '부산',
+            Latitude:33.450309567309525,
+            longitude:126.56706008404826,
+
         },
         //userId,userName, interestCount, likeCount, username, locationName, imagePath
         {
@@ -104,6 +107,8 @@ function Banner() {
             userName: 'Pack',
             imagePath: '/images/test2.jpg',
             locationName: '서울',
+            Latitude:36.32233881614439,
+            longitude:127.80792919254546,
         },
         {
             userId: 'test3',
@@ -113,6 +118,8 @@ function Banner() {
             userName: 'PSY',
             imagePath: '/images/test3.jpg',
             locationName: '경주',
+            Latitude:35.51872967285886,
+            longitude:128.74798659953822,
         },
     ];
 
