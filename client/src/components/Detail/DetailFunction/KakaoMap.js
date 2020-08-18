@@ -74,7 +74,7 @@ const KakaoMap = (props) => {
                     variant="text"
                     color="primary"
                     aria-label="text primary button group"
-                    fullWidth={'100%'}
+                    fullWidth={true}
                 >
                     <Button onClick={onClickToMap}>카카오맵</Button>
                     <Button onClick={onClickToNev}>카카오네비</Button>

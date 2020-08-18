@@ -38,7 +38,7 @@ const DialogBody = styled(DialogContent)`
 export default function DetailPage(props) {
     return (
         <Dialog
-            maxWidth={'1300xs'}
+            maxWidth={false}
             open={props.open}
             onClose={props.close}
             aria-labelledby="form-dialog-title"
@@ -106,10 +106,7 @@ export default function DetailPage(props) {
                 </TotalContainer>
             </DialogBody>
             <DialogActions>
-                <Button item xs={3} onClick={props.close} color="primary">
-                    Cancel
-                </Button>
-                <Button variant="contained">Save</Button>
+                {/*원래버튼있던자리 지만 저희 기능에선 사용할거없음*/}
             </DialogActions>
         </Dialog>
     );
