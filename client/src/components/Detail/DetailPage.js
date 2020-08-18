@@ -29,6 +29,7 @@ import KakaoMap from './DetailFunction/KakaoMap';
 export default function DetailPage(props) {
     return (
         <Dialog
+            scroll={'body'}
             maxWidth={false}
             open={props.open}
             onClose={props.close}
@@ -44,7 +45,7 @@ export default function DetailPage(props) {
         >
             {/*<DialogTitle id="form-dialog-title">최악의 세대</DialogTitle>*/}
             <DialogContent>
-                <TotalContainer>
+                <TotalContainer style={{ overflow: 'auto' }}>
                     <MainContentContainer>
                         <LeftContainer>
                             <ImageContainer>
