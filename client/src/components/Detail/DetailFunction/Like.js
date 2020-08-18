@@ -12,6 +12,7 @@ const LikeContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 `;
 
 const Image = styled.img`
