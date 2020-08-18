@@ -45,7 +45,7 @@ export default function DetailPage(props) {
         >
             {/*<DialogTitle id="form-dialog-title">최악의 세대</DialogTitle>*/}
             <DialogContent>
-                <TotalContainer style={{ overflow: 'auto' }}>
+                <TotalContainer>
                     <MainContentContainer>
                         <LeftContainer>
                             <ImageContainer>
