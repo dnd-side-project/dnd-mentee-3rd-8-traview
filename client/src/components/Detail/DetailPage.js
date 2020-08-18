@@ -4,13 +4,11 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import styled from 'styled-components';
-import Container from '@material-ui/core/Container';
 import {
     ArticleContainer,
     CommentContainer,
-    Container1,
     DataContainer,
-    Graph_Like_Container,
+    GraphLikeContainer,
     GraphContainer,
     ImageContainer,
     LeftContainer,
@@ -82,7 +80,7 @@ export default function DetailPage(props) {
                                 {/* 이곳에 덧글 들어갑니다. */}
                                 {/* <Comment /> */}
                             </CommentContainer>
-                            <Graph_Like_Container>
+                            <GraphLikeContainer>
                                 <GraphContainer>
                                     그래프 컴포넌트
                                     {/* 이곳에 그래프 들어갑니다. */}
@@ -93,7 +91,7 @@ export default function DetailPage(props) {
                                     {/* 이곳에 신기해요 찜목록 클릭 들어갑니다. */}
                                     {/* <Like /> */}
                                 </LikeContainer>
-                            </Graph_Like_Container>
+                            </GraphLikeContainer>
                         </RightContainer>
                     </MainContentContainer>
                     <RelativeContainer>
