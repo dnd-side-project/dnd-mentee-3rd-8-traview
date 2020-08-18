@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {KakaoMapAPI} from "../../../const/apiConst";
-import DetailPage from "../DetailPage";
-
+import { KakaoMapAPI } from '../../../const/apiConst';
+import DetailPage from '../DetailPage';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { Button } from '@material-ui/core';
 const { kakao } = window;
 
 const KakaoMap = (props) => {
@@ -43,12 +44,43 @@ const KakaoMap = (props) => {
             });
         };
     }, []);
-
+    const onClickToNev = () => {
+        window.open(
+            `https://map.kakao.com/link/to/Hello World!,${props.Latitude},${props.longitude}`
+        );
+    };
+    const onClickToMap = () => {
+        window.open(
+            `https://map.kakao.com/link/map/Hello World!,${props.Latitude},${props.longitude}`
+        );
+    };
     return (
         <div
-            id={'staticMap'}
-            style={{ width: '320px', height: '80px', borderRadius: '16px' }}
-        ></div>
+            style={{
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '20px',
+                boxSizing: 'border-box',
+                border: '3px solid #FFFFFF',
+            }}
+        >
+            <div
+                id={'staticMap'}
+                style={{ width: '100%', height: '65%', borderRadius: '16px' }}
+            />
+            <div style={{ width: '100%', height: '65%', borderRadius: '16px' }}>
+                <ButtonGroup
+                    variant="text"
+                    color="primary"
+                    aria-label="text primary button group"
+                    fullWidth={'100%'}
+                >
+                    <Button onClick={onClickToMap}>카카오맵</Button>
+                    <Button onClick={onClickToNev}>카카오네비</Button>
+                </ButtonGroup>
+            </div>
+        </div>
     );
 };
 

@@ -24,6 +24,7 @@ import Profile from './DetailFunction/Profile';
 import MainImage from './DetailFunction/MainImage';
 import Article from './DetailFunction/Article';
 import Like from './DetailFunction/Like';
+import KakaoMap from './DetailFunction/KakaoMap';
 
 const DialogBody = styled(DialogContent)`
     background: rgba(64, 64, 64, 0.7);
@@ -63,7 +64,10 @@ export default function DetailPage(props) {
                                     />
                                 </ProfileContainer>
                                 <MapContainer>
-                                    카카오맵컴포넌트
+                                    <KakaoMap
+                                        Latitude={props.Latitude}
+                                        longitude={props.longitude}
+                                    />
                                     {/* 여기는 카카오맵 넣어주시면 됩니다. */}
                                     {/* <KaKaoMap /> */}
                                 </MapContainer>
