@@ -23,6 +23,7 @@ import {
 import Profile from './DetailFunction/Profile';
 import MainImage from './DetailFunction/MainImage';
 import Article from './DetailFunction/Article';
+import Like from './DetailFunction/Like';
 
 const DialogBody = styled(DialogContent)`
     background: rgba(64, 64, 64, 0.7);
@@ -87,9 +88,7 @@ export default function DetailPage(props) {
                                     {/* <Graph /> */}
                                 </GraphContainer>
                                 <LikeContainer>
-                                    좋아요 찜 클릭 컴포넌트
-                                    {/* 이곳에 신기해요 찜목록 클릭 들어갑니다. */}
-                                    {/* <Like /> */}
+                                    <Like />
                                 </LikeContainer>
                             </GraphLikeContainer>
                         </RightContainer>
