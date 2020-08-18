@@ -32,7 +32,7 @@ export default () => {
     return (
         <Container>
             <LikeContainer>
-                <Image like src={'/images/like.png'} />
+                <Image like src={'/images/Bigintersting.png'} />
                 <Label like>신기해요</Label>
             </LikeContainer>
             <LikeContainer>
