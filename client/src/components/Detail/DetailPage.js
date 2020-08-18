@@ -4,16 +4,23 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import styled from 'styled-components';
-import Container from "@material-ui/core/Container";
+import Container from '@material-ui/core/Container';
 import {
-    ArticleContainer, CommentContainer,
-    DataContainer, Graph_Like_Container, GraphContainer,
+    ArticleContainer,
+    CommentContainer,
+    DataContainer,
+    Graph_Like_Container,
+    GraphContainer,
     ImageContainer,
-    LeftContainer, LikeContainer,
+    LeftContainer,
+    LikeContainer,
     MainContentContainer,
     MapContainer,
-    ProfileContainer, RelativeContainer, RightContainer
-} from "./DetailStyle";
+    ProfileContainer,
+    RelativeContainer,
+    RightContainer,
+} from './DetailStyle';
+import Profile from './DetailFunction/Profile';
 
 const DialogBody = styled(DialogContent)`
     background: rgba(64, 64, 64, 0.7);
@@ -25,7 +32,6 @@ const DialogBody = styled(DialogContent)`
     color: #ffffff;
 `;
 export default function DetailPage(props) {
-
     return (
         <Dialog
             maxWidth={'1300xs'}
@@ -49,9 +55,10 @@ export default function DetailPage(props) {
                             </ImageContainer>
                             <DataContainer>
                                 <ProfileContainer>
-                                    프로파일컴포넌트
-                                    {/* 이곳에 크리스에반스 와꾸 이름 팔로워 넣어주시면 됩니다. */}
-                                    {/* <Profile /> */}
+                                    <Profile
+                                        profileImage={'/images/Avatar1.png'}
+                                        follower={'142'}
+                                    />
                                 </ProfileContainer>
                                 <MapContainer>
                                     카카오맵컴포넌트
