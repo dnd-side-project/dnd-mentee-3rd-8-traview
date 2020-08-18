@@ -38,6 +38,7 @@ export default function DetailPage(props) {
                     backgroundColor: 'rgba(64, 64, 64, 0.7)',
                     backdropFilter: 'blur(30px)',
                     borderRadius: '20px',
+                    color: '#ffffff',
                 },
             }}
         >
