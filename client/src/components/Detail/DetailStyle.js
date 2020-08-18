@@ -1,6 +1,5 @@
-import styled from "styled-components";
-export const Container = styled.div`
-    width: 1300px;
+import styled from 'styled-components';
+export const TotalContainer = styled.div`
     height: 1525px;
 `;
 
