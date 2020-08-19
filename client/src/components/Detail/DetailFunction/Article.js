@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import ShowMoreText from 'react-show-more-text';
-import { SocialImage } from '../../CommonStyle/SocialImage';
-import { SocialBox } from '../../CommonStyle/SocialBox';
 const PostName = styled.h2`
     font-weight: bold;
     font-size: 32px;
