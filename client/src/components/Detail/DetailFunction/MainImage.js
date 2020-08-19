@@ -6,7 +6,7 @@ function MainImage(props) {
                 src={props.imagePath}
                 alt={'사진'}
                 style={{
-                    width: '650px',
+                    width: '680px',
                     height: '870px',
                     borderRadius: '20px',
                 }}

@@ -27,7 +27,7 @@ export const RightContainer = styled.div`
 
 export const ImageContainer = styled.div`
     height: 870px;
-    width: 650px;
+    width: 680px;
 `;
 
 export const DataContainer = styled.div`
@@ -46,9 +46,9 @@ export const MapContainer = styled.div`
 `;
 
 export const ArticleContainer = styled.div`
-    margin-left: 20px;
+    margin-left: 30px;
     margin-right: -40px;
-    width: 640px;
+    width: 570px;
     height: 479px;
 `;
 

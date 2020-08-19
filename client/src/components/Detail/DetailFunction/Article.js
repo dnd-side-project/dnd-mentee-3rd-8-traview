@@ -32,7 +32,7 @@ const CountNumber = styled.p`
 const DetailContent = styled.div`
     margin-top: 3%;
     width: 100%;
-    height: 310px;
+    height: 320px;
     font-weight: 300;
     font-size: 22px;
     line-height: 32px;
@@ -91,7 +91,7 @@ function Article(props) {
                         style={{
                             cursor: 'pointer',
                             marginTop: '-20%',
-                            marginRight: '-10%',
+                            marginRight: '-28px',
                         }}
                         onClick={props.close}
                     />
