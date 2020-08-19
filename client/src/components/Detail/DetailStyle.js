@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 export const TotalContainer = styled.div`
     height: 1525px;
+    width: 1300px;
 `;
 
 export const MainContentContainer = styled.div`
@@ -22,17 +23,18 @@ export const RightContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 545px;
 `;
 
 export const ImageContainer = styled.div`
     height: 870px;
+    width: 680px;
 `;
 
 export const DataContainer = styled.div`
     display: flex;
     justify-content: center;
     height: 113px;
+    margin-top: 30px;
 `;
 
 export const ProfileContainer = styled.div`
@@ -44,6 +46,9 @@ export const MapContainer = styled.div`
 `;
 
 export const ArticleContainer = styled.div`
+    margin-left: 30px;
+    margin-right: -40px;
+    width: 570px;
     height: 479px;
 `;
 
