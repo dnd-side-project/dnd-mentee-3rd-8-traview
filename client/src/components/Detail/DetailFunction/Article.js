@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import ShowMoreText from 'react-show-more-text';
+import { SocialImage } from '../../CommonStyle/SocialImage';
+import { SocialBox } from '../../CommonStyle/SocialBox';
 const PostName = styled.h2`
     font-weight: bold;
     font-size: 32px;
@@ -12,26 +14,27 @@ const PostName = styled.h2`
     color: #ffffff;
 `;
 const InterBox = styled.div`
-    background: transparent;
-    border: none;
-    display: flex;
-    align-items: center;
     margin-right: 12px;
+    width: 35px;
+    height: 30px;
+    background-image: url(${(props) => props.bg});
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 5%;
 `;
 const CountNumber = styled.p`
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
-    line-height: 29px;
+    font-size: 24px;
+    line-height: 35px;
     display: flex;
-    align-items: center;
     margin-right: 25px;
+    margin-top: 5%;
 `;
 const DetailContent = styled.div`
     margin-top: 3%;
-    width: 550px;
-    max-height: 315px;
-    height: 150px;
+    width: 100%;
+    height: 310px;
     font-weight: 300;
     font-size: 22px;
     line-height: 32px;
@@ -75,20 +78,23 @@ function Article(props) {
                 <PostName>한국 안의 휴양지</PostName>
                 <div
                     style={{
+                        alignItems: 'center',
+                        textAlign: 'center',
                         display: 'flex',
                     }}
                 >
-                    <InterBox>
-                        <img src="/images/Interesting.png" alt="Interesting" />
-                    </InterBox>
+                    <InterBox bg={'/images/Interesting.png'} />
                     <CountNumber>432</CountNumber>
-                    <InterBox>
-                        <img src="/images/Like.png" alt="Interesting" />
-                    </InterBox>
+                    <InterBox bg={'/images/Like.png'} />
                     <CountNumber>432</CountNumber>
                     {/*이모티콘*/}
                     <ClearTwoToneIcon
-                        style={{ cursor: 'pointer' }}
+                        fontSize="large"
+                        style={{
+                            cursor: 'pointer',
+                            marginTop: '-20%',
+                            marginRight: '-10%',
+                        }}
                         onClick={props.close}
                     />
                 </div>
@@ -97,7 +103,7 @@ function Article(props) {
                 <DetailContent>
                     <ShowMoreText
                         /* Default options */
-                        lines={3}
+                        lines={8}
                         more="더보기"
                         less="줄이기"
                         anchorClass=""

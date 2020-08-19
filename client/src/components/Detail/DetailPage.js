@@ -36,6 +36,7 @@ export default function DetailPage(props) {
             aria-labelledby="form-dialog-title"
             PaperProps={{
                 style: {
+                    padding: '15 15 15 15',
                     backgroundColor: 'rgba(64, 64, 64, 0.7)',
                     backdropFilter: 'blur(30px)',
                     borderRadius: '20px',
