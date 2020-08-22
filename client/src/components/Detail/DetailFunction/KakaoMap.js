@@ -51,7 +51,7 @@ const KakaoMap = (props) => {
     };
     const onClickToMap = () => {
         window.open(
-            `https://map.kakao.com/link/map/Hello World!,${props.Latitude},${props.longitude}`
+            `https://map.kakao.com/link/map/재훈이형집!,${props.Latitude},${props.longitude}`
         );
     };
     return (

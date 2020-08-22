@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import UploadPage from '../Upload/UploadPage';
 const Container = styled.header`
     display: flex;
     justify-content: space-between;
@@ -127,28 +127,43 @@ export default () => {
         { name: '제주도', to: '/area/jeju' },
     ];
 
+    useEffect(() => {
+        setIsModalOpen(false);
+    }, []);
+    const [IsModalOpen, setIsModalOpen] = useState(false);
+    const onClose = () => {
+        setIsModalOpen(false);
+    };
+
     return (
-        <Container>
-            <Title to={'/'}>Traview</Title>
-            <NavContainer>
-                <AreaContainer>
-                    {cityMenuList.map((item, index) => (
-                        <ListItem key={index}>
-                            <AreaLink to={item.to}>{item.name}</AreaLink>
-                        </ListItem>
-                    ))}
-                </AreaContainer>
-            </NavContainer>
-            <Search />
-            <UploadContainer>
-                <UploadIcon />
-                <UploadText>업로드</UploadText>
-            </UploadContainer>
-            <RegisterContainer>
-                <RegisterText to={'/login'}>로그인</RegisterText>
-                <div>|</div>
-                <RegisterText to={'/register'}>회원가입</RegisterText>
-            </RegisterContainer>
-        </Container>
+        <>
+            <UploadPage open={IsModalOpen} close={onClose} />
+            <Container>
+                <Title to={'/'}>Traview</Title>
+                <NavContainer>
+                    <AreaContainer>
+                        {cityMenuList.map((item, index) => (
+                            <ListItem key={index}>
+                                <AreaLink to={item.to}>{item.name}</AreaLink>
+                            </ListItem>
+                        ))}
+                    </AreaContainer>
+                </NavContainer>
+                <Search />
+                <UploadContainer
+                    onClick={() => {
+                        setIsModalOpen(true);
+                    }}
+                >
+                    <UploadIcon />
+                    <UploadText>업로드</UploadText>
+                </UploadContainer>
+                <RegisterContainer>
+                    <RegisterText to={'/login'}>로그인</RegisterText>
+                    <div>|</div>
+                    <RegisterText to={'/register'}>회원가입</RegisterText>
+                </RegisterContainer>
+            </Container>
+        </>
     );
 };
