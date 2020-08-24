@@ -1,11 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { API_ROOT, ACCESS_KEY } from '../../const/apiConst';
-import styled from 'styled-components';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Picture from './Picture';
-import Loader from './Loader';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import db from '../../firebase';
+
+import styled from 'styled-components';
 import './MainGrid.css';
+
+//import Loader from './Loader';
+//import InfiniteScroll from 'react-infinite-scroll-component';
+//import axios from 'axios';
+//import { API_ROOT, ACCESS_KEY } from '../../const/apiConst';
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -56,9 +59,24 @@ const Container = styled.div`
 `;
 
 export default () => {
-    const [images, setImages] = useState([]);
+    const [posts, setPosts] = useState([]);
+    const moods = ['도시', '자연', '몽환', '여유', '고요', '활기', '낭만'];
 
-    const fetchImages = useCallback(async () => {
+    useEffect(() => {
+        db.collection('posts')
+            .orderBy('timestamp', 'desc')
+            .limit(15)
+            .onSnapshot((snapshot) => {
+                setPosts(
+                    snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        post: doc.data(),
+                    }))
+                );
+            });
+    }, []);
+
+    /*const fetchImages = useCallback(async () => {
         const result = await axios.get(
             `${API_ROOT}/photos/random?client_id=${ACCESS_KEY}&count=15`
         );
@@ -67,34 +85,31 @@ export default () => {
 
     useEffect(() => {
         fetchImages();
-    }, [fetchImages]);
+    }, [fetchImages]);*/
 
     return (
         <>
             <HeaderContainer>
                 <Title>신기한 장소들</Title>
                 <MoodList>
-                    <Mood>도시</Mood>
-                    <Mood>자연</Mood>
-                    <Mood>몽환</Mood>
-                    <Mood>여유</Mood>
-                    <Mood>고요</Mood>
-                    <Mood>활기</Mood>
-                    <Mood>낭만</Mood>
+                    {moods.map((mood) => (
+                        <Mood key={mood}>{mood}</Mood>
+                    ))}
                 </MoodList>
             </HeaderContainer>
-            <InfiniteScroll
+            <Container>
+                {posts.map(({ post, id }) => (
+                    <Picture imagePath={post.imageUrl} key={id} />
+                ))}
+            </Container>
+            {/* <InfiniteScroll
                 dataLength={images.length}
                 next={fetchImages}
                 hasMore={true}
                 loader={<Loader />}
             >
-                <Container>
-                    {images.map((image, index) => (
-                        <Picture imagePath={image.urls.small} key={index} />
-                    ))}
-                </Container>
-            </InfiniteScroll>
+
+            </InfiniteScroll> */}
         </>
     );
 };
