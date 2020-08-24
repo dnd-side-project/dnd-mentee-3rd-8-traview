@@ -24,8 +24,6 @@ const Container = styled.div`
 `;
 
 function App() {
-    const [user, setUser] = useState(null);
-
     return (
         <Router>
             <GlobalStyle />
