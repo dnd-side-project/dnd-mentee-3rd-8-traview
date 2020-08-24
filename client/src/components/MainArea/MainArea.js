@@ -98,9 +98,9 @@ export default () => {
                 </MoodList>
             </HeaderContainer>
             <Container>
-                {posts.map(({ post, id }) => (
-                    <Picture imagePath={post.imageUrl} key={id} />
-                ))}
+                {/*{posts.map(({ post, id }) => (*/}
+                {/*    <Picture imagePath={post.imageUrl} key={id} />*/}
+                {/*))}*/}
             </Container>
             {/* <InfiniteScroll
                 dataLength={images.length}
