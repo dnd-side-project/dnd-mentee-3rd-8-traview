@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useStateValue } from '../../StateProvider';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import firebase from 'firebase/app';
+import { useStateValue } from '../../StateProvider';
+import { actionTypes } from '../../reducer';
 import UploadPage from '../Upload/UploadPage';
+
+import styled from 'styled-components';
 
 const Container = styled.header`
     display: flex;
@@ -112,6 +115,20 @@ const RegisterText = styled(Link)`
     }
 `;
 
+const Label = styled.label`
+    padding: 15px;
+    cursor: ${(props) => (props.logout ? 'pointer' : '')};
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    lineheight: 20px;
+    letter-spacing: -0.28px;
+
+    &:hover {
+        color: ${(props) => (props.logout ? '#ff534b' : '')};
+    }
+`;
+
 export default () => {
     const [{ user }, dispatch] = useStateValue();
     const cityMenuList = [
@@ -136,6 +153,20 @@ export default () => {
     const [IsModalOpen, setIsModalOpen] = useState(false);
     const onClose = () => {
         setIsModalOpen(false);
+    };
+
+    const logout = () => {
+        firebase
+            .auth()
+            .signOut()
+            .then(() => {
+                dispatch({
+                    type: actionTypes.LOGOUT_USER,
+                });
+            })
+            .catch((err) => {
+                alert(err.message);
+            });
     };
 
     return (
@@ -171,7 +202,13 @@ export default () => {
                             </RegisterText>
                         </>
                     ) : (
-                        <div>{user.displayName}님 안녕하세요</div>
+                        <>
+                            <Label>{user.displayName} 님</Label>
+                            <div>|</div>
+                            <Label onClick={logout} logout>
+                                로그아웃
+                            </Label>
+                        </>
                     )}
                 </RegisterContainer>
             </Container>
