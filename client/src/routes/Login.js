@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { auth, provider } from '../firebase';
-import { Link } from 'react-router-dom';
 import { useStateValue } from '../StateProvider';
 import { actionTypes } from '../reducer';
 
@@ -36,7 +36,8 @@ const IDCheckLabel = styled.div`
 function Login() {
     const [{}, dispatch] = useStateValue();
     const [ID, setID] = useState('');
-    const [Password, setPassword] = useState(''); //state
+    const [Password, setPassword] = useState('');
+    const history = useHistory();
 
     const onIDHandler = (event) => {
         setID(event.currentTarget.value);
@@ -57,6 +58,7 @@ function Login() {
                     type: actionTypes.SET_USER,
                     user: result.user,
                 });
+                history.push('/');
             })
             .catch((error) => alert(error.message));
     };
