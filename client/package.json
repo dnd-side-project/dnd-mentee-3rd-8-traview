@@ -7,7 +7,11 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+<<<<<<< HEAD
     "material-ui-dropzone": "^3.4.0",
+=======
+    "firebase": "^7.19.0",
+>>>>>>> 24aa966127277ac6b007cac430bb2d55c812fdae
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-infinite-scroll-component": "^5.0.5",

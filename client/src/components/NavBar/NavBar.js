@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
+=======
+import React from 'react';
+import { useStateValue } from '../../StateProvider';
+>>>>>>> 24aa966127277ac6b007cac430bb2d55c812fdae
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import UploadPage from '../Upload/UploadPage';
@@ -111,6 +116,7 @@ const RegisterText = styled(Link)`
 `;
 
 export default () => {
+    const [{ user }, dispatch] = useStateValue();
     const cityMenuList = [
         { name: '서울', to: '/area/seoul' },
         { name: '부산', to: '/area/busan' },
@@ -136,6 +142,7 @@ export default () => {
     };
 
     return (
+<<<<<<< HEAD
         <>
             <UploadPage open={IsModalOpen} close={onClose} />
             <Container>
@@ -165,5 +172,35 @@ export default () => {
                 </RegisterContainer>
             </Container>
         </>
+=======
+        <Container>
+            <Title to={'/'}>Traview</Title>
+            <NavContainer>
+                <AreaContainer>
+                    {cityMenuList.map((item, index) => (
+                        <ListItem key={index}>
+                            <AreaLink to={item.to}>{item.name}</AreaLink>
+                        </ListItem>
+                    ))}
+                </AreaContainer>
+            </NavContainer>
+            <Search />
+            <UploadContainer>
+                <UploadIcon />
+                <UploadText>업로드</UploadText>
+            </UploadContainer>
+            <RegisterContainer>
+                {!user ? (
+                    <>
+                        <RegisterText to={'/login'}>로그인</RegisterText>
+                        <div>|</div>
+                        <RegisterText to={'/register'}>회원가입</RegisterText>
+                    </>
+                ) : (
+                    <div>{user.displayName}님 안녕하세요</div>
+                )}
+            </RegisterContainer>
+        </Container>
+>>>>>>> 24aa966127277ac6b007cac430bb2d55c812fdae
     );
 };
