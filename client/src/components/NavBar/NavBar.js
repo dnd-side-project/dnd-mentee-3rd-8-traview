@@ -1,4 +1,5 @@
 import React from 'react';
+import { useStateValue } from '../../StateProvider';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -111,6 +112,7 @@ const RegisterText = styled(Link)`
 `;
 
 export default () => {
+    const [{ user }, dispatch] = useStateValue();
     const cityMenuList = [
         { name: '서울', to: '/area/seoul' },
         { name: '부산', to: '/area/busan' },
@@ -145,9 +147,15 @@ export default () => {
                 <UploadText>업로드</UploadText>
             </UploadContainer>
             <RegisterContainer>
-                <RegisterText to={'/login'}>로그인</RegisterText>
-                <div>|</div>
-                <RegisterText to={'/register'}>회원가입</RegisterText>
+                {!user ? (
+                    <>
+                        <RegisterText to={'/login'}>로그인</RegisterText>
+                        <div>|</div>
+                        <RegisterText to={'/register'}>회원가입</RegisterText>
+                    </>
+                ) : (
+                    <div>{user.displayName}님 안녕하세요</div>
+                )}
             </RegisterContainer>
         </Container>
     );

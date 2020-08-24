@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { auth, provider } from '../firebase';
 import { Link } from 'react-router-dom';
+import { useStateValue } from '../StateProvider';
+import { actionTypes } from '../reducer';
+
 import styled from 'styled-components';
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
 import { InputBar } from '../components/CommonStyle/InputBar';
@@ -31,6 +34,7 @@ const IDCheckLabel = styled.div`
 `;
 
 function Login() {
+    const [{}, dispatch] = useStateValue();
     const [ID, setID] = useState('');
     const [Password, setPassword] = useState(''); //state
 
@@ -48,7 +52,12 @@ function Login() {
 
     const googleSignIn = () => {
         auth.signInWithPopup(provider)
-            .then((result) => console.log(result))
+            .then((result) => {
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user: result.user,
+                });
+            })
             .catch((error) => alert(error.message));
     };
 
@@ -101,7 +110,7 @@ function Login() {
                 {/*inputBox Div*/}
 
                 <form
-                    onSubmit={{ onLoginHandler }}
+                    onSubmit={onLoginHandler}
                     style={{
                         height: '70%',
                         display: 'flex',
@@ -134,7 +143,7 @@ function Login() {
                     </p>
                     <SubmittBtn
                         style={{ height: '17%', marginTop: '-2%' }}
-                        onClick={{ onLoginHandler }}
+                        onClick={onLoginHandler}
                     >
                         Traview 로그인
                     </SubmittBtn>
