@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const TotalContainer = styled.div`
     width: 1300px;
-    height: 1041px;
+    height: 900px;
     display: flex;
+
     justify-content: center;
 `;
 
@@ -39,25 +40,6 @@ export const RatingComponent = styled.div`
     height: 137px;
 `;
 
-export const CompleteButton = styled.button`
-    width: 140px;
-    height: 70px;
-    border: none;
-    background: #ff534b;
-    border-radius: 35px;
-    font-family: Noto Sans KR;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 35px;
-    line-height: 51px;
-    align-items: center;
-    text-align: center;
-    color: #ffffff;
-    margin: 0 auto;
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: center;
-`;
 export const SubtitleFont = styled.p`
     font-family: Noto Sans KR;
     font-style: normal;
@@ -67,6 +49,30 @@ export const SubtitleFont = styled.p`
     display: flex;
     align-items: center;
     text-align: center;
-
     color: #000000;
+`;
+export const Mood = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 40px;
+    margin-right: 15px;
+    border: 2px solid #ff534b;
+    box-sizing: border-box;
+    border-radius: 23px;
+    cursor: pointer;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: -0.36px;
+    background-color: white;
+    &:hover {
+        background-color: #ff534b;
+    }
 `;

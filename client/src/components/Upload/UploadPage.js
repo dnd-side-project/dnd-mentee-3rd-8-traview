@@ -5,7 +5,6 @@ import {
     UploadDropZone,
     RightContainer,
     TitleInputBar,
-    CompleteButton,
     AdvertisementComponent,
     AtmosphereComponent,
     LocationComponent,
@@ -16,6 +15,9 @@ import TitleName from './UploadFunction/TitleName';
 import Advertisement from './UploadFunction/advertisement';
 import Atmosphere from './UploadFunction/Atmosphere';
 import Rating from './UploadFunction/Rating';
+import Button from '@material-ui/core/Button';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 export default function UploadPage(props) {
     return (
         <Dialog
@@ -53,8 +55,46 @@ export default function UploadPage(props) {
                             <Rating />
                         </RatingComponent>
                     </RightContainer>
+
+                    <ClearTwoToneIcon
+                        fontSize="large"
+                        style={{
+                            cursor: 'pointer',
+                            marginTop: '-20px',
+                            marginRight: '-15px',
+                        }}
+                        onClick={props.close}
+                    />
                 </TotalContainer>
-                <CompleteButton> 완료</CompleteButton>
+                <div
+                    style={{
+                        width: '100%',
+                        height: '121px',
+                    }}
+                >
+                    <Button
+                        style={{
+                            border: 'none',
+                            width: '140px',
+                            height: '70px',
+                            background: '#ff534b',
+                            borderRadius: '35px',
+                            fontFamily: 'Noto Sans KR',
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            fontSize: '35px',
+                            lineHeight: '51px',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            color: '#ffffff',
+                            margin: '0 auto',
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        완료
+                    </Button>
+                </div>
             </>
         </Dialog>
     );

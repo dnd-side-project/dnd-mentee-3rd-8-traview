@@ -13,13 +13,12 @@ export const RadioFont = styled.p`
     text-align: center;
     display: flex;
 `;
-
+//selectedValue에 yes or no 에 값이 찍여있다.
 function Advertisement() {
     const [selectedValue, setSelectedValue] = React.useState('YES');
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
-        console.log(selectedValue);
     };
     return (
         <div style={{ display: 'flex' }}>

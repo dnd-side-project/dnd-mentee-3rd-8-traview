@@ -4,6 +4,18 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import { SubtitleFont } from '../UploadStyled';
+import styled from 'styled-components';
+
+export const RatingFont = styled.p`
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+`;
 
 function Rating() {
     return (
@@ -22,31 +34,31 @@ function Rating() {
                     <FormControlLabel
                         value="Rating1"
                         control={<Radio color="primary" />}
-                        label="별로야"
+                        label={<RatingFont>별로야</RatingFont>}
                         labelPlacement="bottom"
                     />
                     <FormControlLabel
                         value="Rating2"
                         control={<Radio color="primary" />}
-                        label="그저그래"
+                        label={<RatingFont>그저그래</RatingFont>}
                         labelPlacement="bottom"
                     />
                     <FormControlLabel
                         value="Rating3"
                         control={<Radio color="primary" />}
-                        label="괜찮아"
+                        label={<RatingFont>괜찮아</RatingFont>}
                         labelPlacement="bottom"
                     />
                     <FormControlLabel
                         value="Rating4"
                         control={<Radio color="primary" />}
-                        label="좋아"
+                        label={<RatingFont>좋아</RatingFont>}
                         labelPlacement="bottom"
                     />
                     <FormControlLabel
                         value="Rating5"
                         control={<Radio color="primary" />}
-                        label="최고야"
+                        label={<RatingFont>최고야</RatingFont>}
                         labelPlacement="bottom"
                     />
                 </RadioGroup>
