@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { auth, provider } from '../firebase';
+import { useStateValue } from '../StateProvider';
+import { actionTypes } from '../reducer';
+
+import styled from 'styled-components';
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
 import { InputBar } from '../components/CommonStyle/InputBar';
 import { MainTheme } from '../components/CommonStyle/MainTheme';
@@ -7,8 +13,6 @@ import { SocialBox } from '../components/CommonStyle/SocialBox';
 import { SocialFont } from '../components/CommonStyle/SocialFont';
 import { SocialImage } from '../components/CommonStyle/SocialImage';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { SocialCollection } from '../components/CommonStyle/SocialCollection';
 
 const LoginLabel = styled.div`
@@ -30,16 +34,33 @@ const IDCheckLabel = styled.div`
 `;
 
 function Login() {
+    const [{}, dispatch] = useStateValue();
     const [ID, setID] = useState('');
-    const [Password, setPassword] = useState(''); //state
+    const [Password, setPassword] = useState('');
+    const history = useHistory();
+
     const onIDHandler = (event) => {
         setID(event.currentTarget.value);
     };
+
     const onPasswordHandler = (event) => {
         setPassword(event.currentTarget.value);
     };
+
     const onLoginHandler = (event) => {
         event.preventDefault();
+    };
+
+    const googleSignIn = () => {
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user: result.user,
+                });
+                history.push('/');
+            })
+            .catch((error) => alert(error.message));
     };
 
     return (
@@ -80,7 +101,7 @@ function Login() {
                             <br /> 로그인하기
                         </SocialFont>
                     </SocialBox>
-                    <SocialBox>
+                    <SocialBox onClick={googleSignIn}>
                         <SocialImage bg={'/images/google.png'} alt="Google" />
                         <SocialFont>
                             구글 아이디로
@@ -91,7 +112,7 @@ function Login() {
                 {/*inputBox Div*/}
 
                 <form
-                    onSubmit={{ onLoginHandler }}
+                    onSubmit={onLoginHandler}
                     style={{
                         height: '70%',
                         display: 'flex',
@@ -124,7 +145,7 @@ function Login() {
                     </p>
                     <SubmittBtn
                         style={{ height: '17%', marginTop: '-2%' }}
-                        onClick={{ onLoginHandler }}
+                        onClick={onLoginHandler}
                     >
                         Traview 로그인
                     </SubmittBtn>

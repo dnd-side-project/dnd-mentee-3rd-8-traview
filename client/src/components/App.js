@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
@@ -24,6 +24,8 @@ const Container = styled.div`
 `;
 
 function App() {
+    const [user, setUser] = useState(null);
+
     return (
         <Router>
             <GlobalStyle />
