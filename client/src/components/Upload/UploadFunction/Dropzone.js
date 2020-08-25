@@ -1,10 +1,6 @@
 import React from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
-import PublishIcon from '@material-ui/icons/Publish';
-import { border, color, sizing, textAlign } from '@material-ui/system';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { createStyles } from '@material-ui/core';
-import Dialog from '@material-ui/core/Dialog';
 import styled from 'styled-components';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     },
     colorq: {
         display: 'flex',
-
         marginTop: '50px',
     },
 }));
@@ -47,16 +42,6 @@ const Upload = styled.p`
 
 function Dropzone() {
     const classes = useStyles();
-    // const useStyles = makeStyles((theme) =>
-    //     createStyles({
-    //         previewChip: {
-    //             minWidth: '100%',
-    //             maxWidth: '100%',
-    //         },
-    //     })
-    // );
-    //const classes = useStyles();
-
     return (
         <div
             style={{
@@ -66,13 +51,14 @@ function Dropzone() {
             <DropzoneArea
                 dropzoneClass={classes.DropZoneArea}
                 dropzoneParagraphClass={classes.DropzoneParagrap}
-                Icon="null"
+                Icon=""
                 dropzoneText={
-                    <div style={{ textAlign: 'center' }}>
-                        <img src={'/images/UPLOADTEST.png'} alt="NewPick" />
-                        <UploadTitle>여행지 사진을 올려주세요</UploadTitle>
-                        <Upload>사진 업로드</Upload>
-                    </div>
+                    '안녕하세요'
+                    // <div style={{ textAlign: 'center' }}>
+                    //     <img src={'/images/UPLOADTEST.png'} alt="NewPick" />
+                    //     <UploadTitle>여행지 사진을 올려주세요</UploadTitle>
+                    //     <Upload>사진 업로드</Upload>
+                    // </div>
                 }
                 acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
                 showPreviews={true}

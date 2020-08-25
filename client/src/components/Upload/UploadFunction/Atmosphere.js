@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { SubtitleFont, Mood } from '../UploadStyled';
+import { SubtitleFont } from '../UploadStyled';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 const useStyles = makeStyles({

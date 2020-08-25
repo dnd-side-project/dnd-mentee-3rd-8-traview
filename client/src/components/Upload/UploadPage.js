@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
+import Address from './UploadFunction/Address';
 import {
     TotalContainer,
     UploadDropZone,
@@ -16,9 +17,109 @@ import Advertisement from './UploadFunction/advertisement';
 import Atmosphere from './UploadFunction/Atmosphere';
 import Rating from './UploadFunction/Rating';
 import Button from '@material-ui/core/Button';
-import makeStyles from '@material-ui/core/styles/makeStyles';
 import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
+import axios from 'axios';
+import Projection from 'proj4';
+import { extraApi } from '../../api_manager';
+
+let isSearching = false;
+let isEndReached = false;
+let currentPage = 1;
+
 export default function UploadPage(props) {
+    const [isClicked, setIsClicked] = useState(false);
+    let [locations, setLocations] = useState([]);
+    const [hasSelectedAddress, setHasSelectedAddress] = useState(false);
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
+    const [address, setAddress] = useState('');
+
+    useEffect(() => {
+        resetSearchLocation();
+    }, []);
+
+    const searchLocation = (reset = false) => {
+        if (isSearching || isEndReached || !address) {
+            return;
+        }
+        isSearching = true;
+        extraApi
+            .get('http://www.juso.go.kr/addrlink/addrLinkApi.do', {
+                confmKey: 'U01TX0FVVEgyMDE5MDQxOTEzMTUyNDEwODY2NjA=',
+                keyword: address,
+                resultType: 'json',
+                currentPage: currentPage,
+            })
+            .then((res) => {
+                console.log('searchLocation function res', res);
+                if (!res.data.results.juso) {
+                    alert(res.data.results.common.errorMessage);
+                    isSearching = false;
+                    return;
+                }
+
+                let total = parseInt(res.data.results.common.totalCount);
+                let countPerPage = parseInt(
+                    res.data.results.common.countPerPage
+                );
+                if (total - countPerPage * currentPage < countPerPage) {
+                    isEndReached = true;
+                }
+                currentPage += 1;
+                isSearching = false;
+                if (reset) {
+                    setLocations(res.data.results.juso);
+                } else {
+                    setLocations(locations.concat(res.data.results.juso));
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
+    const onLocationSelect = (location) => {
+        let data = Object.assign(location, {
+            resultType: 'json',
+            confmKey: 'U01TX0FVVEgyMDE5MDQxOTE1MjMxNjEwODY2Nzg=',
+        });
+        extraApi
+            .get('http://www.juso.go.kr/addrlink/addrCoordApi.do', data)
+            .then((res) => {
+                console.log(res);
+                if (!res.data.results.juso) {
+                    alert(res.data.results.common.errorMessage);
+                    return;
+                }
+                let result = res.data.results.juso[0];
+                const x = parseFloat(result.entX);
+                const y = parseFloat(result.entY);
+
+                const [
+                    longitude,
+                    latitude,
+                ] = Projection(
+                    '+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs',
+                    'EPSG:4326',
+                    [x, y]
+                );
+                setHasSelectedAddress(true);
+                setLatitude(latitude);
+                setLongitude(longitude);
+                setAddress(location.roadAddr);
+                console.log('latitude', latitude);
+                console.log('longitude', longitude);
+                // setFieldValue('address', location.roadAddr);
+            });
+    };
+
+    const resetSearchLocation = () => {
+        currentPage = 1;
+        isEndReached = false;
+        isSearching = false;
+        searchLocation(true);
+    };
+
     return (
         <Dialog
             scroll={'body'}
@@ -30,7 +131,7 @@ export default function UploadPage(props) {
                 style: {
                     backgroundColor: '#FFFFFF',
                     borderRadius: '20px',
-                    color: '#000000;',
+                    color: '#000000',
                 },
             }}
         >
@@ -50,12 +151,45 @@ export default function UploadPage(props) {
                         <AtmosphereComponent>
                             <Atmosphere />
                         </AtmosphereComponent>
-                        <LocationComponent></LocationComponent>
-                        <RatingComponent>
-                            <Rating />
-                        </RatingComponent>
-                    </RightContainer>
+                        <LocationComponent>
+                            <Address
+                                setHasSelectedAddress={setHasSelectedAddress}
+                                address={address}
+                                setAddress={setAddress}
+                                resetSearchLocation={resetSearchLocation}
+                            />
+                        </LocationComponent>
+                        <div
+                            style={{
+                                marginTop: '-20px',
+                                background: 'white',
+                                maxWidth: '510px',
 
+                                overflow: 'auto',
+                                maxHeight: '140px',
+                            }}
+                        >
+                            {console.log(
+                                'hasSelectedAddress',
+                                hasSelectedAddress
+                            )}
+                            {!hasSelectedAddress &&
+                                locations.map((location, index) => (
+                                    <LocationItem
+                                        location={location}
+                                        key={index}
+                                        onSelect={(location) => {
+                                            onLocationSelect(location);
+                                        }}
+                                    />
+                                ))}
+                        </div>
+                        {hasSelectedAddress && (
+                            <RatingComponent>
+                                <Rating />
+                            </RatingComponent>
+                        )}
+                    </RightContainer>
                     <ClearTwoToneIcon
                         fontSize="large"
                         style={{
@@ -99,3 +233,43 @@ export default function UploadPage(props) {
         </Dialog>
     );
 }
+
+const LocationItem = (props) => {
+    let { location } = props;
+    return (
+        <Button
+            onClick={() => {
+                props.onSelect(location);
+            }}
+            style={{
+                paddingVertical: 20,
+                paddingLeft: 15,
+                borderBottomWidth: 1,
+                borderColor: '#ddd',
+            }}
+        >
+            <span style={{ fontSize: 18, color: '#000' }}>
+                {location.roadAddrPart1.replace(location.siNm, '').trim()}
+            </span>
+            <span style={{ fontSize: 16, color: '#999', marginTop: 10 }}>
+                {location.jibunAddr}
+            </span>
+            <span
+                style={{
+                    fontSize: 12,
+                    borderWidth: 1,
+                    borderColor: '#ccc',
+                    borderRadius: 2,
+                    padding: 2,
+                    color: '#999',
+                    marginRight: 5,
+                }}
+            >
+                도로명
+            </span>
+            <span style={{ color: '#999', fontSize: 15 }}>
+                {location.rn} {location.buldMnnm}
+            </span>
+        </Button>
+    );
+};
