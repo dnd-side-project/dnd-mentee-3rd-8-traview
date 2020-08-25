@@ -118,6 +118,11 @@ export default () => {
                             key={id}
                             title={post.title}
                             description={post.review}
+                            avatar={post.avatar}
+                            username={post.username}
+                            area={post.area}
+                            novelty={post.novelty}
+                            heart={post.heart}
                         />
                     ))}
                 </Container>
