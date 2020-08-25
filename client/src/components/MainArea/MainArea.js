@@ -28,6 +28,7 @@ const Mood = styled.li`
     display: flex;
     align-items: center;
     justify-content: center;
+    
     width: 80px;
     height: 46px;
     margin-left: 20px;
@@ -36,11 +37,13 @@ const Mood = styled.li`
     box-sizing: border-box;
     background-color: ${(props) => (props.active ? '#ff534b' : '')};
     cursor: pointer;
+    
     font-style: normal;
     font-weight: 500;
     font-size: 22px;
     line-height: 32px;
     letter-spacing: -0.44px;
+    
     &:hover {
         background-color: #ff534b;
         transition: background-color 300ms ease-out;
