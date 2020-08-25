@@ -67,7 +67,7 @@ function Login() {
             >
                 <KeyboardBackspaceIcon
                     onClick={() => {
-                        window.history.back();
+                        history.goBack();
                     }}
                     fontSize="large"
                     style={{
