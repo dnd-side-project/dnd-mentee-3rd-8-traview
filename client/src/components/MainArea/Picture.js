@@ -53,6 +53,7 @@ const Box = styled.div`
         }
         ${Image} {
             opacity: 0.6;
+            transition: opacity 300ms ease-out;
         }
     }
 `;

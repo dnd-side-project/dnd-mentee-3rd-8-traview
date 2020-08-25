@@ -45,6 +45,7 @@ const Mood = styled.li`
 
     &:hover {
         background-color: #ff534b;
+        transition: background-color 300ms ease-out;
     }
 `;
 
