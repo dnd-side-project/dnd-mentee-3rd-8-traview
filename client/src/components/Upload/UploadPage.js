@@ -153,16 +153,43 @@ export default function UploadPage(props) {
                         </AtmosphereComponent>
                         <LocationComponent>
                             <Address
+                                setHasSelectedAddress={setHasSelectedAddress}
                                 address={address}
                                 setAddress={setAddress}
                                 resetSearchLocation={resetSearchLocation}
                             />
                         </LocationComponent>
-                        <RatingComponent>
-                            <Rating />
-                        </RatingComponent>
-                    </RightContainer>
+                        <div
+                            style={{
+                                marginTop: '-20px',
+                                background: 'white',
+                                maxWidth: '510px',
 
+                                overflow: 'auto',
+                                maxHeight: '140px',
+                            }}
+                        >
+                            {console.log(
+                                'hasSelectedAddress',
+                                hasSelectedAddress
+                            )}
+                            {!hasSelectedAddress &&
+                                locations.map((location, index) => (
+                                    <LocationItem
+                                        location={location}
+                                        key={index}
+                                        onSelect={(location) => {
+                                            onLocationSelect(location);
+                                        }}
+                                    />
+                                ))}
+                        </div>
+                        {hasSelectedAddress && (
+                            <RatingComponent>
+                                <Rating />
+                            </RatingComponent>
+                        )}
+                    </RightContainer>
                     <ClearTwoToneIcon
                         fontSize="large"
                         style={{
@@ -201,17 +228,6 @@ export default function UploadPage(props) {
                     >
                         완료
                     </Button>
-                    {console.log('hasSelectedAddress', hasSelectedAddress)}
-                    {!hasSelectedAddress &&
-                        locations.map((location, index) => (
-                            <LocationItem
-                                location={location}
-                                key={index}
-                                onSelect={(location) => {
-                                    onLocationSelect(location);
-                                }}
-                            />
-                        ))}
                 </div>
             </>
         </Dialog>

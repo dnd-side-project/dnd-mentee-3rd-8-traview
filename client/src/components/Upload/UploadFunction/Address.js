@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
         boxSizing: 'border-box',
         borderRadius: '22.5px',
         marginTop: '10px',
-        backgroundColor: 'red',
     },
     input: {
         marginLeft: theme.spacing(1),
@@ -73,7 +72,10 @@ function Address(props) {
                 <IconButton
                     className={classes.closeButton}
                     aria-label="directions"
-                    onClick={() => props.setAddress('')}
+                    onClick={() => {
+                        props.setAddress('');
+                        props.setHasSelectedAddress(false);
+                    }}
                 >
                     <ClearTwoToneIcon />
                 </IconButton>
