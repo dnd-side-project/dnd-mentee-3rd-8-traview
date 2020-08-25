@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import Picture from './Picture';
 import db from '../../firebase';
 
 import styled from 'styled-components';
+import Loader from './Loader';
 import './MainGrid.css';
-
-//import Loader from './Loader';
-//import InfiniteScroll from 'react-infinite-scroll-component';
-//import axios from 'axios';
-//import { API_ROOT, ACCESS_KEY } from '../../const/apiConst';
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -60,12 +57,13 @@ const Container = styled.div`
 
 export default () => {
     const [posts, setPosts] = useState([]);
+    const [last, setLast] = useState(null);
     const moods = ['도시', '자연', '몽환', '여유', '고요', '활기', '낭만'];
 
     useEffect(() => {
         db.collection('posts')
             .orderBy('timestamp', 'desc')
-            .limit(15)
+            .limit(10)
             .onSnapshot((snapshot) => {
                 setPosts(
                     snapshot.docs.map((doc) => ({
@@ -73,19 +71,26 @@ export default () => {
                         post: doc.data(),
                     }))
                 );
+                setLast(snapshot.docs[snapshot.docs.length - 1]);
             });
     }, []);
 
-    /*const fetchImages = useCallback(async () => {
-        const result = await axios.get(
-            `${API_ROOT}/photos/random?client_id=${ACCESS_KEY}&count=15`
-        );
-        setImages((images) => [...images, ...result.data]);
-    }, [setImages]);
-
-    useEffect(() => {
-        fetchImages();
-    }, [fetchImages]);*/
+    const next = () => {
+        db.collection('posts')
+            .orderBy('timestamp', 'desc')
+            .startAfter(last)
+            .limit(10)
+            .onSnapshot((snapshot) => {
+                setPosts([
+                    ...posts,
+                    ...snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        post: doc.data(),
+                    })),
+                ]);
+                setLast(snapshot.docs[snapshot.docs.length - 1]);
+            });
+    };
 
     return (
         <>
@@ -97,19 +102,19 @@ export default () => {
                     ))}
                 </MoodList>
             </HeaderContainer>
-            <Container>
-                {/*{posts.map(({ post, id }) => (*/}
-                {/*    <Picture imagePath={post.imageUrl} key={id} />*/}
-                {/*))}*/}
-            </Container>
-            {/* <InfiniteScroll
-                dataLength={images.length}
-                next={fetchImages}
+
+            <InfiniteScroll
+                dataLength={posts.length}
+                next={next}
                 hasMore={true}
                 loader={<Loader />}
             >
-
-            </InfiniteScroll> */}
+                <Container>
+                    {posts.map(({ post, id }) => (
+                        <Picture imagePath={post?.imageUrl} key={id} />
+                    ))}
+                </Container>
+            </InfiniteScroll>
         </>
     );
 };

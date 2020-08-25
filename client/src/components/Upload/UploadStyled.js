@@ -38,6 +38,7 @@ export const LocationComponent = styled.div`
 export const RatingComponent = styled.div`
     width: 510px;
     height: 137px;
+    position: relative;
 `;
 
 export const SubtitleFont = styled.p`

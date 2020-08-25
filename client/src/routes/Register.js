@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { actionTypes } from '../reducer';
+import { auth, provider } from '../firebase';
+import { useStateValue } from '../StateProvider';
+
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
 import { InputBar } from '../components/CommonStyle/InputBar';
 import { MainTheme } from '../components/CommonStyle/MainTheme';
@@ -9,28 +14,30 @@ import { SocialImage } from '../components/CommonStyle/SocialImage';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { TopLabel } from '../components/CommonStyle/TopLabel';
 import { SocialCollection } from '../components/CommonStyle/SocialCollection';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 function Register() {
+    const [{}, dispatch] = useStateValue();
     const [NickName, setNickName] = useState('');
-    const [Email, setEmail] = useState(''); //state
+    const [Email, setEmail] = useState('');
     const [UserId, setUserId] = useState('');
-    const [Password, setPassword] = useState(''); //state
-    const onNickNameHandler = (event) => {
-        setNickName(event.currentTarget.value);
-    };
-    const onEmailHandler = (event) => {
-        setEmail(event.currentTarget.value);
-    };
+    const [Password, setPassword] = useState('');
+    const history = useHistory();
 
-    const onPasswordHandler = (event) => {
-        setPassword(event.currentTarget.value);
-    };
-
-    const onUserIdHandler = (event) => {
-        setUserId(event.currentTarget.value);
-    };
     const onSignUpHandler = (event) => {
         event.preventDefault();
+    };
+
+    const googleSignIn = () => {
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user: result.user,
+                });
+                history.push('/');
+            })
+            .catch((error) => alert(error.message));
     };
 
     return (
@@ -43,6 +50,23 @@ function Register() {
                     backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 }}
             >
+                <KeyboardBackspaceIcon
+                    onClick={() => {
+                        window.history.back();
+                    }}
+                    fontSize="large"
+                    style={{
+                        position: 'absolute',
+                        paddingTop: '75px',
+                        marginLeft: '75px',
+                        display: 'flex',
+                        cursor: 'pointer',
+                        width: '50px',
+                        height: '50px',
+                        textAlign: 'left',
+                        color: 'white',
+                    }}
+                />
                 <TopLabel>나만 몰랐던 국내 여행지</TopLabel>
                 <SignUpLabel>
                     <span style={{ color: 'red' }}>Traview</span>
@@ -87,7 +111,7 @@ function Register() {
                                 <br /> 로그인하기
                             </SocialFont>
                         </SocialBox>
-                        <SocialBox>
+                        <SocialBox onClick={googleSignIn}>
                             <SocialImage
                                 bg={'/images/google.png'}
                                 alt="Google"
@@ -113,25 +137,25 @@ function Register() {
                             placeholder="닉네임"
                             type="text"
                             value={NickName}
-                            onChange={onNickNameHandler}
+                            onChange={(e) => setNickName(e.currentTarget.value)}
                         />
                         <InputBar
                             placeholder="이메일주소"
                             type="email"
                             value={Email}
-                            onChange={onEmailHandler}
+                            onChange={(e) => setEmail(e.currentTarget.value)}
                         />
                         <InputBar
                             placeholder="아이디"
                             type="text"
                             value={UserId}
-                            onChange={onUserIdHandler}
+                            onChange={(e) => setUserId(e.currentTarget.value)}
                         />
                         <InputBar
                             placeholder="비밀번호"
                             type="password"
                             value={Password}
-                            onChange={onPasswordHandler}
+                            onChange={(e) => setPassword(e.currentTarget.value)}
                         />
                         <SubmittBtn onClick={onSignUpHandler}>
                             Traview 시작하기

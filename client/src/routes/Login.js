@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { auth, provider } from '../firebase';
 import { useStateValue } from '../StateProvider';
 import { actionTypes } from '../reducer';
-
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import styled from 'styled-components';
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
 import { InputBar } from '../components/CommonStyle/InputBar';
@@ -39,14 +39,6 @@ function Login() {
     const [Password, setPassword] = useState('');
     const history = useHistory();
 
-    const onIDHandler = (event) => {
-        setID(event.currentTarget.value);
-    };
-
-    const onPasswordHandler = (event) => {
-        setPassword(event.currentTarget.value);
-    };
-
     const onLoginHandler = (event) => {
         event.preventDefault();
     };
@@ -65,99 +57,132 @@ function Login() {
 
     return (
         <MainTheme bg={'/images/LoginBackground.png'}>
-            <SignUpLabel style={{ marginTop: '6%' }}>
-                <span style={{ color: 'red' }}>Traview</span>
-                &nbsp;로그인
-            </SignUpLabel>
-            <LoginLabel>방문해주셔서 감사합니다</LoginLabel>
-            <BackgroundBox style={{ height: '516px', marginTop: '2%' }}>
-                {/*소셜 로그인 박스*/}
-                <SocialCollection>
-                    <SocialBox>
-                        <SocialImage bg={'/images/kakao.png'} />
-                        <SocialFont>
-                            카카오 아이디로
-                            <br /> 로그인하기
-                        </SocialFont>
-                    </SocialBox>
-                    <SocialBox>
-                        <SocialImage bg={'/images/naver.png'} />
-                        <SocialFont>
-                            네이버 아이디로
-                            <br /> 로그인하기
-                        </SocialFont>
-                    </SocialBox>
-                    <SocialBox>
-                        <SocialImage
-                            style={{
-                                background: ' #3B5998',
-                                borderRadius: '35px',
-                            }}
-                        >
-                            <img src="/images/facebook.png" alt="Facebook" />
-                        </SocialImage>
-                        <SocialFont>
-                            페이스북 아이디로
-                            <br /> 로그인하기
-                        </SocialFont>
-                    </SocialBox>
-                    <SocialBox onClick={googleSignIn}>
-                        <SocialImage bg={'/images/google.png'} alt="Google" />
-                        <SocialFont>
-                            구글 아이디로
-                            <br /> 로그인하기
-                        </SocialFont>
-                    </SocialBox>
-                </SocialCollection>
-                {/*inputBox Div*/}
-
-                <form
-                    onSubmit={onLoginHandler}
-                    style={{
-                        height: '70%',
-                        display: 'flex',
-                        justifyContent: 'space-around',
-                        flexDirection: 'column',
+            <div
+                style={{
+                    overflow: 'hidden',
+                    width: '100%',
+                    height: '100vh',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                }}
+            >
+                <KeyboardBackspaceIcon
+                    onClick={() => {
+                        window.history.back();
                     }}
-                >
-                    <InputBar
-                        style={{ height: '17%' }}
-                        placeholder="아아디"
-                        type="text"
-                        value={ID}
-                        onChange={onIDHandler}
-                    />
-                    <InputBar
-                        style={{ height: '17%', marginTop: '-3%' }}
-                        placeholder="비밀번호"
-                        type="password"
-                        value={Password}
-                        onChange={onPasswordHandler}
-                    />
-                    <p
+                    fontSize="large"
+                    style={{
+                        position: 'absolute',
+                        paddingTop: '75px',
+                        marginLeft: '75px',
+                        display: 'flex',
+                        cursor: 'pointer',
+                        width: '50px',
+                        height: '50px',
+                        textAlign: 'left',
+                        color: 'white',
+                    }}
+                />
+
+                <SignUpLabel style={{ marginTop: '6%' }}>
+                    <span style={{ color: 'red' }}>Traview</span>
+                    &nbsp;로그인
+                </SignUpLabel>
+                <LoginLabel>방문해주셔서 감사합니다</LoginLabel>
+                <BackgroundBox style={{ height: '516px', marginTop: '2%' }}>
+                    {/*소셜 로그인 박스*/}
+                    <SocialCollection>
+                        <SocialBox>
+                            <SocialImage bg={'/images/kakao.png'} />
+                            <SocialFont>
+                                카카오 아이디로
+                                <br /> 로그인하기
+                            </SocialFont>
+                        </SocialBox>
+                        <SocialBox>
+                            <SocialImage bg={'/images/naver.png'} />
+                            <SocialFont>
+                                네이버 아이디로
+                                <br /> 로그인하기
+                            </SocialFont>
+                        </SocialBox>
+                        <SocialBox>
+                            <SocialImage
+                                style={{
+                                    background: ' #3B5998',
+                                    borderRadius: '35px',
+                                }}
+                            >
+                                <img
+                                    src="/images/facebook.png"
+                                    alt="Facebook"
+                                />
+                            </SocialImage>
+                            <SocialFont>
+                                페이스북 아이디로
+                                <br /> 로그인하기
+                            </SocialFont>
+                        </SocialBox>
+                        <SocialBox onClick={googleSignIn}>
+                            <SocialImage
+                                bg={'/images/google.png'}
+                                alt="Google"
+                            />
+                            <SocialFont>
+                                구글 아이디로
+                                <br /> 로그인하기
+                            </SocialFont>
+                        </SocialBox>
+                    </SocialCollection>
+                    {/*inputBox Div*/}
+
+                    <form
+                        onSubmit={onLoginHandler}
                         style={{
-                            width: '86%',
-                            marginTop: '-5%',
-                            textAlign: 'right',
+                            height: '70%',
+                            display: 'flex',
+                            justifyContent: 'space-around',
+                            flexDirection: 'column',
                         }}
                     >
-                        비밀번호찾기
-                    </p>
-                    <SubmittBtn
-                        style={{ height: '17%', marginTop: '-2%' }}
-                        onClick={onLoginHandler}
-                    >
-                        Traview 로그인
-                    </SubmittBtn>
+                        <InputBar
+                            style={{ height: '17%' }}
+                            placeholder="아아디"
+                            type="text"
+                            value={ID}
+                            onChange={(e) => setID(e.currentTarget.value)}
+                        />
+                        <InputBar
+                            style={{ height: '17%', marginTop: '-3%' }}
+                            placeholder="비밀번호"
+                            type="password"
+                            value={Password}
+                            onChange={(e) => setPassword(e.currentTarget.value)}
+                        />
+                        <p
+                            style={{
+                                width: '86%',
+                                marginTop: '-5%',
+                                textAlign: 'right',
+                            }}
+                        >
+                            비밀번호찾기
+                        </p>
+                        <SubmittBtn
+                            style={{ height: '17%', marginTop: '-2%' }}
+                            onClick={onLoginHandler}
+                        >
+                            Traview 로그인
+                        </SubmittBtn>
 
-                    <IDCheckLabel>
-                        <p>아이디가 없으신가요?&nbsp;&nbsp; </p>
-                        <Link style={{ color: 'red' }} to={'/register'}>
-                            &nbsp;가입하기
-                        </Link>
-                    </IDCheckLabel>
-                </form>
-            </BackgroundBox>
+                        <IDCheckLabel>
+                            <p>아이디가 없으신가요?&nbsp;&nbsp; </p>
+                            <Link style={{ color: 'red' }} to={'/register'}>
+                                &nbsp;가입하기
+                            </Link>
+                        </IDCheckLabel>
+                    </form>
+                </BackgroundBox>
+            </div>
         </MainTheme>
     );
 }
