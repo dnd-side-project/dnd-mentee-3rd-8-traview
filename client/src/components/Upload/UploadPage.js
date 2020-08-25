@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import Address from './UploadFunction/Address';
-import db from '../../firebase';
+import firebase from 'firebase/app';
+import db, { storage } from '../../firebase';
 import {
     TotalContainer,
     UploadDropZone,
@@ -32,7 +33,6 @@ export default function UploadPage(props) {
     const [isClicked, setIsClicked] = useState(false);
     let [locations, setLocations] = useState([]);
     const [hasSelectedAddress, setHasSelectedAddress] = useState(false);
-
     const [address, setAddress] = useState('');
     const [latitude, setLatitude] = useState(''); //위도
     const [longitude, setLongitude] = useState(''); //경도
@@ -45,6 +45,7 @@ export default function UploadPage(props) {
     const [hadReview, setHadReview] = useState(null); //상세내용
     const [hadImageurl, setHadImageurl] = useState(null); //상세내용
     const [{ user }, dispatch] = useStateValue(); //로그인유저
+
     useEffect(() => {
         resetSearchLocation();
     }, []);
@@ -69,14 +70,41 @@ export default function UploadPage(props) {
         //         })
         //     })
 
-        console.log('사용자 이름', user.displayName);
-        console.log('위도경도 : ', latitude, longitude);
-        console.log('광고표시 :', hasSelectedadvertisement);
-        console.log('분위기 : ', hadAtmophere);
-        console.log('이미지좌표: ', hadImageurl);
-        console.log('평점: ', hadRating);
-        console.log('타이틀명: ', hadTitlename);
-        console.log('리뷰내용', hadReview);
+        const uploadTask = storage
+            .ref(`images/${hadImageurl.name}`)
+            .put(hadImageurl);
+
+        uploadTask.on(
+            'state_changed',
+            (snapshot) => {},
+            (error) => {
+                console.log(error);
+                alert(error.message);
+            },
+            () => {
+                storage
+                    .ref('images')
+                    .child(hadImageurl.name)
+                    .getDownloadURL()
+                    .then((url) => {
+                        db.collection('posts').add({
+                            advertising: hasSelectedadvertisement,
+                            area: '강원도',
+                            heart: 0,
+                            imageUrl: url,
+                            latitude: latitude,
+                            longitude: longitude,
+                            mood: hadAtmophere,
+                            novelty: 0,
+                            rating: hadRating,
+                            review: hadReview,
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                            title: hadTitlename,
+                            username: user.displayName,
+                        });
+                    });
+            }
+        );
     };
 
     const searchLocation = (reset = false) => {

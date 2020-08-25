@@ -43,12 +43,12 @@ function Dropzone(props) {
     const classes = useStyles();
 
     const onDrop = (file) => {
-        props.setHadImageurl(file);
+        props.setHadImageurl(file[0]);
         let formData = new FormData();
         const config = {
             header: { 'con tent-type': 'multipart/form-data' },
         };
-        console.log(file);
+        console.log(file[0]);
     };
     return (
         <div
