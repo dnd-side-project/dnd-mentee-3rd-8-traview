@@ -20,7 +20,7 @@ export const RatingFont = styled.p`
 function Rating() {
     return (
         <div>
-            <SubtitleFont style={{ marginBottom: '41px' }}>
+            <SubtitleFont style={{ marginBottom: '31px' }}>
                 평점 주기
             </SubtitleFont>
             <FormControl component="fieldset" style={{ width: '100%' }}>
