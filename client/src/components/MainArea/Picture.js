@@ -40,22 +40,6 @@ const Box = styled.div`
     overflow: hidden;
     break-inside: avoid;
     cursor: pointer;
-
-    &: hover {
-        ${LeftBottomContainer} {
-            visibility: visible;
-        }
-        ${RightBottomContainer} {
-            visibility: visible;
-        }
-        ${RightTopContainer} {
-            visibility: visible;
-        }
-        ${Image} {
-            opacity: 0.6;
-            transition: opacity 300ms ease-out;
-        }
-    }
 `;
 
 const ImageTitle = styled.h2`
@@ -77,6 +61,22 @@ const Description = styled.p`
 
 const ImageContainer = styled.div`
     position: relative;
+
+    &: hover {
+        ${LeftBottomContainer} {
+            visibility: visible;
+        }
+        ${RightBottomContainer} {
+            visibility: visible;
+        }
+        ${RightTopContainer} {
+            visibility: visible;
+        }
+        ${Image} {
+            opacity: 0.6;
+            transition: opacity 300ms ease-out;
+        }
+    }
 `;
 
 const TextBox = styled.label`
