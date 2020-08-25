@@ -61,10 +61,12 @@ export default () => {
     const [posts, setPosts] = useState([]);
     const [last, setLast] = useState(null);
     const [mood, setMood] = useState('');
+    const [hasMore, setHasMore] = useState(true);
     const moods = ['도시', '자연', '몽환', '여유', '고요', '활기', '낭만'];
 
     useEffect(() => {
-        db.collection('posts')
+        const unsubscribe = db
+            .collection('posts')
             .orderBy('timestamp', 'desc')
             .limit(10)
             .onSnapshot((snapshot) => {
@@ -76,6 +78,10 @@ export default () => {
                 );
                 setLast(snapshot.docs[snapshot.docs.length - 1]);
             });
+
+        return () => {
+            unsubscribe();
+        };
     }, []);
 
     const next = () => {
@@ -85,6 +91,10 @@ export default () => {
                 .startAfter(last)
                 .limit(10)
                 .onSnapshot((snapshot) => {
+                    if (!snapshot.exists) {
+                        setHasMore(false);
+                        return;
+                    }
                     setPosts([
                         ...posts,
                         ...snapshot.docs.map((doc) => ({
@@ -105,6 +115,10 @@ export default () => {
                 .startAfter(last)
                 .limit(10)
                 .onSnapshot((snapshot) => {
+                    if (!snapshot.exists) {
+                        setHasMore(false);
+                        return;
+                    }
                     setPosts([
                         ...posts,
                         ...snapshot.docs.map((doc) => ({
@@ -156,7 +170,7 @@ export default () => {
             <InfiniteScroll
                 dataLength={posts.length}
                 next={(mood && moodNext) || next}
-                hasMore={true}
+                hasMore={hasMore}
                 loader={<Loader />}
             >
                 <Container>
