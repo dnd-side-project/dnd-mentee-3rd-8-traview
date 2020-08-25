@@ -35,6 +35,7 @@ const Mood = styled.li`
     border: 2px solid #ff534b;
     border-radius: 23px;
     box-sizing: border-box;
+    background-color: ${(props) => (props.active ? '#ff534b' : '')};
     cursor: pointer;
 
     font-style: normal;
@@ -59,6 +60,7 @@ const Container = styled.div`
 export default () => {
     const [posts, setPosts] = useState([]);
     const [last, setLast] = useState(null);
+    const [mood, setMood] = useState('');
     const moods = ['도시', '자연', '몽환', '여유', '고요', '활기', '낭만'];
 
     useEffect(() => {
@@ -95,20 +97,65 @@ export default () => {
         }
     };
 
+    const moodNext = () => {
+        if (last) {
+            db.collection('posts')
+                .orderBy('timestamp', 'desc')
+                .where('mood', '==', mood)
+                .startAfter(last)
+                .limit(10)
+                .onSnapshot((snapshot) => {
+                    setPosts([
+                        ...posts,
+                        ...snapshot.docs.map((doc) => ({
+                            id: doc.id,
+                            post: doc.data(),
+                        })),
+                    ]);
+                    setLast(snapshot.docs[snapshot.docs.length - 1]);
+                });
+        }
+    };
+
+    const onMoodChange = (e) => {
+        setMood(e.currentTarget.innerText);
+        setPosts([]);
+
+        db.collection('posts')
+            .orderBy('timestamp', 'desc')
+            .where('mood', '==', e.currentTarget.innerText)
+            .limit(10)
+            .onSnapshot((snapshot) => {
+                setPosts(
+                    snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        post: doc.data(),
+                    }))
+                );
+                setLast(snapshot.docs[snapshot.docs.length - 1]);
+            });
+    };
+
     return (
         <>
             <HeaderContainer>
                 <Title>신기한 장소들</Title>
                 <MoodList>
-                    {moods.map((mood) => (
-                        <Mood key={mood}>{mood}</Mood>
+                    {moods.map((moodText) => (
+                        <Mood
+                            key={moodText}
+                            onClick={onMoodChange}
+                            active={moodText === mood ? true : false}
+                        >
+                            {moodText}
+                        </Mood>
                     ))}
                 </MoodList>
             </HeaderContainer>
 
             <InfiniteScroll
                 dataLength={posts.length}
-                next={next}
+                next={(mood && moodNext) || next}
                 hasMore={true}
                 loader={<Loader />}
             >
