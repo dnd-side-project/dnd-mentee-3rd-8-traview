@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { SubtitleFont } from '../UploadStyled';
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,6 +42,10 @@ function Atmosphere() {
     const [vigor, setvigor] = useState(false);
     const [romance, setromance] = useState(false);
 
+    const MoodStatus = [City, nature, Dream, relaxation, calm, vigor, romance];
+    useEffect(() => {
+        console.log(MoodStatus);
+    });
     return (
         <div>
             <SubtitleFont> 분위기 선택</SubtitleFont>
