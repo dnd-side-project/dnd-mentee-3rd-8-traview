@@ -22,6 +22,7 @@ import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import axios from 'axios';
 import Projection from 'proj4';
 import { extraApi } from '../../api_manager';
+import {useStateValue} from "../../StateProvider";
 
 let isSearching = false;
 let isEndReached = false;
@@ -31,25 +32,26 @@ export default function UploadPage(props) {
     const [isClicked, setIsClicked] = useState(false);
     let [locations, setLocations] = useState([]);
     const [hasSelectedAddress, setHasSelectedAddress] = useState(false);
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('');
-    const [address, setAddress] = useState('');
 
+    const [address, setAddress] = useState('');
+    const [latitude, setLatitude] = useState('');//위도
+    const [longitude, setLongitude] = useState('');//경도
     const [hasSelectedadvertisement, setHasSelectedadvertisement] = useState(
         false
     ); //광고여부
     const [hadAtmophere, setHadAtmophere] = useState(''); //분위기
-    const [hadRating, setHadRating] = useState(''); //레이팅
-    const [hadTitlename, setHadTitlename] = useState(''); //제목명
-    const [hadReview, setHadReview] = useState(''); //상세내용
+    const [hadRating, setHadRating] = useState(''); //평점
+    const [hadTitlename, setHadTitlename] = useState(null); //제목명
+    const [hadReview, setHadReview] = useState(null); //상세내용
     const [hadImageurl, setHadImageurl] = useState(null); //상세내용
-
+    const [{ user }, dispatch] = useStateValue();//로그인유저
     useEffect(() => {
         resetSearchLocation();
     }, []);
 
     const onHandleUpload = (e) => {
         e.preventDefault()
+
         // if(hadImageurl===null){
         //     console.error("이미지 오류")
         // }
@@ -68,11 +70,7 @@ export default function UploadPage(props) {
         //     })
 
 
-
-
-
-
-
+        console.log("사용자 이름",user.displayName)
         console.log('위도경도 : ', latitude, longitude);
         console.log('광고표시 :', hasSelectedadvertisement);
         console.log('분위기 : ', hadAtmophere);

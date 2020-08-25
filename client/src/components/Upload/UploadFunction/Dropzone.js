@@ -62,7 +62,7 @@ function Dropzone(props) {
                 dropzoneParagraphClass={classes.DropzoneParagrap}
                 Icon=""
                 dropzoneText={
-                    '안녕하세요'
+                    '업로드'
                     // <div style={{ textAlign: 'center' }}>
                     //     <img src={'/images/UPLOADTEST.png'} alt="NewPick" />
                     //     <UploadTitle>여행지 사진을 올려주세요</UploadTitle>
