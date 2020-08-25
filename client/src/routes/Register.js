@@ -14,6 +14,7 @@ import { SocialImage } from '../components/CommonStyle/SocialImage';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { TopLabel } from '../components/CommonStyle/TopLabel';
 import { SocialCollection } from '../components/CommonStyle/SocialCollection';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 function Register() {
     const [{}, dispatch] = useStateValue();
@@ -49,6 +50,23 @@ function Register() {
                     backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 }}
             >
+                <KeyboardBackspaceIcon
+                    onClick={() => {
+                        window.history.back();
+                    }}
+                    fontSize="large"
+                    style={{
+                        position: 'absolute',
+                        paddingTop: '75px',
+                        marginLeft: '75px',
+                        display: 'flex',
+                        cursor: 'pointer',
+                        width: '50px',
+                        height: '50px',
+                        textAlign: 'left',
+                        color: 'white',
+                    }}
+                />
                 <TopLabel>나만 몰랐던 국내 여행지</TopLabel>
                 <SignUpLabel>
                     <span style={{ color: 'red' }}>Traview</span>

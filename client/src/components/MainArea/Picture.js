@@ -61,7 +61,7 @@ const Description = styled.p`
 
 const ImageContainer = styled.div`
     position: relative;
-
+    
     &: hover {
         ${LeftBottomContainer} {
             visibility: visible;
@@ -87,15 +87,15 @@ const TextBox = styled.label`
 `;
 
 export default ({
-    imagePath,
-    title,
-    description,
-    avatar,
-    username,
-    novelty,
-    heart,
-    area,
-}) => {
+                    imagePath,
+                    title,
+                    description,
+                    avatar,
+                    username,
+                    novelty,
+                    heart,
+                    area,
+                }) => {
     return (
         <Box>
             <ImageContainer>

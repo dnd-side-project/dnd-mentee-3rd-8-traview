@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import styled from 'styled-components';
@@ -39,9 +39,17 @@ const Upload = styled.p`
     line-height: 35px;
     color: #ff534b;
 `;
-
-function Dropzone() {
+function Dropzone(props) {
     const classes = useStyles();
+
+    const onDrop=(file)=>{
+        props.setHadImageurl(file)
+        let formData = new FormData;
+        const config = {
+            header: {'con tent-type': 'multipart/form-data'}
+        }
+        console.log(file)
+    }
     return (
         <div
             style={{
@@ -49,11 +57,12 @@ function Dropzone() {
             }}
         >
             <DropzoneArea
+                onDrop={onDrop}
                 dropzoneClass={classes.DropZoneArea}
                 dropzoneParagraphClass={classes.DropzoneParagrap}
                 Icon=""
                 dropzoneText={
-                    '안녕하세요'
+                    '업로드'
                     // <div style={{ textAlign: 'center' }}>
                     //     <img src={'/images/UPLOADTEST.png'} alt="NewPick" />
                     //     <UploadTitle>여행지 사진을 올려주세요</UploadTitle>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import Address from './UploadFunction/Address';
+import db from "../../firebase";
 import {
     TotalContainer,
     UploadDropZone,
@@ -21,6 +22,7 @@ import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import axios from 'axios';
 import Projection from 'proj4';
 import { extraApi } from '../../api_manager';
+import {useStateValue} from "../../StateProvider";
 
 let isSearching = false;
 let isEndReached = false;
@@ -30,13 +32,53 @@ export default function UploadPage(props) {
     const [isClicked, setIsClicked] = useState(false);
     let [locations, setLocations] = useState([]);
     const [hasSelectedAddress, setHasSelectedAddress] = useState(false);
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('');
-    const [address, setAddress] = useState('');
 
+    const [address, setAddress] = useState('');
+    const [latitude, setLatitude] = useState('');//위도
+    const [longitude, setLongitude] = useState('');//경도
+    const [hasSelectedadvertisement, setHasSelectedadvertisement] = useState(
+        false
+    ); //광고여부
+    const [hadAtmophere, setHadAtmophere] = useState(''); //분위기
+    const [hadRating, setHadRating] = useState(''); //평점
+    const [hadTitlename, setHadTitlename] = useState(null); //제목명
+    const [hadReview, setHadReview] = useState(null); //상세내용
+    const [hadImageurl, setHadImageurl] = useState(null); //상세내용
+    const [{ user }, dispatch] = useStateValue();//로그인유저
     useEffect(() => {
         resetSearchLocation();
     }, []);
+
+    const onHandleUpload = (e) => {
+        e.preventDefault()
+
+        // if(hadImageurl===null){
+        //     console.error("이미지 오류")
+        // }
+        // const uploadTask=db.ref(`/images/${hadImageurl.name}`).put(hadImageurl)
+        // uploadTask.on('state_changed',
+        //     (snapShot)=>{
+        //     console.error(snapShot)
+        //     },(err)=>{
+        //     //catch the err
+        //         console.error(err)
+        //     },()=>{
+        //     db.ref('images').child(hadImageurl.name).getDownloadURL()
+        //         .then(fireBaseUrl=>{
+        //             setHadImageurl(prevObject=>({...prevObject,imgUrl:fireBaseUrl}))
+        //         })
+        //     })
+
+
+        console.log("사용자 이름",user.displayName)
+        console.log('위도경도 : ', latitude, longitude);
+        console.log('광고표시 :', hasSelectedadvertisement);
+        console.log('분위기 : ', hadAtmophere);
+        console.log('이미지좌표: ',hadImageurl);
+        console.log('평점: ', hadRating);
+        console.log('타이틀명: ', hadTitlename);
+        console.log('리뷰내용', hadReview);
+    };
 
     const searchLocation = (reset = false) => {
         if (isSearching || isEndReached || !address) {
@@ -51,7 +93,7 @@ export default function UploadPage(props) {
                 currentPage: currentPage,
             })
             .then((res) => {
-                console.log('searchLocation function res', res);
+                // console.log('searchLocation function res', res);
                 if (!res.data.results.juso) {
                     alert(res.data.results.common.errorMessage);
                     isSearching = false;
@@ -72,10 +114,10 @@ export default function UploadPage(props) {
                 } else {
                     setLocations(locations.concat(res.data.results.juso));
                 }
-            })
-            .catch((e) => {
-                console.log(e);
             });
+        // .catch((e) => {
+        //     console.log(e);
+        // });
     };
 
     const onLocationSelect = (location) => {
@@ -86,7 +128,7 @@ export default function UploadPage(props) {
         extraApi
             .get('http://www.juso.go.kr/addrlink/addrCoordApi.do', data)
             .then((res) => {
-                console.log(res);
+                //   console.log(res);
                 if (!res.data.results.juso) {
                     alert(res.data.results.common.errorMessage);
                     return;
@@ -107,8 +149,8 @@ export default function UploadPage(props) {
                 setLatitude(latitude);
                 setLongitude(longitude);
                 setAddress(location.roadAddr);
-                console.log('latitude', latitude);
-                console.log('longitude', longitude);
+                // console.log('latitude', latitude);
+                // console.log('longitude', longitude);
                 // setFieldValue('address', location.roadAddr);
             });
     };
@@ -139,17 +181,24 @@ export default function UploadPage(props) {
             <>
                 <TotalContainer style={{ paddingTop: '30px' }}>
                     <UploadDropZone>
-                        <Dropzone />
+                        <Dropzone  setHadImageurl={setHadImageurl}/>
                     </UploadDropZone>
                     <RightContainer>
                         <TitleInputBar>
-                            <TitleName />
+                            <TitleName
+                                setHadTitlename={setHadTitlename}
+                                setHadReview={setHadReview}
+                            />
                         </TitleInputBar>
                         <AdvertisementComponent>
-                            <Advertisement />
+                            <Advertisement
+                                setHasSelectedadvertisement={
+                                    setHasSelectedadvertisement
+                                }
+                            />
                         </AdvertisementComponent>
                         <AtmosphereComponent>
-                            <Atmosphere />
+                            <Atmosphere setHadAtmophere={setHadAtmophere} />
                         </AtmosphereComponent>
                         <LocationComponent>
                             <Address
@@ -164,15 +213,14 @@ export default function UploadPage(props) {
                                 marginTop: '-20px',
                                 background: 'white',
                                 maxWidth: '510px',
-
                                 overflow: 'auto',
                                 maxHeight: '140px',
                             }}
                         >
-                            {console.log(
-                                'hasSelectedAddress',
-                                hasSelectedAddress
-                            )}
+                            {/*{console.log(*/}
+                            {/*    'hasSelectedAddress',*/}
+                            {/*    hasSelectedAddress*/}
+                            {/*)}*/}
                             {!hasSelectedAddress &&
                                 locations.map((location, index) => (
                                     <LocationItem
@@ -186,7 +234,7 @@ export default function UploadPage(props) {
                         </div>
                         {hasSelectedAddress && (
                             <RatingComponent>
-                                <Rating />
+                                <Rating setHadRating={setHadRating} />
                             </RatingComponent>
                         )}
                     </RightContainer>
@@ -225,6 +273,7 @@ export default function UploadPage(props) {
                             display: 'flex',
                             justifyContent: 'center',
                         }}
+                        onClick={onHandleUpload}
                     >
                         완료
                     </Button>

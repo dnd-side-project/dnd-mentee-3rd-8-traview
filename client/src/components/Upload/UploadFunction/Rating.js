@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -16,8 +16,14 @@ export const RatingFont = styled.p`
     align-items: center;
     text-align: center;
 `;
-
-function Rating() {
+function Rating(props) {
+    useEffect(() => {
+        props.setHadRating(value);
+    });
+    const [value, setValue] = React.useState(null);
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    };
     return (
         <div>
             <SubtitleFont style={{ marginBottom: '31px' }}>
@@ -30,33 +36,35 @@ function Rating() {
                     aria-label="position"
                     name="position"
                     defaultValue="top"
+                    value={value}
+                    onChange={handleChange}
                 >
                     <FormControlLabel
-                        value="Rating1"
+                        value="1"
                         control={<Radio color="primary" />}
                         label={<RatingFont>별로야</RatingFont>}
                         labelPlacement="bottom"
                     />
                     <FormControlLabel
-                        value="Rating2"
+                        value="2"
                         control={<Radio color="primary" />}
                         label={<RatingFont>그저그래</RatingFont>}
                         labelPlacement="bottom"
                     />
                     <FormControlLabel
-                        value="Rating3"
+                        value="3"
                         control={<Radio color="primary" />}
                         label={<RatingFont>괜찮아</RatingFont>}
                         labelPlacement="bottom"
                     />
                     <FormControlLabel
-                        value="Rating4"
+                        value="4"
                         control={<Radio color="primary" />}
                         label={<RatingFont>좋아</RatingFont>}
                         labelPlacement="bottom"
                     />
                     <FormControlLabel
-                        value="Rating5"
+                        value="5"
                         control={<Radio color="primary" />}
                         label={<RatingFont>최고야</RatingFont>}
                         labelPlacement="bottom"
