@@ -39,14 +39,6 @@ function Login() {
     const [Password, setPassword] = useState('');
     const history = useHistory();
 
-    const onIDHandler = (event) => {
-        setID(event.currentTarget.value);
-    };
-
-    const onPasswordHandler = (event) => {
-        setPassword(event.currentTarget.value);
-    };
-
     const onLoginHandler = (event) => {
         event.preventDefault();
     };
@@ -125,14 +117,14 @@ function Login() {
                         placeholder="아아디"
                         type="text"
                         value={ID}
-                        onChange={onIDHandler}
+                        onChange={(e) => setID(e.currentTarget.value)}
                     />
                     <InputBar
                         style={{ height: '17%', marginTop: '-3%' }}
                         placeholder="비밀번호"
                         type="password"
                         value={Password}
-                        onChange={onPasswordHandler}
+                        onChange={(e) => setPassword(e.currentTarget.value)}
                     />
                     <p
                         style={{
