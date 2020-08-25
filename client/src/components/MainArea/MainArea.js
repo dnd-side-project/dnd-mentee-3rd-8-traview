@@ -45,6 +45,7 @@ const Mood = styled.li`
 
     &:hover {
         background-color: #ff534b;
+        transition: background-color 300ms ease-out;
     }
 `;
 
@@ -76,20 +77,22 @@ export default () => {
     }, []);
 
     const next = () => {
-        db.collection('posts')
-            .orderBy('timestamp', 'desc')
-            .startAfter(last)
-            .limit(10)
-            .onSnapshot((snapshot) => {
-                setPosts([
-                    ...posts,
-                    ...snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        post: doc.data(),
-                    })),
-                ]);
-                setLast(snapshot.docs[snapshot.docs.length - 1]);
-            });
+        if (last) {
+            db.collection('posts')
+                .orderBy('timestamp', 'desc')
+                .startAfter(last)
+                .limit(10)
+                .onSnapshot((snapshot) => {
+                    setPosts([
+                        ...posts,
+                        ...snapshot.docs.map((doc) => ({
+                            id: doc.id,
+                            post: doc.data(),
+                        })),
+                    ]);
+                    setLast(snapshot.docs[snapshot.docs.length - 1]);
+                });
+        }
     };
 
     return (
@@ -111,7 +114,17 @@ export default () => {
             >
                 <Container>
                     {posts.map(({ post, id }) => (
-                        <Picture imagePath={post?.imageUrl} key={id} />
+                        <Picture
+                            imagePath={post.imageUrl}
+                            key={id}
+                            title={post.title}
+                            description={post.review}
+                            avatar={post.avatar}
+                            username={post.username}
+                            area={post.area}
+                            novelty={post.novelty}
+                            heart={post.heart}
+                        />
                     ))}
                 </Container>
             </InfiniteScroll>
