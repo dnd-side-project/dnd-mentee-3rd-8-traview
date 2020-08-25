@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import Address from './UploadFunction/Address';
-import db from "../../firebase";
+import db from '../../firebase';
 import {
     TotalContainer,
     UploadDropZone,
@@ -22,7 +22,7 @@ import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import axios from 'axios';
 import Projection from 'proj4';
 import { extraApi } from '../../api_manager';
-import {useStateValue} from "../../StateProvider";
+import { useStateValue } from '../../StateProvider';
 
 let isSearching = false;
 let isEndReached = false;
@@ -34,8 +34,8 @@ export default function UploadPage(props) {
     const [hasSelectedAddress, setHasSelectedAddress] = useState(false);
 
     const [address, setAddress] = useState('');
-    const [latitude, setLatitude] = useState('');//위도
-    const [longitude, setLongitude] = useState('');//경도
+    const [latitude, setLatitude] = useState(''); //위도
+    const [longitude, setLongitude] = useState(''); //경도
     const [hasSelectedadvertisement, setHasSelectedadvertisement] = useState(
         false
     ); //광고여부
@@ -44,13 +44,13 @@ export default function UploadPage(props) {
     const [hadTitlename, setHadTitlename] = useState(null); //제목명
     const [hadReview, setHadReview] = useState(null); //상세내용
     const [hadImageurl, setHadImageurl] = useState(null); //상세내용
-    const [{ user }, dispatch] = useStateValue();//로그인유저
+    const [{ user }, dispatch] = useStateValue(); //로그인유저
     useEffect(() => {
         resetSearchLocation();
     }, []);
 
     const onHandleUpload = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         // if(hadImageurl===null){
         //     console.error("이미지 오류")
@@ -69,12 +69,11 @@ export default function UploadPage(props) {
         //         })
         //     })
 
-
-        console.log("사용자 이름",user.displayName)
+        console.log('사용자 이름', user.displayName);
         console.log('위도경도 : ', latitude, longitude);
         console.log('광고표시 :', hasSelectedadvertisement);
         console.log('분위기 : ', hadAtmophere);
-        console.log('이미지좌표: ',hadImageurl);
+        console.log('이미지좌표: ', hadImageurl);
         console.log('평점: ', hadRating);
         console.log('타이틀명: ', hadTitlename);
         console.log('리뷰내용', hadReview);
@@ -181,7 +180,7 @@ export default function UploadPage(props) {
             <>
                 <TotalContainer style={{ paddingTop: '30px' }}>
                     <UploadDropZone>
-                        <Dropzone  setHadImageurl={setHadImageurl}/>
+                        <Dropzone setHadImageurl={setHadImageurl} />
                     </UploadDropZone>
                     <RightContainer>
                         <TitleInputBar>
