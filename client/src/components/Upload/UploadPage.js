@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import Address from './UploadFunction/Address';
-import db from "../../firebase";
 import {
     TotalContainer,
     UploadDropZone,
@@ -17,12 +14,15 @@ import TitleName from './UploadFunction/TitleName';
 import Advertisement from './UploadFunction/advertisement';
 import Atmosphere from './UploadFunction/Atmosphere';
 import Rating from './UploadFunction/Rating';
+import Address from './UploadFunction/Address';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
 import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
-import axios from 'axios';
+import firebase from 'firebase/app';
+import db, { storage } from '../../firebase';
 import Projection from 'proj4';
 import { extraApi } from '../../api_manager';
-import {useStateValue} from "../../StateProvider";
+import { useStateValue } from '../../StateProvider';
 
 let isSearching = false;
 let isEndReached = false;
@@ -32,30 +32,28 @@ export default function UploadPage(props) {
     const [isClicked, setIsClicked] = useState(false);
     let [locations, setLocations] = useState([]);
     const [hasSelectedAddress, setHasSelectedAddress] = useState(false);
-
     const [address, setAddress] = useState('');
-    const [latitude, setLatitude] = useState('');//위도
-    const [longitude, setLongitude] = useState('');//경도
-    const [hasSelectedadvertisement, setHasSelectedadvertisement] = useState(
-        false
-    ); //광고여부
-    const [hadAtmophere, setHadAtmophere] = useState(''); //분위기
-    const [hadRating, setHadRating] = useState(''); //평점
-    const [hadTitlename, setHadTitlename] = useState(null); //제목명
-    const [hadReview, setHadReview] = useState(null); //상세내용
-    const [hadImageurl, setHadImageurl] = useState(null); //상세내용
-    const [{ user }, dispatch] = useStateValue();//로그인유저
+    const [latitude, setLatitude] = useState(''); //위도
+    const [longitude, setLongitude] = useState(''); //경도
+    const [advertising, setAdvertising] = useState(false); //광고여부
+    const [mood, setMood] = useState(''); //분위기
+    const [rating, setRating] = useState(''); //평점
+    const [title, setTitle] = useState(null); //제목명
+    const [review, setReview] = useState(null); //상세내용
+    const [imageUrl, setImageUrl] = useState(null); //상세내용
+    const [{ user }, dispatch] = useStateValue(); //로그인유저
+
     useEffect(() => {
         resetSearchLocation();
     }, []);
 
     const onHandleUpload = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        // if(hadImageurl===null){
+        // if(imageUrl===null){
         //     console.error("이미지 오류")
         // }
-        // const uploadTask=db.ref(`/images/${hadImageurl.name}`).put(hadImageurl)
+        // const uploadTask=db.ref(`/images/${imageUrl.name}`).put(imageUrl)
         // uploadTask.on('state_changed',
         //     (snapShot)=>{
         //     console.error(snapShot)
@@ -63,21 +61,45 @@ export default function UploadPage(props) {
         //     //catch the err
         //         console.error(err)
         //     },()=>{
-        //     db.ref('images').child(hadImageurl.name).getDownloadURL()
+        //     db.ref('images').child(imageUrl.name).getDownloadURL()
         //         .then(fireBaseUrl=>{
-        //             setHadImageurl(prevObject=>({...prevObject,imgUrl:fireBaseUrl}))
+        //             setImageUrl(prevObject=>({...prevObject,imgUrl:fireBaseUrl}))
         //         })
         //     })
 
+        const uploadTask = storage.ref(`images/${imageUrl.name}`).put(imageUrl);
 
-        console.log("사용자 이름",user.displayName)
-        console.log('위도경도 : ', latitude, longitude);
-        console.log('광고표시 :', hasSelectedadvertisement);
-        console.log('분위기 : ', hadAtmophere);
-        console.log('이미지좌표: ',hadImageurl);
-        console.log('평점: ', hadRating);
-        console.log('타이틀명: ', hadTitlename);
-        console.log('리뷰내용', hadReview);
+        uploadTask.on(
+            'state_changed',
+            (snapshot) => {},
+            (error) => {
+                console.log(error);
+                alert(error.message);
+            },
+            () => {
+                storage
+                    .ref('images')
+                    .child(imageUrl.name)
+                    .getDownloadURL()
+                    .then((url) => {
+                        db.collection('posts').add({
+                            advertising: advertising,
+                            area: '강원도',
+                            heart: 0,
+                            imageUrl: url,
+                            latitude: latitude,
+                            longitude: longitude,
+                            mood: mood,
+                            novelty: 0,
+                            rating: rating,
+                            review: review,
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                            title: title,
+                            username: user.displayName,
+                        });
+                    });
+            }
+        );
     };
 
     const searchLocation = (reset = false) => {
@@ -181,24 +203,22 @@ export default function UploadPage(props) {
             <>
                 <TotalContainer style={{ paddingTop: '30px' }}>
                     <UploadDropZone>
-                        <Dropzone  setHadImageurl={setHadImageurl}/>
+                        <Dropzone setHadImageurl={setImageUrl} />
                     </UploadDropZone>
                     <RightContainer>
                         <TitleInputBar>
                             <TitleName
-                                setHadTitlename={setHadTitlename}
-                                setHadReview={setHadReview}
+                                setHadTitlename={setTitle}
+                                setHadReview={setReview}
                             />
                         </TitleInputBar>
                         <AdvertisementComponent>
                             <Advertisement
-                                setHasSelectedadvertisement={
-                                    setHasSelectedadvertisement
-                                }
+                                setHasSelectedadvertisement={setAdvertising}
                             />
                         </AdvertisementComponent>
                         <AtmosphereComponent>
-                            <Atmosphere setHadAtmophere={setHadAtmophere} />
+                            <Atmosphere setHadAtmophere={setMood} />
                         </AtmosphereComponent>
                         <LocationComponent>
                             <Address
@@ -234,7 +254,7 @@ export default function UploadPage(props) {
                         </div>
                         {hasSelectedAddress && (
                             <RatingComponent>
-                                <Rating setHadRating={setHadRating} />
+                                <Rating setHadRating={setRating} />
                             </RatingComponent>
                         )}
                     </RightContainer>

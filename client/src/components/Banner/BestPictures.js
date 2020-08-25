@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import DetailPage from "../Detail/DetailPage";
+import DetailPage from '../Detail/DetailPage';
 const Container = styled.div`
     overflow: hidden;
     break-inside: avoid;
@@ -159,7 +159,7 @@ function BestPicture(props) {
         imagePath,
         locationName,
         Latitude,
-        longitude
+        longitude,
     } = props.data;
     return (
         <>
