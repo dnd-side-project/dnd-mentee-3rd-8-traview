@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import Address from './UploadFunction/Address';
+import db from "../../firebase";
 import {
     TotalContainer,
     UploadDropZone,
@@ -41,16 +42,41 @@ export default function UploadPage(props) {
     const [hadRating, setHadRating] = useState(''); //레이팅
     const [hadTitlename, setHadTitlename] = useState(''); //제목명
     const [hadReview, setHadReview] = useState(''); //상세내용
+    const [hadImageurl, setHadImageurl] = useState(null); //상세내용
 
     useEffect(() => {
         resetSearchLocation();
     }, []);
 
-    const onHandleUpload = () => {
+    const onHandleUpload = (e) => {
+        e.preventDefault()
+        // if(hadImageurl===null){
+        //     console.error("이미지 오류")
+        // }
+        // const uploadTask=db.ref(`/images/${hadImageurl.name}`).put(hadImageurl)
+        // uploadTask.on('state_changed',
+        //     (snapShot)=>{
+        //     console.error(snapShot)
+        //     },(err)=>{
+        //     //catch the err
+        //         console.error(err)
+        //     },()=>{
+        //     db.ref('images').child(hadImageurl.name).getDownloadURL()
+        //         .then(fireBaseUrl=>{
+        //             setHadImageurl(prevObject=>({...prevObject,imgUrl:fireBaseUrl}))
+        //         })
+        //     })
+
+
+
+
+
+
+
         console.log('위도경도 : ', latitude, longitude);
         console.log('광고표시 :', hasSelectedadvertisement);
         console.log('분위기 : ', hadAtmophere);
-        console.log('이미지좌표: ');
+        console.log('이미지좌표: ',hadImageurl);
         console.log('평점: ', hadRating);
         console.log('타이틀명: ', hadTitlename);
         console.log('리뷰내용', hadReview);
@@ -157,7 +183,7 @@ export default function UploadPage(props) {
             <>
                 <TotalContainer style={{ paddingTop: '30px' }}>
                     <UploadDropZone>
-                        <Dropzone />
+                        <Dropzone  setHadImageurl={setHadImageurl}/>
                     </UploadDropZone>
                     <RightContainer>
                         <TitleInputBar>
