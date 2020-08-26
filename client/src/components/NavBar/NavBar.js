@@ -8,6 +8,8 @@ import UploadPage from '../Upload/UploadPage';
 import styled from 'styled-components';
 
 const Container = styled.header`
+    position: relative;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -172,6 +174,7 @@ export default () => {
     return (
         <>
             <UploadPage open={IsModalOpen} close={onClose} />
+
             <Container>
                 <Title to={'/'}>Traview</Title>
                 <NavContainer>
