@@ -7,7 +7,7 @@ const Container = styled.div`
     position: relative;
     z-index: 1;
     margin-bottom: 14px;
-    margin-top: -30px;
+    margin-top: -20px;
 `;
 
 const BackgroundImage = styled.div`
@@ -15,9 +15,9 @@ const BackgroundImage = styled.div`
     height: 787px;
     background-image: linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 50) 0,
-            rgba(25, 25, 25, 34) 5%,
-            rgba(25, 25, 25, 34) 5%,
+            rgba(0, 0, 0, 100) 0,
+            rgba(25, 25, 25, 0) 20%,
+            rgba(25, 25, 25, 0) 20%,
             rgba(0, 0, 0, 0) 66.66%,
             rgba(0, 0, 0, 0) 66.66%,
             rgba(0, 0, 0, 50) 100%
@@ -174,7 +174,10 @@ function Banner() {
             <BackgroundImage />
             <TitleContainer>
                 <div style={{ fontSize: '40px', letterSpacing: '-0.8px' }}>
-                    오늘의 <span style={{ color: 'red' }}>추천 여행지</span>
+                    오늘의{' '}
+                    <span style={{ color: 'red', fontFamily: 'bold' }}>
+                        추천 여행지
+                    </span>
                 </div>
                 <Title>경주 통일전</Title>
                 <ReviewButton>관련 리뷰 보기</ReviewButton>
