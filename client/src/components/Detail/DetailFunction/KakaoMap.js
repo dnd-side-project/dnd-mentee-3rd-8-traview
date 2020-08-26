@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { KakaoMapAPI } from '../../../const/apiConst';
-import DetailPage from '../DetailPage';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Button } from '@material-ui/core';
 const { kakao } = window;

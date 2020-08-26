@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Address(props) {
     const classes = useStyles();
-
     return (
         <div
             style={{

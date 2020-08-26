@@ -29,7 +29,6 @@ let isEndReached = false;
 let currentPage = 1;
 
 export default function UploadPage(props) {
-    const [isClicked, setIsClicked] = useState(false);
     let [locations, setLocations] = useState([]);
     const [hasSelectedAddress, setHasSelectedAddress] = useState(false);
     const [address, setAddress] = useState('');
@@ -40,9 +39,9 @@ export default function UploadPage(props) {
     const [rating, setRating] = useState(''); //평점
     const [title, setTitle] = useState(null); //제목명
     const [review, setReview] = useState(null); //상세내용
-    const [imageUrl, setImageUrl] = useState(null); //상세내용
-    const [{ user }, dispatch] = useStateValue(); //로그인유저
-
+    const [imageUrl, setImageUrl] = useState(null); //이미지
+    const [{ user }] = useStateValue(); //로그인유저
+    const [area, setArea] = useState(null);
     useEffect(() => {
         resetSearchLocation();
     }, []);
@@ -65,41 +64,55 @@ export default function UploadPage(props) {
         //         .then(fireBaseUrl=>{
         //             setImageUrl(prevObject=>({...prevObject,imgUrl:fireBaseUrl}))
         //         })
+
         //     })
-
-        const uploadTask = storage.ref(`images/${imageUrl.name}`).put(imageUrl);
-
-        uploadTask.on(
-            'state_changed',
-            (snapshot) => {},
-            (error) => {
-                console.log(error);
-                alert(error.message);
-            },
-            () => {
-                storage
-                    .ref('images')
-                    .child(imageUrl.name)
-                    .getDownloadURL()
-                    .then((url) => {
-                        db.collection('posts').add({
-                            advertising: advertising,
-                            area: '강원도',
-                            heart: 0,
-                            imageUrl: url,
-                            latitude: latitude,
-                            longitude: longitude,
-                            mood: mood,
-                            novelty: 0,
-                            rating: rating,
-                            review: review,
-                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                            title: title,
-                            username: user.displayName,
+        if (
+            imageUrl === null || //이미지업로드 X
+            title === null || //제목이(x)
+            review === null || //상세내용x
+            mood === '' || //분위기가(X)
+            area === null || //지역체크(위치X)
+            rating === '' //평점(X)
+        ) {
+            alert('업로드내용을 입력해주세요');
+        } else {
+            const uploadTask = storage
+                .ref(`images/${imageUrl.name}`)
+                .put(imageUrl);
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {},
+                (error) => {
+                    console.log(error);
+                    alert(error.message);
+                },
+                () => {
+                    storage
+                        .ref('images')
+                        .child(imageUrl.name)
+                        .getDownloadURL()
+                        .then((url) => {
+                            db.collection('posts').add({
+                                advertising: advertising,
+                                area: area,
+                                heart: 0,
+                                imageUrl: url,
+                                latitude: latitude,
+                                longitude: longitude,
+                                mood: mood,
+                                novelty: 0,
+                                rating: rating,
+                                review: review,
+                                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                                title: title,
+                                username: user.displayName,
+                            });
                         });
-                    });
-            }
-        );
+                }
+            );
+            alert('업로드 완료');
+            props.close();
+        }
     };
 
     const searchLocation = (reset = false) => {
@@ -170,7 +183,21 @@ export default function UploadPage(props) {
                 setHasSelectedAddress(true);
                 setLatitude(latitude);
                 setLongitude(longitude);
+
                 setAddress(location.roadAddr);
+
+                if (
+                    location.roadAddr.substr(0, 2) === '경기' ||
+                    location.roadAddr.substr(0, 2) === '강원' ||
+                    location.roadAddr.substr(0, 2) === '충청' ||
+                    location.roadAddr.substr(0, 2) === '전라' ||
+                    location.roadAddr.substr(0, 2) === '경상' ||
+                    location.roadAddr.substr(0, 2) === '제주'
+                ) {
+                    setArea(location.roadAddr.substr(0, 2) + '도');
+                } else {
+                    setArea(location.roadAddr.substr(0, 2));
+                }
                 // console.log('latitude', latitude);
                 // console.log('longitude', longitude);
                 // setFieldValue('address', location.roadAddr);
