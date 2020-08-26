@@ -1,152 +1,228 @@
 import React from 'react';
 import styled from 'styled-components';
-import BestPictures from './BestPictures';
+import './Banner.css';
+import BestPicture from './BestPicture';
 
-const BannerPic = styled.div`
-    overflow: hidden;
-    border-radius: 30px;
+const Container = styled.div`
     position: relative;
-    margin-bottom: 60px;
-    max-width: 1440px;
-    max-height: 736px;
+    margin-bottom: 14px;
 `;
 
-const ContainerText = styled.div`
-    margin-left: 117px;
-    margin-top: 150px;
-    align-items: center;
-    font-style: normal;
-    position: relative;
+const BackgroundImage = styled.div`
+    width: 100%;
+    height: 787px;
+    background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.0001) 0,
+            rgba(25, 25, 25, 0.344459) 69.14%,
+            rgba(25, 25, 25, 0.344459) 69.14%,
+            rgba(25, 25, 25, 0.344459) 90%,
+            rgba(25, 25, 25, 0.344459) 90%,
+            rgba(25, 25, 25, 0.0001) 100%
+        ),
+        url('images/banner.png');
 `;
-const RecLabel = styled.h5`
-    font-size: 40px;
-    line-height: 58px;
-    display: flex;
-    letter-spacing: -0.8px;
-    position: relative;
+
+const TitleContainer = styled.div`
+    position: absolute;
+    left: 117px;
+    bottom: 400px;
 `;
-const MainLabel = styled.h2`
-    font-weight: 500;
+
+const Title = styled.h1`
     font-size: 80px;
     line-height: 116px;
-    align-items: center;
     letter-spacing: -1.6px;
-    position: relative;
+    margin-bottom: 41px;
 `;
-const ConnectBtn = styled.button`
-    display: flex;
-    font-size: 24px;
-    border: 2px solid #ffffff;
-    box-sizing: border-box;
-    border-radius: 28px;
-    padding: 4px 35px;
-    margin-top: 30px;
-    letter-spacing: -0.48px;
-    line-height: 35px;
+
+const ReviewButton = styled.button`
+    width: 215px;
+    height: 45px;
     color: #ffffff;
-    background: transparent;
-    position: relative;
+    font-size: 24px;
+    line-height: 35px;
+    letter-spacing: 0.48px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 28px;
     cursor: pointer;
+    outline: none;
 `;
 
-const ContainerPicture = styled.div`
-    align-items: center;
-    text-align: center;
-    margin-bottom: 60px;
-    position: relative;
-`;
-
-const Best = styled.h2`
-    margin-right: 40px;
-    margin-top: 30px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    letter-spacing: -0.6px;
-    position: relative;
-`;
-
-const BestPic = styled.div`
-    margin-top: 30px;
-    justify-content: flex-end;
+const BestPicContainer = styled.div`
+    width: 100%;
+    position: absolute;
+    bottom: 72px;
     display: flex;
+    justify-content: flex-end;
 `;
 
-const BackColor = styled.div`
-    position: flex;
-    width: 1439px;
-    height: 210px;
-    left: 0px;
-    top: 612px;
-    background: linear-gradient(
-        180deg,
-        rgba(25, 25, 25, 0.0001) 0%,
-        #191919 100%
-    );
-`;
 function Banner() {
-    const data = [
+    const datas = [
         {
-            userId: 'test1',
-            interestCount: 1,
-            likeCount: 4,
-            user: '/images/Avatar2.png',
-            userName: 'John',
-            imagePath: '/images/test1.jpg',
-            locationName: '부산',
-            Latitude: 33.450309567309525,
-            longitude: 126.56706008404826,
-        },
-        //userId,userName, interestCount, likeCount, username, locationName, imagePath
-        {
-            userId: 'test2',
-            interestCount: 4,
-            likeCount: 5,
-            user: '/images/Avatar1.png',
-            userName: 'Pack',
-            imagePath: '/images/test2.jpg',
-            locationName: '서울',
-            Latitude: 36.32233881614439,
-            longitude: 127.80792919254546,
-        },
-        {
-            userId: 'test3',
-            interestCount: 1,
-            likeCount: 9,
+            username: 'John',
+            novelty: 1,
+            heart: 9,
             user: '/images/Avatar3.png',
-            userName: 'PSY',
             imagePath: '/images/test3.jpg',
-            locationName: '경주',
-            Latitude: 35.51872967285886,
-            longitude: 128.74798659953822,
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
         },
     ];
+
+    const nextSlide = () => {
+        const container = document.querySelector('.row__posters');
+        sideScroll(container, 'right', 25, 300, 30);
+    };
+
+    const prevSlide = () => {
+        const container = document.querySelector('.row__posters');
+        sideScroll(container, 'left', 25, 300, 30);
+    };
+
+    const sideScroll = (element, direction, speed, distance, step) => {
+        let scrollAmount = 0;
+        const slideTimer = setInterval(() => {
+            if (direction === 'left') {
+                element.scrollLeft -= step;
+            } else {
+                element.scrollLeft += step;
+            }
+            scrollAmount += step;
+            if (scrollAmount >= distance) {
+                window.clearInterval(slideTimer);
+            }
+        }, speed);
+    };
+
     return (
-        <BannerPic
-            style={{
-                backgroundImage: `url("/images/Main.png")`,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-            }}
-        >
-            <ContainerText>
-                <RecLabel>
-                    오늘의
-                    <span style={{ color: 'red' }}> 추천 여행지 </span>
-                </RecLabel>
-                <MainLabel> 경주 통일전 </MainLabel>
-                <ConnectBtn> 관련 사진보기</ConnectBtn>
-            </ContainerText>
-            <ContainerPicture>
-                <Best> 최고의 사진들 </Best>
-                <BestPic>
-                    {data.map((data, index) => (
-                        <BestPictures data={data} key={index} />
+        <Container>
+            <BackgroundImage />
+            <TitleContainer>
+                <div style={{ fontSize: '40px', letterSpacing: '-0.8px' }}>
+                    오늘의 <span style={{ color: 'red' }}>추천 여행지</span>
+                </div>
+                <Title>경주 통일전</Title>
+                <ReviewButton>관련 리뷰 보기</ReviewButton>
+            </TitleContainer>
+            <BestPicContainer>
+                <button
+                    id="slideBack"
+                    type="button"
+                    onClick={prevSlide}
+                    style={{
+                        backgroundColor: 'transparent',
+                        color: '#ffffff',
+                        border: 'none',
+                        fontSize: '64px',
+                        outline: '0',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {'<'}
+                </button>
+                <div className="row__posters">
+                    {datas.map((data, index) => (
+                        <BestPicture
+                            imagePath={data.imagePath}
+                            key={index}
+                            avatar={data.user}
+                            username={data.username}
+                            area={data.area}
+                            novelty={data.novelty}
+                            heart={data.heart}
+                        />
                     ))}
-                </BestPic>
-            </ContainerPicture>
-            <BackColor />
-        </BannerPic>
+                </div>
+                <button
+                    id="slide"
+                    type="button"
+                    onClick={nextSlide}
+                    style={{
+                        backgroundColor: 'transparent',
+                        color: '#ffffff',
+                        border: 'none',
+                        fontSize: '64px',
+                        outline: '0',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {'>'}
+                </button>
+            </BestPicContainer>
+        </Container>
     );
 }
 
