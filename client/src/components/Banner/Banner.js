@@ -5,7 +5,9 @@ import BestPicture from './BestPicture';
 
 const Container = styled.div`
     position: relative;
+    z-index: 1;
     margin-bottom: 14px;
+    margin-top: -30px;
 `;
 
 const BackgroundImage = styled.div`
@@ -13,12 +15,12 @@ const BackgroundImage = styled.div`
     height: 787px;
     background-image: linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0.0001) 0,
-            rgba(25, 25, 25, 0.344459) 69.14%,
-            rgba(25, 25, 25, 0.344459) 69.14%,
-            rgba(25, 25, 25, 0.344459) 90%,
-            rgba(25, 25, 25, 0.344459) 90%,
-            rgba(25, 25, 25, 0.0001) 100%
+            rgba(0, 0, 0, 50) 0,
+            rgba(25, 25, 25, 34) 5%,
+            rgba(25, 25, 25, 34) 5%,
+            rgba(0, 0, 0, 0) 66.66%,
+            rgba(0, 0, 0, 0) 66.66%,
+            rgba(0, 0, 0, 50) 100%
         ),
         url('images/banner.png');
 `;
