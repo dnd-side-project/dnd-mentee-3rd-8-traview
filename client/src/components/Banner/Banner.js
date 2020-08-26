@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import './Banner.css';
-import BestPictures from './BestPictures';
+import BestPicture from './BestPicture';
 
 const Container = styled.div`
     position: relative;
@@ -46,11 +46,16 @@ const ReviewButton = styled.button`
     background-color: transparent;
     border: 2px solid #ffffff;
     border-radius: 28px;
+    cursor: pointer;
+    outline: none;
 `;
 
 const BestPicContainer = styled.div`
+    width: 100%;
     position: absolute;
     bottom: 72px;
+    display: flex;
+    justify-content: flex-end;
 `;
 
 function Banner() {
@@ -119,7 +124,48 @@ function Banner() {
             imagePath: '/images/test3.jpg',
             area: '경주',
         },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
+        {
+            username: 'John',
+            novelty: 1,
+            heart: 9,
+            user: '/images/Avatar3.png',
+            imagePath: '/images/test3.jpg',
+            area: '경주',
+        },
     ];
+
+    const nextSlide = () => {
+        const container = document.querySelector('.row__posters');
+        sideScroll(container, 'right', 25, 300, 30);
+    };
+
+    const prevSlide = () => {
+        const container = document.querySelector('.row__posters');
+        sideScroll(container, 'left', 25, 300, 30);
+    };
+
+    const sideScroll = (element, direction, speed, distance, step) => {
+        let scrollAmount = 0;
+        const slideTimer = setInterval(() => {
+            if (direction === 'left') {
+                element.scrollLeft -= step;
+            } else {
+                element.scrollLeft += step;
+            }
+            scrollAmount += step;
+            if (scrollAmount >= distance) {
+                window.clearInterval(slideTimer);
+            }
+        }, speed);
+    };
 
     return (
         <Container>
@@ -132,16 +178,49 @@ function Banner() {
                 <ReviewButton>관련 리뷰 보기</ReviewButton>
             </TitleContainer>
             <BestPicContainer>
+                <button
+                    id="slideBack"
+                    type="button"
+                    onClick={prevSlide}
+                    style={{
+                        backgroundColor: 'transparent',
+                        color: '#ffffff',
+                        border: 'none',
+                        fontSize: '64px',
+                        outline: '0',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {'<'}
+                </button>
                 <div className="row__posters">
                     {datas.map((data, index) => (
-                        <img
+                        <BestPicture
+                            imagePath={data.imagePath}
                             key={index}
-                            className="row__poster"
-                            src={data.imagePath}
-                            alt=""
+                            avatar={data.user}
+                            username={data.username}
+                            area={data.area}
+                            novelty={data.novelty}
+                            heart={data.heart}
                         />
                     ))}
                 </div>
+                <button
+                    id="slide"
+                    type="button"
+                    onClick={nextSlide}
+                    style={{
+                        backgroundColor: 'transparent',
+                        color: '#ffffff',
+                        border: 'none',
+                        fontSize: '64px',
+                        outline: '0',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {'>'}
+                </button>
             </BestPicContainer>
         </Container>
     );
