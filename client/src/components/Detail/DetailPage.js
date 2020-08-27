@@ -71,7 +71,6 @@ export default function DetailPage(props) {
                                     alt={'사진'}
                                     style={{
                                         width: '680px',
-                                        height: '870px',
                                         borderRadius: '20px',
                                     }}
                                 />

@@ -7,9 +7,8 @@ export const TotalContainer = styled.div`
 export const MainContentContainer = styled.div`
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 1250px;
-    height: 1000px;
 `;
 
 export const LeftContainer = styled.div`
@@ -26,7 +25,6 @@ export const RightContainer = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-    height: 870px;
     width: 680px;
 `;
 
