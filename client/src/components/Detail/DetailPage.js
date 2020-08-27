@@ -48,7 +48,7 @@ export default function DetailPage(props) {
                         <LeftContainer>
                             <ImageContainer>
                                 {/* 이곳에 짱큰 이미지 넣어주시면 됩니다. */}
-                                <MainImage imagePath={props.imagePath} />
+                                <MainImage imagePath={props.imageUrl} />
                             </ImageContainer>
                             <DataContainer>
                                 <ProfileContainer>
