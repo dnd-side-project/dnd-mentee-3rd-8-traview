@@ -1,34 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Picture from '../MainArea/Picture'; //안에 이미지
+import Picture from './Picture';
 import db from '../../firebase';
+
 import styled from 'styled-components';
-import Loader from '../MainArea/Loader';
-import '../MainArea/MainGrid.css';
+import Loader from './Loader';
+import './MainGrid.css';
+
+const MarginContainer = styled.div`
+    max-width: 1440px;
+    margin: auto;
+`;
 
 const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
 `;
 
+const Title = styled.h4`
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 43px;
+    letter-spacing: -0.6px;
+`;
+
 const MoodList = styled.ul`
     display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    margin-bottom: 35px;
 `;
 
 const Mood = styled.li`
     display: flex;
-    width: 44px;
-    height: 36px;
-    margin-left: 50px;
-    color: ${(props) => (props.active ? '#ff534b' : '')};
+    align-items: center;
+    justify-content: center;
+
+    width: 80px;
+    height: 46px;
+    margin-left: 20px;
+    border: 2px solid #ff534b;
+    border-radius: 23px;
+    box-sizing: border-box;
+    background-color: ${(props) => (props.active ? '#ff534b' : '')};
     cursor: pointer;
-    font-weight: 300;
-    font-size: 24px;
-    line-height: 35px;
-    letter-spacing: -0.48px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 32px;
+    letter-spacing: -0.44px;
+
+    &:hover {
+        background-color: #ff534b;
+        transition: background-color 300ms ease-out;
+    }
 `;
 
 const Container = styled.div`
@@ -38,7 +62,7 @@ const Container = styled.div`
     column-gap: 40px;
 `;
 
-export default (props) => {
+export default () => {
     const [posts, setPosts] = useState([]);
     const [last, setLast] = useState(null);
     const [mood, setMood] = useState('');
@@ -48,8 +72,7 @@ export default (props) => {
     useEffect(() => {
         const unsubscribe = db
             .collection('posts')
-            // .orderBy('timestamp', 'desc')
-            .where('area', '==', props.local)
+            .orderBy('timestamp', 'desc')
             .limit(10)
             .onSnapshot((snapshot) => {
                 setPosts(
@@ -64,7 +87,7 @@ export default (props) => {
         return () => {
             unsubscribe();
         };
-    }, [props.local]);
+    }, []);
 
     const next = () => {
         if (last) {
@@ -118,9 +141,8 @@ export default (props) => {
         setPosts([]);
 
         db.collection('posts')
-            //  .orderBy('timestamp', 'desc')
+            .orderBy('timestamp', 'desc')
             .where('mood', '==', e.currentTarget.innerText)
-            .where('area', '==', props.local)
             .limit(10)
             .onSnapshot((snapshot) => {
                 setPosts(
@@ -134,8 +156,9 @@ export default (props) => {
     };
 
     return (
-        <>
+        <MarginContainer>
             <HeaderContainer>
+                <Title>신기한 장소들</Title>
                 <MoodList>
                     {moods.map((moodText) => (
                         <Mood
@@ -158,6 +181,7 @@ export default (props) => {
                 <Container>
                     {posts.map(({ post, id }) => (
                         <Picture
+                            id={id}
                             key={id}
                             advertising={post.advertising}
                             area={post.area}
@@ -178,6 +202,6 @@ export default (props) => {
                     ))}
                 </Container>
             </InfiniteScroll>
-        </>
+        </MarginContainer>
     );
 };
