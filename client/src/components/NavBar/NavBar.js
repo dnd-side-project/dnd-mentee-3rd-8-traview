@@ -187,14 +187,17 @@ export default () => {
                     </AreaContainer>
                 </NavContainer>
                 <Search />
-                <UploadContainer
-                    onClick={() => {
-                        setIsModalOpen(true);
-                    }}
-                >
-                    <UploadIcon />
-                    <UploadText>업로드</UploadText>
-                </UploadContainer>
+                {user && (
+                    <UploadContainer
+                        onClick={() => {
+                            setIsModalOpen(true);
+                        }}
+                    >
+                        <UploadIcon />
+                        <UploadText>업로드</UploadText>
+                    </UploadContainer>
+                )}
+
                 <RegisterContainer>
                     {!user ? (
                         <>
