@@ -1,42 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-
+import Message from './DetailFunction/Message';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import db from '../../firebase';
 import {
-    ArticleContainer,
-    CommentContainer,
-    DataContainer,
-    GraphLikeContainer,
-    GraphContainer,
     ImageContainer,
     LeftContainer,
-    LikeContainer,
     MainContentContainer,
-    MapContainer,
-    ProfileContainer,
-    RelativeContainer,
     RightContainer,
     TotalContainer,
-    CommentButton,
 } from './DetailStyle';
-import {
-    AvatarComponent,
-    FollowButton,
-    Follower,
-    NameLabel,
-    ProfileImage,
-    ProfileRight,
-} from './DetailFunction/Profile';
-import {
-    CountNumber,
-    DetailContent,
-    InterBox,
-    PostName,
-} from './DetailFunction/Article';
-import Like from './DetailFunction/Like';
+import { DetailContent, PostName } from './DetailFunction/Article';
 import KakaoMap from './DetailFunction/KakaoMap';
 import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import ShowMoreText from 'react-show-more-text';
@@ -46,12 +23,29 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import { RatingFont } from '../Upload/UploadFunction/Rating';
-import Input from '@material-ui/core/Input';
 import ChatInput from './DetailFunction/ChatInput';
+
 export default function DetailPage(props) {
+    const [roomDetails, setRoomDetails] = useState(null);
+    const [roomMessages, setRoomMessages] = useState([]);
+    useEffect(() => {
+        if (props.id) {
+            db.collection('posts')
+                .doc(props.id)
+                .onSnapshot((snapShot) => setRoomDetails(snapShot.data()));
+        }
+        db.collection('posts')
+            .doc(props.id)
+            .collection('comment')
+            .orderBy('timestamp', 'asc')
+            .onSnapshot((snapShot) =>
+                setRoomMessages(snapShot.docs.map((doc) => doc.data()))
+            );
+    }, [props.id]);
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
     };
+
     return (
         <Dialog
             scroll={'body'}
@@ -188,16 +182,32 @@ export default function DetailPage(props) {
                             </div>
                             <div
                                 style={{
-                                    background: 'gray',
-                                    height: '65%',
+                                    height: 'auto',
+                                    minHeight: '35%',
+                                    maxHeight: '65%',
                                     width: '100%',
                                     marginTop: '60px',
+                                    overflow: 'auto',
                                 }}
                             >
-                                댓글
+                                {roomMessages.map(
+                                    ({
+                                        message,
+                                        timestamp,
+                                        user,
+                                        userimage,
+                                    }) => (
+                                        <Message
+                                            message={message}
+                                            timestamp={timestamp}
+                                            user={user}
+                                            userImage={userimage}
+                                        />
+                                    )
+                                )}
                             </div>
                             {/*안풋바 */}
-                            <ChatInput />
+                            <ChatInput id={props.id} />
                         </RightContainer>
                     </MainContentContainer>
                 </TotalContainer>

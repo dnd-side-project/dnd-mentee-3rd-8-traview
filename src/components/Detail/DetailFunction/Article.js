@@ -6,30 +6,12 @@ export const PostName = styled.h2`
     line-height: 46px;
     letter-spacing: -0.768px;
     color: #ffffff;
-    margin-top:20px;
-`;
-export const InterBox = styled.div`
-    margin-right: 12px;
-    width: 35px;
-    height: 30px;
-    background-image: url(${(props) => props.bg});
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin-top: 5%;
-`;
-export const CountNumber = styled.p`
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 35px;
-    display: flex;
-    margin-right: 25px;
-    margin-top: 5%;
+    margin-top: 20px;
 `;
 export const DetailContent = styled.div`
     margin-top: 3%;
     width: 100%;
-    height:auto;
+    height: auto;
     max-height: 320px;
     font-weight: 300;
     font-size: 22px;

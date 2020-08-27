@@ -86,6 +86,7 @@ function BestPicture({
     title,
     username,
     address,
+    id,
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -96,6 +97,7 @@ function BestPicture({
     return (
         <>
             <DetailPage
+                id={id}
                 open={isModalOpen}
                 close={onClose}
                 advertising={advertising}
