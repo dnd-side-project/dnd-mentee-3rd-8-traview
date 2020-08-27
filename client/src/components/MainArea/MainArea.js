@@ -52,9 +52,9 @@ const Mood = styled.li`
 
 const Container = styled.div`
     width: 1440px;
-    margin: 20px 0;
-    columns: 5;
-    columns-gap: 20px;
+    margin: 36px 0;
+    columns: 3;
+    column-gap: 40px;
 `;
 
 export default () => {

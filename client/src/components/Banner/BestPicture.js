@@ -45,6 +45,7 @@ const Image = styled.img`
 const ImageContainer = styled.div`
     position: relative;
     margin-right: 24px;
+    cursor: pointer;
     &: hover {
         ${LeftBottomContainer} {
             visibility: visible;

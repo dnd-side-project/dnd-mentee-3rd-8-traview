@@ -24,6 +24,7 @@ const BackgroundImage = styled.div`
         ),
         url(${(props) => props.bg});
     background-size: cover;
+    background-position: center center;
 `;
 
 const TitleContainer = styled.div`

@@ -33,9 +33,9 @@ const Mood = styled.li`
 
 const Container = styled.div`
     width: 1440px;
-    margin: 20px 0;
+    margin: 36px 0;
     columns: 3;
-    columns-gap: 20px;
+    column-gap: 40px;
 `;
 
 export default (props) => {
@@ -158,15 +158,21 @@ export default (props) => {
                 <Container>
                     {posts.map(({ post, id }) => (
                         <Picture
-                            imagePath={post.imageUrl}
                             key={id}
-                            title={post.title}
-                            description={post.review}
-                            avatar={post.avatar}
-                            username={post.username}
+                            advertising={post.advertising}
                             area={post.area}
-                            novelty={post.novelty}
+                            avatar={post.avatar}
                             heart={post.heart}
+                            imageUrl={post.imageUrl}
+                            latitude={post.latitude}
+                            longitude={post.longitude}
+                            mood={post.mood}
+                            novelty={post.novelty}
+                            rating={post.rating}
+                            review={post.review}
+                            timestamp={post.timestamp}
+                            title={post.title}
+                            username={post.username}
                         />
                     ))}
                 </Container>
