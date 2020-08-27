@@ -176,15 +176,21 @@ export default () => {
                 <Container>
                     {posts.map(({ post, id }) => (
                         <Picture
-                            imagePath={post.imageUrl}
                             key={id}
-                            title={post.title}
-                            description={post.review}
-                            avatar={post.avatar}
-                            username={post.username}
+                            advertising={post.advertising}
                             area={post.area}
-                            novelty={post.novelty}
+                            avatar={post.avatar}
                             heart={post.heart}
+                            imageUrl={post.imageUrl}
+                            latitude={post.latitude}
+                            longitude={post.longitude}
+                            mood={post.mood}
+                            novelty={post.novelty}
+                            rating={post.rating}
+                            review={post.review}
+                            timestamp={post.timestamp}
+                            title={post.title}
+                            username={post.username}
                         />
                     ))}
                 </Container>
