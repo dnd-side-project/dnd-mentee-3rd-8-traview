@@ -95,8 +95,9 @@ export default () => {
                 .startAfter(last)
                 .limit(10)
                 .onSnapshot((snapshot) => {
-                    if (!snapshot.exists) {
+                    if (snapshot.empty) {
                         setHasMore(false);
+
                         return;
                     }
                     setPosts([
@@ -119,8 +120,9 @@ export default () => {
                 .startAfter(last)
                 .limit(10)
                 .onSnapshot((snapshot) => {
-                    if (!snapshot.exists) {
+                    if (snapshot.empty) {
                         setHasMore(false);
+
                         return;
                     }
                     setPosts([
