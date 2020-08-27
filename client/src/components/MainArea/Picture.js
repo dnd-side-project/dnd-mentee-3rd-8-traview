@@ -170,7 +170,7 @@ export default ({
                     </RightBottomContainer>
                 </ImageContainer>
                 <ImageTitle>{title}</ImageTitle>
-                <Description>{review.slice(0, 20)}...</Description>
+                <Description>{review?.slice(0, 20)}...</Description>
             </Box>
         </>
     );

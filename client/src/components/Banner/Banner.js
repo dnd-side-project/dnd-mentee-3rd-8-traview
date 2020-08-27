@@ -24,6 +24,8 @@ const BackgroundImage = styled.div`
             rgba(0, 0, 0, 50) 100%
         ),
         url('images/banner.png');
+    background-size: cover;
+    background-position: center center;
 `;
 
 const TitleContainer = styled.div`
