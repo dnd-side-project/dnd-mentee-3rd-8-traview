@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import BestPicture from './BestPicture';
+import db from '../../firebase';
 import styled from 'styled-components';
 import './Banner.css';
-import BestPicture from './BestPicture';
 
 const Container = styled.div`
     position: relative;
@@ -61,184 +62,21 @@ const BestPicContainer = styled.div`
 `;
 
 function Banner() {
-    const datas = [
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test1.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test2.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test3.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test3.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test3.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test3.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test3.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test3.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test3.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test3.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-        {
-            advertising: true,
-            area: '서울',
-            avatar: '/images/Avatar3.png',
-            heart: 54,
-            imageUrl: '/images/test3.jpg',
-            latitude: 65.4,
-            longitude: 34.1,
-            mood: '도시',
-            novelty: 46,
-            rating: [3, 1, 2, 1, 4, 5],
-            review: '안녕하세요 제가 저버넹 강ㅇㅇㅇ',
-            timestamp: null,
-            title: '안녕',
-            username: 'John',
-        },
-    ];
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        db.collection('posts')
+            .orderBy('novelty', 'desc')
+            .limit(10)
+            .onSnapshot((snapshot) => {
+                setPosts(
+                    snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        post: doc.data(),
+                    }))
+                );
+            });
+    }, []);
 
     const nextSlide = () => {
         const container = document.querySelector('.row__posters');
@@ -295,15 +133,23 @@ function Banner() {
                     {'<'}
                 </button>
                 <div className="row__posters">
-                    {datas.map((data, index) => (
+                    {posts.map(({ post, id }) => (
                         <BestPicture
-                            imagePath={data.imageUrl}
-                            key={index}
-                            avatar={data.avatar}
-                            username={data.username}
-                            area={data.area}
-                            novelty={data.novelty}
-                            heart={data.heart}
+                            key={id}
+                            advertising={post.advertising}
+                            area={post.area}
+                            avatar={post.avatar}
+                            heart={post.heart}
+                            imageUrl={post.imageUrl}
+                            latitude={post.latitude}
+                            longitude={post.longitude}
+                            mood={post.mood}
+                            novelty={post.novelty}
+                            rating={post.rating}
+                            review={post.review}
+                            timestamp={post.timestamp}
+                            title={post.title}
+                            username={post.username}
                         />
                     ))}
                 </div>
