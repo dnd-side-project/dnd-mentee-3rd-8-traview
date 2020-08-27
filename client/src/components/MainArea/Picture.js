@@ -32,12 +32,12 @@ const RightTopContainer = styled.div`
 
 const Image = styled.img`
     width: 100%;
-    border-radius: 10px;
+    border-radius: 20px;
 `;
 
 const Box = styled.div`
     width: 100%;
-    margin: 0 0 5px;
+    margin: 0 0 45px;
     overflow: hidden;
     break-inside: avoid;
     cursor: pointer;
@@ -47,17 +47,17 @@ const ImageTitle = styled.h2`
     margin: 8px 0 0;
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: -0.28px;
+    font-size: 24px;
+    line-height: 35px;
+    letter-spacing: -0.48px;
 `;
 
 const Description = styled.p`
     font-style: normal;
     font-weight: 300;
-    font-size: 10px;
-    line-height: 14px;
-    letter-spacing: -0.2px;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: -0.32px;
 `;
 
 const ImageContainer = styled.div`
@@ -81,10 +81,10 @@ const ImageContainer = styled.div`
 `;
 
 const TextBox = styled.label`
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 500;
-    line-height: 14px;
-    letter-spacing: -0.2px;
+    line-height: 23px;
+    letter-spacing: -0.32px;
 `;
 
 export default ({
@@ -135,9 +135,9 @@ export default ({
                     <LeftBottomContainer>
                         <img
                             style={{
-                                width: '28px',
-                                height: '28px',
-                                borderRadius: '14px',
+                                width: '44px',
+                                height: '44px',
+                                borderRadius: '22px',
                                 objectFit: 'cover',
                                 marginBottom: '3px',
                             }}
@@ -170,7 +170,7 @@ export default ({
                     </RightBottomContainer>
                 </ImageContainer>
                 <ImageTitle>{title}</ImageTitle>
-                <Description>{review}</Description>
+                <Description>{review?.slice(0, 20)}...</Description>
             </Box>
         </>
     );
