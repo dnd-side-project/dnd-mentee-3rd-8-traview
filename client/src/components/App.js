@@ -16,12 +16,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Container = styled.div`
-    max-width: 1440px;
-    margin: auto;
-    margin-bottom: 3rem;
-`;
-
 function App() {
     return (
         <Router>
@@ -29,11 +23,11 @@ function App() {
             <Switch>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
-                <Container>
+                <div>
                     <NavBar />
                     <Route exact path="/" component={Home} />
                     <Route exact path="/area/:id" component={Area} />
-                </Container>
+                </div>
             </Switch>
         </Router>
     );

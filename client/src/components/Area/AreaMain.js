@@ -6,6 +6,11 @@ import styled from 'styled-components';
 import Loader from '../MainArea/Loader';
 import '../MainArea/MainGrid.css';
 
+const MarginContainer = styled.div`
+    max-width: 1440px;
+    margin: auto;
+`;
+
 const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
@@ -134,7 +139,7 @@ export default (props) => {
     };
 
     return (
-        <>
+        <MarginContainer>
             <HeaderContainer>
                 <MoodList>
                     {moods.map((moodText) => (
@@ -178,6 +183,6 @@ export default (props) => {
                     ))}
                 </Container>
             </InfiniteScroll>
-        </>
+        </MarginContainer>
     );
 };

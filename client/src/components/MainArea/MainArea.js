@@ -7,6 +7,11 @@ import styled from 'styled-components';
 import Loader from './Loader';
 import './MainGrid.css';
 
+const MarginContainer = styled.div`
+    max-width: 1440px;
+    margin: auto;
+`;
+
 const HeaderContainer = styled.header`
     display: flex;
     justify-content: space-between;
@@ -151,7 +156,7 @@ export default () => {
     };
 
     return (
-        <>
+        <MarginContainer>
             <HeaderContainer>
                 <Title>신기한 장소들</Title>
                 <MoodList>
@@ -197,6 +202,6 @@ export default () => {
                     ))}
                 </Container>
             </InfiniteScroll>
-        </>
+        </MarginContainer>
     );
 };

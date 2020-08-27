@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const MarginContainer = styled.div`
+    max-width: 1440px;
+    margin: auto;
+`;
+
 const Main = styled.div`
     display: flex;
     justify-content: space-between;
@@ -74,60 +79,62 @@ const InterestingBox = styled.div`
 
 function PickBox() {
     return (
-        <Main>
-            <MainBox
-                style={{
-                    background:
-                        'linear-gradient(332deg, #E659A8 -14.31%, #EE5A4A 77.81%, #ED7E21 113.18%)',
-                }}
-            >
-                <MainLabel>최신 사진 PICK</MainLabel>
-                <Label>
-                    오늘은 무슨 신기한
-                    <br />
-                    장소들이 올라왔을까?
-                </Label>
-                <ImageBox>
-                    <img src={'/images/Oval1.png'} alt="NewPick" />
-                </ImageBox>
-            </MainBox>
+        <MarginContainer>
+            <Main>
+                <MainBox
+                    style={{
+                        background:
+                            'linear-gradient(332deg, #E659A8 -14.31%, #EE5A4A 77.81%, #ED7E21 113.18%)',
+                    }}
+                >
+                    <MainLabel>최신 사진 PICK</MainLabel>
+                    <Label>
+                        오늘은 무슨 신기한
+                        <br />
+                        장소들이 올라왔을까?
+                    </Label>
+                    <ImageBox>
+                        <img src={'/images/Oval1.png'} alt="NewPick" />
+                    </ImageBox>
+                </MainBox>
 
-            <MainBox
-                style={{
-                    background:
-                        'linear-gradient(150.6deg, #851095 -11.03%, #821297 -11.03%, #A75DEA 42.9%, #6159DE 86.99%)',
-                }}
-            >
-                <MainLabel>팔로워 PICK</MainLabel>
-                <Label>
-                    나의 팔로워들만의 숨겨진
-                    <br />
-                    장소는 ?!
-                </Label>
-                <ImageBox>
-                    <img src={'/images/Oval2.png'} alt="Follower" />
-                </ImageBox>
-            </MainBox>
+                <MainBox
+                    style={{
+                        background:
+                            'linear-gradient(150.6deg, #851095 -11.03%, #821297 -11.03%, #A75DEA 42.9%, #6159DE 86.99%)',
+                    }}
+                >
+                    <MainLabel>팔로워 PICK</MainLabel>
+                    <Label>
+                        나의 팔로워들만의 숨겨진
+                        <br />
+                        장소는 ?!
+                    </Label>
+                    <ImageBox>
+                        <img src={'/images/Oval2.png'} alt="Follower" />
+                    </ImageBox>
+                </MainBox>
 
-            <MainBox
-                style={{
-                    background:
-                        'linear-gradient(151.01deg, #61BFDA -17.86%, #4366E9 105.09%)',
-                }}
-            >
-                <InterestingBox>
-                    <img src="/images/Interesting.png" alt="Interesting" />
-                </InterestingBox>
-                <MainLabel>신기한 PICK</MainLabel>
-                <Label>
-                    오늘의 신기한 장소는 <br />
-                    어디일까?
-                </Label>
-                <ImageBox>
-                    <img src={'/images/Oval3.png'} alt="Interest" />
-                </ImageBox>
-            </MainBox>
-        </Main>
+                <MainBox
+                    style={{
+                        background:
+                            'linear-gradient(151.01deg, #61BFDA -17.86%, #4366E9 105.09%)',
+                    }}
+                >
+                    <InterestingBox>
+                        <img src="/images/Interesting.png" alt="Interesting" />
+                    </InterestingBox>
+                    <MainLabel>신기한 PICK</MainLabel>
+                    <Label>
+                        오늘의 신기한 장소는 <br />
+                        어디일까?
+                    </Label>
+                    <ImageBox>
+                        <img src={'/images/Oval3.png'} alt="Interest" />
+                    </ImageBox>
+                </MainBox>
+            </Main>
+        </MarginContainer>
     );
 }
 

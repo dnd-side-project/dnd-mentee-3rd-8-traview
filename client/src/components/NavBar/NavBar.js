@@ -9,6 +9,11 @@ import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import { Avatar } from '@material-ui/core';
 
+const MarginContainer = styled.div`
+    max-width: 1440px;
+    margin: auto;
+`;
+
 const Container = styled.header`
     position: relative;
     z-index: 1000;
@@ -112,7 +117,7 @@ export default () => {
     };
 
     return (
-        <>
+        <MarginContainer>
             <UploadPage open={IsModalOpen} close={onClose} />
 
             <Container>
@@ -171,6 +176,6 @@ export default () => {
                     )}
                 </RegisterContainer>
             </Container>
-        </>
+        </MarginContainer>
     );
 };
