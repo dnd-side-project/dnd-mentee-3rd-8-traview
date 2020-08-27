@@ -1,32 +1,28 @@
 import styled from 'styled-components';
 export const TotalContainer = styled.div`
-    height: 1525px;
+    height: auto;
     width: 1300px;
 `;
 
 export const MainContentContainer = styled.div`
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 1250px;
-    height: 1000px;
+    width: 1280px;
 `;
 
 export const LeftContainer = styled.div`
-    display: flex;
     flex-direction: column;
     align-items: center;
     width: 680px;
 `;
 
 export const RightContainer = styled.div`
-    display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 550px;
+    margin-left: 40px;
 `;
 
 export const ImageContainer = styled.div`
-    height: 870px;
     width: 680px;
 `;
 
@@ -74,3 +70,5 @@ export const LikeContainer = styled.div`
 `;
 
 export const RelativeContainer = styled.div``;
+
+export const CloseContatiner = styled.div``;
