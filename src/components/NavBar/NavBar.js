@@ -142,9 +142,9 @@ export default () => {
                         src="/images/upload.png"
                         style={{ cursor: 'pointer' }}
                         onClick={() => setIsModalOpen(true)}
+                        alt="업로드"
                     />
                 )}
-                {console.log(user)}
 
                 <RegisterContainer>
                     {!user ? (
