@@ -107,6 +107,7 @@ export default function UploadPage(props) {
                                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                                 title: title,
                                 username: user.displayName,
+                                address: address,
                             });
                         });
                 }

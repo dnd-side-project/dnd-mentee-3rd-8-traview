@@ -85,6 +85,7 @@ function BestPicture({
     timestamp,
     title,
     username,
+    address,
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -111,6 +112,7 @@ function BestPicture({
                 timestamp={timestamp}
                 title={title}
                 username={username}
+                address={address}
             />
             <ImageContainer onClick={() => setIsModalOpen(true)}>
                 <Image src={imageUrl} alt="" />
