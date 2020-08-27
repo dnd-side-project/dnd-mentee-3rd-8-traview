@@ -69,7 +69,22 @@ const TextBox = styled.label`
     letter-spacing: -0.2px;
 `;
 
-function BestPicture({ imageUrl, avatar, username, novelty, heart, area }) {
+function BestPicture({
+    advertising,
+    area,
+    avatar,
+    heart,
+    imageUrl,
+    latitude,
+    longitude,
+    mood,
+    novelty,
+    rating,
+    review,
+    timestamp,
+    title,
+    username,
+}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const onClose = () => {
@@ -81,9 +96,20 @@ function BestPicture({ imageUrl, avatar, username, novelty, heart, area }) {
             <DetailPage
                 open={isModalOpen}
                 close={onClose}
-                imagePath={imageUrl}
-                latitude={45.6}
-                longitude={65.1}
+                advertising={advertising}
+                area={area}
+                avatar={avatar}
+                heart={heart}
+                imageUrl={imageUrl}
+                latitude={latitude}
+                longitude={longitude}
+                mood={mood}
+                novelty={novelty}
+                rating={rating}
+                review={review}
+                timestamp={timestamp}
+                title={title}
+                username={username}
             />
             <ImageContainer onClick={() => setIsModalOpen(true)}>
                 <Image src={imageUrl} alt="" />
