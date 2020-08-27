@@ -30,7 +30,7 @@ const RightTopContainer = styled.div`
 `;
 
 const Image = styled.img`
-    max-width: 100%;
+    width: 100%;
     border-radius: 10px;
 `;
 
