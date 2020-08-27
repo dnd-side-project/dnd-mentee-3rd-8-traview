@@ -31,14 +31,16 @@ export const ImageContainer = styled.div`
 `;
 
 export const DataContainer = styled.div`
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     height: 113px;
     margin-top: 30px;
 `;
 
 export const ProfileContainer = styled.div`
     width: 265px;
+    display: flex;
 `;
 
 export const MapContainer = styled.div`

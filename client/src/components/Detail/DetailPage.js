@@ -2,6 +2,9 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import {
     ArticleContainer,
     CommentContainer,
@@ -18,13 +21,28 @@ import {
     RightContainer,
     TotalContainer,
 } from './DetailStyle';
-import Profile from './DetailFunction/Profile';
-import MainImage from './DetailFunction/MainImage';
-import Article from './DetailFunction/Article';
+import {
+    AvatarComponent,
+    FollowButton,
+    Follower,
+    NameLabel,
+    ProfileImage,
+    ProfileRight,
+} from './DetailFunction/Profile';
+import {
+    CountNumber,
+    DetailContent,
+    InterBox,
+    PostName,
+} from './DetailFunction/Article';
 import Like from './DetailFunction/Like';
 import KakaoMap from './DetailFunction/KakaoMap';
-
+import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
+import ShowMoreText from 'react-show-more-text';
 export default function DetailPage(props) {
+    const executeOnClick = (isExpanded) => {
+        console.log(isExpanded);
+    };
     return (
         <Dialog
             scroll={'body'}
@@ -48,19 +66,33 @@ export default function DetailPage(props) {
                         <LeftContainer>
                             <ImageContainer>
                                 {/* 이곳에 짱큰 이미지 넣어주시면 됩니다. */}
-                                <MainImage imagePath={props.imageUrl} />
+                                <img
+                                    src={props.imageUrl}
+                                    alt={'사진'}
+                                    style={{
+                                        width: '680px',
+                                        height: '870px',
+                                        borderRadius: '20px',
+                                    }}
+                                />
                             </ImageContainer>
                             <DataContainer>
                                 <ProfileContainer>
-                                    <Profile
-                                        profileImage={'/images/Avatar1.png'}
-                                        follower={'142'}
-                                    />
+                                    <AvatarComponent>
+                                        <ProfileImage src={props.avatar} />
+                                    </AvatarComponent>
+                                    <ProfileRight>
+                                        <NameLabel>{props.username}</NameLabel>
+                                        <Follower>팔로워 {'팔로워수'}</Follower>
+                                        <FollowButton>팔로우</FollowButton>
+                                    </ProfileRight>
                                 </ProfileContainer>
                                 <MapContainer>
                                     <KakaoMap
-                                        Latitude={props.Latitude}
+                                        username={props.username}
+                                        latitude={props.latitude}
                                         longitude={props.longitude}
+                                        address={props.address}
                                     />
                                     {/* 여기는 카카오맵 넣어주시면 됩니다. */}
                                     {/* <KaKaoMap /> */}
@@ -69,10 +101,60 @@ export default function DetailPage(props) {
                         </LeftContainer>
                         <RightContainer>
                             <ArticleContainer>
-                                <Article close={props.close} />
-                                {/*본문 컴포넌트*/}
-                                {/* 이곳에 제목 글 작성날자 등 들어갑니다. */}
-                                {/* <Article /> */}
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                    }}
+                                >
+                                    <PostName>{props.title}</PostName>
+                                    <div
+                                        style={{
+                                            alignItems: 'center',
+                                            textAlign: 'center',
+                                            display: 'flex',
+                                        }}
+                                    >
+                                        <InterBox
+                                            bg={'/images/Interesting.png'}
+                                        />
+                                        <CountNumber>
+                                            {props.novelty}
+                                        </CountNumber>
+                                        <InterBox bg={'/images/Like.png'} />
+                                        <CountNumber>{props.heart}</CountNumber>
+                                        {/*이모티콘*/}
+                                        <ClearTwoToneIcon
+                                            fontSize="large"
+                                            style={{
+                                                cursor: 'pointer',
+                                                marginTop: '-20%',
+                                                marginRight: '-28px',
+                                            }}
+                                            onClick={props.close}
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style={{ position: 'flex' }}>
+                                        <DetailContent>
+                                            <ShowMoreText
+                                                width={500}
+                                                /* Default options */
+                                                lines={8}
+                                                more={
+                                                    <ExpandMoreIcon fontSize="large" />
+                                                }
+                                                less={<ExpandLessIcon />}
+                                                anchorClass=""
+                                                onClick={executeOnClick}
+                                                expanded={false}
+                                            >
+                                                {props.review}
+                                            </ShowMoreText>
+                                        </DetailContent>
+                                    </div>
+                                </div>
                             </ArticleContainer>
                             <CommentContainer>
                                 덧글 컴포넌트

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import styled from 'styled-components';
 
 const useStyles = makeStyles((theme) => ({
     DropZoneArea: {
@@ -26,28 +25,24 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '50px',
     },
 }));
-const UploadTitle = styled.p`
-    color: #000000;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 26px;
-    display: flex;
-`;
-const Upload = styled.p`
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 35px;
-    color: #ff534b;
-`;
+// const UploadTitle = styled.p`
+//     color: #000000;
+//     font-weight: 500;
+//     font-size: 18px;
+//     line-height: 26px;
+//     display: flex;
+// `;
+// const Upload = styled.p`
+//     font-weight: bold;
+//     font-size: 24px;
+//     line-height: 35px;
+//     color: #ff534b;
+// `;
 function Dropzone(props) {
     const classes = useStyles();
 
     const onDrop = (file) => {
         props.setHadImageurl(file[0]);
-        let formData = new FormData();
-        const config = {
-            header: { 'con tent-type': 'multipart/form-data' },
-        };
         console.log(file[0]);
     };
     return (

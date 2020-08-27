@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { KakaoMapAPI } from '../../../const/apiConst';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Button } from '@material-ui/core';
+import DialogContent from '@material-ui/core/DialogContent';
 const { kakao } = window;
 
 const KakaoMap = (props) => {
@@ -18,17 +19,17 @@ const KakaoMap = (props) => {
                 var markers = [
                     {
                         position: new kakao.maps.LatLng(
-                            props.Latitude,
+                            props.latitude,
                             props.longitude
                         ),
-                        text: '부산경치맛집', // text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
+                        // text: '부산경치맛집',  text 옵션을 설정하면 마커 위에 텍스트를 함께 표시할 수 있습니다
                     },
                 ];
 
                 var staticMapContainer = document.getElementById('staticMap'), // 이미지 지도를 표시할 div
                     staticMapOption = {
                         center: new kakao.maps.LatLng(
-                            props.Latitude,
+                            props.latitude,
                             props.longitude
                         ), // 이미지 지도의 중심좌표
                         level: 4, // 이미지 지도의 확대 레벨
@@ -45,12 +46,13 @@ const KakaoMap = (props) => {
     }, []);
     const onClickToNev = () => {
         window.open(
-            `https://map.kakao.com/link/to/Hello World!,${props.Latitude},${props.longitude}`
+            //  `https://map.kakao.com/link/to/Hello World!,${props.latitude},${props.longitude}`
+            `https://map.kakao.com/link/to/${props.address},${props.latitude},${props.longitude}`
         );
     };
     const onClickToMap = () => {
         window.open(
-            `https://map.kakao.com/link/map/Hello World!,${props.Latitude},${props.longitude}`
+            `https://map.kakao.com/link/map/${props.address},${props.latitude},${props.longitude}`
         );
     };
     return (
@@ -64,6 +66,7 @@ const KakaoMap = (props) => {
                 border: '3px solid #FFFFFF',
             }}
         >
+            {console.log('나온다', props.address)}
             <div
                 id={'staticMap'}
                 style={{ width: '100%', height: '65%', borderRadius: '16px' }}

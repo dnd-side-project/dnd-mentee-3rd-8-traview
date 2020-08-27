@@ -102,6 +102,7 @@ export default ({
     timestamp,
     title,
     username,
+    address,
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -128,6 +129,7 @@ export default ({
                 timestamp={timestamp}
                 title={title}
                 username={username}
+                address={address}
             />
             <Box onClick={() => setIsModalOpen(true)}>
                 <ImageContainer>

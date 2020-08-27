@@ -69,7 +69,7 @@ function Banner() {
     useEffect(() => {
         db.collection('posts')
             .orderBy('novelty', 'desc')
-            .limit(10)
+            .limit(15)
             .onSnapshot((snapshot) => {
                 setPosts(
                     snapshot.docs.map((doc) => ({
@@ -152,6 +152,7 @@ function Banner() {
                             timestamp={post.timestamp}
                             title={post.title}
                             username={post.username}
+                            address={post.address}
                         />
                     ))}
                 </div>

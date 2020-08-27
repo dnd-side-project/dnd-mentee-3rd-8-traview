@@ -191,6 +191,7 @@ export default () => {
                             timestamp={post.timestamp}
                             title={post.title}
                             username={post.username}
+                            address={post.address}
                         />
                     ))}
                 </Container>
