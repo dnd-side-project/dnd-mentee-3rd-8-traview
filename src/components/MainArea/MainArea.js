@@ -10,6 +10,7 @@ import './MainGrid.css';
 const MarginContainer = styled.div`
     max-width: 1440px;
     margin: auto;
+    margin-top: 90px;
 `;
 
 const HeaderContainer = styled.header`
@@ -19,7 +20,7 @@ const HeaderContainer = styled.header`
 
 const Title = styled.h4`
     font-style: normal;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 30px;
     line-height: 43px;
     letter-spacing: -0.6px;
@@ -37,21 +38,19 @@ const Mood = styled.li`
     width: 80px;
     height: 46px;
     margin-left: 20px;
-    border: 2px solid #ff534b;
-    border-radius: 23px;
     box-sizing: border-box;
-    background-color: ${(props) => (props.active ? '#ff534b' : '')};
+    color: ${(props) => (props.active ? '#ff534b' : '')};
     cursor: pointer;
 
     font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 32px;
-    letter-spacing: -0.44px;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 35px;
+    letter-spacing: -0.48px;
 
     &:hover {
-        background-color: #ff534b;
-        transition: background-color 300ms ease-out;
+        color: #ff534b;
+        transition: color 300ms ease-out;
     }
 `;
 
