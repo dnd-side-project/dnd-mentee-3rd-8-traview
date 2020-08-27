@@ -1,27 +1,26 @@
 import styled from 'styled-components';
 export const TotalContainer = styled.div`
-    height: 1525px;
+    height: auto;
     width: 1300px;
 `;
 
 export const MainContentContainer = styled.div`
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    width: 1250px;
+    height: auto;
+    width: 1280px;
 `;
 
 export const LeftContainer = styled.div`
-    display: flex;
     flex-direction: column;
     align-items: center;
     width: 680px;
 `;
 
 export const RightContainer = styled.div`
-    display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 550px;
+    margin-left: 40px;
 `;
 
 export const ImageContainer = styled.div`
@@ -72,3 +71,24 @@ export const LikeContainer = styled.div`
 `;
 
 export const RelativeContainer = styled.div``;
+
+export const CloseContatiner = styled.div``;
+
+export const CommentButton = styled.button`
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    width: 54px;
+    color: #ff534b;
+    background: none;
+    border: none;
+    marginleft: 20px;
+    outline: none;
+    justify-content: flex-end;
+    margin-left: 20px;
+    cursor: pointer;
+`;

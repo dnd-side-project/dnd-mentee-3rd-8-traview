@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -20,6 +20,7 @@ import {
     RelativeContainer,
     RightContainer,
     TotalContainer,
+    CommentButton,
 } from './DetailStyle';
 import {
     AvatarComponent,
@@ -39,6 +40,14 @@ import Like from './DetailFunction/Like';
 import KakaoMap from './DetailFunction/KakaoMap';
 import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import ShowMoreText from 'react-show-more-text';
+import { SubtitleFont } from '../Upload/UploadStyled';
+import FormControl from '@material-ui/core/FormControl';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Radio from '@material-ui/core/Radio';
+import { RatingFont } from '../Upload/UploadFunction/Rating';
+import Input from '@material-ui/core/Input';
+import ChatInput from './DetailFunction/ChatInput';
 export default function DetailPage(props) {
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
@@ -75,109 +84,122 @@ export default function DetailPage(props) {
                                     }}
                                 />
                             </ImageContainer>
-                            <DataContainer>
-                                <ProfileContainer>
-                                    <AvatarComponent>
-                                        <ProfileImage src={props.avatar} />
-                                    </AvatarComponent>
-                                    <ProfileRight>
-                                        <NameLabel>{props.username}</NameLabel>
-                                        <Follower>팔로워 {'팔로워수'}</Follower>
-                                        <FollowButton>팔로우</FollowButton>
-                                    </ProfileRight>
-                                </ProfileContainer>
-                                <MapContainer>
-                                    <KakaoMap
-                                        username={props.username}
-                                        latitude={props.latitude}
-                                        longitude={props.longitude}
-                                        address={props.address}
-                                    />
-                                    {/* 여기는 카카오맵 넣어주시면 됩니다. */}
-                                    {/* <KaKaoMap /> */}
-                                </MapContainer>
-                            </DataContainer>
+                            <PostName>{props.title}</PostName>
+                            <DetailContent>
+                                <ShowMoreText
+                                    width={650}
+                                    /* Default options */
+                                    lines={8}
+                                    more={<ExpandMoreIcon fontSize="large" />}
+                                    less={<ExpandLessIcon />}
+                                    anchorClass=""
+                                    onClick={executeOnClick}
+                                    expanded={false}
+                                >
+                                    {props.review}
+                                </ShowMoreText>
+                            </DetailContent>
                         </LeftContainer>
                         <RightContainer>
-                            <ArticleContainer>
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                    }}
-                                >
-                                    <PostName>{props.title}</PostName>
-                                    <div
-                                        style={{
-                                            alignItems: 'center',
-                                            textAlign: 'center',
-                                            display: 'flex',
-                                        }}
-                                    >
-                                        <InterBox
-                                            bg={'/images/Interesting.png'}
-                                        />
-                                        <CountNumber>
-                                            {props.novelty}
-                                        </CountNumber>
-                                        <InterBox bg={'/images/Like.png'} />
-                                        <CountNumber>{props.heart}</CountNumber>
-                                        {/*이모티콘*/}
-                                        <ClearTwoToneIcon
-                                            fontSize="large"
-                                            style={{
-                                                cursor: 'pointer',
-                                                marginTop: '-20%',
-                                                marginRight: '-28px',
-                                            }}
-                                            onClick={props.close}
-                                        />
-                                    </div>
-                                </div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    width: '100%',
+                                    justifyContent: 'space-between',
+                                }}
+                            >
+                                <p>평점그래프</p>
                                 <div>
-                                    <div style={{ position: 'flex' }}>
-                                        <DetailContent>
-                                            <ShowMoreText
-                                                width={500}
-                                                /* Default options */
-                                                lines={8}
-                                                more={
-                                                    <ExpandMoreIcon fontSize="large" />
-                                                }
-                                                less={<ExpandLessIcon />}
-                                                anchorClass=""
-                                                onClick={executeOnClick}
-                                                expanded={false}
-                                            >
-                                                {props.review}
-                                            </ShowMoreText>
-                                        </DetailContent>
-                                    </div>
+                                    <ClearTwoToneIcon
+                                        fontSize="large"
+                                        style={{
+                                            cursor: 'pointer',
+                                            marginTop: '-20%',
+                                            marginRight: '-28px',
+                                        }}
+                                        onClick={props.close}
+                                    />
                                 </div>
-                            </ArticleContainer>
-                            <CommentContainer>
-                                덧글 컴포넌트
-                                {/* 이곳에 덧글 들어갑니다. */}
-                                {/* <Comment /> */}
-                            </CommentContainer>
-                            <GraphLikeContainer>
-                                <GraphContainer>
-                                    그래프 컴포넌트
-                                    {/* 이곳에 그래프 들어갑니다. */}
-                                    {/* <Graph /> */}
-                                </GraphContainer>
-                                <LikeContainer>
-                                    <Like />
-                                </LikeContainer>
-                            </GraphLikeContainer>
+                            </div>
+                            <div style={{ marginTop: '20px' }}>
+                                <SubtitleFont style={{ marginBottom: '31px' }}>
+                                    평점 주기
+                                </SubtitleFont>
+                                <FormControl
+                                    component="fieldset"
+                                    style={{ width: '100%' }}
+                                >
+                                    <RadioGroup
+                                        style={{
+                                            width: '100%',
+                                            justifyContent: 'space-between',
+                                        }}
+                                        row
+                                        aria-label="position"
+                                        name="position"
+                                        defaultValue="top"
+                                        //  value={value}
+                                        // onChange={handleChange}
+                                    >
+                                        <FormControlLabel
+                                            value="1"
+                                            control={<Radio color="primary" />}
+                                            label={
+                                                <RatingFont>별로야</RatingFont>
+                                            }
+                                            labelPlacement="bottom"
+                                        />
+                                        <FormControlLabel
+                                            value="2"
+                                            control={<Radio color="primary" />}
+                                            label={
+                                                <RatingFont>
+                                                    그저그래
+                                                </RatingFont>
+                                            }
+                                            labelPlacement="bottom"
+                                        />
+                                        <FormControlLabel
+                                            value="3"
+                                            control={<Radio color="primary" />}
+                                            label={
+                                                <RatingFont>괜찮아</RatingFont>
+                                            }
+                                            labelPlacement="bottom"
+                                        />
+                                        <FormControlLabel
+                                            value="4"
+                                            control={<Radio color="primary" />}
+                                            label={
+                                                <RatingFont>좋아</RatingFont>
+                                            }
+                                            labelPlacement="bottom"
+                                        />
+                                        <FormControlLabel
+                                            value="5"
+                                            control={<Radio color="primary" />}
+                                            label={
+                                                <RatingFont>최고야</RatingFont>
+                                            }
+                                            labelPlacement="bottom"
+                                        />
+                                    </RadioGroup>
+                                </FormControl>
+                            </div>
+                            <div
+                                style={{
+                                    background: 'gray',
+                                    height: '65%',
+                                    width: '100%',
+                                    marginTop: '60px',
+                                }}
+                            >
+                                댓글
+                            </div>
+                            {/*안풋바 */}
+                            <ChatInput />
                         </RightContainer>
                     </MainContentContainer>
-                    <RelativeContainer>
-                        관련글 컴포넌트
-                        {/* 이곳에 주변사진들 비슷한 분위기 들어갑니다. */}
-                        {/* <주변사진들 /> */}
-                        {/* <비슷한 사진들 /> */}
-                    </RelativeContainer>
                 </TotalContainer>
             </DialogContent>
             <DialogActions>

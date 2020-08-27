@@ -4,10 +4,9 @@ export const PostName = styled.h2`
     font-weight: bold;
     font-size: 32px;
     line-height: 46px;
-    align-items: center;
-    text-align: center;
     letter-spacing: -0.768px;
     color: #ffffff;
+    margin-top:20px;
 `;
 export const InterBox = styled.div`
     margin-right: 12px;
@@ -30,7 +29,8 @@ export const CountNumber = styled.p`
 export const DetailContent = styled.div`
     margin-top: 3%;
     width: 100%;
-    height: 320px;
+    height:auto;
+    max-height: 320px;
     font-weight: 300;
     font-size: 22px;
     line-height: 32px;
