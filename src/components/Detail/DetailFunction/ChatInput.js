@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
 import Input from '@material-ui/core/Input';
-import { CommentButton, RightContainer } from '../DetailStyle';
-
+import { CommentButton } from '../DetailStyle';
+import db from '../../../firebase';
+import firebase from 'firebase';
+import { useStateValue } from '../../../StateProvider';
 function ChatInput(props) {
-    const [titleValue, setTitleValue] = useState(null);
+    const [{ user }] = useStateValue();
+    const [commentValue, setCommentValue] = useState(null);
     const onChageTitle = (e) => {
         e.preventDefault();
-        setTitleValue(e.target.value);
+        setCommentValue(e.target.value);
     };
-    // const CommentSubmit = (e) => {
-    //     e.preventDefault();
-    // };
+    const sendMessage = (e) => {
+        e.preventDefault();
+
+      if(user){
+          if (props.id) {
+            db.collection('posts').doc(props.id).collection('comment').add({
+                message: commentValue,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                user: user.displayName,
+                userimage: user.photoURL,
+            });
+        }}
+      else{
+          alert("로그인 후의 이용바랍니다")
+      }
+      setCommentValue('')
+    };
+
     return (
         <div
             style={{
@@ -32,10 +50,12 @@ function ChatInput(props) {
                     width: '85%',
                     height: '46px',
                 }}
-                value={titleValue}
+                value={commentValue}
                 onChange={onChageTitle}
             />
-            <CommentButton>게시</CommentButton>
+            <CommentButton
+            onClick={sendMessage}
+            >게시</CommentButton>
         </div>
     );
 }

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { KakaoMapAPI } from '../../../const/apiConst';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Button } from '@material-ui/core';
-import DialogContent from '@material-ui/core/DialogContent';
 const { kakao } = window;
 
 const KakaoMap = (props) => {
@@ -66,7 +65,6 @@ const KakaoMap = (props) => {
                 border: '3px solid #FFFFFF',
             }}
         >
-            {console.log('나온다', props.address)}
             <div
                 id={'staticMap'}
                 style={{ width: '100%', height: '65%', borderRadius: '16px' }}

@@ -43,7 +43,6 @@ function Dropzone(props) {
 
     const onDrop = (file) => {
         props.setHadImageurl(file[0]);
-        console.log(file[0]);
     };
     return (
         <div
