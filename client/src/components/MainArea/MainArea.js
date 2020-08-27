@@ -176,6 +176,7 @@ export default () => {
                 <Container>
                     {posts.map(({ post, id }) => (
                         <Picture
+                            id={id}
                             key={id}
                             advertising={post.advertising}
                             area={post.area}

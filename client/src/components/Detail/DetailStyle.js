@@ -7,6 +7,7 @@ export const TotalContainer = styled.div`
 export const MainContentContainer = styled.div`
     display: flex;
     justify-content: center;
+    height: auto;
     width: 1280px;
 `;
 
@@ -72,3 +73,22 @@ export const LikeContainer = styled.div`
 export const RelativeContainer = styled.div``;
 
 export const CloseContatiner = styled.div``;
+
+export const CommentButton = styled.button`
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    width: 54px;
+    color: #ff534b;
+    background: none;
+    border: none;
+    marginleft: 20px;
+    outline: none;
+    justify-content: flex-end;
+    margin-left: 20px;
+    cursor: pointer;
+`;

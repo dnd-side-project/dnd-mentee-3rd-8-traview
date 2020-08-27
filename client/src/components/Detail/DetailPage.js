@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -20,6 +20,7 @@ import {
     RelativeContainer,
     RightContainer,
     TotalContainer,
+    CommentButton,
 } from './DetailStyle';
 import {
     AvatarComponent,
@@ -46,6 +47,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import { RatingFont } from '../Upload/UploadFunction/Rating';
 import Input from '@material-ui/core/Input';
+import ChatInput from './DetailFunction/ChatInput';
 export default function DetailPage(props) {
     const executeOnClick = (isExpanded) => {
         console.log(isExpanded);
@@ -194,22 +196,8 @@ export default function DetailPage(props) {
                             >
                                 댓글
                             </div>
-                            <Input
-                                placeholder="제목"
-                                inputProps={{ 'aria-label': 'description' }}
-                                style={{
-                                    color: 'white',
-                                    paddingLeft: '10px',
-                                    marginTop: '30px',
-                                    width: '100%',
-                                    height: '46px',
-                                    borderRadius: '29.5px',
-                                    boxSizing: 'border-box',
-                                    border: '1px solid #FFFFFF',
-                                }}
-                                // value={titleValue}
-                                // onChange={onChageTitle}
-                            />
+                            {/*안풋바 */}
+                            <ChatInput />
                         </RightContainer>
                     </MainContentContainer>
                 </TotalContainer>

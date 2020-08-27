@@ -103,6 +103,7 @@ export default ({
     title,
     username,
     address,
+    id,
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -115,6 +116,7 @@ export default ({
             <DetailPage
                 open={isModalOpen}
                 close={onClose}
+                id={id}
                 advertising={advertising}
                 area={area}
                 avatar={avatar}
