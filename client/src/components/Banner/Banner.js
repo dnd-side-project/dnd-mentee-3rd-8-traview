@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import BestPicture from './BestPicture';
+import db from '../../firebase';
 import styled from 'styled-components';
 import './Banner.css';
-import BestPicture from './BestPicture';
 
 const Container = styled.div`
     position: relative;
@@ -61,88 +62,21 @@ const BestPicContainer = styled.div`
 `;
 
 function Banner() {
-    const datas = [
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-        {
-            username: 'John',
-            novelty: 1,
-            heart: 9,
-            user: '/images/Avatar3.png',
-            imagePath: '/images/test3.jpg',
-            area: '경주',
-        },
-    ];
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        db.collection('posts')
+            .orderBy('novelty', 'desc')
+            .limit(10)
+            .onSnapshot((snapshot) => {
+                setPosts(
+                    snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        post: doc.data(),
+                    }))
+                );
+            });
+    }, []);
 
     const nextSlide = () => {
         const container = document.querySelector('.row__posters');
@@ -199,15 +133,23 @@ function Banner() {
                     {'<'}
                 </button>
                 <div className="row__posters">
-                    {datas.map((data, index) => (
+                    {posts.map(({ post, id }) => (
                         <BestPicture
-                            imagePath={data.imagePath}
-                            key={index}
-                            avatar={data.user}
-                            username={data.username}
-                            area={data.area}
-                            novelty={data.novelty}
-                            heart={data.heart}
+                            key={id}
+                            advertising={post.advertising}
+                            area={post.area}
+                            avatar={post.avatar}
+                            heart={post.heart}
+                            imageUrl={post.imageUrl}
+                            latitude={post.latitude}
+                            longitude={post.longitude}
+                            mood={post.mood}
+                            novelty={post.novelty}
+                            rating={post.rating}
+                            review={post.review}
+                            timestamp={post.timestamp}
+                            title={post.title}
+                            username={post.username}
                         />
                     ))}
                 </div>

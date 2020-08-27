@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import DetailPage from '../Detail/DetailPage';
 
 const LeftBottomContainer = styled.div`
     position: absolute;
@@ -68,47 +69,88 @@ const TextBox = styled.label`
     letter-spacing: -0.2px;
 `;
 
-function BestPicture({ imagePath, avatar, username, novelty, heart, area }) {
+function BestPicture({
+    advertising,
+    area,
+    avatar,
+    heart,
+    imageUrl,
+    latitude,
+    longitude,
+    mood,
+    novelty,
+    rating,
+    review,
+    timestamp,
+    title,
+    username,
+}) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const onClose = () => {
+        setIsModalOpen(false);
+    };
+
     return (
-        <ImageContainer>
-            <Image src={imagePath} alt="" />
-            <LeftBottomContainer>
-                <img
-                    style={{
-                        width: '28px',
-                        height: '28px',
-                        borderRadius: '14px',
-                        objectFit: 'cover',
-                        marginBottom: '3px',
-                    }}
-                    src={avatar}
-                    alt=""
-                />
-                <TextBox>{username}</TextBox>
-            </LeftBottomContainer>
-            <RightTopContainer>
-                <img
-                    style={{ marginRight: '4px' }}
-                    src="/images/Interesting.png"
-                    alt=""
-                />
-                <TextBox>{novelty}</TextBox>
-                <img
-                    style={{ marginRight: '4px', marginLeft: '14px' }}
-                    src="/images/like.png"
-                    alt=""
-                />
-                <TextBox>{heart}</TextBox>
-            </RightTopContainer>
-            <RightBottomContainer>
-                <img
-                    style={{ marginRight: '4px' }}
-                    src="/images/location.png"
-                    alt=""
-                />
-                <TextBox>{area}</TextBox>
-            </RightBottomContainer>
-        </ImageContainer>
+        <>
+            <DetailPage
+                open={isModalOpen}
+                close={onClose}
+                advertising={advertising}
+                area={area}
+                avatar={avatar}
+                heart={heart}
+                imageUrl={imageUrl}
+                latitude={latitude}
+                longitude={longitude}
+                mood={mood}
+                novelty={novelty}
+                rating={rating}
+                review={review}
+                timestamp={timestamp}
+                title={title}
+                username={username}
+            />
+            <ImageContainer onClick={() => setIsModalOpen(true)}>
+                <Image src={imageUrl} alt="" />
+                <LeftBottomContainer>
+                    <img
+                        style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '14px',
+                            objectFit: 'cover',
+                            marginBottom: '3px',
+                        }}
+                        src={avatar}
+                        alt=""
+                    />
+                    <TextBox>{username}</TextBox>
+                </LeftBottomContainer>
+                <RightTopContainer>
+                    <img
+                        style={{ marginRight: '4px' }}
+                        src="/images/Interesting.png"
+                        alt=""
+                    />
+                    <TextBox>{novelty}</TextBox>
+                    <img
+                        style={{ marginRight: '4px', marginLeft: '14px' }}
+                        src="/images/like.png"
+                        alt=""
+                    />
+                    <TextBox>{heart}</TextBox>
+                </RightTopContainer>
+                <RightBottomContainer>
+                    <img
+                        style={{ marginRight: '4px' }}
+                        src="/images/location.png"
+                        alt=""
+                    />
+                    <TextBox>{area}</TextBox>
+                </RightBottomContainer>
+            </ImageContainer>
+        </>
     );
 }
 
