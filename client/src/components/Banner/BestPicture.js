@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import DetailPage from '../Detail/DetailPage';
 
 const LeftBottomContainer = styled.div`
     position: absolute;
@@ -69,46 +70,61 @@ const TextBox = styled.label`
 `;
 
 function BestPicture({ imagePath, avatar, username, novelty, heart, area }) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const onClose = () => {
+        setIsModalOpen(false);
+    };
+
     return (
-        <ImageContainer>
-            <Image src={imagePath} alt="" />
-            <LeftBottomContainer>
-                <img
-                    style={{
-                        width: '28px',
-                        height: '28px',
-                        borderRadius: '14px',
-                        objectFit: 'cover',
-                        marginBottom: '3px',
-                    }}
-                    src={avatar}
-                    alt=""
-                />
-                <TextBox>{username}</TextBox>
-            </LeftBottomContainer>
-            <RightTopContainer>
-                <img
-                    style={{ marginRight: '4px' }}
-                    src="/images/Interesting.png"
-                    alt=""
-                />
-                <TextBox>{novelty}</TextBox>
-                <img
-                    style={{ marginRight: '4px', marginLeft: '14px' }}
-                    src="/images/like.png"
-                    alt=""
-                />
-                <TextBox>{heart}</TextBox>
-            </RightTopContainer>
-            <RightBottomContainer>
-                <img
-                    style={{ marginRight: '4px' }}
-                    src="/images/location.png"
-                    alt=""
-                />
-                <TextBox>{area}</TextBox>
-            </RightBottomContainer>
-        </ImageContainer>
+        <>
+            <DetailPage
+                imagePath={imagePath}
+                open={isModalOpen}
+                close={onClose}
+                latitude={45.6}
+                longitude={65.1}
+            />
+            <ImageContainer onClick={() => setIsModalOpen(true)}>
+                <Image src={imagePath} alt="" />
+                <LeftBottomContainer>
+                    <img
+                        style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '14px',
+                            objectFit: 'cover',
+                            marginBottom: '3px',
+                        }}
+                        src={avatar}
+                        alt=""
+                    />
+                    <TextBox>{username}</TextBox>
+                </LeftBottomContainer>
+                <RightTopContainer>
+                    <img
+                        style={{ marginRight: '4px' }}
+                        src="/images/Interesting.png"
+                        alt=""
+                    />
+                    <TextBox>{novelty}</TextBox>
+                    <img
+                        style={{ marginRight: '4px', marginLeft: '14px' }}
+                        src="/images/like.png"
+                        alt=""
+                    />
+                    <TextBox>{heart}</TextBox>
+                </RightTopContainer>
+                <RightBottomContainer>
+                    <img
+                        style={{ marginRight: '4px' }}
+                        src="/images/location.png"
+                        alt=""
+                    />
+                    <TextBox>{area}</TextBox>
+                </RightBottomContainer>
+            </ImageContainer>
+        </>
     );
 }
 
