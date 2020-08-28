@@ -68,7 +68,7 @@ export default function DetailPage(props) {
         db.collection('posts')
             .doc(props.id)
             .collection('comment')
-            .orderBy('timestamp', 'asc')
+            .orderBy('timestamp', 'desc')
             .onSnapshot((snapShot) =>
                 setRoomMessages(snapShot.docs.map((doc) => doc.data()))
             );
