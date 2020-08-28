@@ -139,7 +139,7 @@ export const RightTopContainer = styled.div`
     display: flex;
     align-items: center;
 `;
-export const CommentDiv = styled.div`
+export const CommentBox = styled.div`
     ::-webkit-scrollbar {
         display: none;
     }

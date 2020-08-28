@@ -18,7 +18,7 @@ import {
     Countbox,
     RightBottomContainer,
     RightTopContainer,
-    CommentDiv,
+    CommentBox,
 } from './DetailStyle';
 import { DetailContent, PostName } from './DetailFunction/Article';
 import KakaoMap from './DetailFunction/KakaoMap';
@@ -317,7 +317,7 @@ export default function DetailPage(props) {
                                     </RadioGroup>
                                 </FormControl>
                             </div>
-                            <CommentDiv
+                            <CommentBox
                                 style={{
                                     height: 'auto',
                                     minHeight: '35%',
@@ -342,7 +342,7 @@ export default function DetailPage(props) {
                                         />
                                     )
                                 )}
-                            </CommentDiv>
+                            </CommentBox>
                             {/*안풋바 */}
                             <ChatInput id={props.id} />
                         </RightContainer>
