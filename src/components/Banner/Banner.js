@@ -30,7 +30,7 @@ const BackgroundImage = styled.div`
 
 const TitleContainer = styled.div`
     position: absolute;
-    left: 117px;
+    left: 240px;
     bottom: 400px;
 `;
 

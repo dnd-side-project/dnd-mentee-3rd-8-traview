@@ -25,7 +25,7 @@ function App() {
                 <>
                     <NavBar />
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/area/:id" component={Area} />
+                    <Route exact path="/area" component={Area} />
                 </>
             </Switch>
         </Router>
