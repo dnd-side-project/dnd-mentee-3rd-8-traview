@@ -65,6 +65,11 @@ function Address(props) {
                     className={classes.input}
                     placeholder="위치 검색"
                     value={props.address}
+                    onKeyPress={(e) => {
+                        e.preventDefault();
+                        props.setAddress('');
+                        props.resetSearchLocation();
+                    }}
                     onChange={(e) => props.setAddress(e.target.value)}
                     // inputProps={{ 'aria-label': 'search google maps' }}
                 />
