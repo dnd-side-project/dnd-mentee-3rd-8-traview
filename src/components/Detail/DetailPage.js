@@ -342,13 +342,12 @@ export default function DetailPage(props) {
                                 }}
                             >
                                 {roomMessages.map(
-                                    ({
-                                        message,
-                                        timestamp,
-                                        user,
-                                        userimage,
-                                    }) => (
+                                    (
+                                        { message, timestamp, user, userimage },
+                                        index
+                                    ) => (
                                         <Message
+                                            key={index}
                                             message={message}
                                             timestamp={timestamp}
                                             user={user}
