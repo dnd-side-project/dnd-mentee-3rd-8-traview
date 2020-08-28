@@ -125,7 +125,7 @@ export default function UploadPage(props) {
         }
         isSearching = true;
         extraApi
-            .get('http://www.juso.go.kr/addrlink/addrLinkApi.do', {
+            .get('https://www.juso.go.kr/addrlink/addrLinkApi.do', {
                 confmKey: 'U01TX0FVVEgyMDE5MDQxOTEzMTUyNDEwODY2NjA=',
                 keyword: address,
                 resultType: 'json',
@@ -165,7 +165,7 @@ export default function UploadPage(props) {
             confmKey: 'U01TX0FVVEgyMDE5MDQxOTE1MjMxNjEwODY2Nzg=',
         });
         extraApi
-            .get('http://www.juso.go.kr/addrlink/addrCoordApi.do', data)
+            .get('https://www.juso.go.kr/addrlink/addrCoordApi.do', data)
             .then((res) => {
                 //   console.log(res);
                 if (!res.data.results.juso) {
