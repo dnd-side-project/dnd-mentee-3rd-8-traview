@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { auth, provider } from '../firebase';
+import { auth, googleProvider, facebookProvider } from '../firebase';
 import { useStateValue } from '../StateProvider';
 import { actionTypes } from '../reducer';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -44,7 +44,19 @@ function Login() {
     };
 
     const googleSignIn = () => {
-        auth.signInWithPopup(provider)
+        auth.signInWithPopup(googleProvider)
+            .then((result) => {
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user: result.user,
+                });
+                history.push('/');
+            })
+            .catch((error) => alert(error.message));
+    };
+
+    const facebookSignIn = () => {
+        auth.signInWithPopup(facebookProvider)
             .then((result) => {
                 dispatch({
                     type: actionTypes.SET_USER,
@@ -105,7 +117,7 @@ function Login() {
                                 <br /> 로그인하기
                             </SocialFont>
                         </SocialBox>
-                        <SocialBox>
+                        <SocialBox onClick={facebookSignIn}>
                             <SocialImage
                                 style={{
                                     background: ' #3B5998',

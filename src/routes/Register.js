@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { actionTypes } from '../reducer';
-import { auth, provider } from '../firebase';
+import { auth, googleProvider, facebookProvider } from '../firebase';
 import { useStateValue } from '../StateProvider';
 
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
@@ -29,7 +29,19 @@ function Register() {
     };
 
     const googleSignIn = () => {
-        auth.signInWithPopup(provider)
+        auth.signInWithPopup(googleProvider)
+            .then((result) => {
+                dispatch({
+                    type: actionTypes.SET_USER,
+                    user: result.user,
+                });
+                history.push('/');
+            })
+            .catch((error) => alert(error.message));
+    };
+
+    const facebookSignIn = () => {
+        auth.signInWithPopup(facebookProvider)
             .then((result) => {
                 dispatch({
                     type: actionTypes.SET_USER,
@@ -94,7 +106,7 @@ function Register() {
                                 <br /> 로그인하기
                             </SocialFont>
                         </SocialBox>
-                        <SocialBox>
+                        <SocialBox onClick={facebookSignIn}>
                             <SocialImage
                                 style={{
                                     background: ' #3B5998',
