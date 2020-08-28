@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Input from '@material-ui/core/Input';
 import { CommentButton } from '../DetailStyle';
 import db from '../../../firebase';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import { useStateValue } from '../../../StateProvider';
 function ChatInput(props) {
     const [{ user }] = useStateValue();
