@@ -161,13 +161,13 @@ function Area() {
         if (last) {
             db.collection('posts')
                 .orderBy('timestamp', 'desc')
+                .where('area', '==', term)
                 .where('mood', '==', mood)
                 .startAfter(last)
                 .limit(10)
                 .onSnapshot((snapshot) => {
                     if (snapshot.empty) {
                         setHasMore(false);
-
                         return;
                     }
                     setPosts([
@@ -188,6 +188,7 @@ function Area() {
 
         db.collection('posts')
             .orderBy('timestamp', 'desc')
+            .where('area', '==', term)
             .where('mood', '==', e.currentTarget.innerText)
             .limit(10)
             .onSnapshot((snapshot) => {
