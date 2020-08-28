@@ -32,8 +32,8 @@ const BackgroundImage = styled.div`
 
 const TitleContainer = styled.div`
     position: absolute;
-    left: 117px;
-    bottom: 400px;
+    left: 240px;
+    bottom: 340px;
 `;
 
 const Title = styled.h1`
