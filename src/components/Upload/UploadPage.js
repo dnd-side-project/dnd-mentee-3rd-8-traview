@@ -76,7 +76,10 @@ export default function UploadPage(props) {
         ) {
             alert('업로드내용을 입력해주세요');
         } else {
-            const imageName = `${imageUrl.name}_${new Date()}`;
+            const randomNum = Math.floor(
+                Math.random() * (1000000 - 0) + 1000000
+            );
+            const imageName = `${imageUrl.name}${randomNum}`;
             const uploadTask = storage.ref(`images/${imageName}`).put(imageUrl);
             uploadTask.on(
                 'state_changed',
@@ -122,7 +125,7 @@ export default function UploadPage(props) {
         }
         isSearching = true;
         extraApi
-            .get('http://www.juso.go.kr/addrlink/addrLinkApi.do', {
+            .get('https://www.juso.go.kr/addrlink/addrLinkApi.do', {
                 confmKey: 'U01TX0FVVEgyMDE5MDQxOTEzMTUyNDEwODY2NjA=',
                 keyword: address,
                 resultType: 'json',
@@ -162,7 +165,7 @@ export default function UploadPage(props) {
             confmKey: 'U01TX0FVVEgyMDE5MDQxOTE1MjMxNjEwODY2Nzg=',
         });
         extraApi
-            .get('http://www.juso.go.kr/addrlink/addrCoordApi.do', data)
+            .get('https://www.juso.go.kr/addrlink/addrCoordApi.do', data)
             .then((res) => {
                 //   console.log(res);
                 if (!res.data.results.juso) {

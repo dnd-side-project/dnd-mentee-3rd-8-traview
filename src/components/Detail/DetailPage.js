@@ -48,6 +48,16 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '16px',
         marginTop: '10px',
     },
+    RatingBtn: {
+        width: '26px',
+        height: '21px',
+        fontWeight: '500',
+        fontSize: '14px',
+        lineHeight: '20px',
+        alignItems: 'center',
+        color: '#D84B45',
+        margin: 'auto 0',
+    },
 }));
 export default function DetailPage(props) {
     const classes = useStyles();
@@ -315,6 +325,9 @@ export default function DetailPage(props) {
                                             }
                                             labelPlacement="bottom"
                                         />
+                                        <Button className={classes.RatingBtn}>
+                                            완료
+                                        </Button>
                                     </RadioGroup>
                                 </FormControl>
                             </div>
