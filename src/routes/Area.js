@@ -116,6 +116,7 @@ function Area() {
         const unsubscribe = db
             .collection('posts')
             .orderBy('timestamp', 'desc')
+            .where('area', '==', term)
             .limit(10)
             .onSnapshot((snapshot) => {
                 setPosts(
@@ -130,18 +131,18 @@ function Area() {
         return () => {
             unsubscribe();
         };
-    }, []);
+    }, [term]);
 
     const next = () => {
         if (last) {
             db.collection('posts')
                 .orderBy('timestamp', 'desc')
+                .where('area', '==', term)
                 .startAfter(last)
                 .limit(10)
                 .onSnapshot((snapshot) => {
                     if (snapshot.empty) {
                         setHasMore(false);
-
                         return;
                     }
                     setPosts([
@@ -234,10 +235,10 @@ function Area() {
                     loader={<Loader />}
                 >
                     <ScrollContainer>
-                        {posts.map(({ post, id }) => (
+                        {posts.map(({ post, id }, index) => (
                             <Picture
                                 id={id}
-                                key={id}
+                                key={index}
                                 advertising={post.advertising}
                                 area={post.area}
                                 avatar={post.avatar}
