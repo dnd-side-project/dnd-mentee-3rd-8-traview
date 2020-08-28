@@ -76,9 +76,8 @@ export default function UploadPage(props) {
         ) {
             alert('업로드내용을 입력해주세요');
         } else {
-            const uploadTask = storage
-                .ref(`images/${imageUrl.name}`)
-                .put(imageUrl);
+            const imageName = `${imageUrl.name}_${new Date()}`;
+            const uploadTask = storage.ref(`images/${imageName}`).put(imageUrl);
             uploadTask.on(
                 'state_changed',
                 (snapshot) => {},
@@ -89,7 +88,7 @@ export default function UploadPage(props) {
                 () => {
                     storage
                         .ref('images')
-                        .child(imageUrl.name)
+                        .child(imageName)
                         .getDownloadURL()
                         .then((url) => {
                             db.collection('posts').add({
