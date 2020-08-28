@@ -9,6 +9,7 @@ export const MainContentContainer = styled.div`
     justify-content: center;
     height: auto;
     width: 1280px;
+    max-height: 1186px;
 `;
 
 export const LeftContainer = styled.div`
@@ -25,6 +26,7 @@ export const RightContainer = styled.div`
 
 export const ImageContainer = styled.div`
     width: 680px;
+    position: relative;
 `;
 
 export const DataContainer = styled.div`
@@ -91,4 +93,49 @@ export const CommentButton = styled.button`
     justify-content: flex-end;
     margin-left: 20px;
     cursor: pointer;
+`;
+export const LeftBottomContainer = styled.div`
+    position: absolute;
+    left: 12px;
+    bottom: 10px;
+    display: flex;
+
+    align-items: center;
+`;
+export const TextBox = styled.label`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 26px;
+    color: #ffffff;
+`;
+export const LeftTopContainer = styled.div`
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+`;
+
+export const Countbox = styled.p`
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+`;
+export const RightBottomContainer = styled.div`
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+`;
+export const RightTopContainer = styled.div`
+    position: absolute;
+    top: 15px;
+    right: 12px;
+    display: flex;
+    align-items: center;
 `;
