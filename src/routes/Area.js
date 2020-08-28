@@ -25,7 +25,7 @@ const BackgroundImage = styled.div`
             rgba(0, 0, 0, 0) 66.66%,
             rgba(0, 0, 0, 50) 100%
         ),
-        url('images/Areatest.png');
+        url(${(props) => props.bg});
     background-size: cover;
     background-position: center center;
 `;
@@ -119,6 +119,10 @@ function Area() {
             .where('area', '==', term)
             .limit(10)
             .onSnapshot((snapshot) => {
+                if (snapshot.empty) {
+                    setHasMore(false);
+                    return;
+                }
                 setPosts(
                     snapshot.docs.map((doc) => ({
                         id: doc.id,
@@ -204,16 +208,14 @@ function Area() {
 
     return (
         <>
-            {/* 배너 */}
             <Container>
-                <BackgroundImage />
+                <BackgroundImage bg={posts[0]?.post?.imageUrl} />
                 <TitleContainer>
                     <Title>{term}의 여행지들</Title>
                     <ReviewButton>배경 리뷰 보기</ReviewButton>
                 </TitleContainer>
             </Container>
 
-            {/* 인피니티 스크롤 */}
             <MarginContainer>
                 <HeaderContainer>
                     <MoodList>

@@ -119,6 +119,11 @@ export default () => {
     const search = (e) => {
         e.preventDefault();
 
+        if (area === '') {
+            alert('검색어를 입력해주세요.');
+            return;
+        }
+
         dispatch({
             type: actionTypes.SET_SERACH_TERM,
             term: area,
