@@ -76,7 +76,9 @@ export default function UploadPage(props) {
         ) {
             alert('업로드내용을 입력해주세요');
         } else {
-            const randomNum = Math.floor(Math.random());
+            const randomNum = Math.floor(
+                Math.random() * (1000000 - 0) + 1000000
+            );
             const imageName = `${imageUrl.name}${randomNum}`;
             const uploadTask = storage.ref(`images/${imageName}`).put(imageUrl);
             uploadTask.on(
