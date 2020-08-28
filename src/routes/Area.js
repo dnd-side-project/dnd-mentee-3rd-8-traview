@@ -119,6 +119,10 @@ function Area() {
             .where('area', '==', term)
             .limit(10)
             .onSnapshot((snapshot) => {
+                if (snapshot.empty) {
+                    setHasMore(false);
+                    return;
+                }
                 setPosts(
                     snapshot.docs.map((doc) => ({
                         id: doc.id,
