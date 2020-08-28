@@ -12,6 +12,12 @@ import {
     MainContentContainer,
     RightContainer,
     TotalContainer,
+    LeftBottomContainer,
+    TextBox,
+    LeftTopContainer,
+    Countbox,
+    RightBottomContainer,
+    RightTopContainer,
 } from './DetailStyle';
 import { DetailContent, PostName } from './DetailFunction/Article';
 import KakaoMap from './DetailFunction/KakaoMap';
@@ -24,10 +30,34 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import { RatingFont } from '../Upload/UploadFunction/Rating';
 import ChatInput from './DetailFunction/ChatInput';
-
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+const useStyles = makeStyles((theme) => ({
+    FollowBtn: {
+        color: '#FFFFFF',
+        background: '#FF534B',
+        border: '2px solid #FF534B',
+        height: '24px',
+        width: '55px',
+        fontWeight: 500,
+        fontSize: '13px',
+        lineHeight: '19px',
+        display: 'flex',
+        boxSizing: 'border-box',
+        borderRadius: '16px',
+        marginTop: '10px',
+    },
+}));
 export default function DetailPage(props) {
+    const classes = useStyles();
     const [roomDetails, setRoomDetails] = useState(null);
     const [roomMessages, setRoomMessages] = useState([]);
+    const openMap = () => {
+        window.open(
+            `https://map.kakao.com/link/map/${props.address},${props.latitude},${props.longitude}`
+        );
+    };
+
     useEffect(() => {
         if (props.id) {
             db.collection('posts')
@@ -73,10 +103,116 @@ export default function DetailPage(props) {
                                     src={props.imageUrl}
                                     alt={'사진'}
                                     style={{
-                                        width: '680px',
+                                        width: '100%',
+                                        hegiht: '100%',
                                         borderRadius: '20px',
                                     }}
                                 />
+                                <LeftTopContainer>
+                                    <img
+                                        style={{ marginRight: '4px' }}
+                                        src="/images/Interesting.png"
+                                        alt=""
+                                    />
+                                    <Countbox>{props.novelty}</Countbox>
+                                    <img
+                                        style={{
+                                            marginRight: '4px',
+                                            marginLeft: '14px',
+                                        }}
+                                        src="/images/like.png"
+                                        alt=""
+                                    />
+                                    <Countbox>{props.heart}</Countbox>
+                                </LeftTopContainer>
+                                <LeftBottomContainer>
+                                    <img
+                                        style={{
+                                            width: '70px',
+                                            height: '70px',
+                                            borderRadius: '40px',
+                                            objectFit: 'cover',
+                                            marginBottom: '3px',
+                                            border: '1px solid #F534B',
+                                            boxSizing: 'border-box',
+                                            marginRight: '9px',
+                                        }}
+                                        src={props.avatar}
+                                        alt="Avartarimage"
+                                    />
+                                    <div
+                                        style={{
+                                            alignItems: 'left',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        <TextBox>{props.username}</TextBox>
+                                        <p
+                                            style={{
+                                                fontWeight: 300,
+                                                fontSize: '12px',
+                                                lineHeight: '17px',
+                                            }}
+                                        >
+                                            팔로워 {'223'}
+                                        </p>
+                                        <Button className={classes.FollowBtn}>
+                                            팔로우
+                                        </Button>
+                                    </div>
+                                </LeftBottomContainer>
+                                <RightTopContainer>
+                                    {props.advertising && (
+                                        <div
+                                            style={{
+                                                width: '72px',
+                                                height: '26px',
+                                                border: '1px solid #FFFFFF',
+                                                boxSizing: 'border-box',
+                                                borderRadius: '10px',
+                                                textAlign: 'center',
+                                                alignItem: 'center',
+                                                fontWeight: 'normal',
+                                                fontSize: '14px',
+                                                lineHeight: '20px',
+                                                margin: 'auto 0',
+                                            }}
+                                        >
+                                            광고 포함
+                                            {/*{props.advertising === false*/}
+                                            {/*    ? null*/}
+                                            {/*    : '광고 포함'}*/}
+                                        </div>
+                                    )}
+                                </RightTopContainer>
+                                <RightBottomContainer>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={openMap}
+                                    >
+                                        <img
+                                            style={{
+                                                marginRight: '4px',
+                                                width: '15px',
+                                                height: '20px',
+                                            }}
+                                            src="/images/location.png"
+                                            alt=""
+                                        />
+                                        <p
+                                            style={{
+                                                fontWeight: 'normal',
+                                                fontSize: '13px',
+                                                lineHeight: '23px',
+                                            }}
+                                        >
+                                            카카오맵으로 이동
+                                        </p>
+                                    </div>
+                                </RightBottomContainer>
                             </ImageContainer>
                             <PostName>{props.title}</PostName>
                             <DetailContent>

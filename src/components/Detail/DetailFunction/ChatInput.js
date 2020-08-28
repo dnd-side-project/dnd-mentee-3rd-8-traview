@@ -14,19 +14,19 @@ function ChatInput(props) {
     const sendMessage = (e) => {
         e.preventDefault();
 
-      if(user){
-          if (props.id) {
-            db.collection('posts').doc(props.id).collection('comment').add({
-                message: commentValue,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                user: user.displayName,
-                userimage: user.photoURL,
-            });
-        }}
-      else{
-          alert("로그인 후의 이용바랍니다")
-      }
-      setCommentValue('')
+        if (user) {
+            if (props.id) {
+                db.collection('posts').doc(props.id).collection('comment').add({
+                    message: commentValue,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    user: user.displayName,
+                    userimage: user.photoURL,
+                });
+            }
+        } else {
+            alert('로그인 후의 이용바랍니다');
+        }
+        setCommentValue('');
     };
 
     return (
@@ -53,9 +53,7 @@ function ChatInput(props) {
                 value={commentValue}
                 onChange={onChageTitle}
             />
-            <CommentButton
-            onClick={sendMessage}
-            >게시</CommentButton>
+            <CommentButton onClick={sendMessage}>게시</CommentButton>
         </div>
     );
 }
