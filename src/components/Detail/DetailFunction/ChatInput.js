@@ -30,7 +30,7 @@ function ChatInput(props) {
     };
 
     return (
-        <div
+        <form
             style={{
                 display: 'flex',
                 marginTop: '30px',
@@ -54,7 +54,7 @@ function ChatInput(props) {
                 onChange={onChageTitle}
             />
             <CommentButton onClick={sendMessage}>게시</CommentButton>
-        </div>
+        </form>
     );
 }
 

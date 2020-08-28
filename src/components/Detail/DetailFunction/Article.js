@@ -12,15 +12,17 @@ export const DetailContent = styled.div`
     margin-top: 3%;
     width: 100%;
     height: auto;
-    max-height: 320px;
+    max-height: 220px;
     font-weight: 300;
     font-size: 22px;
     line-height: 32px;
     display: flex;
-
     color: #ffffff;
     overflow: hidden;
     overflow-y: auto;
+    ::-webkit-scrollbar {
+        display: none;
+    }
 `;
 // function Article(props) {
 //     const executeOnClick = (isExpanded) => {

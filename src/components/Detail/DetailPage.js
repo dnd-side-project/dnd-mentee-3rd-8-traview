@@ -106,6 +106,7 @@ export default function DetailPage(props) {
                                     style={{
                                         width: '100%',
                                         hegiht: '100%',
+                                        maxHeight: '850px',
                                         borderRadius: '20px',
                                     }}
                                 />
@@ -220,7 +221,7 @@ export default function DetailPage(props) {
                                 <ShowMoreText
                                     width={650}
                                     /* Default options */
-                                    lines={8}
+                                    lines={6}
                                     more={<ExpandMoreIcon fontSize="large" />}
                                     less={<ExpandLessIcon />}
                                     anchorClass=""
