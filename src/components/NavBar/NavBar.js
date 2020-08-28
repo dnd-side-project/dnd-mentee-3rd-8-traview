@@ -116,6 +116,17 @@ export default () => {
             });
     };
 
+    const search = (e) => {
+        e.preventDefault();
+
+        dispatch({
+            type: actionTypes.SET_SERACH_TERM,
+            term: area,
+        });
+
+        history.push('/area');
+    };
+
     return (
         <MarginContainer>
             <UploadPage open={IsModalOpen} close={onClose} />
@@ -123,7 +134,7 @@ export default () => {
             <Container>
                 <Title to={'/'}>Traview</Title>
                 <SearhContainer>
-                    <SearchBtn type="submit">
+                    <SearchBtn type="submit" onClick={search}>
                         <SearchIcon />
                     </SearchBtn>
                     <Input

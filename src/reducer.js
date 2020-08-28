@@ -1,10 +1,12 @@
 export const initialState = {
     user: null,
+    term: null,
 };
 
 export const actionTypes = {
     SET_USER: 'SET_USER',
     LOGOUT_USER: 'LOGOUT_USER',
+    SET_SERACH_TERM: 'SET_SERACH_TERM',
 };
 
 const reducer = (state, action) => {
@@ -18,6 +20,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 user: null,
+            };
+        case actionTypes.SET_SERACH_TERM:
+            return {
+                ...state,
+                term: action.term,
             };
         default:
             return state;
