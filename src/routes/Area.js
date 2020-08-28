@@ -113,6 +113,7 @@ function Area() {
     const moods = ['도시', '자연', '몽환', '여유', '고요', '활기', '낭만'];
 
     useEffect(() => {
+        setPosts([]);
         const unsubscribe = db
             .collection('posts')
             .orderBy('timestamp', 'desc')
