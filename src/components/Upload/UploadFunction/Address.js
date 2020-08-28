@@ -66,9 +66,11 @@ function Address(props) {
                     placeholder="위치 검색"
                     value={props.address}
                     onKeyPress={(e) => {
-                        e.preventDefault();
-                        props.setAddress('');
-                        props.resetSearchLocation();
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            props.setAddress('');
+                            props.resetSearchLocation();
+                        }
                     }}
                     onChange={(e) => props.setAddress(e.target.value)}
                     // inputProps={{ 'aria-label': 'search google maps' }}
