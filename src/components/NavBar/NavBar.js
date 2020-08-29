@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import { Avatar } from '@material-ui/core';
+import { SignUpLabel } from '../CommonStyle/SignUpLabel';
 
 const MarginContainer = styled.div`
     max-width: 1440px;
@@ -137,7 +138,7 @@ export default () => {
             <UploadPage open={IsModalOpen} close={onClose} />
 
             <Container>
-                <Title to={'/'}>Traview</Title>
+                <img src="/images/NavbarLogo.png" alt="Logo" />
                 <SearhContainer>
                     <SearchBtn type="submit" onClick={search}>
                         <SearchIcon />

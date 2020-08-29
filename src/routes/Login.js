@@ -16,7 +16,7 @@ import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { SocialCollection } from '../components/CommonStyle/SocialCollection';
 
 const LoginLabel = styled.div`
-    margin-top: -4%;
+    margin-top: 5%;
     font-weight: 300;
     font-size: 30px;
     line-height: 43px;
@@ -94,13 +94,17 @@ function Login() {
                         color: 'white',
                     }}
                 />
-
-                <SignUpLabel style={{ marginTop: '6%' }}>
-                    <span style={{ color: 'red' }}>Traview</span>
+                <LoginLabel>방문해주셔서 감사합니다</LoginLabel>
+                <SignUpLabel style={{ marginTop: '2%' }}>
+                    <img
+                        style={{ marginRight: '30px' }}
+                        src="/images/Logo.png"
+                        alt="Logo"
+                    />
                     &nbsp;로그인
                 </SignUpLabel>
-                <LoginLabel>방문해주셔서 감사합니다</LoginLabel>
-                <BackgroundBox style={{ height: '516px', marginTop: '2%' }}>
+
+                <BackgroundBox style={{ height: '516px', marginTop: '-3%' }}>
                     {/*소셜 로그인 박스*/}
                     <SocialCollection>
                         <SocialBox>

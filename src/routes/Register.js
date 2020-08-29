@@ -79,13 +79,19 @@ function Register() {
                         color: 'white',
                     }}
                 />
-                <TopLabel>나만 몰랐던 국내 여행지</TopLabel>
-                <SignUpLabel>
-                    <span style={{ color: 'red' }}>Traview</span>
+                <TopLabel style={{ marginBottom: '1.5%' }}>
+                    나만 몰랐던 국내 여행지
+                </TopLabel>
+                <SignUpLabel style={{ marginBottom: '3%' }}>
+                    <img
+                        style={{ marginRight: '30px' }}
+                        src="/images/Logo.png"
+                        alt="Logo"
+                    />
                     &nbsp;회원가입
                 </SignUpLabel>
 
-                <BackgroundBox style={{ marginTop: '-3%' }}>
+                <BackgroundBox style={{ marginTop: '-2%' }}>
                     {/*소셜 로그인 박스*/}
                     <SocialCollection
                         style={{
