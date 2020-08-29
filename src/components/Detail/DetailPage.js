@@ -33,10 +33,11 @@ import { RatingFont } from '../Upload/UploadFunction/Rating';
 import ChatInput from './DetailFunction/ChatInput';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
         color: '#FFFFFF',
-        background: '#FF534B',
+
         border: '2px solid #FF534B',
         height: '24px',
         width: '55px',
@@ -61,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function DetailPage(props) {
     const classes = useStyles();
+    const [subscribe, setSubscribe] = useState(false);
     const [roomDetails, setRoomDetails] = useState(null);
     const [roomMessages, setRoomMessages] = useState([]);
     const openMap = () => {
@@ -69,6 +71,9 @@ export default function DetailPage(props) {
         );
     };
 
+    const onSubscribe = () => {
+        setSubscribe(!subscribe);
+    };
     useEffect(() => {
         if (props.id) {
             db.collection('posts')
@@ -168,8 +173,16 @@ export default function DetailPage(props) {
                                         >
                                             팔로워 {'223'}
                                         </p>
-                                        <Button className={classes.FollowBtn}>
-                                            팔로우
+                                        <Button
+                                            onClick={onSubscribe}
+                                            className={classes.FollowBtn}
+                                            style={{
+                                                background: `{subscribe? "#FF534B":"blue"}`,
+                                            }}
+                                        >
+                                            {subscribe
+                                                ? 'subscribed'
+                                                : '팔로우'}
                                         </Button>
                                     </div>
                                 </LeftBottomContainer>
