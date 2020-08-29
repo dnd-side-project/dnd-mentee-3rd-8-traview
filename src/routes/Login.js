@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { auth, googleProvider, facebookProvider } from '../firebase';
+import db, { auth, googleProvider, facebookProvider } from '../firebase';
 import { useStateValue } from '../StateProvider';
 import { actionTypes } from '../reducer';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -14,7 +14,6 @@ import { SocialFont } from '../components/CommonStyle/SocialFont';
 import { SocialImage } from '../components/CommonStyle/SocialImage';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { SocialCollection } from '../components/CommonStyle/SocialCollection';
-
 const LoginLabel = styled.div`
     margin-top: 5%;
     font-weight: 300;
@@ -34,11 +33,11 @@ const IDCheckLabel = styled.div`
 `;
 
 function Login() {
-    const [{}, dispatch] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
     const [ID, setID] = useState('');
     const [Password, setPassword] = useState('');
     const history = useHistory();
-
+    const [hasUsers, setHasUsers] = useState([]);
     const onLoginHandler = (event) => {
         event.preventDefault();
     };
@@ -50,8 +49,27 @@ function Login() {
                     type: actionTypes.SET_USER,
                     user: result.user,
                 });
+                // const unsubscribe = db
+                //     .collection('users')
+                //     .where('displayName', '==', '백동우')
+                //     .onSnapshot((snapshot) => {
+                //         setHasUsers(
+                //             snapshot.docs.map((doc) => ({
+                //                 id: doc.id,
+                //                 post: doc.data(),
+                //             }))
+                //         );
+                //     });
+                // if (hasUsers[0] === undefined) {
+                //     db.collection('users').add({
+                //         displayName: result.user.displayName,
+                //         email: result.user.email,
+                //         photoURL: result.user.photoURL,
+                //     });
+                // }
                 history.push('/');
             })
+
             .catch((error) => alert(error.message));
     };
 
