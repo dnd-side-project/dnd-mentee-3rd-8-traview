@@ -177,7 +177,9 @@ export default function DetailPage(props) {
                                             onClick={onSubscribe}
                                             className={classes.FollowBtn}
                                             style={{
-                                                background: `{subscribe? "#FF534B":"blue"}`,
+                                                background: `${
+                                                    subscribe ? 'blue' : 'red'
+                                                }`,
                                             }}
                                         >
                                             {subscribe

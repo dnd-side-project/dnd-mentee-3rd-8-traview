@@ -135,7 +135,6 @@ export default () => {
     return (
         <MarginContainer>
             <UploadPage open={IsModalOpen} close={onClose} />
-
             <Container>
                 <Title to={'/'}>
                     <img src="/images/NavbarLogo.png" alt="Logo" />
