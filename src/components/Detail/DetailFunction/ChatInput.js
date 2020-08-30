@@ -7,14 +7,21 @@ import { useStateValue } from '../../../StateProvider';
 function ChatInput(props) {
     const [{ user }] = useStateValue();
     const [commentValue, setCommentValue] = useState(null);
+
     const onChageTitle = (e) => {
         e.preventDefault();
         setCommentValue(e.target.value);
     };
+    var blank_pattern = /^\s+|\s+$/g;
     const sendMessage = (e) => {
         e.preventDefault();
-
-        if (user) {
+        if (!user) {
+            alert('로그인 후의 이용바랍니다');
+        } else if (commentValue === '' || commentValue === null) {
+            alert('댓글을 작성해주세요');
+        } else if (commentValue.replace(blank_pattern, '') === '') {
+            alert(' 공백만 입력되었습니다 ');
+        } else if (user) {
             if (props.id) {
                 db.collection('posts').doc(props.id).collection('comment').add({
                     message: commentValue,
@@ -23,8 +30,6 @@ function ChatInput(props) {
                     userimage: user.photoURL,
                 });
             }
-        } else {
-            alert('로그인 후의 이용바랍니다');
         }
         setCommentValue('');
     };

@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Loader from '../components/MainArea/Loader';
 import Picture from '../components/MainArea/Picture';
 import styled from 'styled-components';
-
+import DefaultArea from './DefaultArea';
 const Container = styled.div`
     position: relative;
     z-index: 1;
@@ -111,7 +111,7 @@ function Area() {
     const [mood, setMood] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const moods = ['도시', '자연', '몽환', '여유', '고요', '활기', '낭만'];
-
+    const [{}, dispatch] = useStateValue();
     useEffect(() => {
         setPosts([]);
         const unsubscribe = db
@@ -209,62 +209,67 @@ function Area() {
 
     return (
         <>
-            <Container>
-                <BackgroundImage bg={posts[0]?.post?.imageUrl} />
-                <TitleContainer>
-                    <Title>{term}의 여행지들</Title>
-                    <ReviewButton>배경 리뷰 보기</ReviewButton>
-                </TitleContainer>
-            </Container>
+            {posts[0] && (
+                <div>
+                    <Container>
+                        <BackgroundImage bg={posts[0]?.post?.imageUrl} />
+                        <TitleContainer>
+                            <Title>{term}의 여행지들</Title>
+                            <ReviewButton>배경 리뷰 보기</ReviewButton>
+                        </TitleContainer>
+                    </Container>
+                    <MarginContainer>
+                        <HeaderContainer>
+                            <MoodList>
+                                {moods.map((moodText) => (
+                                    <Mood
+                                        key={moodText}
+                                        onClick={onMoodChange}
+                                        active={
+                                            moodText === mood ? true : false
+                                        }
+                                    >
+                                        {moodText}
+                                    </Mood>
+                                ))}
+                            </MoodList>
+                        </HeaderContainer>
 
-            <MarginContainer>
-                <HeaderContainer>
-                    <MoodList>
-                        {moods.map((moodText) => (
-                            <Mood
-                                key={moodText}
-                                onClick={onMoodChange}
-                                active={moodText === mood ? true : false}
-                            >
-                                {moodText}
-                            </Mood>
-                        ))}
-                    </MoodList>
-                </HeaderContainer>
-
-                <InfiniteScroll
-                    dataLength={posts.length}
-                    next={(mood && moodNext) || next}
-                    hasMore={hasMore}
-                    loader={<Loader />}
-                >
-                    <ScrollContainer>
-                        {posts.map(({ post, id }, index) => (
-                            <Picture
-                                id={id}
-                                key={index}
-                                advertising={post.advertising}
-                                area={post.area}
-                                avatar={post.avatar}
-                                heart={post.heart}
-                                imageUrl={post.imageUrl}
-                                latitude={post.latitude}
-                                longitude={post.longitude}
-                                mood={post.mood}
-                                novelty={post.novelty}
-                                rating={post.rating}
-                                review={post.review}
-                                timestamp={post.timestamp}
-                                title={post.title}
-                                username={post.username}
-                                address={post.address}
-                            />
-                        ))}
-                    </ScrollContainer>
-                </InfiniteScroll>
-            </MarginContainer>
+                        <InfiniteScroll
+                            dataLength={posts.length}
+                            next={(mood && moodNext) || next}
+                            hasMore={hasMore}
+                            loader={<Loader />}
+                        >
+                            <ScrollContainer>
+                                {posts.map(({ post, id }, index) => (
+                                    <Picture
+                                        id={id}
+                                        key={index}
+                                        advertising={post.advertising}
+                                        area={post.area}
+                                        avatar={post.avatar}
+                                        heart={post.heart}
+                                        imageUrl={post.imageUrl}
+                                        latitude={post.latitude}
+                                        longitude={post.longitude}
+                                        mood={post.mood}
+                                        novelty={post.novelty}
+                                        rating={post.rating}
+                                        review={post.review}
+                                        timestamp={post.timestamp}
+                                        title={post.title}
+                                        username={post.username}
+                                        address={post.address}
+                                    />
+                                ))}
+                            </ScrollContainer>
+                        </InfiniteScroll>
+                    </MarginContainer>
+                </div>
+            )}
+            {!posts[0] && <DefaultArea />}
         </>
     );
 }
-
 export default Area;

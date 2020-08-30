@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { auth, googleProvider, facebookProvider } from '../firebase';
+import db, { auth, googleProvider, facebookProvider } from '../firebase';
 import { useStateValue } from '../StateProvider';
 import { actionTypes } from '../reducer';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -14,9 +14,8 @@ import { SocialFont } from '../components/CommonStyle/SocialFont';
 import { SocialImage } from '../components/CommonStyle/SocialImage';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { SocialCollection } from '../components/CommonStyle/SocialCollection';
-
 const LoginLabel = styled.div`
-    margin-top: -4%;
+    margin-top: 5%;
     font-weight: 300;
     font-size: 30px;
     line-height: 43px;
@@ -34,11 +33,11 @@ const IDCheckLabel = styled.div`
 `;
 
 function Login() {
-    const [{}, dispatch] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
     const [ID, setID] = useState('');
     const [Password, setPassword] = useState('');
     const history = useHistory();
-
+    const [hasUsers, setHasUsers] = useState([]);
     const onLoginHandler = (event) => {
         event.preventDefault();
     };
@@ -50,8 +49,27 @@ function Login() {
                     type: actionTypes.SET_USER,
                     user: result.user,
                 });
+                // const unsubscribe = db
+                //     .collection('users')
+                //     .where('displayName', '==', '백동우')
+                //     .onSnapshot((snapshot) => {
+                //         setHasUsers(
+                //             snapshot.docs.map((doc) => ({
+                //                 id: doc.id,
+                //                 post: doc.data(),
+                //             }))
+                //         );
+                //     });
+                // if (hasUsers[0] === undefined) {
+                //     db.collection('users').add({
+                //         displayName: result.user.displayName,
+                //         email: result.user.email,
+                //         photoURL: result.user.photoURL,
+                //     });
+                // }
                 history.push('/');
             })
+
             .catch((error) => alert(error.message));
     };
 
@@ -94,13 +112,17 @@ function Login() {
                         color: 'white',
                     }}
                 />
-
-                <SignUpLabel style={{ marginTop: '6%' }}>
-                    <span style={{ color: 'red' }}>Traview</span>
+                <LoginLabel>방문해주셔서 감사합니다</LoginLabel>
+                <SignUpLabel style={{ marginTop: '2%' }}>
+                    <img
+                        style={{ marginRight: '30px' }}
+                        src="/images/Logo.png"
+                        alt="Logo"
+                    />
                     &nbsp;로그인
                 </SignUpLabel>
-                <LoginLabel>방문해주셔서 감사합니다</LoginLabel>
-                <BackgroundBox style={{ height: '516px', marginTop: '2%' }}>
+
+                <BackgroundBox style={{ height: '516px', marginTop: '-3%' }}>
                     {/*소셜 로그인 박스*/}
                     <SocialCollection>
                         <SocialBox>

@@ -135,9 +135,10 @@ export default () => {
     return (
         <MarginContainer>
             <UploadPage open={IsModalOpen} close={onClose} />
-
             <Container>
-                <Title to={'/'}>Traview</Title>
+                <Title to={'/'}>
+                    <img src="/images/NavbarLogo.png" alt="Logo" />
+                </Title>
                 <SearhContainer>
                     <SearchBtn type="submit" onClick={search}>
                         <SearchIcon />

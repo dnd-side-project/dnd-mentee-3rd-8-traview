@@ -6,6 +6,8 @@ import NavBar from './NavBar/NavBar';
 import Login from '../routes/Login';
 import Area from '../routes/Area';
 import Register from '../routes/Register';
+import Mypage from '../routes/Mypage';
+import { useStateValue } from '../StateProvider';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -16,6 +18,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+    const [{ user }, dispatch] = useStateValue();
+
     return (
         <Router>
             <GlobalStyle />
@@ -26,6 +30,13 @@ function App() {
                     <NavBar />
                     <Route exact path="/" component={Home} />
                     <Route exact path="/area" component={Area} />
+                    {user && user.uid && (
+                        <Route
+                            exact
+                            path={`/user/:${user.uid}`}
+                            component={Mypage}
+                        />
+                    )}
                 </>
             </Switch>
         </Router>
