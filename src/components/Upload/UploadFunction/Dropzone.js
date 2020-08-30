@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
@@ -37,10 +37,13 @@ const useStyles = makeStyles((theme) => ({
 //     font-size: 24px;
 //     line-height: 35px;
 //     color: #ff534b;
-// `;
+//
 function Dropzone(props) {
+    const [fileUrl, setFileUrl] = useState(props.imageUrl);
+    // useEffect(() => {
+    //     props.setHadImageurl(props.imageUrl);
+    // }, [props.imageUrl]);
     const classes = useStyles();
-
     const onDrop = (file) => {
         props.setHadImageurl(file[0]);
     };

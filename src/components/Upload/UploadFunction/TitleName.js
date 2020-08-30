@@ -3,8 +3,8 @@ import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 
 function TitleName(props) {
-    const [titleValue, setTitleValue] = useState('');
-    const [reviewValue, setReviewValue] = useState('');
+    const [titleValue, setTitleValue] = useState(props.title);
+    const [reviewValue, setReviewValue] = useState(props.review);
     const onChageTitle = (e) => {
         e.preventDefault();
         setTitleValue(e.target.value);
@@ -16,7 +16,7 @@ function TitleName(props) {
     useEffect(() => {
         props.setHadReview(reviewValue);
         props.setHadTitlename(titleValue);
-    });
+    }, [reviewValue, titleValue]);
     return (
         <form style={{ width: '100%', height: '100%' }}>
             <Input

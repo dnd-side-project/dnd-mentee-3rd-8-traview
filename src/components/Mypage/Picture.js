@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import db from '../../firebase';
+import UploadPage from '../Upload/UploadPage';
 const useStyles = makeStyles((theme) => ({
     ButtonGroup: {
         width: '150px',
@@ -112,8 +113,11 @@ export default ({
     id,
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [IsUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+
     const onClose = () => {
         setIsModalOpen(false);
+        setIsUpdateModalOpen(false);
     };
     const classes = useStyles();
 
@@ -131,6 +135,8 @@ export default ({
         }
     };
     const UpdatePost = () => {
+        setIsUpdateModalOpen(true);
+
         // let PostInfoChange = db.collection('posts').doc(id);
         // return PostInfoChange.update({
         //     title: '이렇게업데이트하는구나',
@@ -138,6 +144,26 @@ export default ({
     };
     return (
         <>
+            <UploadPage
+                open={IsUpdateModalOpen}
+                close={onClose}
+                id={id}
+                advertising={advertising}
+                area={area}
+                // avatar={avatar}
+                // heart={heart}
+                imageUrl={imageUrl}
+                latitude={latitude}
+                longitude={longitude}
+                mood={mood}
+                novelty={novelty}
+                rating={rating}
+                review={review}
+                // timestamp={timestamp}
+                title={title}
+                username={username}
+                address={address}
+            />
             <DetailPage
                 open={isModalOpen}
                 close={onClose}
