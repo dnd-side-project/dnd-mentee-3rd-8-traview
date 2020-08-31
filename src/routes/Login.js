@@ -50,10 +50,6 @@ function Login() {
                     .doc(user.uid)
                     .get()
                     .then((doc) => {
-                        console.log(user);
-                        console.log(user.uid);
-                        console.log(doc.data());
-                        console.log(doc.exists);
                         if (doc.exists) {
                             dispatch({
                                 type: actionTypes.SET_USER,
