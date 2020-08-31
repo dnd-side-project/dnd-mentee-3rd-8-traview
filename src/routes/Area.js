@@ -111,7 +111,6 @@ function Area() {
     const [mood, setMood] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const moods = ['도시', '자연', '몽환', '여유', '고요', '활기', '낭만'];
-    const [{}, dispatch] = useStateValue();
     useEffect(() => {
         setPosts([]);
         const unsubscribe = db

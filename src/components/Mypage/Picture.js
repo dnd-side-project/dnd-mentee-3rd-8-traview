@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import db from '../../firebase';
+import UploadPage from '../Upload/UploadPage';
 const useStyles = makeStyles((theme) => ({
     ButtonGroup: {
         width: '150px',
@@ -32,6 +33,11 @@ const RightTopContainer = styled.div`
     align-items: center;
     visibility: hidden;
 `;
+
+const Image = styled.img`
+    width: 100%;
+    border-radius: 20px;
+`;
 const ButtonContainer = styled.div`
     position: absolute;
     top: 40%;
@@ -39,11 +45,6 @@ const ButtonContainer = styled.div`
     align-items: center;
     visibility: hidden;
 `;
-const Image = styled.img`
-    width: 100%;
-    border-radius: 20px;
-`;
-
 const Box = styled.div`
     width: 100%;
     margin: 0 0 45px;
@@ -83,6 +84,9 @@ const ImageContainer = styled.div`
         ${ButtonContainer} {
             visibility: visible;
         }
+        ${Box} {
+            visibility: hidden;
+        }
     }
 `;
 
@@ -112,8 +116,11 @@ export default ({
     id,
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [IsUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+
     const onClose = () => {
         setIsModalOpen(false);
+        setIsUpdateModalOpen(false);
     };
     const classes = useStyles();
 
@@ -131,6 +138,8 @@ export default ({
         }
     };
     const UpdatePost = () => {
+        setIsUpdateModalOpen(true);
+
         // let PostInfoChange = db.collection('posts').doc(id);
         // return PostInfoChange.update({
         //     title: '이렇게업데이트하는구나',
@@ -138,6 +147,26 @@ export default ({
     };
     return (
         <>
+            <UploadPage
+                open={IsUpdateModalOpen}
+                close={onClose}
+                id={id}
+                advertising={advertising}
+                area={area}
+                // avatar={avatar}
+                // heart={heart}
+                imageUrl={imageUrl}
+                latitude={latitude}
+                longitude={longitude}
+                mood={mood}
+                novelty={novelty}
+                rating={rating}
+                review={review}
+                // timestamp={timestamp}
+                title={title}
+                username={username}
+                address={address}
+            />
             <DetailPage
                 open={isModalOpen}
                 close={onClose}
@@ -158,10 +187,14 @@ export default ({
                 username={username}
                 address={address}
             />
-            {/*onClick={() => setIsModalOpen(true)}*/}
+
             <Box>
                 <ImageContainer>
-                    <Image src={imageUrl} alt="" />
+                    <Image
+                        src={imageUrl}
+                        alt=""
+                        onClick={() => setIsModalOpen(true)}
+                    />
                     <RightTopContainer>
                         <img
                             style={{ marginRight: '4px' }}
@@ -201,6 +234,10 @@ export default ({
                             <Button
                                 className={classes.Button}
                                 style={{
+                                    //  hover :{
+                                    //     $`box` :{
+                                    //     visibility: 'hidden'
+                                    // }},
                                     width: '100%',
                                     height: '50%',
                                     border: 'none',
@@ -212,8 +249,12 @@ export default ({
                         </ButtonGroup>
                     </ButtonContainer>
                 </ImageContainer>
-                <ImageTitle>{title}</ImageTitle>
-                <Description>{review?.slice(0, 20)}...</Description>
+                <ImageTitle onClick={() => setIsModalOpen(true)}>
+                    {title}
+                </ImageTitle>
+                <Description onClick={() => setIsModalOpen(true)}>
+                    {review?.slice(0, 20)}...
+                </Description>
             </Box>
         </>
     );

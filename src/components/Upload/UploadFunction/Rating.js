@@ -20,7 +20,7 @@ function Rating(props) {
     useEffect(() => {
         props.setHadRating(value);
     });
-    const [value, setValue] = React.useState(null);
+    const [value, setValue] = React.useState(props.rating);
     const handleChange = (event) => {
         setValue(event.target.value);
     };

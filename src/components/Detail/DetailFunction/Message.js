@@ -11,7 +11,7 @@ const Avartar = styled.div`
     background repeat: no-repeat;
     margin-right:20px;
 `;
-const User_message = styled.p`
+const UserMessage = styled.p`
     font-family: Noto Sans KR;
     font-style: normal;
     font-weight: 500;
@@ -32,12 +32,12 @@ function Message(props) {
         >
             <Avartar bg={props.userImage} />
 
-            <User_message style={{ marginRight: '20px' }}>
+            <UserMessage style={{ marginRight: '20px' }}>
                 {props.user}
-            </User_message>
-            <User_message style={{ fontWeight: 300 }}>
+            </UserMessage>
+            <UserMessage style={{ fontWeight: 300 }}>
                 {props.message}
-            </User_message>
+            </UserMessage>
             {/*<h4>*/}
             {/*    {props.user}*/}
             {/*    <span>{new Date(props.timestamp?.toDate()).toUTCString()}</span>*/}

@@ -37,10 +37,9 @@ const useStyles = makeStyles((theme) => ({
 //     font-size: 24px;
 //     line-height: 35px;
 //     color: #ff534b;
-// `;
+//
 function Dropzone(props) {
     const classes = useStyles();
-
     const onDrop = (file) => {
         props.setHadImageurl(file[0]);
     };

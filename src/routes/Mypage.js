@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useStateValue } from '../StateProvider';
 import Mypost from '../components/Mypage/Mypost';
 const Container = styled.div`
     position: relative;
@@ -27,7 +26,7 @@ const BackgroundImage = styled.div`
 `;
 
 function Mypage() {
-    const [{ user }, dispatch] = useStateValue();
+    // const [{ user }, dispatch] = useStateValue();
     return (
         <>
             <Container>

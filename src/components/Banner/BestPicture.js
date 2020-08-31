@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import DetailPage from '../Detail/DetailPage';
-
 const LeftBottomContainer = styled.div`
     position: absolute;
     left: 6px;
@@ -11,7 +10,6 @@ const LeftBottomContainer = styled.div`
     align-items: center;
     visibility: hidden;
 `;
-
 const RightBottomContainer = styled.div`
     position: absolute;
     bottom: 5px;

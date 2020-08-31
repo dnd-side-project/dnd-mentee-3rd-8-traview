@@ -17,7 +17,7 @@ const MiddleTitle = styled.h2`
     line-height: 58px;
 `;
 function DefaultArea(props) {
-    const [{}, dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
     return (
         <div>
             <div

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import db, { auth, googleProvider, facebookProvider } from '../firebase';
+import { auth, googleProvider, facebookProvider } from '../firebase';
 import { useStateValue } from '../StateProvider';
 import { actionTypes } from '../reducer';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -33,11 +33,10 @@ const IDCheckLabel = styled.div`
 `;
 
 function Login() {
-    const [{ user }, dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
     const [ID, setID] = useState('');
     const [Password, setPassword] = useState('');
     const history = useHistory();
-    const [hasUsers, setHasUsers] = useState([]);
     const onLoginHandler = (event) => {
         event.preventDefault();
     };
