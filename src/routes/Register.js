@@ -41,12 +41,13 @@ function Register() {
                             alert('이미 가입된 계정입니다.');
                         } else {
                             db.collection('users').doc(user.uid).set({
-                                photoURL: user.photoURL,
                                 background:
                                     'https://images.unsplash.com/photo-1597589619078-b633d1d07d0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-                                email: user.email,
                                 displayName: user.displayName,
+                                email: user.email,
                                 introduction: '인삿말이 없습니다',
+                                photoURL: user.photoURL,
+                                uid: user.uid,
                             });
                             db.collection('users')
                                 .doc(user.uid)
