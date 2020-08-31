@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { actionTypes } from '../reducer';
 import { auth, googleProvider, facebookProvider } from '../firebase';
 import { useStateValue } from '../StateProvider';
+import db from '../firebase';
 
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
 import { InputBar } from '../components/CommonStyle/InputBar';
@@ -31,9 +32,16 @@ function Register() {
     const googleSignIn = () => {
         auth.signInWithPopup(googleProvider)
             .then((result) => {
+                const { user } = result;
+                db.collection('users').doc(user.uid).set({
+                    avatar: user.photoURL,
+                    background: null,
+                    email: user.email,
+                    username: user.displayName,
+                });
                 dispatch({
                     type: actionTypes.SET_USER,
-                    user: result.user,
+                    user: user,
                 });
                 history.push('/');
             })
