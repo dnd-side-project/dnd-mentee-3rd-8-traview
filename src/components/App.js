@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-    const [{ user }, dispatch] = useStateValue();
+    const [{ user }] = useStateValue();
 
     return (
         <Router>

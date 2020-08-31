@@ -21,7 +21,6 @@ import {
     CommentBox,
 } from './DetailStyle';
 import { DetailContent, PostName } from './DetailFunction/Article';
-import KakaoMap from './DetailFunction/KakaoMap';
 import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import ShowMoreText from 'react-show-more-text';
 import { SubtitleFont } from '../Upload/UploadStyled';

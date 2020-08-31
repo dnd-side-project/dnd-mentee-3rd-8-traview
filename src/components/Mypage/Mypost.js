@@ -64,7 +64,7 @@ export default () => {
     const [mood, setMood] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const moods = ['내가 올린 사진', '신기해요', '찜목록'];
-    const [{ user }, dispatch] = useStateValue();
+    const [{ user }] = useStateValue();
     useEffect(() => {
         const unsubscribe = db
             .collection('posts')
@@ -82,7 +82,7 @@ export default () => {
         return () => {
             unsubscribe();
         };
-    }, [last]);
+    }, [user.displayName]);
 
     const next = () => {
         if (last) {

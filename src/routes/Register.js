@@ -17,7 +17,7 @@ import { SocialCollection } from '../components/CommonStyle/SocialCollection';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 function Register() {
-    const [{}, dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
     const [NickName, setNickName] = useState('');
     const [Email, setEmail] = useState('');
     const [UserId, setUserId] = useState('');
