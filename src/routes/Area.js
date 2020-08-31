@@ -6,6 +6,8 @@ import Loader from '../components/MainArea/Loader';
 import Picture from '../components/MainArea/Picture';
 import styled from 'styled-components';
 import DefaultArea from './DefaultArea';
+import FlipMove from 'react-flip-move';
+
 const Container = styled.div`
     position: relative;
     z-index: 1;
@@ -111,6 +113,7 @@ function Area() {
     const [mood, setMood] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const moods = ['도시', '자연', '몽환', '여유', '고요', '활기', '낭만'];
+
     useEffect(() => {
         setPosts([]);
         const unsubscribe = db
@@ -241,27 +244,29 @@ function Area() {
                             loader={<Loader />}
                         >
                             <ScrollContainer>
-                                {posts.map(({ post, id }, index) => (
-                                    <Picture
-                                        id={id}
-                                        key={index}
-                                        advertising={post.advertising}
-                                        area={post.area}
-                                        avatar={post.avatar}
-                                        heart={post.heart}
-                                        imageUrl={post.imageUrl}
-                                        latitude={post.latitude}
-                                        longitude={post.longitude}
-                                        mood={post.mood}
-                                        novelty={post.novelty}
-                                        rating={post.rating}
-                                        review={post.review}
-                                        timestamp={post.timestamp}
-                                        title={post.title}
-                                        username={post.username}
-                                        address={post.address}
-                                    />
-                                ))}
+                                <FlipMove>
+                                    {posts.map(({ post, id }, index) => (
+                                        <Picture
+                                            id={id}
+                                            key={index}
+                                            advertising={post.advertising}
+                                            area={post.area}
+                                            avatar={post.avatar}
+                                            heart={post.heart}
+                                            imageUrl={post.imageUrl}
+                                            latitude={post.latitude}
+                                            longitude={post.longitude}
+                                            mood={post.mood}
+                                            novelty={post.novelty}
+                                            rating={post.rating}
+                                            review={post.review}
+                                            timestamp={post.timestamp}
+                                            title={post.title}
+                                            username={post.username}
+                                            address={post.address}
+                                        />
+                                    ))}
+                                </FlipMove>
                             </ScrollContainer>
                         </InfiniteScroll>
                     </MarginContainer>
