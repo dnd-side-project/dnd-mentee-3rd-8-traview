@@ -19,7 +19,6 @@ const MiddleTitle = styled.h2`
 `;
 function DefaultArea(props) {
     let RecommendArea = [
-        //10개개
         '서울',
         '부산',
         '대구',

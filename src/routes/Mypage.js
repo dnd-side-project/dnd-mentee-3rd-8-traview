@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Mypost from '../components/Mypage/Mypost';
+import { useStateValue } from '../StateProvider';
+import db from '../firebase';
 const Container = styled.div`
     position: relative;
     z-index: 1;
@@ -23,18 +25,31 @@ const BackgroundImage = styled.div`
         url(${(props) => props.bg});
     background-size: cover;
     background-position: center center;
+    background-repeat: no-repeat;
 `;
 
 function Mypage() {
-    // const [{ user }, dispatch] = useStateValue();
+    const [{ user }] = useStateValue();
+    const [userInfo, setUserInfo] = useStateValue('');
+    useEffect(() => {
+        db.collection('users')
+            .doc(user.uid)
+            .get()
+            .then((doc) => {
+                setUserInfo(doc);
+            });
+    }, []);
+
+    // {console.log(userInfo)}
+    // {console.log(userInfo.user.background)} 배경
+    // {console.log(userInfo.user.displayName)} 이름
+    // {console.log(userInfo.user.email)} 이메일
+    // {console.log(userInfo.user.introduction)} 소개
+    // {console.log(userInfo.user.photoURL)} 아바타타{' '}
     return (
         <>
             <Container>
-                <BackgroundImage
-                    bg={
-                        'https://3.bp.blogspot.com/-5CMGxobN0Ek/XCTD5BahEyI/AAAAAAAAy6I/7rzP7GFFkd8KXYLKlSS6cr6Zuyx3_K1TwCLcBGAs/s1600/Screen%2BShot%2B2018-12-27%2Bat%2B7.21.53%2BAM.png'
-                    }
-                />
+                <BackgroundImage bg={userInfo.user.background} />
             </Container>
             <Mypost />
         </>

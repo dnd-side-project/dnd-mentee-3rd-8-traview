@@ -54,15 +54,15 @@ export default function UploadPage(props) {
         resetSearchLocation();
     }, []);
     useEffect(() => {
-        // setHasSelectedAddress(false);
-        // setAddress(props.address ? props.address : '');
-        // setAdvertising(props.advertising ? props.advertising : false);
-        // setMood(props.mood ? props.mood : '');
-        // setRating(props.rating ? props.rating : '');
-        // setTitle(props.title ? props.title : null);
-        // setReview(props.review ? props.review : null);
-        // setImageUrl(props.imageUrl ? props.imageUrl : null);
-    }, []);
+        setHasSelectedAddress(false);
+        setAddress(props.address ? props.address : '');
+        setAdvertising(props.advertising ? props.advertising : false);
+        setMood(props.mood ? props.mood : '');
+        setRating(props.rating ? props.rating : '');
+        setTitle(props.title ? props.title : null);
+        setReview(props.review ? props.review : null);
+        setImageUrl(props.imageUrl ? props.imageUrl : null);
+    }, [props.close]);
     const onHandleUpload = (e) => {
         e.preventDefault();
         if (
