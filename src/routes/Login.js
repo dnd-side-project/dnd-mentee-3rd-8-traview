@@ -53,7 +53,7 @@ function Login() {
                         if (doc.exists) {
                             dispatch({
                                 type: actionTypes.SET_USER,
-                                user: result.user,
+                                user: doc.data(),
                             });
                             history.push('/');
                         } else {

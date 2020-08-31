@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 import DetailPage from '../Detail/DetailPage';
 
@@ -87,95 +87,105 @@ const TextBox = styled.label`
     letter-spacing: -0.32px;
 `;
 
-export default ({
-    advertising,
-    area,
-    avatar,
-    heart,
-    imageUrl,
-    latitude,
-    longitude,
-    mood,
-    novelty,
-    rating,
-    review,
-    timestamp,
-    title,
-    username,
-    address,
-    id,
-}) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+const Picture = forwardRef(
+    (
+        {
+            advertising,
+            area,
+            avatar,
+            heart,
+            imageUrl,
+            latitude,
+            longitude,
+            mood,
+            novelty,
+            rating,
+            review,
+            timestamp,
+            title,
+            username,
+            address,
+            id,
+        },
+        ref
+    ) => {
+        const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const onClose = () => {
-        setIsModalOpen(false);
-    };
+        const onClose = () => {
+            setIsModalOpen(false);
+        };
 
-    return (
-        <>
-            <DetailPage
-                open={isModalOpen}
-                close={onClose}
-                id={id}
-                advertising={advertising}
-                area={area}
-                avatar={avatar}
-                heart={heart}
-                imageUrl={imageUrl}
-                latitude={latitude}
-                longitude={longitude}
-                mood={mood}
-                novelty={novelty}
-                rating={rating}
-                review={review}
-                timestamp={timestamp}
-                title={title}
-                username={username}
-                address={address}
-            />
-            <Box onClick={() => setIsModalOpen(true)}>
-                <ImageContainer>
-                    <Image src={imageUrl} alt="" />
-                    <LeftBottomContainer>
-                        <img
-                            style={{
-                                width: '44px',
-                                height: '44px',
-                                borderRadius: '22px',
-                                objectFit: 'cover',
-                                marginBottom: '3px',
-                            }}
-                            src={avatar}
-                            alt=""
-                        />
-                        <TextBox>{username}</TextBox>
-                    </LeftBottomContainer>
-                    <RightTopContainer>
-                        <img
-                            style={{ marginRight: '4px' }}
-                            src="/images/Interesting.png"
-                            alt=""
-                        />
-                        <TextBox>{novelty}</TextBox>
-                        <img
-                            style={{ marginRight: '4px', marginLeft: '14px' }}
-                            src="/images/like.png"
-                            alt=""
-                        />
-                        <TextBox>{heart}</TextBox>
-                    </RightTopContainer>
-                    <RightBottomContainer>
-                        <img
-                            style={{ marginRight: '4px' }}
-                            src="/images/location.png"
-                            alt=""
-                        />
-                        <TextBox>{area}</TextBox>
-                    </RightBottomContainer>
-                </ImageContainer>
-                <ImageTitle>{title}</ImageTitle>
-                <Description>{review?.slice(0, 20)}...</Description>
-            </Box>
-        </>
-    );
-};
+        return (
+            <>
+                <DetailPage
+                    open={isModalOpen}
+                    close={onClose}
+                    id={id}
+                    advertising={advertising}
+                    area={area}
+                    avatar={avatar}
+                    heart={heart}
+                    imageUrl={imageUrl}
+                    latitude={latitude}
+                    longitude={longitude}
+                    mood={mood}
+                    novelty={novelty}
+                    rating={rating}
+                    review={review}
+                    timestamp={timestamp}
+                    title={title}
+                    username={username}
+                    address={address}
+                />
+                <Box onClick={() => setIsModalOpen(true)} ref={ref}>
+                    <ImageContainer>
+                        <Image src={imageUrl} alt="" />
+                        <LeftBottomContainer>
+                            <img
+                                style={{
+                                    width: '44px',
+                                    height: '44px',
+                                    borderRadius: '22px',
+                                    objectFit: 'cover',
+                                    marginBottom: '3px',
+                                }}
+                                src={avatar}
+                                alt=""
+                            />
+                            <TextBox>{username}</TextBox>
+                        </LeftBottomContainer>
+                        <RightTopContainer>
+                            <img
+                                style={{ marginRight: '4px' }}
+                                src="/images/Interesting.png"
+                                alt=""
+                            />
+                            <TextBox>{novelty}</TextBox>
+                            <img
+                                style={{
+                                    marginRight: '4px',
+                                    marginLeft: '14px',
+                                }}
+                                src="/images/like.png"
+                                alt=""
+                            />
+                            <TextBox>{heart}</TextBox>
+                        </RightTopContainer>
+                        <RightBottomContainer>
+                            <img
+                                style={{ marginRight: '4px' }}
+                                src="/images/location.png"
+                                alt=""
+                            />
+                            <TextBox>{area}</TextBox>
+                        </RightBottomContainer>
+                    </ImageContainer>
+                    <ImageTitle>{title}</ImageTitle>
+                    <Description>{review?.slice(0, 20)}...</Description>
+                </Box>
+            </>
+        );
+    }
+);
+
+export default Picture;

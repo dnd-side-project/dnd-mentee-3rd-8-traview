@@ -33,17 +33,34 @@ function Register() {
         auth.signInWithPopup(googleProvider)
             .then((result) => {
                 const { user } = result;
-                db.collection('users').doc(user.uid).set({
-                    avatar: user.photoURL,
-                    background: null,
-                    email: user.email,
-                    username: user.displayName,
-                });
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user: user,
-                });
-                history.push('/');
+                db.collection('users')
+                    .doc(user.uid)
+                    .get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            alert('이미 가입된 계정입니다.');
+                        } else {
+                            db.collection('users').doc(user.uid).set({
+                                photoURL: user.photoURL,
+                                background:
+                                    'https://images.unsplash.com/photo-1597589619078-b633d1d07d0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+                                email: user.email,
+                                displayName: user.displayName,
+                                introduction: '인삿말이 없습니다',
+                            });
+                            db.collection('users')
+                                .doc(user.uid)
+                                .get()
+                                .then((doc) => {
+                                    dispatch({
+                                        type: actionTypes.SET_USER,
+                                        user: doc.data(),
+                                    });
+                                });
+
+                            history.push('/');
+                        }
+                    });
             })
             .catch((error) => alert(error.message));
     };
