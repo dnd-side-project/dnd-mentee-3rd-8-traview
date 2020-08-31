@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { auth, googleProvider, facebookProvider } from '../firebase';
 import { useStateValue } from '../StateProvider';
 import { actionTypes } from '../reducer';
+import db from '../firebase';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import styled from 'styled-components';
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
@@ -44,29 +45,22 @@ function Login() {
     const googleSignIn = () => {
         auth.signInWithPopup(googleProvider)
             .then((result) => {
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user: result.user,
-                });
-                // const unsubscribe = db
-                //     .collection('users')
-                //     .where('displayName', '==', '백동우')
-                //     .onSnapshot((snapshot) => {
-                //         setHasUsers(
-                //             snapshot.docs.map((doc) => ({
-                //                 id: doc.id,
-                //                 post: doc.data(),
-                //             }))
-                //         );
-                //     });
-                // if (hasUsers[0] === undefined) {
-                //     db.collection('users').add({
-                //         displayName: result.user.displayName,
-                //         email: result.user.email,
-                //         photoURL: result.user.photoURL,
-                //     });
-                // }
-                history.push('/');
+                const { user } = result;
+                db.collection('users')
+                    .doc(user.uid)
+                    .get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            dispatch({
+                                type: actionTypes.SET_USER,
+                                user: result.user,
+                            });
+                            history.push('/');
+                        } else {
+                            alert('회원가입을 먼저 해주세요!');
+                            history.push('/register');
+                        }
+                    });
             })
 
             .catch((error) => alert(error.message));
