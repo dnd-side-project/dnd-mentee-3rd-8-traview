@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Mypost from '../components/Mypage/Mypost';
+import { useStateValue } from '../StateProvider';
+import db from '../firebase';
+import firebase from 'firebase';
 const Container = styled.div`
     position: relative;
     z-index: 1;
@@ -23,12 +26,23 @@ const BackgroundImage = styled.div`
         url(${(props) => props.bg});
     background-size: cover;
     background-position: center center;
+    background-repeat: no-repeat;
 `;
 
 function Mypage() {
-    // const [{ user }, dispatch] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
+    const [userInfo, setUserInfo] = useStateValue('');
+    useEffect(() => {
+        // db.collection('users')
+        //     .doc(user.uid)
+        //     .get()
+        //     .then((doc) => {
+        //         setUserInfo(doc);
+        //     });
+    });
     return (
         <>
+            {console.log(userInfo)}
             <Container>
                 <BackgroundImage
                     bg={
