@@ -3,6 +3,7 @@ import { Button } from '@material-ui/core';
 import { actionTypes } from '../reducer';
 import styled from 'styled-components';
 import { useStateValue } from '../StateProvider';
+
 const Toptitle = styled.h1`
     font-weight: 500;
     font-size: 70px;
@@ -17,6 +18,19 @@ const MiddleTitle = styled.h2`
     line-height: 58px;
 `;
 function DefaultArea(props) {
+    let RecommendArea = [
+        //10개개
+        '서울',
+        '부산',
+        '대구',
+        '인천',
+        '경기도',
+        '강원도',
+        '전라도',
+        '경상도',
+        '제주도',
+    ];
+    const [{ term }] = useStateValue();
     const [, dispatch] = useStateValue();
     return (
         <div>
@@ -52,9 +66,17 @@ function DefaultArea(props) {
                         color: '#FFFFFF',
                     }}
                     onClick={() => {
+                        let randomNum = Math.floor(Math.random() * 8);
                         dispatch({
                             type: actionTypes.SET_SERACH_TERM,
-                            term: '부산',
+                            term:
+                                term === RecommendArea[randomNum]
+                                    ? RecommendArea[
+                                          randomNum === 8
+                                              ? randomNum - 1
+                                              : randomNum + 1
+                                      ]
+                                    : RecommendArea[randomNum],
                         });
                     }}
                 >

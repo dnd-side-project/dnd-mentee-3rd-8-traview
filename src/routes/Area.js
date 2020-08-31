@@ -130,6 +130,7 @@ function Area() {
                     }))
                 );
                 setLast(snapshot.docs[snapshot.docs.length - 1]);
+                setMood('');
             });
 
         return () => {
