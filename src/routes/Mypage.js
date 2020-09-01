@@ -1,15 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Mypost from '../components/Mypage/Mypost';
 import { useStateValue } from '../StateProvider';
 import db from '../firebase';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import { Avatar } from '@material-ui/core';
+import Edit from '../components/Mypage/Edit';
+const useStyles = makeStyles((theme) => ({
+    Edit: {
+        width: '75px',
+        height: '46px',
+        border: '1px solid #FFFFFF',
+        boxSizing: 'border-box',
+        borderRadius: '25.5px',
+        fontWeight: 'normal',
+        fontSize: '24px',
+        lineHeight: '35px',
+        letterSpacing: '-0.48px',
+        color: '#FFFFFF',
+    },
+}));
 const Container = styled.div`
     position: relative;
     z-index: 1;
     margin-bottom: 14px;
     margin-top: -20px;
 `;
-
 const BackgroundImage = styled.div`
     width: 100%;
     height: 787px;
@@ -27,8 +44,26 @@ const BackgroundImage = styled.div`
     background-position: center center;
     background-repeat: no-repeat;
 `;
-
+const Username = styled.p`
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 35px;
+    letter-spacing: -0.48px;
+    margin-top: 12px;
+    margin-bottom: 20px;
+`;
+const IntroductionFont = styled.p`
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 35px;
+    text-align: left;
+    letter-spacing: -0.48px;
+    color: #ffffff;
+`;
 function Mypage() {
+    const classes = useStyles();
     const [{ user }] = useStateValue();
     const [userInfo, setUserInfo] = useStateValue('');
     useEffect(() => {
@@ -46,13 +81,77 @@ function Mypage() {
     // {console.log(userInfo.user.email)} 이메일
     // {console.log(userInfo.user.introduction)} 소개
     // {console.log(userInfo.user.photoURL)} 아바타타{' '}
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    const onClose = () => {
+        setIsEditModalOpen(false);
+    };
     return (
-        <>
+        <div>
+            <Edit open={isEditModalOpen} close={onClose} />
             <Container>
                 <BackgroundImage bg={userInfo.user.background} />
             </Container>
+            <div
+                style={{
+                    display: 'flex',
+                    marginLeft: '10%',
+                    marginTop: '-5%',
+                    position: 'relative',
+                    zIndex: 2,
+                }}
+            >
+                <div
+                    style={{
+                        width: '200px',
+                        height: 'auto',
+                        alignItems: 'center',
+                        textAlign: 'center',
+                    }}
+                >
+                    <Avatar
+                        src={userInfo.user.photoURL}
+                        alt={user.displayName}
+                        style={{
+                            width: '200px',
+                            height: '200px',
+                            border: '2px solid #E44E47',
+                            boxSizing: 'border-box',
+                        }}
+                    />
+                    {/*// <AvatarBox bg={userInfo.user.photoURL} />*/}
+                    <Username>{userInfo.user.displayName}</Username>
+                    <Button
+                        className={classes.Edit}
+                        onClick={() => setIsEditModalOpen(true)}
+                    >
+                        편집
+                    </Button>
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        maxWidth: '380px',
+                        alignItems: 'center',
+                        marginLeft: '65px',
+                    }}
+                >
+                    <div>
+                        <IntroductionFont>내 소개</IntroductionFont>
+                        <IntroductionFont
+                            style={{
+                                marginTop: '20px',
+                                wordBreak: 'break-all',
+                                fontWeight: '300',
+                            }}
+                        >
+                            {userInfo.user.introduction}
+                        </IntroductionFont>
+                    </div>
+                </div>
+            </div>
             <Mypost />
-        </>
+        </div>
     );
 }
 
