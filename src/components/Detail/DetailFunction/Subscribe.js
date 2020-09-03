@@ -76,18 +76,6 @@ function Subscribe(props) {
                 .catch(function (err) {
                     console.log(err);
                 });
-            // db.collection('subscribe')
-            //     .where('userTo', '==', props.userTo)
-            //     .where('userFrom', '==', user.displayName)
-            //     .delete()
-            //     .then(function () {
-            //         console.log('Document successfully deleted!');
-            //     })
-            //     .catch(function (error) {
-            //         console.error('Error removing document: ', error);
-            //     });
-            // //지우기,
-            // //이미 구독중이라면
             setSubscribed(false);
         } else {
             //이미 구독중이 아니라면
