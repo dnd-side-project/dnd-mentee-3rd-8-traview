@@ -248,6 +248,7 @@ function Area() {
                                 <FlipMove>
                                     {posts.map(({ post, id }, index) => (
                                         <Picture
+                                            uid={post.uid}
                                             id={id}
                                             key={index}
                                             advertising={post.advertising}

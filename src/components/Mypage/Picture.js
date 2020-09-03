@@ -98,6 +98,7 @@ const TextBox = styled.label`
 `;
 export default ({
     setCheckUpdate,
+    uid,
     advertising,
     area,
     avatar,
@@ -148,6 +149,7 @@ export default ({
     return (
         <>
             <UploadPage
+                uid={uid}
                 open={IsUpdateModalOpen}
                 close={onClose}
                 id={id}
@@ -170,6 +172,7 @@ export default ({
             <DetailPage
                 open={isModalOpen}
                 close={onClose}
+                uid={uid}
                 id={id}
                 advertising={advertising}
                 area={area}

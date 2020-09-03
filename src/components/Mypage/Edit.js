@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import { DropzoneArea } from 'material-ui-dropzone';
@@ -6,9 +6,6 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
-import db from '../../firebase';
-import firebase from 'firebase';
-import { useStateValue } from '../../StateProvider';
 const useStyles = makeStyles((theme) => ({
     DropZoneArea: {
         height: '558px',
@@ -88,44 +85,10 @@ const TotalContainer = styled.div`
     display: flex;
     justify-content: center;
 `;
-// isIntroduction={userInfo.user.introduction} //소개
-// isBackground={userInfo.user.background} //백그라운드
-// isAvartar={userInfo.user.photoURL} //아바타
 function Edit(props) {
+    const [backroundFile, setBackroundFile] = useState(null);
     const onDrop = (file) => {};
     const classes = useStyles();
-    const [isAvartar, setIsAvartar] = useState(props.isAvartar);
-    const [isBackground, setIsbackground] = useState(props.isBackground);
-    const [isIntroduction, setIsIntroduction] = useState(props.isIntroduction);
-    const [{ user }] = useStateValue();
-
-    useEffect(() => {
-        setIsIntroduction(props.isIntroduction);
-        setIsbackground(props.isBackground);
-        setIsAvartar(props.isAvartar);
-    }, [props.close]);
-    const onChageTitle = (e) => {
-        e.preventDefault();
-        setIsIntroduction(e.target.value);
-    };
-    const onClickChange = (e) => {
-        e.preventDefault();
-        if (isIntroduction === '') {
-            alert('소개글을 입력해주세요');
-        } else {
-            let userInfoChange = db.collection('users').doc(user.uid);
-            userInfoChange
-                .update({
-                    introduction: isIntroduction,
-                })
-                .then((temp) => console.log('success', temp));
-            props.setIsAvartar(isAvartar);
-            props.setIsBackground(isBackground);
-            props.setIsIntroduction(isIntroduction);
-            alert('게시물이 수정되었습니다.');
-            props.close();
-        }
-    };
     return (
         <Dialog
             scroll={'body'}
@@ -211,8 +174,6 @@ function Edit(props) {
                             filesLimit={1} //파일 갯수
                         />
                         <TextField
-                            onChange={onChageTitle}
-                            value={isIntroduction}
                             autoFocus={true}
                             InputProps={{
                                 className: classes.InputOption,
@@ -236,12 +197,7 @@ function Edit(props) {
                             marginTop: '70px',
                         }}
                     >
-                        <Button
-                            className={classes.UpdateBtn}
-                            onClick={onClickChange}
-                        >
-                            게시
-                        </Button>
+                        <Button className={classes.UpdateBtn}>게시</Button>
                     </div>
                 </div>
             </TotalContainer>

@@ -184,6 +184,7 @@ export default () => {
                     <FlipMove>
                         {posts.map(({ post, id }) => (
                             <Picture
+                                uid={post.uid}
                                 id={id}
                                 key={id}
                                 advertising={post.advertising}

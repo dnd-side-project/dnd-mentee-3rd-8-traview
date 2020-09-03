@@ -86,25 +86,11 @@ function Mypage() {
     const onClose = () => {
         setIsEditModalOpen(false);
     };
-    const [isAvartar, setIsAvartar] = useState(userInfo.user.photoURL);
-    const [isBackground, setIsBackground] = useState(userInfo.user.background);
-    const [isIntroduction, setIsIntroduction] = useState(
-        userInfo.user.introduction
-    );
     return (
         <div>
-            <Edit
-                open={isEditModalOpen}
-                close={onClose}
-                isIntroduction={isIntroduction} //소개
-                isBackground={isBackground} //백그라운드
-                isAvartar={isAvartar} //아바타      isIntroduction={isIntroduction} //소개
-                setIsIntroduction={setIsIntroduction} //소개
-                setIsBackground={setIsBackground} //백그라운드
-                setIsAvartar={setIsAvartar} //아바타      isIntroduction={isIntroduction} //소개
-            />
+            <Edit open={isEditModalOpen} close={onClose} />
             <Container>
-                <BackgroundImage bg={isBackground} />
+                <BackgroundImage bg={userInfo.user.background} />
             </Container>
             <div
                 style={{
@@ -124,7 +110,7 @@ function Mypage() {
                     }}
                 >
                     <Avatar
-                        src={isAvartar}
+                        src={userInfo.user.photoURL}
                         alt={user.displayName}
                         style={{
                             width: '200px',
@@ -159,7 +145,7 @@ function Mypage() {
                                 fontWeight: '300',
                             }}
                         >
-                            {isIntroduction}
+                            {userInfo.user.introduction}
                         </IntroductionFont>
                     </div>
                 </div>

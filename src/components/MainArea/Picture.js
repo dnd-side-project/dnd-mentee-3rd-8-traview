@@ -106,6 +106,7 @@ const Picture = forwardRef(
             username,
             address,
             id,
+            uid,
         },
         ref
     ) => {
@@ -136,6 +137,7 @@ const Picture = forwardRef(
                     title={title}
                     username={username}
                     address={address}
+                    uid={uid}
                 />
                 <Box onClick={() => setIsModalOpen(true)} ref={ref}>
                     <ImageContainer>
