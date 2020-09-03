@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Mypost from '../components/Mypage/Mypost';
 import { useStateValue } from '../StateProvider';
-import db from '../firebase';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
@@ -65,32 +64,27 @@ const IntroductionFont = styled.p`
 function Mypage() {
     const classes = useStyles();
     const [{ user }] = useStateValue();
-    const [userInfo, setUserInfo] = useStateValue('');
-    useEffect(() => {
-        db.collection('users')
-            .doc(user.uid)
-            .get()
-            .then((doc) => {
-                setUserInfo(doc);
-            });
-    }, []);
-
-    // {console.log(userInfo)}
-    // {console.log(userInfo.user.background)} 배경
-    // {console.log(userInfo.user.displayName)} 이름
-    // {console.log(userInfo.user.email)} 이메일
-    // {console.log(userInfo.user.introduction)} 소개
-    // {console.log(userInfo.user.photoURL)} 아바타타{' '}
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
     const onClose = () => {
         setIsEditModalOpen(false);
     };
+    const [isAvartar, setIsAvartar] = useState(user.photoURL);
+    const [isBackground, setIsBackground] = useState(user.background);
+    const [isIntroduction, setIsIntroduction] = useState(user.introduction);
     return (
         <div>
-            <Edit open={isEditModalOpen} close={onClose} />
+            <Edit
+                open={isEditModalOpen}
+                close={onClose}
+                isIntroduction={isIntroduction} //소개
+                isBackground={isBackground} //백그라운드
+                isAvartar={isAvartar} //아바타      isIntroduction={isIntroduction} //소개
+                setIsIntroduction={setIsIntroduction} //소개
+                setIsBackground={setIsBackground} //백그라운드
+                setIsAvartar={setIsAvartar} //아바타      isIntroduction={isIntroduction} //소개
+            />
             <Container>
-                <BackgroundImage bg={userInfo.user.background} />
+                <BackgroundImage bg={isBackground} />
             </Container>
             <div
                 style={{
@@ -110,7 +104,7 @@ function Mypage() {
                     }}
                 >
                     <Avatar
-                        src={userInfo.user.photoURL}
+                        src={isAvartar}
                         alt={user.displayName}
                         style={{
                             width: '200px',
@@ -120,7 +114,7 @@ function Mypage() {
                         }}
                     />
                     {/*// <AvatarBox bg={userInfo.user.photoURL} />*/}
-                    <Username>{userInfo.user.displayName}</Username>
+                    <Username>{user.displayName}</Username>
                     <Button
                         className={classes.Edit}
                         onClick={() => setIsEditModalOpen(true)}
@@ -145,7 +139,7 @@ function Mypage() {
                                 fontWeight: '300',
                             }}
                         >
-                            {userInfo.user.introduction}
+                            {isIntroduction}
                         </IntroductionFont>
                     </div>
                 </div>
@@ -154,5 +148,4 @@ function Mypage() {
         </div>
     );
 }
-
 export default Mypage;

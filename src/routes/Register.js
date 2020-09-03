@@ -48,6 +48,8 @@ function Register() {
                                 introduction: '인삿말이 없습니다',
                                 photoURL: user.photoURL,
                                 uid: user.uid,
+                                AvartarFileName: '',
+                                BackgroundFileName: '',
                             });
                             db.collection('users')
                                 .doc(user.uid)
