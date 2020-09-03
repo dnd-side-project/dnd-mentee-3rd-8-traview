@@ -26,17 +26,33 @@ function Subscribe(props) {
     const classes = useStyles();
     const [{ user }] = useStateValue();
     const [subscribed, setSubscribed] = useState(false);
+    const [SubscribeNumber, setSubscribeNumber] = useState(0);
     useEffect(() => {
         db.collection('subscribe')
             .where('userTo', '==', props.userTo)
-            .where('userFrom', '==', user.uid)
-            .onSnapshot((snapshot) => {
-                if (snapshot.empty) {
-                    setSubscribed(false);
+            .get()
+            .then((doc) => {
+                if (doc.empty) {
+                    setSubscribeNumber(0);
                 } else {
-                    setSubscribed(true);
+                    setSubscribeNumber(doc.size);
                 }
             });
+        {
+            user &&
+                user.uid &&
+                db
+                    .collection('subscribe')
+                    .where('userTo', '==', props.userTo)
+                    .where('userFrom', '==', user.uid)
+                    .onSnapshot((snapshot) => {
+                        if (snapshot.empty) {
+                            setSubscribed(false);
+                        } else {
+                            setSubscribed(true);
+                        }
+                    });
+        }
     }, []);
     const onSubscribe = () => {
         if (subscribed) {
@@ -60,18 +76,6 @@ function Subscribe(props) {
                 .catch(function (err) {
                     console.log(err);
                 });
-            // db.collection('subscribe')
-            //     .where('userTo', '==', props.userTo)
-            //     .where('userFrom', '==', user.displayName)
-            //     .delete()
-            //     .then(function () {
-            //         console.log('Document successfully deleted!');
-            //     })
-            //     .catch(function (error) {
-            //         console.error('Error removing document: ', error);
-            //     });
-            // //지우기,
-            // //이미 구독중이라면
             setSubscribed(false);
         } else {
             //이미 구독중이 아니라면
@@ -81,11 +85,34 @@ function Subscribe(props) {
             });
             setSubscribed(true);
         }
+        db.collection('subscribe')
+            .where('userTo', '==', props.userTo)
+            .get()
+            .then((doc) => {
+                if (doc.empty) {
+                    setSubscribeNumber(0);
+                } else {
+                    setSubscribeNumber(doc.size);
+                }
+            });
     };
     return (
-        <Button className={classes.FollowBtn} onClick={onSubscribe}>
-            {subscribed ? 'subscribed' : '팔로우'}
-        </Button>
+        <>
+            <p
+                style={{
+                    fontWeight: 300,
+                    fontSize: '12px',
+                    lineHeight: '17px',
+                }}
+            >
+                팔로워 {SubscribeNumber}
+            </p>
+            {user && user.uid && (
+                <Button className={classes.FollowBtn} onClick={onSubscribe}>
+                    {subscribed ? 'subscribed' : '팔로우'}
+                </Button>
+            )}
+        </>
     );
 }
 

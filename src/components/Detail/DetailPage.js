@@ -74,6 +74,7 @@ export default function DetailPage(props) {
             `https://map.kakao.com/link/map/${props.address},${props.latitude},${props.longitude}`
         );
     };
+
     useEffect(() => {
         if (props.id) {
             db.collection('posts')
@@ -164,18 +165,18 @@ export default function DetailPage(props) {
                                         }}
                                     >
                                         <TextBox>{props.username}</TextBox>
-                                        <p
-                                            style={{
-                                                fontWeight: 300,
-                                                fontSize: '12px',
-                                                lineHeight: '17px',
-                                            }}
-                                        >
-                                            팔로워 {'223'}
-                                        </p>
-                                        {user && user.uid && (
-                                            <Subscribe userTo={props.uid} />
-                                        )}
+                                        {/*<p*/}
+                                        {/*    style={{*/}
+                                        {/*        fontWeight: 300,*/}
+                                        {/*        fontSize: '12px',*/}
+                                        {/*        lineHeight: '17px',*/}
+                                        {/*    }}*/}
+                                        {/*>*/}
+                                        {/*    팔로워 {'223'}*/}
+                                        {/*</p>*/}
+                                        {/*{user && user.uid && (*/}
+                                        <Subscribe userTo={props.uid} />
+                                        {/*)}*/}
                                         {/*<Button*/}
                                         {/*    onClick={onSubscribe}*/}
                                         {/*    className={classes.FollowBtn}*/}
