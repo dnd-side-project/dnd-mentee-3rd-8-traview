@@ -233,12 +233,10 @@ function Edit(props) {
                 .doc(user.uid)
                 .get()
                 .then((doc) => {
-                    console.log(user);
                     dispatch({
                         type: actionTypes.SET_USER,
                         user: doc.data(),
                     });
-                    console.log(user);
                 });
             props.setIsIntroduction(isIntroduction);
             alert('게시물이 수정되었습니다.');
