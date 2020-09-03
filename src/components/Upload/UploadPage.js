@@ -23,7 +23,6 @@ import db, { storage } from '../../firebase';
 import Projection from 'proj4';
 import { extraApi } from '../../api_manager';
 import { useStateValue } from '../../StateProvider';
-
 let isSearching = false;
 let isEndReached = false;
 let currentPage = 1;
@@ -109,6 +108,8 @@ export default function UploadPage(props) {
                                 title: title,
                                 username: user.displayName,
                                 address: address,
+                                uid: user.uid,
+                                //  {console.log(user.uid)}
                             });
                         });
                 }

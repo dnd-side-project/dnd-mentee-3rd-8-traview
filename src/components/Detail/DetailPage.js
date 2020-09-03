@@ -32,6 +32,10 @@ import { RatingFont } from '../Upload/UploadFunction/Rating';
 import ChatInput from './DetailFunction/ChatInput';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Subscribe from './DetailFunction/Subscribe';
+import { useStateValue } from '../../StateProvider';
+import { Route } from 'react-router-dom';
+import Mypage from '../../routes/Mypage';
 
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
@@ -61,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function DetailPage(props) {
     const classes = useStyles();
+    const [{ user }] = useStateValue();
     const [subscribe, setSubscribe] = useState(false);
     const [roomDetails, setRoomDetails] = useState(null);
     const [roomMessages, setRoomMessages] = useState([]);
@@ -68,10 +73,6 @@ export default function DetailPage(props) {
         window.open(
             `https://map.kakao.com/link/map/${props.address},${props.latitude},${props.longitude}`
         );
-    };
-
-    const onSubscribe = () => {
-        setSubscribe(!subscribe);
     };
     useEffect(() => {
         if (props.id) {
@@ -172,19 +173,22 @@ export default function DetailPage(props) {
                                         >
                                             팔로워 {'223'}
                                         </p>
-                                        <Button
-                                            onClick={onSubscribe}
-                                            className={classes.FollowBtn}
-                                            style={{
-                                                background: `${
-                                                    subscribe ? 'blue' : 'red'
-                                                }`,
-                                            }}
-                                        >
-                                            {subscribe
-                                                ? 'subscribed'
-                                                : '팔로우'}
-                                        </Button>
+                                        {user && user.uid && (
+                                            <Subscribe userTo={props.uid} />
+                                        )}
+                                        {/*<Button*/}
+                                        {/*    onClick={onSubscribe}*/}
+                                        {/*    className={classes.FollowBtn}*/}
+                                        {/*    style={{*/}
+                                        {/*        background: `${*/}
+                                        {/*            subscribe ? 'blue' : 'red'*/}
+                                        {/*        }`,*/}
+                                        {/*    }}*/}
+                                        {/*>*/}
+                                        {/*    {subscribe*/}
+                                        {/*        ? 'subscribed'*/}
+                                        {/*        : '팔로우'}*/}
+                                        {/*</Button>*/}
                                     </div>
                                 </LeftBottomContainer>
                                 <RightTopContainer>
