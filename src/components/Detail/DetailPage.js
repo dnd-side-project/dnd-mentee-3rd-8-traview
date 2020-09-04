@@ -96,7 +96,7 @@ export default function DetailPage(props) {
             maxWidth={false}
             open={props.open}
             onClose={props.close}
-            aria-labelledby="form-dialog-title"
+            // aria-labelledby="form-dialog-title"
             PaperProps={{
                 style: {
                     backgroundColor: 'rgba(64, 64, 64, 0.7)',
@@ -363,7 +363,13 @@ export default function DetailPage(props) {
                             >
                                 {roomMessages.map(
                                     (
-                                        { message, timestamp, user, userimage },
+                                        {
+                                            message,
+                                            timestamp,
+                                            user,
+                                            userimage,
+                                            uid,
+                                        },
                                         index
                                     ) => (
                                         <Message
@@ -372,6 +378,7 @@ export default function DetailPage(props) {
                                             timestamp={timestamp}
                                             user={user}
                                             userImage={userimage}
+                                            uid={uid}
                                         />
                                     )
                                 )}

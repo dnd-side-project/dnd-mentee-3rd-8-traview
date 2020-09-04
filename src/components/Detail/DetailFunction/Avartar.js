@@ -55,6 +55,22 @@ function Avartar(props) {
                 alt="Avartarimage"
             />
         );
+    } else if (props.Type === 'comment') {
+        return (
+            <img
+                style={{
+                    borderRadius: '20px',
+                    width: '40px',
+                    height: '40px',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center center',
+                    backgroundRepeat: 'no-repeat',
+                    marginRight: '20px',
+                }}
+                src={detailuser}
+                alt=""
+            />
+        );
     }
 }
 
