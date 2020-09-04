@@ -112,11 +112,11 @@ function Subscribe(props) {
                     onClick={onSubscribe}
                     style={{
                         backgroundColor: `${
-                            subscribed ? '#ff534b' : '#000000'
+                            subscribed ? '#000000' : '#ff534b'
                         }`,
                     }}
                 >
-                    {subscribed ? '팔로잉' : '팔로우'}
+                    {subscribed ? '팔로우' : '팔로잉'}
                 </Button>
             )}
         </>
