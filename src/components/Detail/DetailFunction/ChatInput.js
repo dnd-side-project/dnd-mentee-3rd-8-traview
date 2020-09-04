@@ -28,6 +28,7 @@ function ChatInput(props) {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     user: user.displayName,
                     userimage: user.photoURL,
+                    uid: user.uid,
                 });
             }
         }

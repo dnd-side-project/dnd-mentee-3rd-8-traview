@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const Avartar = styled.div`
-    border-radius: 20px;
-    width:40px;
-    height:40px;
-    background-image: url(${(props) => props.bg});
-    background-size: cover;
-    background-position: center center;
-    background repeat: no-repeat;
-    margin-right:20px;
-`;
+import Avartar from './Avartar';
+// const Avartar = styled.div`
+//     border-radius: 20px;
+//     width:40px;
+//     height:40px;
+//     background-image: url(${(props) => props.bg});
+//     background-size: cover;
+//     background-position: center center;
+//     background repeat: no-repeat;
+//     margin-right:20px;
+// `;
 const UserMessage = styled.p`
     font-family: Noto Sans KR;
     font-style: normal;
@@ -30,8 +30,10 @@ function Message(props) {
                 alignItems: 'center',
             }}
         >
-            <Avartar bg={props.userImage} />
+            {/*<Avartar />*/}
+            {/*<Avartar bg={props.userImage} />*/}
 
+            <Avartar uid={props.uid} Type="comment" />
             <UserMessage style={{ marginRight: '20px' }}>
                 {props.user}
             </UserMessage>
