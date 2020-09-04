@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import DetailPage from '../Detail/DetailPage';
+import Avartar from '../Detail/DetailFunction/Avartar';
 const LeftBottomContainer = styled.div`
     position: absolute;
     left: 6px;
@@ -119,17 +120,7 @@ function BestPicture({
             <ImageContainer onClick={() => setIsModalOpen(true)}>
                 <Image src={imageUrl} alt="" />
                 <LeftBottomContainer>
-                    <img
-                        style={{
-                            width: '28px',
-                            height: '28px',
-                            borderRadius: '14px',
-                            objectFit: 'cover',
-                            marginBottom: '3px',
-                        }}
-                        src={avatar}
-                        alt=""
-                    />
+                    <Avartar uid={uid} Type="Best" />
                     <TextBox>{username}</TextBox>
                 </LeftBottomContainer>
                 <RightTopContainer>

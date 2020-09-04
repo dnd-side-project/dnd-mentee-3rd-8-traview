@@ -33,9 +33,7 @@ import ChatInput from './DetailFunction/ChatInput';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Subscribe from './DetailFunction/Subscribe';
-import { useStateValue } from '../../StateProvider';
-import { Route } from 'react-router-dom';
-import Mypage from '../../routes/Mypage';
+import Avartar from './DetailFunction/Avartar';
 
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
@@ -65,8 +63,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function DetailPage(props) {
     const classes = useStyles();
-    const [{ user }] = useStateValue();
-    const [subscribe, setSubscribe] = useState(false);
     const [roomDetails, setRoomDetails] = useState(null);
     const [roomMessages, setRoomMessages] = useState([]);
     const openMap = () => {
@@ -144,20 +140,21 @@ export default function DetailPage(props) {
                                     <Countbox>{props.heart}</Countbox>
                                 </LeftTopContainer>
                                 <LeftBottomContainer>
-                                    <img
-                                        style={{
-                                            width: '70px',
-                                            height: '70px',
-                                            borderRadius: '40px',
-                                            objectFit: 'cover',
-                                            marginBottom: '3px',
-                                            border: '1px solid #F534B',
-                                            boxSizing: 'border-box',
-                                            marginRight: '9px',
-                                        }}
-                                        src={props.avatar}
-                                        alt="Avartarimage"
-                                    />
+                                    <Avartar uid={props.uid} Type="Detail" />
+                                    {/*<img*/}
+                                    {/*    style={{*/}
+                                    {/*        width: '70px',*/}
+                                    {/*        height: '70px',*/}
+                                    {/*        borderRadius: '40px',*/}
+                                    {/*        objectFit: 'cover',*/}
+                                    {/*        marginBottom: '3px',*/}
+                                    {/*        border: '1px solid #F534B',*/}
+                                    {/*        boxSizing: 'border-box',*/}
+                                    {/*        marginRight: '9px',*/}
+                                    {/*    }}*/}
+                                    {/*    src={<Avartar/}>*/}
+                                    {/*    alt="Avartarimage"*/}
+                                    {/*/>*/}
                                     <div
                                         style={{
                                             alignItems: 'left',

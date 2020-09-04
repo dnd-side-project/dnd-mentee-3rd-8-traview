@@ -3,8 +3,6 @@ import { useStateValue } from '../../../StateProvider';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import db from '../../../firebase';
-import { actionTypes } from '../../../reducer';
-import firebase from 'firebase';
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
         color: '#FFFFFF',

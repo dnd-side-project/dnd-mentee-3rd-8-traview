@@ -1,6 +1,7 @@
 import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 import DetailPage from '../Detail/DetailPage';
+import Avartar from '../Detail/DetailFunction/Avartar';
 
 const LeftBottomContainer = styled.div`
     position: absolute;
@@ -143,17 +144,7 @@ const Picture = forwardRef(
                     <ImageContainer>
                         <Image src={imageUrl} alt="" />
                         <LeftBottomContainer>
-                            <img
-                                style={{
-                                    width: '44px',
-                                    height: '44px',
-                                    borderRadius: '22px',
-                                    objectFit: 'cover',
-                                    marginBottom: '3px',
-                                }}
-                                src={avatar}
-                                alt=""
-                            />
+                            <Avartar uid={uid} Type="MainArea" />
                             <TextBox>{username}</TextBox>
                         </LeftBottomContainer>
                         <RightTopContainer>
