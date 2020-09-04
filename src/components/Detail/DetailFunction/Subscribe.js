@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
         boxSizing: 'border-box',
         borderRadius: '16px',
         marginTop: '10px',
+        background: 'black',
     },
 }));
 //{user.displayName} 지금 유저이름
@@ -105,9 +106,17 @@ function Subscribe(props) {
             >
                 팔로워 {SubscribeNumber}
             </p>
-            {user && user.uid && (
-                <Button className={classes.FollowBtn} onClick={onSubscribe}>
-                    {subscribed ? 'subscribed' : '팔로우'}
+            {user && user.uid && user.uid !== props.userTo && (
+                <Button
+                    className={classes.FollowBtn}
+                    onClick={onSubscribe}
+                    style={{
+                        backgroundColor: `${
+                            subscribed ? '#ff534b' : '#000000'
+                        }`,
+                    }}
+                >
+                    {subscribed ? '팔로잉' : '팔로우'}
                 </Button>
             )}
         </>
