@@ -3,8 +3,6 @@ import { useStateValue } from '../../../StateProvider';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import db from '../../../firebase';
-import { actionTypes } from '../../../reducer';
-import firebase from 'firebase';
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
         color: '#FFFFFF',
@@ -18,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
         boxSizing: 'border-box',
         borderRadius: '16px',
         marginTop: '10px',
+        background: 'black',
     },
 }));
 //{user.displayName} 지금 유저이름
@@ -107,9 +106,17 @@ function Subscribe(props) {
             >
                 팔로워 {SubscribeNumber}
             </p>
-            {user && user.uid && (
-                <Button className={classes.FollowBtn} onClick={onSubscribe}>
-                    {subscribed ? 'subscribed' : '팔로우'}
+            {user && user.uid && user.uid !== props.userTo && (
+                <Button
+                    className={classes.FollowBtn}
+                    onClick={onSubscribe}
+                    style={{
+                        backgroundColor: `${
+                            subscribed ? '#000000' : '#ff534b'
+                        }`,
+                    }}
+                >
+                    {subscribed ? '팔로우' : '팔로잉'}
                 </Button>
             )}
         </>
