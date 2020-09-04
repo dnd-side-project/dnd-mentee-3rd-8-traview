@@ -2,6 +2,7 @@ import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 import DetailPage from '../Detail/DetailPage';
 import Avartar from '../Detail/DetailFunction/Avartar';
+import LikeInterest from '../Detail/DetailFunction/Like_Interest';
 
 const LeftBottomContainer = styled.div`
     position: absolute;
@@ -28,7 +29,6 @@ const RightTopContainer = styled.div`
     right: 12px;
     display: flex;
     align-items: center;
-    visibility: hidden;
 `;
 
 const Image = styled.img`
@@ -69,9 +69,6 @@ const ImageContainer = styled.div`
             visibility: visible;
         }
         ${RightBottomContainer} {
-            visibility: visible;
-        }
-        ${RightTopContainer} {
             visibility: visible;
         }
         ${Image} {
@@ -140,30 +137,36 @@ const Picture = forwardRef(
                     address={address}
                     uid={uid}
                 />
-                <Box onClick={() => setIsModalOpen(true)} ref={ref}>
+                <Box>
                     <ImageContainer>
-                        <Image src={imageUrl} alt="" />
+                        <Image
+                            onClick={() => setIsModalOpen(true)}
+                            ref={ref}
+                            src={imageUrl}
+                            alt=""
+                        />
                         <LeftBottomContainer>
                             <Avartar uid={uid} Type="MainArea" />
                             <TextBox>{username}</TextBox>
                         </LeftBottomContainer>
-                        <RightTopContainer>
-                            <img
-                                style={{ marginRight: '4px' }}
-                                src="/images/Interesting.png"
-                                alt=""
-                            />
-                            <TextBox>{novelty}</TextBox>
-                            <img
-                                style={{
-                                    marginRight: '4px',
-                                    marginLeft: '14px',
-                                }}
-                                src="/images/like.png"
-                                alt=""
-                            />
-                            <TextBox>{heart}</TextBox>
-                        </RightTopContainer>
+                        <LikeInterest postId={id} />
+                        {/*<RightTopContainer>*/}
+                        {/*    <img*/}
+                        {/*        style={{ marginRight: '4px' }}*/}
+                        {/*        src="/images/Interesting.png"*/}
+                        {/*        alt=""*/}
+                        {/*    />*/}
+                        {/*    <TextBox>{novelty}</TextBox>*/}
+                        {/*    <img*/}
+                        {/*        style={{*/}
+                        {/*            marginRight: '4px',*/}
+                        {/*            marginLeft: '14px',*/}
+                        {/*        }}*/}
+                        {/*        src="/images/like.png"*/}
+                        {/*        alt=""*/}
+                        {/*    />*/}
+                        {/*    <TextBox>{heart}</TextBox>*/}
+                        {/*</RightTopContainer>*/}
                         <RightBottomContainer>
                             <img
                                 style={{ marginRight: '4px' }}

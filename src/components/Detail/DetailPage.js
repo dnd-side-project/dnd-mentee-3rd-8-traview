@@ -34,6 +34,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Subscribe from './DetailFunction/Subscribe';
 import Avartar from './DetailFunction/Avartar';
+import LikeInterest from './DetailFunction/Like_Interest';
 
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
@@ -122,23 +123,26 @@ export default function DetailPage(props) {
                                         borderRadius: '20px',
                                     }}
                                 />
-                                <LeftTopContainer>
-                                    <img
-                                        style={{ marginRight: '4px' }}
-                                        src="/images/Interesting.png"
-                                        alt=""
-                                    />
-                                    <Countbox>{props.novelty}</Countbox>
-                                    <img
-                                        style={{
-                                            marginRight: '4px',
-                                            marginLeft: '14px',
-                                        }}
-                                        src="/images/like.png"
-                                        alt=""
-                                    />
-                                    <Countbox>{props.heart}</Countbox>
+                                <LeftTopContainer style={{ left: '150px' }}>
+                                    <LikeInterest postId={props.id} />
                                 </LeftTopContainer>
+                                {/*<LeftTopContainer>*/}
+                                {/*    <img*/}
+                                {/*        style={{ marginRight: '4px' }}*/}
+                                {/*        src="/images/Interesting.png"*/}
+                                {/*        alt=""*/}
+                                {/*    />*/}
+                                {/*    <Countbox>{props.novelty}</Countbox>*/}
+                                {/*    <img*/}
+                                {/*        style={{*/}
+                                {/*            marginRight: '4px',*/}
+                                {/*            marginLeft: '14px',*/}
+                                {/*        }}*/}
+                                {/*        src="/images/like.png"*/}
+                                {/*        alt=""*/}
+                                {/*    />*/}
+                                {/*    <Countbox>{props.heart}</Countbox>*/}
+                                {/*</LeftTopContainer>*/}
                                 <LeftBottomContainer>
                                     <Avartar uid={props.uid} Type="Detail" />
                                     {/*<img*/}
