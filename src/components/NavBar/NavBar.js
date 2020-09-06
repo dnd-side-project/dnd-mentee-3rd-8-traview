@@ -139,7 +139,6 @@ export default () => {
             <Alert
                 icon={false}
                 message={'검색어를 입력해주세요.'}
-                link={`/`}
                 display={isAlert}
                 setAlert={setIsAlert}
             />

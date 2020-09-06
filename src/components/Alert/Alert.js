@@ -17,13 +17,22 @@ const Alert = ({ link, display, icon, message, setAlert }) => {
                             <CloseIcon className="alert__x" />
                         )}
                         <h1>{message}</h1>
-                        <Link
-                            to={link}
-                            className="close"
-                            onClick={() => setAlert(false)}
-                        >
-                            Close
-                        </Link>
+                        {link ? (
+                            <Link
+                                to={link}
+                                className="close"
+                                onClick={() => setAlert(false)}
+                            >
+                                Close
+                            </Link>
+                        ) : (
+                            <div
+                                className="close"
+                                onClick={() => setAlert(false)}
+                            >
+                                Close
+                            </div>
+                        )}
                     </div>
                 </div>
             ) : (
@@ -34,7 +43,7 @@ const Alert = ({ link, display, icon, message, setAlert }) => {
 };
 
 Alert.propTypes = {
-    link: PropTypes.string.isRequired,
+    link: PropTypes.string,
     display: PropTypes.bool.isRequired,
     icon: PropTypes.bool.isRequired,
     message: PropTypes.string.isRequired,
