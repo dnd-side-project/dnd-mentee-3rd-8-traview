@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import { Avatar } from '@material-ui/core';
+import Alert from '../Alert/Alert';
 
 const MarginContainer = styled.div`
     max-width: 1440px;
@@ -97,6 +98,7 @@ export default () => {
     const [IsModalOpen, setIsModalOpen] = useState(false);
     const [area, setArea] = useState('');
     const history = useHistory();
+    const [isAlert, setIsAlert] = useState(false);
 
     const onClose = () => {
         setIsModalOpen(false);
@@ -120,7 +122,7 @@ export default () => {
         e.preventDefault();
 
         if (area === '') {
-            alert('검색어를 입력해주세요.');
+            setIsAlert(true);
             return;
         }
 
@@ -134,6 +136,13 @@ export default () => {
 
     return (
         <MarginContainer>
+            <Alert
+                icon={false}
+                message={'검색어를 입력해주세요.'}
+                link={`/`}
+                display={isAlert}
+                setAlert={setIsAlert}
+            />
             <UploadPage open={IsModalOpen} close={onClose} />
             <Container>
                 <Title to={'/'}>
