@@ -61,12 +61,12 @@ export default () => {
     const [posts, setPosts] = useState([]);
     const [postList, setPostList] = useState([]);
     const [last, setLast] = useState(null);
-    const [mood, setMood] = useState('');
+    const [category, setCategory] = useState('');
     const [hasMore, setHasMore] = useState(true);
-    const moods = ['내가 올린 사진', '신기해요', '찜목록'];
+    const lists = ['내가 올린 사진', '신기해요', '찜목록'];
     const [{ user }] = useStateValue();
     useEffect(() => {
-        setMood('내가 올린 사진');
+        setCategory('내가 올린 사진');
         const unsubscribe = db
             .collection('posts')
             .where('username', '==', user.displayName)
@@ -88,7 +88,8 @@ export default () => {
     const onChagnePost = (e) => {
         let newPostList = [];
         setPosts([]);
-        setMood(e.currentTarget.innerText);
+
+        setCategory(e.currentTarget.innerText);
         const unsubscribe = db;
         if (e.currentTarget.innerText === '내가 올린 사진') {
             db.collection('posts')
@@ -135,13 +136,13 @@ export default () => {
             <HeaderContainer>
                 <Title>게시물</Title>
                 <MoodList>
-                    {moods.map((moodText) => (
+                    {lists.map((categoryText) => (
                         <Mood
-                            key={moodText}
+                            key={categoryText}
                             onClick={onChagnePost}
-                            active={moodText === mood ? true : false}
+                            active={categoryText === category ? true : false}
                         >
-                            {moodText}
+                            {categoryText}
                         </Mood>
                     ))}
                 </MoodList>
