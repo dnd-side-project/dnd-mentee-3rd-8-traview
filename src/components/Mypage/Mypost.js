@@ -93,7 +93,7 @@ export default () => {
         const unsubscribe = db;
         if (e.currentTarget.innerText === '내가 올린 사진') {
             db.collection('posts')
-                .where('username', '==', user.displayName)
+                .where('uid', '==', user.uid)
                 .onSnapshot((snapshot) => {
                     setPosts(
                         snapshot.docs.map((doc) => ({

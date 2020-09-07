@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import db from '../../../firebase';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 const FollowerAvatar = styled.img`
     &: hover {
         transform: scale(1.3);
     }
 `;
 function Avartar(props) {
+    const history = useHistory();
     const [detailuser, setDetailUser] = useState(null);
     useEffect(() => {
         db.collection('users')
@@ -83,22 +85,24 @@ function Avartar(props) {
         );
     } else if (props.Type === 'Follower') {
         return (
-            <FollowerAvatar
-                style={{
-                    cursor: 'pointer',
-                    borderRadius: '80px',
-                    width: '130px',
-                    height: '130px',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center center',
-                    backgroundRepeat: 'no-repeat',
-                    border: '2px solid #E44E47',
-                    boxSizing: 'border-box',
-                    marginRight: '50px',
-                }}
-                src={detailuser}
-                alt=""
-            />
+            <a href={`/FriendsPage/${props.uid}`}>
+                <FollowerAvatar
+                    style={{
+                        cursor: 'pointer',
+                        borderRadius: '80px',
+                        width: '130px',
+                        height: '130px',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center',
+                        backgroundRepeat: 'no-repeat',
+                        border: '2px solid #E44E47',
+                        boxSizing: 'border-box',
+                        marginRight: '50px',
+                    }}
+                    src={detailuser}
+                    alt=""
+                />
+            </a>
         );
     }
 }
