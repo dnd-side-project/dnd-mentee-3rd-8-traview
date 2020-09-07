@@ -43,7 +43,6 @@ const Mood = styled.li`
     font-size: 26px;
     line-height: 38px;
     letter-spacing: -0.52px;
-
     &:hover {
         color: #ff534b;
         transition: color 300ms ease-out;
@@ -61,12 +60,11 @@ export default (props) => {
     const [posts, setPosts] = useState([]);
     const [postList, setPostList] = useState([]);
     const [last, setLast] = useState(null);
-    const [category, setCategory] = useState('내가 올린 사진');
+    const [category, setCategory] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const lists = ['내가 올린 사진', '신기해요', '찜목록'];
     useEffect(() => {
         if (props.uid) {
-            setCategory('내가 올린 사진');
             const unsubscribe = db
                 .collection('posts')
                 .where('uid', '==', props.uid)
@@ -89,10 +87,9 @@ export default (props) => {
     const onChagnePost = (e) => {
         let newPostList = [];
         setPosts([]);
-
         setCategory(e.currentTarget.innerText);
         const unsubscribe = db;
-        if (e.currentTarget.innerText === '내가 올린 사진' || '최근') {
+        if (e.currentTarget.innerText === '내가 올린 사진') {
             db.collection('posts')
                 .where('uid', '==', props.uid)
                 .onSnapshot((snapshot) => {
