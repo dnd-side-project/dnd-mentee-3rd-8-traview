@@ -57,33 +57,34 @@ const Container = styled.div`
     column-gap: 40px;
 `;
 
-export default () => {
+export default (props) => {
     const [posts, setPosts] = useState([]);
     const [postList, setPostList] = useState([]);
     const [last, setLast] = useState(null);
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState('내가 올린 사진');
     const [hasMore, setHasMore] = useState(true);
     const lists = ['내가 올린 사진', '신기해요', '찜목록'];
-    const [{ user }] = useStateValue();
     useEffect(() => {
-        setCategory('내가 올린 사진');
-        const unsubscribe = db
-            .collection('posts')
-            .where('username', '==', user.displayName)
-            .onSnapshot((snapshot) => {
-                setPosts(
-                    snapshot.docs.map((doc) => ({
-                        id: doc.id,
-                        post: doc.data(),
-                    }))
-                );
-                setLast(snapshot.docs[snapshot.docs.length - 1]);
-            });
+        if (props.uid) {
+            setCategory('내가 올린 사진');
+            const unsubscribe = db
+                .collection('posts')
+                .where('uid', '==', props.uid)
+                .onSnapshot((snapshot) => {
+                    setPosts(
+                        snapshot.docs.map((doc) => ({
+                            id: doc.id,
+                            post: doc.data(),
+                        }))
+                    );
+                    setLast(snapshot.docs[snapshot.docs.length - 1]);
+                });
 
-        return () => {
-            unsubscribe();
-        };
-    }, []);
+            return () => {
+                unsubscribe();
+            };
+        }
+    }, [props.uid]);
 
     const onChagnePost = (e) => {
         let newPostList = [];
@@ -91,9 +92,9 @@ export default () => {
 
         setCategory(e.currentTarget.innerText);
         const unsubscribe = db;
-        if (e.currentTarget.innerText === '내가 올린 사진') {
+        if (e.currentTarget.innerText === '내가 올린 사진' || '최근') {
             db.collection('posts')
-                .where('username', '==', user.displayName)
+                .where('uid', '==', props.uid)
                 .onSnapshot((snapshot) => {
                     setPosts(
                         snapshot.docs.map((doc) => ({
@@ -112,7 +113,7 @@ export default () => {
             }
             {
                 db.collection('Like_Inter')
-                    .where('user', '==', user.uid)
+                    .where('user', '==', props.uid)
                     .where('type', '==', Like_Inter)
                     .onSnapshot((snapshot) => {
                         newPostList = [...postList];

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Mypost from '../components/Mypage/Mypost';
 import { useStateValue } from '../StateProvider';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
-import Edit from '../components/Mypage/Edit';
+import db from '../firebase';
 const useStyles = makeStyles((theme) => ({
     Edit: {
         width: '75px',
@@ -61,30 +60,21 @@ const IntroductionFont = styled.p`
     letter-spacing: -0.48px;
     color: #ffffff;
 `;
-function Mypage() {
-    const classes = useStyles();
-    const [{ user }] = useStateValue();
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const onClose = () => {
-        setIsEditModalOpen(false);
-    };
-    const [isAvartar, setIsAvartar] = useState(user.photoURL);
-    const [isBackground, setIsBackground] = useState(user.background);
-    const [isIntroduction, setIsIntroduction] = useState(user.introduction);
+function FriendsPage(props) {
+    const [userinfo, setUserInfo] = useState('');
+    useEffect(() => {
+        const videoId = props.match.params.friendid; ///URL 에서 가져옴
+        db.collection('users')
+            .doc(videoId)
+            .get()
+            .then((doc) => {
+                setUserInfo(doc.data());
+            });
+    }, []);
     return (
         <div>
-            <Edit
-                open={isEditModalOpen}
-                close={onClose}
-                isIntroduction={isIntroduction} //소개
-                isBackground={isBackground} //백그라운드
-                isAvartar={isAvartar} //아바타      isIntroduction={isIntroduction} //소개
-                setIsIntroduction={setIsIntroduction} //소개
-                setIsBackground={setIsBackground} //백그라운드
-                setIsAvartar={setIsAvartar} //아바타      isIntroduction={isIntroduction} //소개
-            />
             <Container>
-                <BackgroundImage bg={isBackground} />
+                <BackgroundImage bg={userinfo.background} />
             </Container>
             <div
                 style={{
@@ -104,8 +94,8 @@ function Mypage() {
                     }}
                 >
                     <Avatar
-                        src={isAvartar}
-                        alt={user.displayName}
+                        src={userinfo.photoURL}
+                        alt={''}
                         style={{
                             width: '200px',
                             height: '200px',
@@ -113,14 +103,7 @@ function Mypage() {
                             boxSizing: 'border-box',
                         }}
                     />
-                    {/*// <AvatarBox bg={userInfo.user.photoURL} />*/}
-                    <Username>{user.displayName}</Username>
-                    <Button
-                        className={classes.Edit}
-                        onClick={() => setIsEditModalOpen(true)}
-                    >
-                        편집
-                    </Button>
+                    <Username>{userinfo.displayName}</Username>
                 </div>
                 <div
                     style={{
@@ -139,13 +122,14 @@ function Mypage() {
                                 fontWeight: '300',
                             }}
                         >
-                            {isIntroduction}
+                            {userinfo.introduction}
                         </IntroductionFont>
                     </div>
                 </div>
             </div>
-            <Mypost displayName={user.displayName} uid={user.uid} />
+
+            <Mypost displayName={userinfo.displayName} uid={userinfo.uid} />
         </div>
     );
 }
-export default Mypage;
+export default FriendsPage;
