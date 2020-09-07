@@ -7,6 +7,7 @@ import Login from '../routes/Login';
 import Area from '../routes/Area';
 import Register from '../routes/Register';
 import Mypage from '../routes/Mypage';
+import FollowPage from '../routes/FollowPage';
 import { useStateValue } from '../StateProvider';
 
 const GlobalStyle = createGlobalStyle`
@@ -30,6 +31,7 @@ function App() {
                     <NavBar />
                     <Route exact path="/" component={Home} />
                     <Route exact path="/area" component={Area} />
+                    <Route exact path="/follow" component={FollowPage} />
                     {user && user.uid && (
                         <Route
                             exact

@@ -6,6 +6,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import db from '../../firebase';
 import UploadPage from '../Upload/UploadPage';
+import LikeInterest from '../Detail/DetailFunction/Like_Interest';
 const useStyles = makeStyles((theme) => ({
     ButtonGroup: {
         width: '150px',
@@ -198,20 +199,21 @@ export default ({
                         alt=""
                         onClick={() => setIsModalOpen(true)}
                     />
-                    <RightTopContainer>
-                        <img
-                            style={{ marginRight: '4px' }}
-                            src="/images/Interesting.png"
-                            alt=""
-                        />
-                        <TextBox>{novelty}</TextBox>
-                        <img
-                            style={{ marginRight: '4px', marginLeft: '14px' }}
-                            src="/images/like.png"
-                            alt=""
-                        />
-                        <TextBox>{heart}</TextBox>
-                    </RightTopContainer>
+                    <LikeInterest postId={id} />
+                    {/*<RightTopContainer>*/}
+                    {/*    <img*/}
+                    {/*        style={{ marginRight: '4px' }}*/}
+                    {/*        src="/images/Interesting.png"*/}
+                    {/*        alt=""*/}
+                    {/*    />*/}
+                    {/*    <TextBox>{novelty}</TextBox>*/}
+                    {/*    <img*/}
+                    {/*        style={{ marginRight: '4px', marginLeft: '14px' }}*/}
+                    {/*        src="/images/like.png"*/}
+                    {/*        alt=""*/}
+                    {/*    />*/}
+                    {/*    <TextBox>{heart}</TextBox>*/}
+                    {/*</RightTopContainer>*/}
 
                     <ButtonContainer>
                         <ButtonGroup

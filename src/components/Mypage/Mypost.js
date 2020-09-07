@@ -38,7 +38,6 @@ const Mood = styled.li`
     box-sizing: border-box;
     color: ${(props) => (props.active ? '#ff534b' : '')};
     cursor: pointer;
-
     font-style: normal;
     font-weight: 300;
     font-size: 26px;
@@ -60,12 +59,14 @@ const Container = styled.div`
 
 export default () => {
     const [posts, setPosts] = useState([]);
+    const [postList, setPostList] = useState([]);
     const [last, setLast] = useState(null);
     const [mood, setMood] = useState('');
     const [hasMore, setHasMore] = useState(true);
     const moods = ['내가 올린 사진', '신기해요', '찜목록'];
     const [{ user }] = useStateValue();
     useEffect(() => {
+        setMood('내가 올린 사진');
         const unsubscribe = db
             .collection('posts')
             .where('username', '==', user.displayName)
@@ -82,57 +83,53 @@ export default () => {
         return () => {
             unsubscribe();
         };
-    }, [user.displayName]);
+    }, []);
 
-    const next = () => {
-        if (last) {
+    const onChagnePost = (e) => {
+        let newPostList = [];
+        setPosts([]);
+        setMood(e.currentTarget.innerText);
+        const unsubscribe = db;
+        if (e.currentTarget.innerText === '내가 올린 사진') {
             db.collection('posts')
-                // .orderBy('timestamp', 'desc')
                 .where('username', '==', user.displayName)
-                .startAfter(last)
-                .limit(10)
                 .onSnapshot((snapshot) => {
-                    if (snapshot.empty) {
-                        setHasMore(false);
-
-                        return;
-                    }
-                    setPosts([
-                        ...posts,
-                        ...snapshot.docs.map((doc) => ({
+                    setPosts(
+                        snapshot.docs.map((doc) => ({
                             id: doc.id,
                             post: doc.data(),
-                        })),
-                    ]);
+                        }))
+                    );
                     setLast(snapshot.docs[snapshot.docs.length - 1]);
                 });
+        } else {
+            let Like_Inter;
+            {
+                if (e.currentTarget.innerText === '신기해요')
+                    Like_Inter = 'Interest';
+                else Like_Inter = 'Like';
+            }
+            {
+                db.collection('Like_Inter')
+                    .where('user', '==', user.uid)
+                    .where('type', '==', Like_Inter)
+                    .onSnapshot((snapshot) => {
+                        newPostList = [...postList];
+                        snapshot.docs.map((doc) => {
+                            db.collection('posts')
+                                .doc(doc.data().postId)
+                                .onSnapshot((snapshot) => {
+                                    newPostList.push({
+                                        id: snapshot.id,
+                                        post: snapshot.data(),
+                                    });
+                                    setPosts([...newPostList]);
+                                });
+                        });
+                    });
+            }
         }
     };
-
-    const moodNext = () => {
-        if (last) {
-            db.collection('posts')
-                //  .orderBy('timestamp', 'desc')
-                .where('username', '==', user.displayName)
-                .startAfter(last)
-                .limit(10)
-                .onSnapshot((snapshot) => {
-                    if (snapshot.empty) {
-                        setHasMore(false);
-                        return;
-                    }
-                    setPosts([
-                        ...posts,
-                        ...snapshot.docs.map((doc) => ({
-                            id: doc.id,
-                            post: doc.data(),
-                        })),
-                    ]);
-                    setLast(snapshot.docs[snapshot.docs.length - 1]);
-                });
-        }
-    };
-
     return (
         <MarginContainer>
             <HeaderContainer>
@@ -141,18 +138,17 @@ export default () => {
                     {moods.map((moodText) => (
                         <Mood
                             key={moodText}
-                            // onClick={onMoodChange}
-                            // active={moodText === mood ? true : false}
+                            onClick={onChagnePost}
+                            active={moodText === mood ? true : false}
                         >
                             {moodText}
                         </Mood>
                     ))}
                 </MoodList>
             </HeaderContainer>
-
             <InfiniteScroll
                 dataLength={posts.length}
-                next={(mood && moodNext) || next}
+                next={() => setHasMore(false)}
                 hasMore={hasMore}
                 loader={<Loader />}
             >

@@ -112,7 +112,7 @@ function LikeInterest(props) {
         db.collection('Like_Inter')
             .where('postId', '==', props.postId)
             .where('type', '==', 'Like')
-            .where('user', '==', user.uid)
+
             .get()
             .then((doc) => {
                 if (doc.empty) {
@@ -159,8 +159,6 @@ function LikeInterest(props) {
         db.collection('Like_Inter')
             .where('postId', '==', props.postId)
             .where('type', '==', 'Interest')
-            .where('user', '==', user.uid)
-
             .get()
             .then((doc) => {
                 if (doc.empty) {

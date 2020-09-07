@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import { useStateValue } from '../../StateProvider';
 
 const MarginContainer = styled.div`
     max-width: 1440px;
@@ -78,6 +80,8 @@ const InterestingBox = styled.div`
 `;
 
 function PickBox() {
+    const [{ user }] = useStateValue();
+    const history = useHistory();
     return (
         <MarginContainer>
             <Main>
@@ -102,6 +106,9 @@ function PickBox() {
                     style={{
                         background:
                             'linear-gradient(150.6deg, #851095 -11.03%, #821297 -11.03%, #A75DEA 42.9%, #6159DE 86.99%)',
+                    }}
+                    onClick={() => {
+                        user && user.uid && history.push('/Follow');
                     }}
                 >
                     <MainLabel>팔로워 PICK</MainLabel>
