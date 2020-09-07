@@ -14,6 +14,7 @@ function Avartar(props) {
         return (
             <img
                 style={{
+                    cursor: 'pointer',
                     width: '70px',
                     height: '70px',
                     borderRadius: '40px',
@@ -31,6 +32,7 @@ function Avartar(props) {
         return (
             <img
                 style={{
+                    cursor: 'pointer',
                     width: '28px',
                     height: '28px',
                     borderRadius: '14px',
@@ -45,6 +47,7 @@ function Avartar(props) {
         return (
             <img
                 style={{
+                    cursor: 'pointer',
                     width: '44px',
                     height: '44px',
                     borderRadius: '22px',
@@ -59,6 +62,7 @@ function Avartar(props) {
         return (
             <img
                 style={{
+                    cursor: 'pointer',
                     borderRadius: '20px',
                     width: '40px',
                     height: '40px',
