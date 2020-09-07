@@ -127,7 +127,8 @@ function FriendsPage(props) {
                     </div>
                 </div>
             </div>
-            {/*<Mypost />*/}
+
+            <Mypost displayName={userinfo.displayName} uid={userinfo.uid} />
         </div>
     );
 }

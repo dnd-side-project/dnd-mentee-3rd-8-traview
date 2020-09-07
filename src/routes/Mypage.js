@@ -144,7 +144,7 @@ function Mypage() {
                     </div>
                 </div>
             </div>
-            <Mypost />
+            <Mypost displayName={user.displayName} uid={user.uid} />
         </div>
     );
 }
