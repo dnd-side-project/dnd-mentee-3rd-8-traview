@@ -7,6 +7,8 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import db from '../../firebase';
 import UploadPage from '../Upload/UploadPage';
 import LikeInterest from '../Detail/DetailFunction/Like_Interest';
+import match from 'proj4/lib/match';
+import { useStateValue } from '../../StateProvider';
 const useStyles = makeStyles((theme) => ({
     ButtonGroup: {
         width: '150px',
@@ -73,7 +75,6 @@ const Description = styled.p`
 
 const ImageContainer = styled.div`
     position: relative;
-
     &: hover {
         ${RightTopContainer} {
             visibility: visible;
@@ -116,10 +117,11 @@ export default ({
     username,
     address,
     id,
+    videoId,
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [IsUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-
+    const [{ user }] = useStateValue();
     const onClose = () => {
         setIsModalOpen(false);
         setIsUpdateModalOpen(false);
@@ -191,7 +193,6 @@ export default ({
                 username={username}
                 address={address}
             />
-
             <Box>
                 <ImageContainer>
                     <Image
@@ -214,45 +215,46 @@ export default ({
                     {/*    />*/}
                     {/*    <TextBox>{heart}</TextBox>*/}
                     {/*</RightTopContainer>*/}
-
-                    <ButtonContainer>
-                        <ButtonGroup
-                            className={classes.ButtonGroup}
-                            orientation="vertical"
-                        >
-                            <Button
-                                className={classes.Button}
-                                style={{
-                                    width: '100%',
-                                    height: '50%',
-                                }}
-                                onClick={UpdatePost}
+                    {user && user.uid && videoId === user.uid && (
+                        <ButtonContainer>
+                            <ButtonGroup
+                                className={classes.ButtonGroup}
+                                orientation="vertical"
                             >
-                                게시글 수정
-                            </Button>
-                            {/*<hr*/}
-                            {/*    style={{*/}
-                            {/*        width: '100%',*/}
-                            {/*        border: '1px solid white',*/}
-                            {/*    }}*/}
-                            {/*/>*/}
-                            <Button
-                                className={classes.Button}
-                                style={{
-                                    //  hover :{
-                                    //     $`box` :{
-                                    //     visibility: 'hidden'
-                                    // }},
-                                    width: '100%',
-                                    height: '50%',
-                                    border: 'none',
-                                }}
-                                onClick={DeletePost}
-                            >
-                                게시글 삭제
-                            </Button>
-                        </ButtonGroup>
-                    </ButtonContainer>
+                                <Button
+                                    className={classes.Button}
+                                    style={{
+                                        width: '100%',
+                                        height: '50%',
+                                    }}
+                                    onClick={UpdatePost}
+                                >
+                                    게시글 수정
+                                </Button>
+                                {/*<hr*/}
+                                {/*    style={{*/}
+                                {/*        width: '100%',*/}
+                                {/*        border: '1px solid white',*/}
+                                {/*    }}*/}
+                                {/*/>*/}
+                                <Button
+                                    className={classes.Button}
+                                    style={{
+                                        //  hover :{
+                                        //     $`box` :{
+                                        //     visibility: 'hidden'
+                                        // }},
+                                        width: '100%',
+                                        height: '50%',
+                                        border: 'none',
+                                    }}
+                                    onClick={DeletePost}
+                                >
+                                    게시글 삭제
+                                </Button>
+                            </ButtonGroup>
+                        </ButtonContainer>
+                    )}
                 </ImageContainer>
                 <ImageTitle onClick={() => setIsModalOpen(true)}>
                     {title}

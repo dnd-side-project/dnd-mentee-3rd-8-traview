@@ -62,6 +62,7 @@ const IntroductionFont = styled.p`
 `;
 function FriendsPage(props) {
     const [userinfo, setUserInfo] = useState('');
+    const videoId = props.match.params.friendid; ///URL 에서 가져옴
     useEffect(() => {
         const videoId = props.match.params.friendid; ///URL 에서 가져옴
         db.collection('users')
@@ -127,8 +128,11 @@ function FriendsPage(props) {
                     </div>
                 </div>
             </div>
-
-            <Mypost displayName={userinfo.displayName} uid={userinfo.uid} />
+            <Mypost
+                displayName={userinfo.displayName}
+                uid={userinfo.uid}
+                videoId={videoId}
+            />
         </div>
     );
 }

@@ -89,10 +89,9 @@ export default (props) => {
     const onChagnePost = (e) => {
         let newPostList = [];
         setPosts([]);
-
         setCategory(e.currentTarget.innerText);
         const unsubscribe = db;
-        if (e.currentTarget.innerText === '내가 올린 사진' || '최근') {
+        if (e.currentTarget.innerText === '내가 올린 사진') {
             db.collection('posts')
                 .where('uid', '==', props.uid)
                 .onSnapshot((snapshot) => {
@@ -157,6 +156,7 @@ export default (props) => {
                 <Container>
                     {posts.map(({ post, id }) => (
                         <Picture
+                            videoId={props.videoId}
                             uid={post.uid}
                             id={id}
                             key={id}
