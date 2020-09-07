@@ -88,6 +88,7 @@ export default () => {
     const onChagnePost = (e) => {
         let newPostList = [];
         setPosts([]);
+
         setCategory(e.currentTarget.innerText);
         const unsubscribe = db;
         if (e.currentTarget.innerText === '내가 올린 사진') {
