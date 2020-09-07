@@ -43,7 +43,6 @@ const Mood = styled.li`
     font-size: 26px;
     line-height: 38px;
     letter-spacing: -0.52px;
-
     &:hover {
         color: #ff534b;
         transition: color 300ms ease-out;
@@ -91,7 +90,7 @@ export default (props) => {
         setPosts([]);
         setCategory(e.currentTarget.innerText);
         const unsubscribe = db;
-        if (e.currentTarget.innerText === '내가 올린 사진') {
+        if (e.currentTarget.innerText === '내가 올린 사진' || '최근') {
             db.collection('posts')
                 .where('uid', '==', props.uid)
                 .onSnapshot((snapshot) => {
