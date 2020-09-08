@@ -5,6 +5,7 @@ import { useStateValue } from '../StateProvider';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import db from '../firebase';
+import { useParams } from 'react-router';
 const useStyles = makeStyles((theme) => ({
     Edit: {
         width: '75px',
@@ -61,14 +62,12 @@ const IntroductionFont = styled.p`
     color: #ffffff;
 `;
 function FriendsPage(props) {
+    const { friendid } = useParams();
     const [userinfo, setUserInfo] = useState('');
 
-    const videoId = props.match.params.friendid; ///URL 에서 가져옴
-
     useEffect(() => {
-        const videoId = props.match.params.friendid; ///URL 에서 가져옴
         db.collection('users')
-            .doc(videoId)
+            .doc(friendid)
             .get()
             .then((doc) => {
                 setUserInfo(doc.data());
@@ -130,11 +129,7 @@ function FriendsPage(props) {
                     </div>
                 </div>
             </div>
-            <Mypost
-                displayName={userinfo.displayName}
-                uid={userinfo.uid}
-                videoId={videoId}
-            />
+            <Mypost uid={userinfo.uid} />
         </div>
     );
 }

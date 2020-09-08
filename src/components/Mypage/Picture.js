@@ -7,8 +7,8 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import db from '../../firebase';
 import UploadPage from '../Upload/UploadPage';
 import LikeInterest from '../Detail/DetailFunction/Like_Interest';
-import match from 'proj4/lib/match';
 import { useStateValue } from '../../StateProvider';
+import { useParams, useLocation } from 'react-router';
 const useStyles = makeStyles((theme) => ({
     ButtonGroup: {
         width: '150px',
@@ -119,6 +119,7 @@ export default ({
     id,
     videoId,
 }) => {
+    const location = useLocation();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [IsUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
     const [{ user }] = useStateValue();
@@ -215,46 +216,48 @@ export default ({
                     {/*    />*/}
                     {/*    <TextBox>{heart}</TextBox>*/}
                     {/*</RightTopContainer>*/}
-                    {user && user.uid && videoId === user.uid && (
-                        <ButtonContainer>
-                            <ButtonGroup
-                                className={classes.ButtonGroup}
-                                orientation="vertical"
-                            >
-                                <Button
-                                    className={classes.Button}
-                                    style={{
-                                        width: '100%',
-                                        height: '50%',
-                                    }}
-                                    onClick={UpdatePost}
+                    {user &&
+                        user.uid &&
+                        location.pathname === `/user/:${user.uid}` && (
+                            <ButtonContainer>
+                                <ButtonGroup
+                                    className={classes.ButtonGroup}
+                                    orientation="vertical"
                                 >
-                                    게시글 수정
-                                </Button>
-                                {/*<hr*/}
-                                {/*    style={{*/}
-                                {/*        width: '100%',*/}
-                                {/*        border: '1px solid white',*/}
-                                {/*    }}*/}
-                                {/*/>*/}
-                                <Button
-                                    className={classes.Button}
-                                    style={{
-                                        //  hover :{
-                                        //     $`box` :{
-                                        //     visibility: 'hidden'
-                                        // }},
-                                        width: '100%',
-                                        height: '50%',
-                                        border: 'none',
-                                    }}
-                                    onClick={DeletePost}
-                                >
-                                    게시글 삭제
-                                </Button>
-                            </ButtonGroup>
-                        </ButtonContainer>
-                    )}
+                                    <Button
+                                        className={classes.Button}
+                                        style={{
+                                            width: '100%',
+                                            height: '50%',
+                                        }}
+                                        onClick={UpdatePost}
+                                    >
+                                        게시글 수정
+                                    </Button>
+                                    {/*<hr*/}
+                                    {/*    style={{*/}
+                                    {/*        width: '100%',*/}
+                                    {/*        border: '1px solid white',*/}
+                                    {/*    }}*/}
+                                    {/*/>*/}
+                                    <Button
+                                        className={classes.Button}
+                                        style={{
+                                            //  hover :{
+                                            //     $`box` :{
+                                            //     visibility: 'hidden'
+                                            // }},
+                                            width: '100%',
+                                            height: '50%',
+                                            border: 'none',
+                                        }}
+                                        onClick={DeletePost}
+                                    >
+                                        게시글 삭제
+                                    </Button>
+                                </ButtonGroup>
+                            </ButtonContainer>
+                        )}
                 </ImageContainer>
                 <ImageTitle onClick={() => setIsModalOpen(true)}>
                     {title}

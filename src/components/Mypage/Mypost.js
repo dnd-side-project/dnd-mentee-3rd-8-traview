@@ -6,6 +6,7 @@ import Loader from '../MainArea/Loader';
 import styled from 'styled-components';
 import '../MainArea/MainGrid.css';
 import { useStateValue } from '../../StateProvider';
+import { useParams } from 'react-router';
 
 const MarginContainer = styled.div`
     max-width: 1440px;
@@ -57,14 +58,23 @@ const Container = styled.div`
 `;
 
 export default (props) => {
+    const { friendid } = useParams();
     const [posts, setPosts] = useState([]);
     const [postList, setPostList] = useState([]);
     const [last, setLast] = useState(null);
     const [category, setCategory] = useState('');
     const [hasMore, setHasMore] = useState(true);
-    const lists = ['내가 올린 사진', '신기해요', '찜목록'];
+    let lists = ['내가 올린 사진', '신기해요', '찜목록'];
+    let Friendlists = ['최신', '신기해요', '찜목록'];
+    const [{ user }] = useStateValue();
     useEffect(() => {
         if (props.uid) {
+            {
+                user && user.uid && user.uid === props.uid
+                    ? setCategory('내가 올린 사진')
+                    : setCategory('최신');
+            }
+
             const unsubscribe = db
                 .collection('posts')
                 .where('uid', '==', props.uid)
@@ -89,7 +99,10 @@ export default (props) => {
         setPosts([]);
         setCategory(e.currentTarget.innerText);
         const unsubscribe = db;
-        if (e.currentTarget.innerText === '내가 올린 사진') {
+        if (
+            e.currentTarget.innerText === '내가 올린 사진' ||
+            e.currentTarget.innerText === '최신'
+        ) {
             db.collection('posts')
                 .where('uid', '==', props.uid)
                 .onSnapshot((snapshot) => {
@@ -134,7 +147,10 @@ export default (props) => {
             <HeaderContainer>
                 <Title>게시물</Title>
                 <MoodList>
-                    {lists.map((categoryText) => (
+                    {(user && user.uid && user.uid === props.uid
+                        ? lists
+                        : Friendlists
+                    ).map((categoryText) => (
                         <Mood
                             key={categoryText}
                             onClick={onChagnePost}

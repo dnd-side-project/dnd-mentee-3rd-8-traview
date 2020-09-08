@@ -215,6 +215,7 @@ function FollowPage() {
                                 if (doc !== undefined)
                                     return (
                                         <Avartar
+                                            key={doc.post.uid}
                                             uid={doc.post.uid}
                                             Type="Follower"
                                         />
