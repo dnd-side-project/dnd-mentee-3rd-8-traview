@@ -117,6 +117,7 @@ export default ({
     username,
     address,
     id,
+    videoId,
 }) => {
     const location = useLocation();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -215,7 +216,6 @@ export default ({
                     {/*    />*/}
                     {/*    <TextBox>{heart}</TextBox>*/}
                     {/*</RightTopContainer>*/}
-
                     {user &&
                         user.uid &&
                         location.pathname === `/user/:${user.uid}` && (
