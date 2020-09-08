@@ -18,6 +18,19 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '10px',
         background: 'black',
     },
+    Follow: {
+        color: '#FFFFFF',
+        border: '2px solid #FF534B',
+        height: '45px',
+        width: '112px',
+        fontWeight: 500,
+        fontSize: '24px',
+        lineHeight: '35px',
+        boxSizing: 'border-box',
+        borderRadius: '30px',
+        marginTop: '10px',
+        background: 'black',
+    },
 }));
 //{user.displayName} 지금 유저이름
 //{prop.userTo} post 유저이름
@@ -95,32 +108,52 @@ function Subscribe(props) {
                 }
             });
     };
-    return (
-        <>
-            <p
-                style={{
-                    fontWeight: 300,
-                    fontSize: '12px',
-                    lineHeight: '17px',
-                }}
-            >
-                팔로워 {SubscribeNumber}
-            </p>
-            {user && user.uid && user.uid !== props.userTo && (
-                <Button
-                    className={classes.FollowBtn}
-                    onClick={onSubscribe}
+    if (props.Type === 'FollowPage') {
+        return (
+            <>
+                {user && user.uid && user.uid !== props.userTo && (
+                    <Button
+                        className={classes.Follow}
+                        onClick={onSubscribe}
+                        style={{
+                            backgroundColor: `${
+                                subscribed ? '#000000' : '#ff534b'
+                            }`,
+                        }}
+                    >
+                        {subscribed ? '팔로우' : '팔로잉'}
+                    </Button>
+                )}
+            </>
+        );
+    } else {
+        return (
+            <>
+                <p
                     style={{
-                        backgroundColor: `${
-                            subscribed ? '#000000' : '#ff534b'
-                        }`,
+                        fontWeight: 300,
+                        fontSize: '12px',
+                        lineHeight: '17px',
                     }}
                 >
-                    {subscribed ? '팔로우' : '팔로잉'}
-                </Button>
-            )}
-        </>
-    );
+                    팔로워 {SubscribeNumber}
+                </p>
+                {user && user.uid && user.uid !== props.userTo && (
+                    <Button
+                        className={classes.FollowBtn}
+                        onClick={onSubscribe}
+                        style={{
+                            backgroundColor: `${
+                                subscribed ? '#000000' : '#ff534b'
+                            }`,
+                        }}
+                    >
+                        {subscribed ? '팔로우' : '팔로잉'}
+                    </Button>
+                )}
+            </>
+        );
+    }
 }
 
 export default Subscribe;

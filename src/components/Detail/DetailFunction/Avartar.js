@@ -25,7 +25,7 @@ function Avartar(props) {
             <Link
                 to={
                     user && user.uid && user.uid === props.uid
-                        ? `/user/:${user.uid}`
+                        ? `/user/${user.uid}`
                         : `/FriendsPage/${props.uid}`
                 }
             >
@@ -51,7 +51,7 @@ function Avartar(props) {
             <Link
                 to={
                     user && user.uid && user.uid === props.uid
-                        ? `/user/:${user.uid}`
+                        ? `/user/${user.uid}`
                         : `/FriendsPage/${props.uid}`
                 }
             >
@@ -74,7 +74,7 @@ function Avartar(props) {
             <Link
                 to={
                     user && user.uid && user.uid === props.uid
-                        ? `/user/:${user.uid}`
+                        ? `/user/${user.uid}`
                         : `/FriendsPage/${props.uid}`
                 }
             >
@@ -97,7 +97,7 @@ function Avartar(props) {
             <Link
                 to={
                     user && user.uid && user.uid === props.uid
-                        ? `/user/:${user.uid}`
+                        ? `/user/${user.uid}`
                         : `/FriendsPage/${props.uid}`
                 }
             >
@@ -122,7 +122,7 @@ function Avartar(props) {
             <Link
                 to={
                     user && user.uid && user.uid === props.uid
-                        ? `/user/:${user.uid}`
+                        ? `/user/${user.uid}`
                         : `/FriendsPage/${props.uid}`
                 }
             >

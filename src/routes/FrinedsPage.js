@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Mypost from '../components/Mypage/Mypost';
-import { useStateValue } from '../StateProvider';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import db from '../firebase';
 import { useParams } from 'react-router';
+
+import Subscribe from '../components/Detail/DetailFunction/Subscribe';
+
 const useStyles = makeStyles((theme) => ({
     Edit: {
         width: '75px',
@@ -106,6 +108,7 @@ function FriendsPage(props) {
                         }}
                     />
                     <Username>{userinfo.displayName}</Username>
+                    <Subscribe userTo={friendid} Type="FollowPage" />
                 </div>
                 <div
                     style={{
