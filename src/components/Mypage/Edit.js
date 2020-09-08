@@ -252,10 +252,10 @@ function Edit(props) {
             aria-labelledby="form-dialog-title"
             PaperProps={{
                 style: {
-                    background: '#262626',
-                    borderRadius: '20px',
+                    backgroundColor: 'rgba(64, 64, 64, 0.7)',
                     backdropFilter: 'blur(30px)',
-                    color: '#000000',
+                    borderRadius: '20px',
+                    color: '#ffffff',
                 },
             }}
         >

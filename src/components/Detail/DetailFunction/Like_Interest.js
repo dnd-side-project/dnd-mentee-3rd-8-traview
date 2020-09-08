@@ -172,8 +172,8 @@ function LikeInterest(props) {
         <div
             style={{
                 position: 'absolute',
-                top: '15px',
-                right: '12px',
+                top: props.Type === 'small' ? '1%' : '15px',
+                right: props.Type === 'small' ? '3%' : '12px',
                 display: ' flex',
                 alignItems: 'center',
             }}
@@ -181,9 +181,17 @@ function LikeInterest(props) {
             <img
                 onClick={
                     //로그인 안됬을떄는클릭시 아무일도 안생기도록하였습니다
-                    user && user.uid && onHandleInterest
+                    user &&
+                    user.uid &&
+                    props.Type !== 'small' &&
+                    onHandleInterest
                 }
-                style={{ marginRight: '4px', cursor: 'pointer' }}
+                style={{
+                    marginRight: '4px',
+                    cursor: 'pointer',
+                    width: props.Type === 'small' ? '20px' : '',
+                    height: props.Type === 'small' ? '20px' : '',
+                }}
                 src={
                     //로그인 안될있을경우는 꽉찬 모양에 버튼으로 나오도록하였습니다.
                     user
@@ -199,8 +207,12 @@ function LikeInterest(props) {
 
             <TextBox>{interstCount}</TextBox>
             <img
-                onClick={user && user.uid && onHandleLike}
+                onClick={
+                    user && user.uid && props.Type !== 'small' && onHandleLike
+                }
                 style={{
+                    width: props.Type === 'small' ? '20px' : '',
+                    height: props.Type === 'small' ? '20px' : '',
                     marginRight: '4px',
                     marginLeft: '14px',
                     cursor: 'pointer',
