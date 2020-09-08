@@ -218,7 +218,7 @@ export default ({
                     {/*</RightTopContainer>*/}
                     {user &&
                         user.uid &&
-                        location.pathname === `/user/:${user.uid}` && (
+                        location.pathname === `/user/${user.uid}` && (
                             <ButtonContainer>
                                 <ButtonGroup
                                     className={classes.ButtonGroup}
