@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import db from '../../../firebase';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
+import { useStateValue } from '../../../StateProvider';
 const FollowerAvatar = styled.img`
     &: hover {
         transform: scale(1.3);
@@ -9,6 +10,7 @@ const FollowerAvatar = styled.img`
 `;
 function Avartar(props) {
     const history = useHistory();
+    const [{ user }] = useStateValue();
     const [detailuser, setDetailUser] = useState(null);
     useEffect(() => {
         db.collection('users')
@@ -20,7 +22,13 @@ function Avartar(props) {
     }, []);
     if (props.Type === 'Detail') {
         return (
-            <Link to={`/FriendsPage/${props.uid}`}>
+            <Link
+                to={
+                    user && user.uid && user.uid === props.uid
+                        ? `/user/:${user.uid}`
+                        : `/FriendsPage/${props.uid}`
+                }
+            >
                 <img
                     style={{
                         cursor: 'pointer',
@@ -40,7 +48,13 @@ function Avartar(props) {
         );
     } else if (props.Type === 'Best') {
         return (
-            <Link to={`/FriendsPage/${props.uid}`}>
+            <Link
+                to={
+                    user && user.uid && user.uid === props.uid
+                        ? `/user/:${user.uid}`
+                        : `/FriendsPage/${props.uid}`
+                }
+            >
                 <img
                     style={{
                         cursor: 'pointer',
@@ -57,7 +71,13 @@ function Avartar(props) {
         );
     } else if (props.Type === 'MainArea') {
         return (
-            <Link to={`/FriendsPage/${props.uid}`}>
+            <Link
+                to={
+                    user && user.uid && user.uid === props.uid
+                        ? `/user/:${user.uid}`
+                        : `/FriendsPage/${props.uid}`
+                }
+            >
                 <img
                     style={{
                         cursor: 'pointer',
@@ -74,7 +94,13 @@ function Avartar(props) {
         );
     } else if (props.Type === 'comment') {
         return (
-            <Link to={`/FriendsPage/${props.uid}`}>
+            <Link
+                to={
+                    user && user.uid && user.uid === props.uid
+                        ? `/user/:${user.uid}`
+                        : `/FriendsPage/${props.uid}`
+                }
+            >
                 <img
                     style={{
                         cursor: 'pointer',
@@ -93,7 +119,13 @@ function Avartar(props) {
         );
     } else if (props.Type === 'Follower') {
         return (
-            <Link to={`/FriendsPage/${props.uid}`}>
+            <Link
+                to={
+                    user && user.uid && user.uid === props.uid
+                        ? `/user/:${user.uid}`
+                        : `/FriendsPage/${props.uid}`
+                }
+            >
                 <FollowerAvatar
                     style={{
                         cursor: 'pointer',
