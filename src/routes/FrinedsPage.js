@@ -5,7 +5,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import db from '../firebase';
 import { useParams } from 'react-router';
+
 import Subscribe from '../components/Detail/DetailFunction/Subscribe';
+
 const useStyles = makeStyles((theme) => ({
     Edit: {
         width: '75px',
