@@ -22,15 +22,6 @@ const RightBottomContainer = styled.div`
     align-items: center;
     visibility: hidden;
 `;
-
-const RightTopContainer = styled.div`
-    position: absolute;
-    top: 15px;
-    right: 12px;
-    display: flex;
-    align-items: center;
-`;
-
 const Image = styled.img`
     width: 100%;
     border-radius: 20px;
@@ -150,23 +141,6 @@ const Picture = forwardRef(
                             <TextBox>{username}</TextBox>
                         </LeftBottomContainer>
                         <LikeInterest postId={id} />
-                        {/*<RightTopContainer>*/}
-                        {/*    <img*/}
-                        {/*        style={{ marginRight: '4px' }}*/}
-                        {/*        src="/images/Interesting.png"*/}
-                        {/*        alt=""*/}
-                        {/*    />*/}
-                        {/*    <TextBox>{novelty}</TextBox>*/}
-                        {/*    <img*/}
-                        {/*        style={{*/}
-                        {/*            marginRight: '4px',*/}
-                        {/*            marginLeft: '14px',*/}
-                        {/*        }}*/}
-                        {/*        src="/images/like.png"*/}
-                        {/*        alt=""*/}
-                        {/*    />*/}
-                        {/*    <TextBox>{heart}</TextBox>*/}
-                        {/*</RightTopContainer>*/}
                         <RightBottomContainer>
                             <img
                                 style={{ marginRight: '4px' }}

@@ -30,9 +30,6 @@ function Message(props) {
                 alignItems: 'center',
             }}
         >
-            {/*<Avartar />*/}
-            {/*<Avartar bg={props.userImage} />*/}
-
             <Avartar uid={props.uid} Type="comment" />
             <UserMessage style={{ marginRight: '20px' }}>
                 {props.user}
@@ -40,11 +37,6 @@ function Message(props) {
             <UserMessage style={{ fontWeight: 300 }}>
                 {props.message}
             </UserMessage>
-            {/*<h4>*/}
-            {/*    {props.user}*/}
-            {/*    <span>{new Date(props.timestamp?.toDate()).toUTCString()}</span>*/}
-            {/*</h4>*/}
-            {/*<p> {props.message}</p>*/}
         </div>
     );
 }

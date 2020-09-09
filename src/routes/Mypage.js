@@ -113,7 +113,7 @@ function Mypage() {
                             boxSizing: 'border-box',
                         }}
                     />
-                    {/*// <AvatarBox bg={userInfo.user.photoURL} />*/}
+
                     <Username>{user.displayName}</Username>
                     <Button
                         className={classes.Edit}

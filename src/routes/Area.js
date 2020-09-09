@@ -7,6 +7,7 @@ import Picture from '../components/MainArea/Picture';
 import styled from 'styled-components';
 import DefaultArea from './DefaultArea';
 import FlipMove from 'react-flip-move';
+import DetailPage from '../components/Detail/DetailPage';
 
 const Container = styled.div`
     position: relative;
@@ -209,16 +210,43 @@ function Area() {
                 setLast(snapshot.docs[snapshot.docs.length - 1]);
             });
     };
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const onClose = () => {
+        setIsModalOpen(false);
+    };
     return (
         <>
             {posts[0] && (
                 <div>
+                    <DetailPage
+                        open={isModalOpen}
+                        close={onClose}
+                        id={posts[0].id}
+                        advertising={posts[0].post.advertising}
+                        area={posts[0].post.area}
+                        avatar={posts[0].post.avatar}
+                        heart={posts[0].post.heart}
+                        imageUrl={posts[0].post.imageUrl}
+                        latitude={posts[0].post.latitude}
+                        longitude={posts[0].post.longitude}
+                        mood={posts[0].post.mood}
+                        novelty={posts[0].post.novelty}
+                        rating={posts[0].post.rating}
+                        review={posts[0].post.review}
+                        timestamp={posts[0].post.timestamp}
+                        title={posts[0].post.title}
+                        username={posts[0].post.username}
+                        address={posts[0].post.address}
+                        uid={posts[0].post.uid}
+                    />
                     <Container>
                         <BackgroundImage bg={posts[0]?.post?.imageUrl} />
                         <TitleContainer>
                             <Title>{term}의 여행지들</Title>
-                            <ReviewButton>배경 리뷰 보기</ReviewButton>
+                            <ReviewButton onClick={() => setIsModalOpen(true)}>
+                                배경 리뷰 보기
+                            </ReviewButton>
                         </TitleContainer>
                     </Container>
                     <MarginContainer>

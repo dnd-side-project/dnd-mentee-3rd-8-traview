@@ -3,6 +3,7 @@ import { useStateValue } from '../../../StateProvider';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import db from '../../../firebase';
+
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
         color: '#FFFFFF',
@@ -50,21 +51,20 @@ function Subscribe(props) {
                     setSubscribeNumber(doc.size);
                 }
             });
-        {
-            user &&
-                user.uid &&
-                db
-                    .collection('subscribe')
-                    .where('userTo', '==', props.userTo)
-                    .where('userFrom', '==', user.uid)
-                    .onSnapshot((snapshot) => {
-                        if (snapshot.empty) {
-                            setSubscribed(false);
-                        } else {
-                            setSubscribed(true);
-                        }
-                    });
-        }
+
+        user &&
+            user.uid &&
+            db
+                .collection('subscribe')
+                .where('userTo', '==', props.userTo)
+                .where('userFrom', '==', user.uid)
+                .onSnapshot((snapshot) => {
+                    if (snapshot.empty) {
+                        setSubscribed(false);
+                    } else {
+                        setSubscribed(true);
+                    }
+                });
     }, []);
     const onSubscribe = () => {
         if (subscribed) {
@@ -78,7 +78,7 @@ function Subscribe(props) {
                         doc.ref
                             .delete()
                             .then(() => {
-                                console.log('delete success');
+                                //console.log('delete success');
                             })
                             .catch(function (err) {
                                 console.log(err);

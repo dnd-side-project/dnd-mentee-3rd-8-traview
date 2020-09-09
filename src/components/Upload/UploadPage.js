@@ -121,13 +121,6 @@ export default function UploadPage(props) {
     };
 
     const onHandleUpdate = (e) => {
-        // console.log('id', props.id);
-        // console.log('광고', advertising);
-        // console.log('제목', title);
-        // console.log('상세내용', review);
-        // console.log('무드', mood);
-        // console.log('레이팅', Rating);
-        // console.log('아리아', area);
         e.preventDefault();
         if (
             imageUrl === null || //이미지업로드 X
@@ -153,8 +146,8 @@ export default function UploadPage(props) {
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(), //시간
                 title: title, //제목
                 address: address, //주소
-            }).then((temp) => console.log('success', temp));
-            alert('게시물이 수정되었습니다.');
+            }).then((temp) => alert('게시물이 수정되었습니다.'));
+
             props.close();
         }
     };
@@ -269,7 +262,6 @@ export default function UploadPage(props) {
                 },
             }}
         >
-            {/*<DialogTitle id="form-dialog-title">최악의 세대</DialogTitle>*/}
             <>
                 <TotalContainer style={{ paddingTop: '30px' }}>
                     <UploadDropZone>
@@ -313,10 +305,6 @@ export default function UploadPage(props) {
                                 maxHeight: '140px',
                             }}
                         >
-                            {/*{console.log(*/}
-                            {/*    'hasSelectedAddress',*/}
-                            {/*    hasSelectedAddress*/}
-                            {/*)}*/}
                             {!hasSelectedAddress &&
                                 locations.map((location, index) => (
                                     <LocationItem

@@ -118,7 +118,7 @@ function Edit(props) {
                     desertRef
                         .delete()
                         .then(function () {
-                            console.log('삭제성공');
+                            //console.log('삭제성공');
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -151,7 +151,7 @@ function Edit(props) {
                                     })
                                     .then((temp) => {
                                         props.setIsAvartar(url);
-                                        console.log('Avartar success', temp);
+                                        //console.log('Avartar success', temp);
                                         db.collection('users')
                                             .doc(user.uid)
                                             .get()
@@ -175,7 +175,7 @@ function Edit(props) {
                     desertRef
                         .delete()
                         .then(function () {
-                            console.log('백그라운드삭제성공');
+                            //console.log('백그라운드삭제성공');
                         })
                         .catch(function (error) {
                             console.log(error);
@@ -207,7 +207,7 @@ function Edit(props) {
                                     })
                                     .then((temp) => {
                                         props.setIsBackground(url);
-                                        console.log('background success', temp);
+                                        //console.log('background success', temp);
                                         db.collection('users')
                                             .doc(user.uid)
                                             .get()
@@ -227,7 +227,7 @@ function Edit(props) {
                     introduction: isIntroduction,
                 })
                 .then((temp) => {
-                    console.log('success', temp);
+                    //console.log('success', temp);
                 });
             db.collection('users')
                 .doc(user.uid)
@@ -252,10 +252,10 @@ function Edit(props) {
             aria-labelledby="form-dialog-title"
             PaperProps={{
                 style: {
-                    background: '#262626',
-                    borderRadius: '20px',
+                    backgroundColor: 'rgba(64, 64, 64, 0.7)',
                     backdropFilter: 'blur(30px)',
-                    color: '#000000',
+                    borderRadius: '20px',
+                    color: '#ffffff',
                 },
             }}
         >

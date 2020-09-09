@@ -14,7 +14,6 @@ function LikeInterest(props) {
     const [liked, setLiked] = useState(false); //좋아요 상태
     const [interstCount, setInterstCount] = useState(0); //신기해요 수
     const [interested, setInterested] = useState(false); //신기해요 상태
-    ////////////////////////////////////
     useEffect(() => {
         //포스트 별좋아요 수를 나타낸다
         db.collection('Like_Inter')
@@ -28,23 +27,22 @@ function LikeInterest(props) {
                     setLikeCount(doc.size);
                 }
             });
-        {
-            user &&
-                user.uid &&
-                db
-                    .collection('Like_Inter')
-                    .where('postId', '==', props.postId)
-                    .where('user', '==', user.uid)
-                    .where('type', '==', 'Like')
-                    .onSnapshot((snapshot) => {
-                        if (snapshot.empty) {
-                            setLiked(false);
-                        } else {
-                            setLiked(true);
-                        }
-                    });
-        }
-    }, []);
+
+        user &&
+            user.uid &&
+            db
+                .collection('Like_Inter')
+                .where('postId', '==', props.postId)
+                .where('user', '==', user.uid)
+                .where('type', '==', 'Like')
+                .onSnapshot((snapshot) => {
+                    if (snapshot.empty) {
+                        setLiked(false);
+                    } else {
+                        setLiked(true);
+                    }
+                });
+    }, [liked]);
     useEffect(() => {
         //포스트 별좋아요 수를 나타낸다
         db.collection('Like_Inter')
@@ -58,24 +56,22 @@ function LikeInterest(props) {
                     setInterstCount(doc.size);
                 }
             });
-        {
-            user &&
-                user.uid &&
-                db
-                    .collection('Like_Inter')
-                    .where('postId', '==', props.postId)
-                    .where('user', '==', user.uid)
-                    .where('type', '==', 'Interest')
-                    .onSnapshot((snapshot) => {
-                        if (snapshot.empty) {
-                            setInterested(false);
-                        } else {
-                            setInterested(true);
-                        }
-                    });
-        }
-    }, []);
-    //////////////////////////////////////////////
+
+        user &&
+            user.uid &&
+            db
+                .collection('Like_Inter')
+                .where('postId', '==', props.postId)
+                .where('user', '==', user.uid)
+                .where('type', '==', 'Interest')
+                .onSnapshot((snapshot) => {
+                    if (snapshot.empty) {
+                        setInterested(false);
+                    } else {
+                        setInterested(true);
+                    }
+                });
+    }, [interested]);
     const onHandleLike = () => {
         if (liked) {
             let collectionRef = db.collection('Like_Inter');
@@ -89,7 +85,7 @@ function LikeInterest(props) {
                         doc.ref
                             .delete()
                             .then(() => {
-                                console.log('delete success');
+                                // console.log('delete success');
                             })
                             .catch(function (err) {
                                 console.log(err);
@@ -136,7 +132,7 @@ function LikeInterest(props) {
                         doc.ref
                             .delete()
                             .then(() => {
-                                console.log('delete success');
+                                // console.log('delete success');
                             })
                             .catch(function (err) {
                                 console.log(err);
@@ -172,8 +168,8 @@ function LikeInterest(props) {
         <div
             style={{
                 position: 'absolute',
-                top: '15px',
-                right: '12px',
+                top: props.Type === 'small' ? '1%' : '15px',
+                right: props.Type === 'small' ? '3%' : '12px',
                 display: ' flex',
                 alignItems: 'center',
             }}
@@ -181,9 +177,16 @@ function LikeInterest(props) {
             <img
                 onClick={
                     //로그인 안됬을떄는클릭시 아무일도 안생기도록하였습니다
-                    user && user.uid && onHandleInterest
+                    user && user.uid && props.Type !== 'small'
+                        ? onHandleInterest
+                        : undefined
                 }
-                style={{ marginRight: '4px', cursor: 'pointer' }}
+                style={{
+                    marginRight: '4px',
+                    cursor: 'pointer',
+                    width: props.Type === 'small' ? '20px' : '',
+                    height: props.Type === 'small' ? '20px' : '',
+                }}
                 src={
                     //로그인 안될있을경우는 꽉찬 모양에 버튼으로 나오도록하였습니다.
                     user
@@ -199,8 +202,14 @@ function LikeInterest(props) {
 
             <TextBox>{interstCount}</TextBox>
             <img
-                onClick={user && user.uid && onHandleLike}
+                onClick={
+                    user && user.uid && props.Type !== 'small'
+                        ? onHandleLike
+                        : undefined
+                }
                 style={{
+                    width: props.Type === 'small' ? '20px' : '',
+                    height: props.Type === 'small' ? '20px' : '',
                     marginRight: '4px',
                     marginLeft: '14px',
                     cursor: 'pointer',

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import DetailPage from '../Detail/DetailPage';
 import Avartar from '../Detail/DetailFunction/Avartar';
+import LikeInterest from '../Detail/DetailFunction/Like_Interest';
 const LeftBottomContainer = styled.div`
     position: absolute;
     left: 6px;
@@ -26,7 +27,6 @@ const RightTopContainer = styled.div`
     right: 6px;
     display: flex;
     align-items: center;
-    visibility: hidden;
 `;
 
 const Image = styled.img`
@@ -52,9 +52,7 @@ const ImageContainer = styled.div`
         ${RightBottomContainer} {
             visibility: visible;
         }
-        ${RightTopContainer} {
-            visibility: visible;
-        }
+
         ${Image} {
             opacity: 0.9;
             transition: opacity 450ms ease-out;
@@ -124,18 +122,7 @@ function BestPicture({
                     <TextBox>{username}</TextBox>
                 </LeftBottomContainer>
                 <RightTopContainer>
-                    <img
-                        style={{ marginRight: '4px' }}
-                        src="/images/Interesting.png"
-                        alt=""
-                    />
-                    <TextBox>{novelty}</TextBox>
-                    <img
-                        style={{ marginRight: '4px', marginLeft: '14px' }}
-                        src="/images/like.png"
-                        alt=""
-                    />
-                    <TextBox>{heart}</TextBox>
+                    <LikeInterest postId={id} Type="small" />
                 </RightTopContainer>
                 <RightBottomContainer>
                     <img

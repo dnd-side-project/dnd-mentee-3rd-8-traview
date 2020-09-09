@@ -22,7 +22,7 @@ function Advertisement(props) {
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
 
-        console.log(selectedValue);
+        //console.log(selectedValue);
         props.setHasSelectedadvertisement(
             selectedValue === 'YES' ? true : false
         );
