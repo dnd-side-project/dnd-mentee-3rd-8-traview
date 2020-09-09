@@ -71,6 +71,7 @@ export default (props) => {
                 : setCategory('최신');
             const unsubscribe = db
                 .collection('posts')
+                .orderBy('timestamp', 'desc')
                 .where('uid', '==', props.uid)
                 .onSnapshot((snapshot) => {
                     setPosts(
@@ -97,6 +98,7 @@ export default (props) => {
             e.currentTarget.innerText === '최신'
         ) {
             db.collection('posts')
+                .orderBy('timestamp', 'desc')
                 .where('uid', '==', props.uid)
                 .onSnapshot((snapshot) => {
                     setPosts(

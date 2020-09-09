@@ -103,6 +103,7 @@ function FollowPage() {
             .then((querySnapshot) => {
                 querySnapshot.docs.map((subscriber) => {
                     db.collection('posts')
+                        .orderBy('timestamp', 'desc')
                         .where('uid', '==', subscriber.data().userTo)
                         .onSnapshot((snapshot) => {
                             snapshot.docs.map((doc) => {
