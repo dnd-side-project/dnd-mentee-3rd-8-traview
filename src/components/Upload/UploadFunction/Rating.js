@@ -19,7 +19,7 @@ export const RatingFont = styled.p`
 function Rating(props) {
     useEffect(() => {
         props.setHadRating(value);
-    });
+    },[value]);
     const [value, setValue] = React.useState(props.rating);
     const handleChange = (event) => {
         setValue(event.target.value);

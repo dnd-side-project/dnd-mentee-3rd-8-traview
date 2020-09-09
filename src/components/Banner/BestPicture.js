@@ -123,18 +123,6 @@ function BestPicture({
                 </LeftBottomContainer>
                 <RightTopContainer>
                     <LikeInterest postId={id} Type="small" />
-                    {/*<img*/}
-                    {/*    style={{ marginRight: '4px' }}*/}
-                    {/*    src="/images/Interesting.png"*/}
-                    {/*    alt=""*/}
-                    {/*/>*/}
-                    {/*<TextBox>{novelty}</TextBox>*/}
-                    {/*<img*/}
-                    {/*    style={{ marginRight: '4px', marginLeft: '14px' }}*/}
-                    {/*    src="/images/like.png"*/}
-                    {/*    alt=""*/}
-                    {/*/>*/}
-                    {/*<TextBox>{heart}</TextBox>*/}
                 </RightTopContainer>
                 <RightBottomContainer>
                     <img

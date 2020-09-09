@@ -5,7 +5,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Loader from '../components/MainArea/Loader';
 import Picture from '../components/MainArea/Picture';
 import styled from 'styled-components';
-import DefaultArea from './DefaultArea';
 import FlipMove from 'react-flip-move';
 import Avartar from '../components/Detail/DetailFunction/Avartar';
 const Container = styled.div`

@@ -39,7 +39,7 @@ export default function ToggleButtons(props) {
     };
     useEffect(() => {
         props.setHadAtmophere(alignment);
-    });
+    },[alignment]);
 
     return (
         <div>

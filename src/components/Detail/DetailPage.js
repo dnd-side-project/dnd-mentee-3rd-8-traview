@@ -86,7 +86,7 @@ export default function DetailPage(props) {
             );
     }, [props.id]);
     const executeOnClick = (isExpanded) => {
-        console.log(isExpanded);
+        // console.log(isExpanded);
     };
 
     return (
@@ -105,13 +105,11 @@ export default function DetailPage(props) {
                 },
             }}
         >
-            {/*<DialogTitle id="form-dialog-title">최악의 세대</DialogTitle>*/}
             <DialogContent>
                 <TotalContainer>
                     <MainContentContainer>
                         <LeftContainer>
                             <ImageContainer>
-                                {/* 이곳에 짱큰 이미지 넣어주시면 됩니다. */}
                                 <img
                                     src={props.imageUrl}
                                     alt={'사진'}
@@ -125,39 +123,8 @@ export default function DetailPage(props) {
                                 <LeftTopContainer style={{ left: '150px' }}>
                                     <LikeInterest postId={props.id} />
                                 </LeftTopContainer>
-                                {/*<LeftTopContainer>*/}
-                                {/*    <img*/}
-                                {/*        style={{ marginRight: '4px' }}*/}
-                                {/*        src="/images/Interesting.png"*/}
-                                {/*        alt=""*/}
-                                {/*    />*/}
-                                {/*    <Countbox>{props.novelty}</Countbox>*/}
-                                {/*    <img*/}
-                                {/*        style={{*/}
-                                {/*            marginRight: '4px',*/}
-                                {/*            marginLeft: '14px',*/}
-                                {/*        }}*/}
-                                {/*        src="/images/like.png"*/}
-                                {/*        alt=""*/}
-                                {/*    />*/}
-                                {/*    <Countbox>{props.heart}</Countbox>*/}
-                                {/*</LeftTopContainer>*/}
                                 <LeftBottomContainer>
                                     <Avartar uid={props.uid} Type="Detail" />
-                                    {/*<img*/}
-                                    {/*    style={{*/}
-                                    {/*        width: '70px',*/}
-                                    {/*        height: '70px',*/}
-                                    {/*        borderRadius: '40px',*/}
-                                    {/*        objectFit: 'cover',*/}
-                                    {/*        marginBottom: '3px',*/}
-                                    {/*        border: '1px solid #F534B',*/}
-                                    {/*        boxSizing: 'border-box',*/}
-                                    {/*        marginRight: '9px',*/}
-                                    {/*    }}*/}
-                                    {/*    src={<Avartar/}>*/}
-                                    {/*    alt="Avartarimage"*/}
-                                    {/*/>*/}
                                     <div
                                         style={{
                                             alignItems: 'left',
@@ -165,31 +132,6 @@ export default function DetailPage(props) {
                                         }}
                                     >
                                         <TextBox>{props.username}</TextBox>
-                                        {/*<p*/}
-                                        {/*    style={{*/}
-                                        {/*        fontWeight: 300,*/}
-                                        {/*        fontSize: '12px',*/}
-                                        {/*        lineHeight: '17px',*/}
-                                        {/*    }}*/}
-                                        {/*>*/}
-                                        {/*    팔로워 {'223'}*/}
-                                        {/*</p>*/}
-                                        {/*{user && user.uid && (*/}
-                                        <Subscribe userTo={props.uid} />
-                                        {/*)}*/}
-                                        {/*<Button*/}
-                                        {/*    onClick={onSubscribe}*/}
-                                        {/*    className={classes.FollowBtn}*/}
-                                        {/*    style={{*/}
-                                        {/*        background: `${*/}
-                                        {/*            subscribe ? 'blue' : 'red'*/}
-                                        {/*        }`,*/}
-                                        {/*    }}*/}
-                                        {/*>*/}
-                                        {/*    {subscribe*/}
-                                        {/*        ? 'subscribed'*/}
-                                        {/*        : '팔로우'}*/}
-                                        {/*</Button>*/}
                                     </div>
                                 </LeftBottomContainer>
                                 <RightTopContainer>

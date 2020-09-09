@@ -10,7 +10,6 @@ const Toptitle = styled.h1`
     line-height: 101px;
     letter-spacing: -1.4px;
     color: #ffffff;
-    //  margin-top: 20%;
 `;
 const MiddleTitle = styled.h2`
     font-weight: normal;

@@ -8,7 +8,7 @@ import db from '../../firebase';
 import UploadPage from '../Upload/UploadPage';
 import LikeInterest from '../Detail/DetailFunction/Like_Interest';
 import { useStateValue } from '../../StateProvider';
-import { useParams, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 const useStyles = makeStyles((theme) => ({
     ButtonGroup: {
         width: '150px',
@@ -92,12 +92,6 @@ const ImageContainer = styled.div`
     }
 `;
 
-const TextBox = styled.label`
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 23px;
-    letter-spacing: -0.32px;
-`;
 export default ({
     setCheckUpdate,
     uid,
@@ -135,7 +129,7 @@ export default ({
                 .doc(id)
                 .delete()
                 .then(function () {
-                    console.log('Document successfully deleted!');
+                    //console.log('Document successfully deleted!');
                 })
                 .catch(function (error) {
                     console.error('Error removing document: ', error);
@@ -144,11 +138,6 @@ export default ({
     };
     const UpdatePost = () => {
         setIsUpdateModalOpen(true);
-
-        // let PostInfoChange = db.collection('posts').doc(id);
-        // return PostInfoChange.update({
-        //     title: '이렇게업데이트하는구나',
-        // });
     };
     return (
         <>
@@ -202,20 +191,6 @@ export default ({
                         onClick={() => setIsModalOpen(true)}
                     />
                     <LikeInterest postId={id} />
-                    {/*<RightTopContainer>*/}
-                    {/*    <img*/}
-                    {/*        style={{ marginRight: '4px' }}*/}
-                    {/*        src="/images/Interesting.png"*/}
-                    {/*        alt=""*/}
-                    {/*    />*/}
-                    {/*    <TextBox>{novelty}</TextBox>*/}
-                    {/*    <img*/}
-                    {/*        style={{ marginRight: '4px', marginLeft: '14px' }}*/}
-                    {/*        src="/images/like.png"*/}
-                    {/*        alt=""*/}
-                    {/*    />*/}
-                    {/*    <TextBox>{heart}</TextBox>*/}
-                    {/*</RightTopContainer>*/}
                     {user &&
                         user.uid &&
                         location.pathname === `/user/${user.uid}` && (

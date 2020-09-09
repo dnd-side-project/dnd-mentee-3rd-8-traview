@@ -6,8 +6,6 @@ import Loader from '../MainArea/Loader';
 import styled from 'styled-components';
 import '../MainArea/MainGrid.css';
 import { useStateValue } from '../../StateProvider';
-import { useParams } from 'react-router';
-
 const MarginContainer = styled.div`
     max-width: 1440px;
     margin: auto;
@@ -58,7 +56,6 @@ const Container = styled.div`
 `;
 
 export default (props) => {
-    const { friendid } = useParams();
     const [posts, setPosts] = useState([]);
     const [postList, setPostList] = useState([]);
     const [last, setLast] = useState(null);
@@ -69,12 +66,9 @@ export default (props) => {
     const [{ user }] = useStateValue();
     useEffect(() => {
         if (props.uid) {
-            {
-                user && user.uid && user.uid === props.uid
-                    ? setCategory('내가 올린 사진')
-                    : setCategory('최신');
-            }
-
+            user && user.uid && user.uid === props.uid
+                ? setCategory('내가 올린 사진')
+                : setCategory('최신');
             const unsubscribe = db
                 .collection('posts')
                 .where('uid', '==', props.uid)
@@ -98,7 +92,6 @@ export default (props) => {
         let newPostList = [];
         setPosts([]);
         setCategory(e.currentTarget.innerText);
-        const unsubscribe = db;
         if (
             e.currentTarget.innerText === '내가 올린 사진' ||
             e.currentTarget.innerText === '최신'
@@ -116,11 +109,9 @@ export default (props) => {
                 });
         } else {
             let Like_Inter;
-            {
-                if (e.currentTarget.innerText === '신기해요')
-                    Like_Inter = 'Interest';
-                else Like_Inter = 'Like';
-            }
+            if (e.currentTarget.innerText === '신기해요')
+                Like_Inter = 'Interest';
+            else Like_Inter = 'Like';
             {
                 db.collection('Like_Inter')
                     .where('user', '==', props.uid)

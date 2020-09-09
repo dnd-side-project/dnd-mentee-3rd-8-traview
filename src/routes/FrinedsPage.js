@@ -1,27 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Mypost from '../components/Mypage/Mypost';
-import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import db from '../firebase';
 import { useParams } from 'react-router';
 
 import Subscribe from '../components/Detail/DetailFunction/Subscribe';
-
-const useStyles = makeStyles((theme) => ({
-    Edit: {
-        width: '75px',
-        height: '46px',
-        border: '1px solid #FFFFFF',
-        boxSizing: 'border-box',
-        borderRadius: '25.5px',
-        fontWeight: 'normal',
-        fontSize: '24px',
-        lineHeight: '35px',
-        letterSpacing: '-0.48px',
-        color: '#FFFFFF',
-    },
-}));
 const Container = styled.div`
     position: relative;
     z-index: 1;

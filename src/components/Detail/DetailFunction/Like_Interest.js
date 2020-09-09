@@ -14,7 +14,6 @@ function LikeInterest(props) {
     const [liked, setLiked] = useState(false); //좋아요 상태
     const [interstCount, setInterstCount] = useState(0); //신기해요 수
     const [interested, setInterested] = useState(false); //신기해요 상태
-    ////////////////////////////////////
     useEffect(() => {
         //포스트 별좋아요 수를 나타낸다
         db.collection('Like_Inter')
@@ -28,22 +27,21 @@ function LikeInterest(props) {
                     setLikeCount(doc.size);
                 }
             });
-        {
-            user &&
-                user.uid &&
-                db
-                    .collection('Like_Inter')
-                    .where('postId', '==', props.postId)
-                    .where('user', '==', user.uid)
-                    .where('type', '==', 'Like')
-                    .onSnapshot((snapshot) => {
-                        if (snapshot.empty) {
-                            setLiked(false);
-                        } else {
-                            setLiked(true);
-                        }
-                    });
-        }
+
+        user &&
+            user.uid &&
+            db
+                .collection('Like_Inter')
+                .where('postId', '==', props.postId)
+                .where('user', '==', user.uid)
+                .where('type', '==', 'Like')
+                .onSnapshot((snapshot) => {
+                    if (snapshot.empty) {
+                        setLiked(false);
+                    } else {
+                        setLiked(true);
+                    }
+                });
     }, []);
     useEffect(() => {
         //포스트 별좋아요 수를 나타낸다
@@ -58,24 +56,22 @@ function LikeInterest(props) {
                     setInterstCount(doc.size);
                 }
             });
-        {
-            user &&
-                user.uid &&
-                db
-                    .collection('Like_Inter')
-                    .where('postId', '==', props.postId)
-                    .where('user', '==', user.uid)
-                    .where('type', '==', 'Interest')
-                    .onSnapshot((snapshot) => {
-                        if (snapshot.empty) {
-                            setInterested(false);
-                        } else {
-                            setInterested(true);
-                        }
-                    });
-        }
+
+        user &&
+            user.uid &&
+            db
+                .collection('Like_Inter')
+                .where('postId', '==', props.postId)
+                .where('user', '==', user.uid)
+                .where('type', '==', 'Interest')
+                .onSnapshot((snapshot) => {
+                    if (snapshot.empty) {
+                        setInterested(false);
+                    } else {
+                        setInterested(true);
+                    }
+                });
     }, []);
-    //////////////////////////////////////////////
     const onHandleLike = () => {
         if (liked) {
             let collectionRef = db.collection('Like_Inter');
@@ -89,7 +85,7 @@ function LikeInterest(props) {
                         doc.ref
                             .delete()
                             .then(() => {
-                                console.log('delete success');
+                                // console.log('delete success');
                             })
                             .catch(function (err) {
                                 console.log(err);
@@ -136,7 +132,7 @@ function LikeInterest(props) {
                         doc.ref
                             .delete()
                             .then(() => {
-                                console.log('delete success');
+                                // console.log('delete success');
                             })
                             .catch(function (err) {
                                 console.log(err);
