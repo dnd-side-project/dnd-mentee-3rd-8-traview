@@ -132,6 +132,7 @@ export default function DetailPage(props) {
                                         }}
                                     >
                                         <TextBox>{props.username}</TextBox>
+                                        <Subscribe userTo={props.uid} />
                                     </div>
                                 </LeftBottomContainer>
                                 <RightTopContainer>

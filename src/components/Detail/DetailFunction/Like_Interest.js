@@ -42,7 +42,7 @@ function LikeInterest(props) {
                         setLiked(true);
                     }
                 });
-    }, []);
+    }, [liked]);
     useEffect(() => {
         //포스트 별좋아요 수를 나타낸다
         db.collection('Like_Inter')
@@ -71,7 +71,7 @@ function LikeInterest(props) {
                         setInterested(true);
                     }
                 });
-    }, []);
+    }, [interested]);
     const onHandleLike = () => {
         if (liked) {
             let collectionRef = db.collection('Like_Inter');
@@ -177,10 +177,9 @@ function LikeInterest(props) {
             <img
                 onClick={
                     //로그인 안됬을떄는클릭시 아무일도 안생기도록하였습니다
-                    user &&
-                    user.uid &&
-                    props.Type !== 'small' &&
-                    onHandleInterest
+                    user && user.uid && props.Type !== 'small'
+                        ? onHandleInterest
+                        : undefined
                 }
                 style={{
                     marginRight: '4px',
@@ -204,7 +203,9 @@ function LikeInterest(props) {
             <TextBox>{interstCount}</TextBox>
             <img
                 onClick={
-                    user && user.uid && props.Type !== 'small' && onHandleLike
+                    user && user.uid && props.Type !== 'small'
+                        ? onHandleLike
+                        : undefined
                 }
                 style={{
                     width: props.Type === 'small' ? '20px' : '',
