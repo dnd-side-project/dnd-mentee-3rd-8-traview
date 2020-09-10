@@ -93,7 +93,6 @@ const ImageContainer = styled.div`
 `;
 
 export default ({
-    setCheckUpdate,
     uid,
     advertising,
     area,
@@ -111,7 +110,6 @@ export default ({
     username,
     address,
     id,
-    videoId,
 }) => {
     const location = useLocation();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -193,7 +191,8 @@ export default ({
                     <LikeInterest postId={id} />
                     {user &&
                         user.uid &&
-                        location.pathname === `/user/${user.uid}` && (
+                        location.pathname === `/user/${user.uid}` &&
+                        uid === user.uid && (
                             <ButtonContainer>
                                 <ButtonGroup
                                     className={classes.ButtonGroup}
