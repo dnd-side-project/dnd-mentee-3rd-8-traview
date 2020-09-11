@@ -32,14 +32,14 @@ const MoodList = styled.div`
 export default function ToggleButtons(props) {
     const classes = useStyles();
 
-    const [alignment, setAlignment] = React.useState('');
+    const [alignment, setAlignment] = React.useState(props.mood);
 
     const handleAlignment = (event, newAlignment) => {
         setAlignment(newAlignment);
     };
     useEffect(() => {
         props.setHadAtmophere(alignment);
-    });
+    },[alignment]);
 
     return (
         <div>

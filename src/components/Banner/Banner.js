@@ -137,6 +137,7 @@ function Banner() {
                 <div className="row__posters">
                     {posts.map(({ post, id }) => (
                         <BestPicture
+                            uid={post.uid}
                             id={id}
                             key={id}
                             advertising={post.advertising}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Picture from './Picture';
 import db from '../../firebase';
+import FlipMove from 'react-flip-move';
 
 import styled from 'styled-components';
 import Loader from './Loader';
@@ -180,27 +181,30 @@ export default () => {
                 loader={<Loader />}
             >
                 <Container>
-                    {posts.map(({ post, id }) => (
-                        <Picture
-                            id={id}
-                            key={id}
-                            advertising={post.advertising}
-                            area={post.area}
-                            avatar={post.avatar}
-                            heart={post.heart}
-                            imageUrl={post.imageUrl}
-                            latitude={post.latitude}
-                            longitude={post.longitude}
-                            mood={post.mood}
-                            novelty={post.novelty}
-                            rating={post.rating}
-                            review={post.review}
-                            timestamp={post.timestamp}
-                            title={post.title}
-                            username={post.username}
-                            address={post.address}
-                        />
-                    ))}
+                    <FlipMove>
+                        {posts.map(({ post, id }) => (
+                            <Picture
+                                uid={post.uid}
+                                id={id}
+                                key={id}
+                                advertising={post.advertising}
+                                area={post.area}
+                                avatar={post.avatar}
+                                heart={post.heart}
+                                imageUrl={post.imageUrl}
+                                latitude={post.latitude}
+                                longitude={post.longitude}
+                                mood={post.mood}
+                                novelty={post.novelty}
+                                rating={post.rating}
+                                review={post.review}
+                                timestamp={post.timestamp}
+                                title={post.title}
+                                username={post.username}
+                                address={post.address}
+                            />
+                        ))}
+                    </FlipMove>
                 </Container>
             </InfiniteScroll>
         </MarginContainer>

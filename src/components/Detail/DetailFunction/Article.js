@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 export const PostName = styled.h2`
     font-weight: bold;
@@ -24,29 +23,3 @@ export const DetailContent = styled.div`
         display: none;
     }
 `;
-// function Article(props) {
-//     const executeOnClick = (isExpanded) => {
-//         console.log(isExpanded);
-//     };
-//     let example = '123213213123213';
-//
-//     return (
-//         <div>
-//             <div style={{ position: 'flex' }}>
-//                 <DetailContent>
-//                     <ShowMoreText
-//                         /* Default options */
-//                         lines={8}
-//                         more="더보기"
-//                         less="줄이기"
-//                         anchorClass=""
-//                         onClick={executeOnClick}
-//                         expanded={false}
-//                     >
-//                         {example}
-//                     </ShowMoreText>
-//                 </DetailContent>
-//             </div>
-//         </div>
-//     );
-// }

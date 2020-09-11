@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { auth, googleProvider, facebookProvider } from '../firebase';
 import { useStateValue } from '../StateProvider';
 import { actionTypes } from '../reducer';
+import db from '../firebase';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import styled from 'styled-components';
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
@@ -14,9 +15,8 @@ import { SocialFont } from '../components/CommonStyle/SocialFont';
 import { SocialImage } from '../components/CommonStyle/SocialImage';
 import { SubmittBtn } from '../components/CommonStyle/SubmittBtn';
 import { SocialCollection } from '../components/CommonStyle/SocialCollection';
-
 const LoginLabel = styled.div`
-    margin-top: -4%;
+    margin-top: 5%;
     font-weight: 300;
     font-size: 30px;
     line-height: 43px;
@@ -34,11 +34,10 @@ const IDCheckLabel = styled.div`
 `;
 
 function Login() {
-    const [{}, dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
     const [ID, setID] = useState('');
     const [Password, setPassword] = useState('');
     const history = useHistory();
-
     const onLoginHandler = (event) => {
         event.preventDefault();
     };
@@ -46,12 +45,24 @@ function Login() {
     const googleSignIn = () => {
         auth.signInWithPopup(googleProvider)
             .then((result) => {
-                dispatch({
-                    type: actionTypes.SET_USER,
-                    user: result.user,
-                });
-                history.push('/');
+                const { user } = result;
+                db.collection('users')
+                    .doc(user.uid)
+                    .get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            dispatch({
+                                type: actionTypes.SET_USER,
+                                user: doc.data(),
+                            });
+                            history.push('/');
+                        } else {
+                            alert('회원가입을 먼저 해주세요!');
+                            history.push('/register');
+                        }
+                    });
             })
+
             .catch((error) => alert(error.message));
     };
 
@@ -94,13 +105,17 @@ function Login() {
                         color: 'white',
                     }}
                 />
-
-                <SignUpLabel style={{ marginTop: '6%' }}>
-                    <span style={{ color: 'red' }}>Traview</span>
+                <LoginLabel>방문해주셔서 감사합니다</LoginLabel>
+                <SignUpLabel style={{ marginTop: '2%' }}>
+                    <img
+                        style={{ marginRight: '30px' }}
+                        src="/images/Logo.png"
+                        alt="Logo"
+                    />
                     &nbsp;로그인
                 </SignUpLabel>
-                <LoginLabel>방문해주셔서 감사합니다</LoginLabel>
-                <BackgroundBox style={{ height: '516px', marginTop: '2%' }}>
+
+                <BackgroundBox style={{ height: '516px', marginTop: '-3%' }}>
                     {/*소셜 로그인 박스*/}
                     <SocialCollection>
                         <SocialBox>

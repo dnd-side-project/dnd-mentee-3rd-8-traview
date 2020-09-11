@@ -6,6 +6,10 @@ import NavBar from './NavBar/NavBar';
 import Login from '../routes/Login';
 import Area from '../routes/Area';
 import Register from '../routes/Register';
+import Mypage from '../routes/Mypage';
+import FollowPage from '../routes/FollowPage';
+import { useStateValue } from '../StateProvider';
+import FriendsPage from '../routes/FrinedsPage';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -16,6 +20,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+    const [{ user }] = useStateValue();
+
     return (
         <Router>
             <GlobalStyle />
@@ -26,6 +32,20 @@ function App() {
                     <NavBar />
                     <Route exact path="/" component={Home} />
                     <Route exact path="/area" component={Area} />
+                    <Route exact path="/follow" component={FollowPage} />
+                    <Route
+                        exact
+                        path="/FriendsPage/:friendid"
+                        component={FriendsPage}
+                    />
+
+                    {user && user.uid && (
+                        <Route
+                            exact
+                            path={`/user/:${user.uid}`}
+                            component={Mypage}
+                        />
+                    )}
                 </>
             </Switch>
         </Router>
