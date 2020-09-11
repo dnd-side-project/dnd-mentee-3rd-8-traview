@@ -39,7 +39,7 @@ export default function ToggleButtons(props) {
     };
     useEffect(() => {
         props.setHadAtmophere(alignment);
-    },[alignment]);
+    }, [alignment]);
 
     return (
         <div>
@@ -54,13 +54,12 @@ export default function ToggleButtons(props) {
                     <ToggleButton
                         className={classes.root}
                         style={{
-                            backgroundColor:
-                                alignment === '도시' ? '#ff534b' : 'white',
+                            border: 'none',
+                            backgroundColor: 'transparent',
                             color: `${
-                                alignment === '도시' ? 'white' : '#FF534B'
+                                alignment === '도시' ? '#ff534b' : '#ffffff'
                             }`,
                             borderRadius: '40px',
-                            border: '2px solid #ff534b',
                         }}
                         value="도시"
                         aria-label="left aligned"
@@ -71,13 +70,12 @@ export default function ToggleButtons(props) {
                         value="자연"
                         aria-label="left aligned"
                         style={{
-                            backgroundColor:
-                                alignment === '자연' ? '#ff534b' : 'white',
+                            border: 'none',
+                            backgroundColor: 'transparent',
                             color: `${
-                                alignment === '자연' ? 'white' : '#FF534B'
+                                alignment === '자연' ? '#ff534b' : '#ffffff'
                             }`,
                             borderRadius: '40px',
-                            border: '2px solid #ff534b',
                         }}
                         className={classes.root}
                     >
@@ -85,13 +83,12 @@ export default function ToggleButtons(props) {
                     </ToggleButton>
                     <ToggleButton
                         style={{
-                            backgroundColor:
-                                alignment === '몽환' ? '#ff534b' : 'white',
+                            border: 'none',
+                            backgroundColor: 'transparent',
                             color: `${
-                                alignment === '몽환' ? 'white' : '#FF534B'
+                                alignment === '몽환' ? '#ff534b' : '#ffffff'
                             }`,
                             borderRadius: '40px',
-                            border: '2px solid #ff534b',
                         }}
                         className={classes.root}
                         value="몽환"
@@ -101,13 +98,12 @@ export default function ToggleButtons(props) {
                     </ToggleButton>
                     <ToggleButton
                         style={{
-                            backgroundColor:
-                                alignment === '여유' ? '#ff534b' : 'white',
+                            border: 'none',
+                            backgroundColor: 'transparent',
                             color: `${
-                                alignment === '여유' ? 'white' : '#FF534B'
+                                alignment === '여유' ? '#ff534b' : '#ffffff'
                             }`,
                             borderRadius: '40px',
-                            border: '2px solid #ff534b',
                         }}
                         className={classes.root}
                         value="여유"
@@ -117,13 +113,12 @@ export default function ToggleButtons(props) {
                     </ToggleButton>
                     <ToggleButton
                         style={{
-                            backgroundColor:
-                                alignment === '고요' ? '#ff534b' : 'white',
+                            border: 'none',
+                            backgroundColor: 'transparent',
                             color: `${
-                                alignment === '고요' ? 'white' : '#FF534B'
+                                alignment === '고요' ? '#ff534b' : '#ffffff'
                             }`,
                             borderRadius: '40px',
-                            border: '2px solid #ff534b',
                         }}
                         className={classes.root}
                         value="고요"
@@ -133,13 +128,12 @@ export default function ToggleButtons(props) {
                     </ToggleButton>
                     <ToggleButton
                         style={{
-                            backgroundColor:
-                                alignment === '활기' ? '#ff534b' : 'white',
+                            border: 'none',
+                            backgroundColor: 'transparent',
                             color: `${
-                                alignment === '활기' ? 'white' : '#FF534B'
+                                alignment === '활기' ? '#ff534b' : '#ffffff'
                             }`,
                             borderRadius: '40px',
-                            border: '2px solid #ff534b',
                         }}
                         className={classes.root}
                         value="활기"
@@ -149,13 +143,12 @@ export default function ToggleButtons(props) {
                     </ToggleButton>
                     <ToggleButton
                         style={{
-                            backgroundColor:
-                                alignment === '낭만' ? '#ff534b' : 'white',
+                            border: 'none',
+                            backgroundColor: 'transparent',
                             color: `${
-                                alignment === '낭만' ? 'white' : '#FF534B'
+                                alignment === '낭만' ? '#ff534b' : '#ffffff'
                             }`,
                             borderRadius: '40px',
-                            border: '2px solid #ff534b',
                         }}
                         className={classes.root}
                         value="낭만"
