@@ -256,9 +256,10 @@ export default function UploadPage(props) {
             aria-labelledby="form-dialog-title"
             PaperProps={{
                 style: {
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: 'rgba(64, 64, 64, 0.7)',
+                    backdropFilter: 'blur(30px)',
                     borderRadius: '20px',
-                    color: '#000000',
+                    color: '#ffffff',
                 },
             }}
         >

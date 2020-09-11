@@ -15,7 +15,7 @@ export const AddressTtile = styled.p`
     display: flex;
     align-items: center;
     text-align: center;
-    color: #000000;
+    color: #ffffff;
     padding-top: 30px;
 `;
 

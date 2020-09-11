@@ -21,12 +21,13 @@ function TitleName(props) {
         <form style={{ width: '100%', height: '100%' }}>
             <Input
                 placeholder="제목"
-                style={{ width: '100%', height: '11%' }}
+                style={{ width: '100%', height: '11%', color: '#ffffff' }}
                 value={titleValue}
                 onChange={onChageTitle}
             />
             <TextField
                 style={{
+                    color: '#ffffff',
                     width: '100%',
                     marginTop: '21px',
                     borderRadius: '10px',
