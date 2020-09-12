@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 'auto 0',
+        backgroundColor: 'transparent',
     },
     DropzoneParagrap: {
         fontFamily: 'Noto Sans KR',
