@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { actionTypes } from '../reducer';
-import { auth, provider } from '../firebase';
+import { auth, googleProvider, facebookProvider } from '../firebase';
 import { useStateValue } from '../StateProvider';
+import db from '../firebase';
 
 import { BackgroundBox } from '../components/CommonStyle/BackgroundBox';
 import { InputBar } from '../components/CommonStyle/InputBar';
@@ -17,7 +18,7 @@ import { SocialCollection } from '../components/CommonStyle/SocialCollection';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 function Register() {
-    const [{}, dispatch] = useStateValue();
+    const [, dispatch] = useStateValue();
     const [NickName, setNickName] = useState('');
     const [Email, setEmail] = useState('');
     const [UserId, setUserId] = useState('');
@@ -29,7 +30,46 @@ function Register() {
     };
 
     const googleSignIn = () => {
-        auth.signInWithPopup(provider)
+        auth.signInWithPopup(googleProvider)
+            .then((result) => {
+                const { user } = result;
+                db.collection('users')
+                    .doc(user.uid)
+                    .get()
+                    .then((doc) => {
+                        if (doc.exists) {
+                            alert('이미 가입된 계정입니다.');
+                        } else {
+                            db.collection('users').doc(user.uid).set({
+                                background:
+                                    'https://images.unsplash.com/photo-1597589619078-b633d1d07d0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+                                displayName: user.displayName,
+                                email: user.email,
+                                introduction: '인삿말이 없습니다',
+                                photoURL: user.photoURL,
+                                uid: user.uid,
+                                AvartarFileName: '',
+                                BackgroundFileName: '',
+                            });
+                            db.collection('users')
+                                .doc(user.uid)
+                                .get()
+                                .then((doc) => {
+                                    dispatch({
+                                        type: actionTypes.SET_USER,
+                                        user: doc.data(),
+                                    });
+                                });
+
+                            history.push('/');
+                        }
+                    });
+            })
+            .catch((error) => alert(error.message));
+    };
+
+    const facebookSignIn = () => {
+        auth.signInWithPopup(facebookProvider)
             .then((result) => {
                 dispatch({
                     type: actionTypes.SET_USER,
@@ -67,13 +107,19 @@ function Register() {
                         color: 'white',
                     }}
                 />
-                <TopLabel>나만 몰랐던 국내 여행지</TopLabel>
-                <SignUpLabel>
-                    <span style={{ color: 'red' }}>Traview</span>
+                <TopLabel style={{ marginBottom: '1.5%' }}>
+                    나만 몰랐던 국내 여행지
+                </TopLabel>
+                <SignUpLabel style={{ marginBottom: '3%' }}>
+                    <img
+                        style={{ marginRight: '30px' }}
+                        src="/images/Logo.png"
+                        alt="Logo"
+                    />
                     &nbsp;회원가입
                 </SignUpLabel>
 
-                <BackgroundBox style={{ marginTop: '-3%' }}>
+                <BackgroundBox style={{ marginTop: '-2%' }}>
                     {/*소셜 로그인 박스*/}
                     <SocialCollection
                         style={{
@@ -94,7 +140,7 @@ function Register() {
                                 <br /> 로그인하기
                             </SocialFont>
                         </SocialBox>
-                        <SocialBox>
+                        <SocialBox onClick={facebookSignIn}>
                             <SocialImage
                                 style={{
                                     background: ' #3B5998',

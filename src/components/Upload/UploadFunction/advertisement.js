@@ -15,12 +15,14 @@ export const RadioFont = styled.p`
 `;
 //selectedValue에 yes or no 에 값이 찍여있다.
 function Advertisement(props) {
-    const [selectedValue, setSelectedValue] = React.useState('YES');
+    const [selectedValue, setSelectedValue] = React.useState(
+        props.advertising ? 'NO' : 'YES'
+    );
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
 
-        console.log(selectedValue);
+        //console.log(selectedValue);
         props.setHasSelectedadvertisement(
             selectedValue === 'YES' ? true : false
         );

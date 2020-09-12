@@ -23,7 +23,6 @@ import db, { storage } from '../../firebase';
 import Projection from 'proj4';
 import { extraApi } from '../../api_manager';
 import { useStateValue } from '../../StateProvider';
-
 let isSearching = false;
 let isEndReached = false;
 let currentPage = 1;
@@ -31,41 +30,40 @@ let currentPage = 1;
 export default function UploadPage(props) {
     let [locations, setLocations] = useState([]);
     const [hasSelectedAddress, setHasSelectedAddress] = useState(false);
-    const [address, setAddress] = useState('');
-    const [latitude, setLatitude] = useState(''); //위도
-    const [longitude, setLongitude] = useState(''); //경도
-    const [advertising, setAdvertising] = useState(false); //광고여부
-    const [mood, setMood] = useState(''); //분위기
-    const [rating, setRating] = useState(''); //평점
-    const [title, setTitle] = useState(null); //제목명
-    const [review, setReview] = useState(null); //상세내용
-    const [imageUrl, setImageUrl] = useState(null); //이미지
+    const [address, setAddress] = useState(props.address ? props.address : '');
+    const [latitude, setLatitude] = useState(
+        props.latitude ? props.latitude : ''
+    ); //위도
+    const [longitude, setLongitude] = useState(
+        props.longitude ? props.longitude : ''
+    ); //경도
+    const [advertising, setAdvertising] = useState(
+        props.advertising ? props.advertising : false
+    ); //광고여부
+    const [mood, setMood] = useState(props.mood ? props.mood : ''); //분위기
+    const [rating, setRating] = useState(props.rating ? props.rating : ''); //평점
+    const [title, setTitle] = useState(props.title ? props.title : null); //제목명
+    const [review, setReview] = useState(props.review ? props.review : null); //상세내용
+    const [imageUrl, setImageUrl] = useState(
+        props.imageUrl ? props.imageUrl : null
+    ); //이미지
     const [{ user }] = useStateValue(); //로그인유저
-    const [area, setArea] = useState(null);
+    const [area, setArea] = useState(props.area ? props.area : null);
     useEffect(() => {
         resetSearchLocation();
     }, []);
-
+    useEffect(() => {
+        setHasSelectedAddress(false);
+        setAddress(props.address ? props.address : '');
+        setAdvertising(props.advertising ? props.advertising : false);
+        setMood(props.mood ? props.mood : '');
+        setRating(props.rating ? props.rating : '');
+        setTitle(props.title ? props.title : null);
+        setReview(props.review ? props.review : null);
+        setImageUrl(props.imageUrl ? props.imageUrl : null);
+    }, [props.close]);
     const onHandleUpload = (e) => {
         e.preventDefault();
-
-        // if(imageUrl===null){
-        //     console.error("이미지 오류")
-        // }
-        // const uploadTask=db.ref(`/images/${imageUrl.name}`).put(imageUrl)
-        // uploadTask.on('state_changed',
-        //     (snapShot)=>{
-        //     console.error(snapShot)
-        //     },(err)=>{
-        //     //catch the err
-        //         console.error(err)
-        //     },()=>{
-        //     db.ref('images').child(imageUrl.name).getDownloadURL()
-        //         .then(fireBaseUrl=>{
-        //             setImageUrl(prevObject=>({...prevObject,imgUrl:fireBaseUrl}))
-        //         })
-
-        //     })
         if (
             imageUrl === null || //이미지업로드 X
             title === null || //제목이(x)
@@ -110,15 +108,49 @@ export default function UploadPage(props) {
                                 title: title,
                                 username: user.displayName,
                                 address: address,
+                                uid: user.uid,
+                                //  {console.log(user.uid)}
                             });
                         });
                 }
             );
+
             alert('업로드 완료');
             props.close();
         }
     };
 
+    const onHandleUpdate = (e) => {
+        e.preventDefault();
+        if (
+            imageUrl === null || //이미지업로드 X
+            title === null || //제목이(x)
+            review === null || //상세내용x
+            mood === '' || //분위기가(X)
+            area === null || //지역체크(위치X)
+            rating === '' //평점(X)
+        ) {
+            alert('업로드내용을 입력해주세요');
+        } else {
+            let PostInfoChange = db.collection('posts').doc(props.id);
+            PostInfoChange.update({
+                advertising: advertising, //광고
+                area: area, //지역
+                avatar: user.photoURL, //아바타
+                imageUrl: imageUrl, //이미지
+                latitude: latitude, //위도
+                longitude: longitude, //경도
+                mood: mood, //분위기
+                rating: rating, //평점
+                review: review, //리뷰
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(), //시간
+                title: title, //제목
+                address: address, //주소
+            }).then((temp) => alert('게시물이 수정되었습니다.'));
+
+            props.close();
+        }
+    };
     const searchLocation = (reset = false) => {
         if (isSearching || isEndReached || !address) {
             return;
@@ -224,21 +256,26 @@ export default function UploadPage(props) {
             aria-labelledby="form-dialog-title"
             PaperProps={{
                 style: {
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: 'rgba(64, 64, 64, 0.7)',
+                    backdropFilter: 'blur(30px)',
                     borderRadius: '20px',
-                    color: '#000000',
+                    color: '#ffffff',
                 },
             }}
         >
-            {/*<DialogTitle id="form-dialog-title">최악의 세대</DialogTitle>*/}
             <>
                 <TotalContainer style={{ paddingTop: '30px' }}>
                     <UploadDropZone>
-                        <Dropzone setHadImageurl={setImageUrl} />
+                        <Dropzone
+                            imageUrl={imageUrl}
+                            setHadImageurl={setImageUrl}
+                        />
                     </UploadDropZone>
                     <RightContainer>
                         <TitleInputBar>
                             <TitleName
+                                title={title}
+                                review={review}
                                 setHadTitlename={setTitle}
                                 setHadReview={setReview}
                             />
@@ -246,10 +283,11 @@ export default function UploadPage(props) {
                         <AdvertisementComponent>
                             <Advertisement
                                 setHasSelectedadvertisement={setAdvertising}
+                                advertising={advertising}
                             />
                         </AdvertisementComponent>
                         <AtmosphereComponent>
-                            <Atmosphere setHadAtmophere={setMood} />
+                            <Atmosphere setHadAtmophere={setMood} mood={mood} />
                         </AtmosphereComponent>
                         <LocationComponent>
                             <Address
@@ -268,10 +306,6 @@ export default function UploadPage(props) {
                                 maxHeight: '140px',
                             }}
                         >
-                            {/*{console.log(*/}
-                            {/*    'hasSelectedAddress',*/}
-                            {/*    hasSelectedAddress*/}
-                            {/*)}*/}
                             {!hasSelectedAddress &&
                                 locations.map((location, index) => (
                                     <LocationItem
@@ -285,7 +319,10 @@ export default function UploadPage(props) {
                         </div>
                         {hasSelectedAddress && (
                             <RatingComponent>
-                                <Rating setHadRating={setRating} />
+                                <Rating
+                                    setHadRating={setRating}
+                                    rating={rating}
+                                />
                             </RatingComponent>
                         )}
                     </RightContainer>
@@ -324,9 +361,11 @@ export default function UploadPage(props) {
                             display: 'flex',
                             justifyContent: 'center',
                         }}
-                        onClick={onHandleUpload}
+                        onClick={
+                            props.username ? onHandleUpdate : onHandleUpload
+                        }
                     >
-                        완료
+                        {props.username ? '수정' : '완료'}
                     </Button>
                 </div>
             </>

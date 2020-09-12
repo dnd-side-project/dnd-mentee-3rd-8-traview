@@ -13,8 +13,11 @@
     "material-ui-dropzone": "^3.4.0",
     "proj4": "^2.6.2",
     "react": "^16.13.1",
+    "react-confirm-alert": "^2.6.2",
     "react-dom": "^16.13.1",
+    "react-flip-move": "^3.0.4",
     "react-infinite-scroll-component": "^5.0.5",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1"

@@ -61,6 +61,7 @@ const BestPicContainer = styled.div`
     bottom: 72px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 `;
 
 function Banner() {
@@ -124,19 +125,23 @@ function Banner() {
                     type="button"
                     onClick={prevSlide}
                     style={{
+                        width: '30px',
+                        height: '30px',
                         backgroundColor: 'transparent',
                         color: '#ffffff',
                         border: 'none',
                         fontSize: '64px',
                         outline: '0',
                         cursor: 'pointer',
+                        backgroundImage: 'url("/images/bannerLeftBtn.png")',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center',
                     }}
-                >
-                    {'<'}
-                </button>
+                />
                 <div className="row__posters">
                     {posts.map(({ post, id }) => (
                         <BestPicture
+                            uid={post.uid}
                             id={id}
                             key={id}
                             advertising={post.advertising}
@@ -162,16 +167,20 @@ function Banner() {
                     type="button"
                     onClick={nextSlide}
                     style={{
+                        marginRight: '20px',
+                        width: '30px',
+                        height: '30px',
                         backgroundColor: 'transparent',
                         color: '#ffffff',
                         border: 'none',
                         fontSize: '64px',
                         outline: '0',
                         cursor: 'pointer',
+                        backgroundImage: 'url("/images/bannerRightBtn.png")',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center',
                     }}
-                >
-                    {'>'}
-                </button>
+                />
             </BestPicContainer>
         </Container>
     );

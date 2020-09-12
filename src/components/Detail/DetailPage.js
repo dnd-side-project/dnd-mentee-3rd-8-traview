@@ -15,13 +15,11 @@ import {
     LeftBottomContainer,
     TextBox,
     LeftTopContainer,
-    Countbox,
     RightBottomContainer,
     RightTopContainer,
     CommentBox,
 } from './DetailStyle';
 import { DetailContent, PostName } from './DetailFunction/Article';
-import KakaoMap from './DetailFunction/KakaoMap';
 import ClearTwoToneIcon from '@material-ui/icons/ClearTwoTone';
 import ShowMoreText from 'react-show-more-text';
 import { SubtitleFont } from '../Upload/UploadStyled';
@@ -33,10 +31,14 @@ import { RatingFont } from '../Upload/UploadFunction/Rating';
 import ChatInput from './DetailFunction/ChatInput';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Subscribe from './DetailFunction/Subscribe';
+import Avartar from './DetailFunction/Avartar';
+import LikeInterest from './DetailFunction/Like_Interest';
+
 const useStyles = makeStyles((theme) => ({
     FollowBtn: {
         color: '#FFFFFF',
-        background: '#FF534B',
+
         border: '2px solid #FF534B',
         height: '24px',
         width: '55px',
@@ -84,7 +86,7 @@ export default function DetailPage(props) {
             );
     }, [props.id]);
     const executeOnClick = (isExpanded) => {
-        console.log(isExpanded);
+        // console.log(isExpanded);
     };
 
     return (
@@ -93,7 +95,7 @@ export default function DetailPage(props) {
             maxWidth={false}
             open={props.open}
             onClose={props.close}
-            aria-labelledby="form-dialog-title"
+            // aria-labelledby="form-dialog-title"
             PaperProps={{
                 style: {
                     backgroundColor: 'rgba(64, 64, 64, 0.7)',
@@ -103,13 +105,11 @@ export default function DetailPage(props) {
                 },
             }}
         >
-            {/*<DialogTitle id="form-dialog-title">최악의 세대</DialogTitle>*/}
             <DialogContent>
                 <TotalContainer>
                     <MainContentContainer>
                         <LeftContainer>
                             <ImageContainer>
-                                {/* 이곳에 짱큰 이미지 넣어주시면 됩니다. */}
                                 <img
                                     src={props.imageUrl}
                                     alt={'사진'}
@@ -120,38 +120,11 @@ export default function DetailPage(props) {
                                         borderRadius: '20px',
                                     }}
                                 />
-                                <LeftTopContainer>
-                                    <img
-                                        style={{ marginRight: '4px' }}
-                                        src="/images/Interesting.png"
-                                        alt=""
-                                    />
-                                    <Countbox>{props.novelty}</Countbox>
-                                    <img
-                                        style={{
-                                            marginRight: '4px',
-                                            marginLeft: '14px',
-                                        }}
-                                        src="/images/like.png"
-                                        alt=""
-                                    />
-                                    <Countbox>{props.heart}</Countbox>
+                                <LeftTopContainer style={{ left: '150px' }}>
+                                    <LikeInterest postId={props.id} />
                                 </LeftTopContainer>
                                 <LeftBottomContainer>
-                                    <img
-                                        style={{
-                                            width: '70px',
-                                            height: '70px',
-                                            borderRadius: '40px',
-                                            objectFit: 'cover',
-                                            marginBottom: '3px',
-                                            border: '1px solid #F534B',
-                                            boxSizing: 'border-box',
-                                            marginRight: '9px',
-                                        }}
-                                        src={props.avatar}
-                                        alt="Avartarimage"
-                                    />
+                                    <Avartar uid={props.uid} Type="Detail" />
                                     <div
                                         style={{
                                             alignItems: 'left',
@@ -159,18 +132,7 @@ export default function DetailPage(props) {
                                         }}
                                     >
                                         <TextBox>{props.username}</TextBox>
-                                        <p
-                                            style={{
-                                                fontWeight: 300,
-                                                fontSize: '12px',
-                                                lineHeight: '17px',
-                                            }}
-                                        >
-                                            팔로워 {'223'}
-                                        </p>
-                                        <Button className={classes.FollowBtn}>
-                                            팔로우
-                                        </Button>
+                                        <Subscribe userTo={props.uid} />
                                     </div>
                                 </LeftBottomContainer>
                                 <RightTopContainer>
@@ -343,7 +305,13 @@ export default function DetailPage(props) {
                             >
                                 {roomMessages.map(
                                     (
-                                        { message, timestamp, user, userimage },
+                                        {
+                                            message,
+                                            timestamp,
+                                            user,
+                                            userimage,
+                                            uid,
+                                        },
                                         index
                                     ) => (
                                         <Message
@@ -352,6 +320,7 @@ export default function DetailPage(props) {
                                             timestamp={timestamp}
                                             user={user}
                                             userImage={userimage}
+                                            uid={uid}
                                         />
                                     )
                                 )}

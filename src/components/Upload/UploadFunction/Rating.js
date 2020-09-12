@@ -16,11 +16,13 @@ export const RatingFont = styled.p`
     align-items: center;
     text-align: center;
 `;
+
 function Rating(props) {
+    const [value, setValue] = React.useState(props.rating);
     useEffect(() => {
         props.setHadRating(value);
-    });
-    const [value, setValue] = React.useState(null);
+    }, [value]);
+
     const handleChange = (event) => {
         setValue(event.target.value);
     };

@@ -50,7 +50,7 @@ export const SubtitleFont = styled.p`
     display: flex;
     align-items: center;
     text-align: center;
-    color: #000000;
+    color: #ffffff;
 `;
 export const Mood = styled.button`
     display: flex;
