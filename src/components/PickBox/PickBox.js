@@ -127,6 +127,9 @@ function PickBox() {
                         background:
                             'linear-gradient(151.01deg, #61BFDA -17.86%, #4366E9 105.09%)',
                     }}
+                    onClick={() => {
+                        history.push('/interest');
+                    }}
                 >
                     <InterestingBox>
                         <img src="/images/Interesting.png" alt="Interesting" />
